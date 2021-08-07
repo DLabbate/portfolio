@@ -1,0 +1,104 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 80px;
+  background: #11101d;
+  padding: 5px 15px;
+  z-index: 99;
+  transition: all 0.5s ease;
+}
+
+.sidebar--open {
+  width: 300px;
+}
+
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  height: 50px;
+  transition: 400ms;
+}
+
+.sidebar__menu {
+  color: white;
+  height: 20px;
+  width: 20px;
+  min-width: 20px;
+  cursor: pointer;
+}
+
+.sidebar__logo {
+  color: white;
+  text-align: center;
+  font-size: 1.25rem;
+  margin-right: 50px;
+  white-space: nowrap;
+  display: none;
+}
+
+.sidebar__logo--open {
+  display: block;
+}
+
+.sidebar__list {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.sidebar__list-item {
+  position: relative;
+  margin: 8px 0px;
+  list-style: none;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar__link {
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  transition: 200ms;
+}
+
+.sidebar__link:hover {
+  background-color: white;
+}
+
+.sidebar__link:hover .sidebar__label {
+  color: black;
+}
+
+.sidebar__link:hover .sidebar__icon {
+  color: black;
+}
+
+.sidebar__icon {
+  /* Total Sidebar Width = 80px, Sidebar Padding = 15px, Icon Width = 20px*/
+  margin: calc((80px - 2 * 15px - 20px) / 2);
+  height: 20px;
+  width: 20px;
+  min-width: 20px;
+  color: white;
+}
+
+.sidebar__label {
+  color: white;
+  text-align: center;
+  opacity: 0;
+  white-space: nowrap;
+  transition: 400ms;
+}
+
+.sidebar__label--open {
+  opacity: 1;
+  transition: 400ms;
+  display: inline;
+}
