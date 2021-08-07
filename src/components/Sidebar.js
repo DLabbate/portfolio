@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Sidebar.css";
-import { FiAward, FiUser, FiMenu } from "react-icons/fi";
+import * as FeatherIcons from "react-icons/fi";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -8,6 +8,41 @@ const Sidebar = () => {
   const toggleOpen = () => {
     setOpen(!open);
   };
+
+  const sidebarItems = [
+    { label: "About Me", icon: "FiUser" },
+    { label: "Experience", icon: "FiCode" },
+    { label: "Projects", icon: "FiGithub" },
+    { label: "Accomplishments", icon: "FiAward" },
+  ];
+
+  const renderSidebarItems = () =>
+    sidebarItems.map((item) => {
+      const Icon = FeatherIcons[item.icon];
+      return (
+        <li className="sidebar__list-item" key={item.label}>
+          <a className="sidebar__link" href="#">
+            <Icon className="sidebar__icon" />
+            <span
+              className={
+                open ? "sidebar__label sidebar__label--open" : "sidebar__label"
+              }
+            >
+              {item.label}
+            </span>
+          </a>
+          <div
+            className={
+              open
+                ? "sidebar__tooltip sidebar__tooltip--open"
+                : "sidebar__tooltip"
+            }
+          >
+            {item.label}
+          </div>
+        </li>
+      );
+    });
 
   return (
     <div className={open ? "sidebar sidebar--open" : "sidebar"}>
@@ -19,58 +54,14 @@ const Sidebar = () => {
         >
           Domenic Labbate
         </span>
-        <FiMenu className="sidebar__menu" size={20} onClick={toggleOpen} />
+
+        <FeatherIcons.FiMenu
+          className="sidebar__menu"
+          size={20}
+          onClick={toggleOpen}
+        />
       </div>
-      <ul className="sidebar__list">
-        <li className="sidebar__list-item">
-          <a className="sidebar__link" href="#">
-            <FiUser className="sidebar__icon" />
-            <span
-              className={
-                open ? "sidebar__label sidebar__label--open" : "sidebar__label"
-              }
-            >
-              About Me
-            </span>
-          </a>
-        </li>
-        <li className="sidebar__list-item">
-          <a className="sidebar__link" href="#">
-            <FiAward className="sidebar__icon" />
-            <span
-              className={
-                open ? "sidebar__label sidebar__label--open" : "sidebar__label"
-              }
-            >
-              Experience
-            </span>
-          </a>
-        </li>
-        <li className="sidebar__list-item">
-          <a className="sidebar__link" href="#">
-            <FiAward className="sidebar__icon" />
-            <span
-              className={
-                open ? "sidebar__label sidebar__label--open" : "sidebar__label"
-              }
-            >
-              Projects
-            </span>
-          </a>
-        </li>
-        <li className="sidebar__list-item">
-          <a className="sidebar__link" href="#">
-            <FiAward className="sidebar__icon" />
-            <span
-              className={
-                open ? "sidebar__label sidebar__label--open" : "sidebar__label"
-              }
-            >
-              Accomplishments
-            </span>
-          </a>
-        </li>
-      </ul>
+      <ul className="sidebar__list">{renderSidebarItems()}</ul>
     </div>
   );
 };
