@@ -88,8 +88,7 @@
   opacity: 1;
   pointer-events: auto;
   transition: all 0.4s ease;
-  top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(20px);
 }
 
 .sidebar__icon {
@@ -117,6 +116,8 @@
 
 .sidebar__tooltip {
   position: absolute;
+  height: 30px;
+  top: -10px;
   left: calc(100% + 30px);
   z-index: 3;
   background: #fff;

@@ -7,6 +7,13 @@
 
 .App {
   background-color: rgb(241, 241, 241);
-  height: 100vh;
   display: flex;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

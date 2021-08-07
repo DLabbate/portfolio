@@ -1,0 +1,40 @@
+.terminal {
+  /* width: 500px; */
+  /* height: 350px; */
+  background: #11101d;
+  overflow: hidden;
+  width: 70%;
+  aspect-ratio: 1.5;
+  max-width: 700px;
+}
+
+.terminal__header {
+  background-color: lightgray;
+  height: 5%;
+  display: flex;
+  align-items: center;
+}
+
+.terminal__code {
+  color: white;
+  margin: 5px;
+}
+
+.terminal__button {
+  width: 1.5%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  margin: 5px;
+}
+
+.terminal__button--red {
+  background-color: rgb(255, 98, 98);
+}
+
+.terminal__button--yellow {
+  background-color: rgb(255, 255, 144);
+}
+
+.terminal__button--green {
+  background-color: rgb(77, 165, 77);
+}
