@@ -1,5 +1,5 @@
 import "./App.css";
-import Employment from "./components/Employment";
+import Experience from "./components/Experience";
 import Section from "./components/Section";
 import Sidebar from "./components/Sidebar";
 import Terminal from "./components/Terminal";
@@ -13,8 +13,8 @@ function App() {
           <Terminal />
         </Section>
         <Section title={"Experience"}>
-          <p>Hello</p>
-          <Employment />
+          <Experience />
+          <Experience />
         </Section>
         <Section title={"Projects"}>
           <p>Hello</p>
