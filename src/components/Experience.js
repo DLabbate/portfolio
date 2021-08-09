@@ -2,7 +2,7 @@ import React from "react";
 import "./Experience.css";
 import Skill from "./Skill";
 
-const Experience = ({ logoSrc, title, company, content, skills }) => {
+const Experience = ({ logoSrc, title, company, year, content, skills }) => {
   return (
     <div className="experience">
       <div className="experience__logo-container">
@@ -12,7 +12,7 @@ const Experience = ({ logoSrc, title, company, content, skills }) => {
         <h3>{title}</h3>
         <h4>{company}</h4>
       </div>
-      <div className="experience__year-container">2017 - 2020</div>
+      <div className="experience__year-container">{year}</div>
       <div className="experience__content-container">
         <ul>
           {content.map((item) => {

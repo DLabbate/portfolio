@@ -2,19 +2,12 @@ import React, { useState } from "react";
 import "./Sidebar.css";
 import * as FeatherIcons from "react-icons/fi";
 
-const Sidebar = () => {
+const Sidebar = ({ sidebarItems }) => {
   const [open, setOpen] = useState(false);
 
   const toggleOpen = () => {
     setOpen(!open);
   };
-
-  const sidebarItems = [
-    { label: "About Me", icon: "FiUser" },
-    { label: "Experience", icon: "FiCode" },
-    { label: "Projects", icon: "FiGithub" },
-    { label: "Accomplishments", icon: "FiAward" },
-  ];
 
   const renderSidebarItems = () =>
     sidebarItems.map((item) => {
