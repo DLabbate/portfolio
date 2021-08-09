@@ -77,11 +77,11 @@
 }
 
 .sidebar__link:hover .sidebar__label {
-  color: black;
+  color: #11101d;
 }
 
 .sidebar__link:hover .sidebar__icon {
-  color: black;
+  color: #11101d;
 }
 
 .sidebar__link:hover ~ .sidebar__tooltip {

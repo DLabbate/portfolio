@@ -1,0 +1,10 @@
+.skill {
+  margin: 5px;
+  color: #11101d;
+  padding: 5px 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: #11101d;
+  white-space: nowrap;
+}
