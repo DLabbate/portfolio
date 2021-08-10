@@ -1,11 +1,18 @@
 import "./App.css";
 import Experience from "./components/Experience";
-import Section from "./components/Section";
-import Sidebar from "./components/Sidebar";
+import Section from "./components/wrappers/Section";
+import Sidebar from "./components/navigation/Sidebar";
 import Terminal from "./components/Terminal";
 import cae from "./assets/logos/cae.jpg";
 import genetec from "./assets/logos/genetec.png";
 import concordia from "./assets/logos/concordia.jpg";
+import Project from "./components/Project";
+import acasa from "./assets/projects/acasa.gif";
+import moodAI from "./assets/projects/moodai.jpg";
+import bikebuddy from "./assets/projects/bikebuddy.jpg";
+import fastkeys from "./assets/projects/fastkeys.PNG";
+import bumpercars from "./assets/projects/bumpercars.png";
+import hovercraft from "./assets/projects/hovercraft.mp4";
 
 function App() {
   const sidebarItems = [
@@ -91,6 +98,97 @@ function App() {
       ],
     },
   ];
+
+  const projects = [
+    {
+      title: "Acasa",
+      imageSrc: acasa,
+      description:
+        "is a simple to use real estate platform that offers the ability to search for homes, organize favorites into different categories, and even create your own listing!",
+      link: "https://github.com/DLabbate/real-estate-website",
+      skills: [
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "React",
+        "NodeJS",
+        "ExpressJS",
+        "MongoDB",
+        "AWS",
+        "Jest",
+        "React Testing Library",
+      ],
+    },
+    {
+      title: "Mood.AI",
+      imageSrc: moodAI,
+      description:
+        "is a mental health application for a modern age.  In a team of 4 students, we developed a Cross-Platform app that allows patients with mental health difficulties to enter mood logs, gain insights on how they feel, and share data with psychologists",
+      link: "/projects/moodai",
+      skills: [
+        "JavaScript",
+        "React Native",
+        "Python",
+        "Bluetooth",
+        "Raspberry Pi",
+      ],
+    },
+    {
+      title: "BikeBuddy",
+      imageSrc: bikebuddy,
+      description:
+        "your personal biking assistant. In a team of 4 students, received 1st place for a design project intended for cyclists seeking to track and improve performance",
+      link: "https://github.com/DLabbate/BikeBuddy",
+      skills: [
+        "Java",
+        "Android Studio",
+        "Bluetooth",
+        "Google Maps API",
+        "Software Architecture (MVC)",
+      ],
+    },
+    {
+      title: "BumperCars",
+      imageSrc: bumpercars,
+      description:
+        "is a 3D computer game built using OpenGL API. Application includes a user-controlled car that can collide with other cars on the track.",
+      link: "https://github.com/DLabbate/OpenGL_CarProject",
+      skills: [
+        "OpenGL",
+        "C++",
+        "Computer Graphics",
+        "Modeling",
+        "Illumination",
+        "Shading",
+        "Texturing",
+        "Shadow Mapping",
+        "Fragment Shader",
+        "Vertex Shader",
+      ],
+    },
+    {
+      title: "Autonomous Hovercraft",
+      videoSrc: hovercraft,
+      description:
+        "Received 1st place for a design project in a team of 3 students. Each team tasked with developing a fully autonomous hovercraft capable of navigating a specified track and surpassing obstacles of height 1 mm to 3 mm",
+      link: "/projects/hovercraft",
+      skills: [
+        "Arduino",
+        "Fans",
+        "Servos",
+        "Ultrasonic Sensors",
+        "Infrared Sensors",
+      ],
+    },
+    {
+      title: "FastKeys",
+      imageSrc: fastkeys,
+      description:
+        "is a 2D typing game built using the Unity Game Engine. Implemented basic concepts such as using Rigidbody physics, collision detection, user input, and so forth.",
+      link: "https://labbgames.itch.io/fastkeys",
+      skills: ["Unity API", "C#"],
+    },
+  ];
   return (
     <div className="App">
       <Sidebar sidebarItems={sidebarItems} />
@@ -109,7 +207,11 @@ function App() {
           })}
         </Section>
         <Section title={"Projects"}>
-          <p>Hello</p>
+          <div className="projects-container">
+            {projects.map((item) => {
+              return <Project {...item} />;
+            })}
+          </div>
         </Section>
         <Section title={"Accomplishments"}>
           <p>Hello</p>

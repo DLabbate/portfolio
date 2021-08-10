@@ -33,14 +33,14 @@
 
 .experience__content-container {
   grid-row: 2/3;
-  grid-column: 2/3;
+  grid-column: 2/4;
   padding: 0px 20px;
   margin-top: -20px;
 }
 
 .experience__skills-container {
   grid-row: 3/4;
-  grid-column: 2/3;
+  grid-column: 2/4;
   display: flex;
   flex-wrap: wrap;
 }
