@@ -1,8 +1,8 @@
 .accomplishment {
   position: relative;
   width: 45%;
-  min-width: 400px;
-  max-width: 600px;
+  min-width: 550px;
+  max-width: 650px;
   aspect-ratio: 4;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   transition: 400ms;
