@@ -1,0 +1,52 @@
+.accomplishment {
+  position: relative;
+  width: 40%;
+  min-width: 400px;
+  max-width: 600px;
+  aspect-ratio: 4;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: 400ms;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: 20px;
+  border-width: 0px 0px 0px 5px;
+  border-style: solid;
+  border-color: #11101d;
+}
+
+.accomplishment:hover {
+  transform: scale(105%);
+}
+
+.accomplishment__year {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.accomplishment__link {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  text-decoration: none;
+  color: inherit;
+  transition: 400ms;
+}
+
+.accomplishment__icon {
+  width: 22.5px;
+  height: 22.5px;
+}
+
+.accomplishment__link:hover {
+  color: white;
+  background-color: #11101d;
+}

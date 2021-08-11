@@ -9,7 +9,9 @@ import {
   education,
   workExperience,
   projects,
+  accomplishments,
 } from "./constants/profile";
+import Accomplishment from "./components/Accomplishment";
 
 function App() {
   return (
@@ -37,7 +39,11 @@ function App() {
           </div>
         </Section>
         <Section title={"Accomplishments"}>
-          <p>Hello</p>
+          <div className="accomplishments-container">
+            {accomplishments.map((item) => {
+              return <Accomplishment {...item} />;
+            })}
+          </div>
         </Section>
       </div>
     </div>

@@ -188,3 +188,28 @@ export const projects = [
     ],
   },
 ];
+
+export const accomplishments = [
+  {
+    title: "Top Performing Student",
+    organization: "Concordia University",
+    description:
+      "Featured as one of Concordia University's top performing students!",
+    year: "2021",
+    link: "https://www.concordia.ca/content/shared/en/profiles/ginacody/domenic-labbate.html",
+  },
+  {
+    title: "Dean's List (Tier 1)",
+    organization: "Concordia University",
+    description:
+      "$1000 awarded to students with an annual GPA of at least 4.2/4.3",
+    year: "2019, 2020, 2021",
+  },
+  {
+    title: "Knowledge First Scholarship",
+    organization: "Concordia University",
+    description:
+      "Renewable scholarship of $2500 per semester (for a maximum of 8 semesters) in recognition of high academic entrance qualifications for the Fall 2017 semester",
+    year: "2017",
+  },
+];
