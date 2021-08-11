@@ -18,6 +18,7 @@
 .terminal__code {
   color: white;
   margin: 5px;
+  white-space: pre;
 }
 
 .terminal__button {
