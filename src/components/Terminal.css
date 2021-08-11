@@ -1,11 +1,26 @@
+@keyframes bounce {
+  0% {
+    transform: translateY(-150px);
+  }
+  50% {
+    transform: translateY(25px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 .terminal {
-  /* width: 500px; */
-  /* height: 350px; */
   background: #11101d;
   overflow: hidden;
   width: 70%;
   aspect-ratio: 1.5;
   max-width: 700px;
+}
+
+.terminal--active {
+  animation-name: bounce;
+  animation-duration: 1s;
 }
 
 .terminal__header {

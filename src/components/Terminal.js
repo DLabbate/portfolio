@@ -4,7 +4,7 @@ import Typewriter from "typewriter-effect";
 
 const Terminal = () => {
   return (
-    <div className="terminal">
+    <div className="terminal terminal--active">
       <div className="terminal__header">
         <div className="terminal__button terminal__button--red"></div>
         <div className="terminal__button terminal__button--yellow"></div>
