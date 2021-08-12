@@ -10,6 +10,7 @@ import {
   workExperience,
   projects,
   accomplishments,
+  volunter,
 } from "./constants/profile";
 import Accomplishment from "./components/Accomplishment";
 
@@ -42,6 +43,13 @@ function App() {
           <div className="accomplishments-container">
             {accomplishments.map((item) => {
               return <Accomplishment {...item} />;
+            })}
+          </div>
+        </Section>
+        <Section title={"Volunteer"}>
+          <div className="accomplishments-container">
+            {volunter.map((item) => {
+              return <Experience {...item} />;
             })}
           </div>
         </Section>

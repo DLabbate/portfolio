@@ -1,6 +1,8 @@
 import cae from "../assets/logos/cae.jpg";
 import genetec from "../assets/logos/genetec.png";
 import concordia from "../assets/logos/concordia.jpg";
+import pdc from "../assets/logos/pdc.png";
+import youtube from "../assets/logos/youtube.png";
 import acasa from "../assets/projects/thumbnails/acasa.gif";
 import moodAI from "../assets/projects/thumbnails/moodai.jpg";
 import bikebuddy from "../assets/projects/thumbnails/bikebuddy2.PNG";
@@ -211,5 +213,30 @@ export const accomplishments = [
     description:
       "Renewable scholarship of $2500 per semester (for a maximum of 8 semesters) in recognition of high academic entrance qualifications for the Fall 2017 semester",
     year: "2017",
+  },
+];
+
+export const volunter = [
+  {
+    logoSrc: youtube,
+    title: "YouTube Channel",
+    company: "YouTube",
+    year: "August 2021 — Present",
+    content: [
+      "Started a YouTube channel with the goal of sharing educational videos",
+      "Content includes beginner coding projects with an emphasis on Web and Mobile Technologies",
+    ],
+    skills: ["Education", "Web", "Mobile"],
+  },
+  {
+    logoSrc: pdc,
+    title: "Tutoring",
+    company: "Pierre de Coubertin Elementary School",
+    year: "2014",
+    content: [
+      "Volunteered to aid grade 1 students with homework for an hour and a half weekly",
+      "Offered help in English, French and Mathematics",
+    ],
+    skills: ["Education", "English", "French", "Mathematics"],
   },
 ];
