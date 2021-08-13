@@ -230,7 +230,7 @@ export const accomplishments = [
 export const volunter = [
   {
     logoSrc: youtube,
-    title: "YouTube Channel",
+    title: "Dom the Engineer",
     company: "YouTube",
     year: "August 2021 — Present",
     content: [
