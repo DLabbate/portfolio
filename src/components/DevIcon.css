@@ -1,4 +1,4 @@
-@keyframes bounce-2 {
+@keyframes bounce {
   0% {
     transform: translateY(0);
   }
@@ -15,7 +15,7 @@
   width: 80px;
   height: 80px;
   transition: 400ms;
-  animation-name: bounce-2;
+  animation-name: bounce;
   animation-timing-function: ease;
   animation-duration: 2s;
   animation-iteration-count: infinite;
