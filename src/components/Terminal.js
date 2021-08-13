@@ -10,7 +10,7 @@ const Terminal = () => {
         <div className="terminal__button terminal__button--yellow"></div>
         <div className="terminal__button terminal__button--green"></div>
       </div>
-      <p className="terminal__code">
+      <div className="terminal__code">
         <Typewriter
           options={{ loop: true }}
           onInit={(typewriter) => {
@@ -39,7 +39,7 @@ const Terminal = () => {
               .start();
           }}
         />
-      </p>
+      </div>
     </div>
   );
 };

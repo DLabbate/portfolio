@@ -6,7 +6,7 @@ const Experience = ({ logoSrc, title, company, year, content, skills }) => {
   return (
     <div className="experience">
       <div className="experience__logo-container">
-        <img className="experience__logo" src={logoSrc} />
+        <img className="experience__logo" src={logoSrc} alt="Experience" />
       </div>
       <div className="experience__title-container">
         <h3>{title}</h3>
@@ -16,13 +16,13 @@ const Experience = ({ logoSrc, title, company, year, content, skills }) => {
       <div className="experience__content-container">
         <ul>
           {content.map((item) => {
-            return <li>{item}</li>;
+            return <li key={item}>{item}</li>;
           })}
         </ul>
       </div>
       <div className="experience__skills-container">
         {skills.map((item) => {
-          return <Skill label={item} />;
+          return <Skill label={item} key={item} />;
         })}
       </div>
     </div>

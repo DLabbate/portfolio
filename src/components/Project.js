@@ -14,7 +14,7 @@ const Project = ({ link, title, description, imageSrc, skills, videoSrc }) => {
           loop
         />
       ) : (
-        <img className="project__thumbnail" src={imageSrc} />
+        <img className="project__thumbnail" src={imageSrc} alt="Project" />
       )}
       <p className="project__description">
         <span className="project__title">{title}</span>
@@ -22,7 +22,7 @@ const Project = ({ link, title, description, imageSrc, skills, videoSrc }) => {
       </p>
       <div className="project__skills">
         {skills.map((item) => {
-          return <Skill label={item} />;
+          return <Skill label={item} key={item} />;
         })}
       </div>
     </a>

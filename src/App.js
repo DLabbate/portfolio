@@ -25,38 +25,38 @@ function App() {
           <Terminal />
           <div className="technologies-container">
             {technologies.map((name) => {
-              return <DevIcon name={name} />;
+              return <DevIcon name={name} key={name} />;
             })}
           </div>
         </Section>
         <Section title={"Education"}>
-          {education.map((item) => {
-            return <Experience {...item} />;
+          {education.map((item, index) => {
+            return <Experience {...item} key={index} />;
           })}
         </Section>
         <Section title={"Experience"}>
-          {workExperience.map((item) => {
-            return <Experience {...item} />;
+          {workExperience.map((item, index) => {
+            return <Experience {...item} key={index} />;
           })}
         </Section>
         <Section title={"Projects"}>
           <div className="projects-container">
-            {projects.map((item) => {
-              return <Project {...item} />;
+            {projects.map((item, index) => {
+              return <Project {...item} key={index} />;
             })}
           </div>
         </Section>
         <Section title={"Accomplishments"}>
           <div className="accomplishments-container">
-            {accomplishments.map((item) => {
-              return <Accomplishment {...item} />;
+            {accomplishments.map((item, index) => {
+              return <Accomplishment {...item} key={index} />;
             })}
           </div>
         </Section>
         <Section title={"Volunteer"}>
           <div className="accomplishments-container">
-            {volunter.map((item) => {
-              return <Experience {...item} />;
+            {volunter.map((item, index) => {
+              return <Experience {...item} key={index} />;
             })}
           </div>
         </Section>
