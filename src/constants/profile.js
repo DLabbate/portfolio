@@ -11,11 +11,22 @@ import bumpercars from "../assets/projects/thumbnails/bumpercars.png";
 import hovercraft from "../assets/projects/thumbnails/hovercraft.mp4";
 
 export const sidebarItems = [
-  { label: "About Me", icon: "FiUser" },
-  { label: "Education", icon: "FiBook" },
-  { label: "Experience", icon: "FiCode" },
-  { label: "Projects", icon: "FiGithub" },
-  { label: "Accomplishments", icon: "FiAward" },
+  { label: "About Me", icon: "FiUser", to: "about-me" },
+  { label: "Education", icon: "FiBook", to: "education" },
+  { label: "Experience", icon: "FiCode", to: "experience" },
+  { label: "Projects", icon: "FiGithub", to: "projects" },
+  { label: "Accomplishments", icon: "FiAward", to: "accomplishments" },
+  { label: "Volunteer", icon: "FiHeart", to: "volunteer" },
+  {
+    label: "LinkedIn",
+    icon: "FiLinkedin",
+    link: "https://www.linkedin.com/in/domenic-labbate",
+  },
+  {
+    label: "YouTube",
+    icon: "FiYoutube",
+    link: "https://www.youtube.com/channel/UCPoHCHX-RCL8MzlOIJ7l9Nw",
+  },
 ];
 
 export const education = [

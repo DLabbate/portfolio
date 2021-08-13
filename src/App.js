@@ -21,7 +21,7 @@ function App() {
     <div className="App">
       <Sidebar sidebarItems={sidebarItems} />
       <div className="content">
-        <Section title={"About Me"}>
+        <Section title={"About Me"} id="about-me">
           <Terminal />
           <div className="technologies-container">
             {technologies.map((name) => {
@@ -29,31 +29,31 @@ function App() {
             })}
           </div>
         </Section>
-        <Section title={"Education"}>
+        <Section title={"Education"} id="education">
           {education.map((item, index) => {
             return <Experience {...item} key={index} />;
           })}
         </Section>
-        <Section title={"Experience"}>
+        <Section title={"Experience"} id="experience">
           {workExperience.map((item, index) => {
             return <Experience {...item} key={index} />;
           })}
         </Section>
-        <Section title={"Projects"}>
+        <Section title={"Projects"} id="projects">
           <div className="projects-container">
             {projects.map((item, index) => {
               return <Project {...item} key={index} />;
             })}
           </div>
         </Section>
-        <Section title={"Accomplishments"}>
+        <Section title={"Accomplishments"} id="accomplishments">
           <div className="accomplishments-container">
             {accomplishments.map((item, index) => {
               return <Accomplishment {...item} key={index} />;
             })}
           </div>
         </Section>
-        <Section title={"Volunteer"}>
+        <Section title={"Volunteer"} id="volunteer">
           <div className="accomplishments-container">
             {volunter.map((item, index) => {
               return <Experience {...item} key={index} />;

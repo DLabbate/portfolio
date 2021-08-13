@@ -70,6 +70,7 @@
   align-items: center;
   border-radius: 12px;
   transition: 200ms;
+  cursor: pointer;
 }
 
 .sidebar__link:hover {
