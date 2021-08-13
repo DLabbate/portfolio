@@ -240,3 +240,18 @@ export const volunter = [
     skills: ["Education", "English", "French", "Mathematics"],
   },
 ];
+
+export const technologies = [
+  "javascript",
+  "html",
+  "css",
+  "react",
+  "nodejs",
+  "express",
+  "mongodb",
+  "csharp",
+  "dotnetcore",
+  "cplusplus",
+  "python",
+  "java",
+];

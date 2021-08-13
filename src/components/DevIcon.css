@@ -1,0 +1,27 @@
+@keyframes bounce-2 {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.dev-icon {
+  margin: 10px;
+  width: 80px;
+  height: 80px;
+  transition: 400ms;
+  animation-name: bounce-2;
+  animation-timing-function: ease;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.dev-icon:hover {
+  transform: translateY(-10px);
+  transition: 400ms;
+}

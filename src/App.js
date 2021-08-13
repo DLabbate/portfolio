@@ -11,8 +11,10 @@ import {
   projects,
   accomplishments,
   volunter,
+  technologies,
 } from "./constants/profile";
 import Accomplishment from "./components/Accomplishment";
+import DevIcon from "./components/DevIcon";
 
 function App() {
   return (
@@ -21,6 +23,11 @@ function App() {
       <div className="content">
         <Section title={"About Me"}>
           <Terminal />
+          <div className="technologies-container">
+            {technologies.map((name) => {
+              return <DevIcon name={name} />;
+            })}
+          </div>
         </Section>
         <Section title={"Education"}>
           {education.map((item) => {
