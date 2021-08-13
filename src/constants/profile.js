@@ -129,8 +129,8 @@ export const projects = [
     title: "Mood.AI",
     imageSrc: moodAI,
     description:
-      "is a mental health application for a modern age.  In a team of 4 students, we developed a Cross-Platform app that allows patients with mental health difficulties to enter mood logs, gain insights on how they feel, and share data with psychologists",
-    link: "/projects/thumbnails/moodai",
+      "is a mental health application for a modern age.  In a team of 5 students, we developed a Cross-Platform mobile app that allows patients with mental health difficulties to enter mood logs, gain insights on how they feel, and share data with psychologists.",
+    link: "/projects/moodai",
     skills: [
       "JavaScript",
       "React Native",
@@ -143,7 +143,7 @@ export const projects = [
     title: "BikeBuddy",
     imageSrc: bikebuddy,
     description:
-      "your personal biking assistant. In a team of 4 students, received 1st place for a design project intended for cyclists seeking to track and improve performance",
+      "is your personal biking assistant. In a team of 4 students, we received 1st place for a mobile design project. Our platform is intended for cyclists seeking to track and improve performance.",
     link: "https://github.com/DLabbate/BikeBuddy",
     skills: [
       "Java",
@@ -168,15 +168,13 @@ export const projects = [
       "Shading",
       "Texturing",
       "Shadow Mapping",
-      "Fragment Shader",
-      "Vertex Shader",
     ],
   },
   {
     title: "Autonomous Hovercraft",
     videoSrc: hovercraft,
     description:
-      "Received 1st place for a design project in a team of 3 students. Each team tasked with developing a fully autonomous hovercraft capable of navigating a specified track and surpassing obstacles of height 1 mm to 3 mm",
+      "received 1st place for a design project in a team of 3 students. Each team tasked with developing a fully autonomous hovercraft capable of navigating a specified track and surpassing obstacles of height 1mm to 3mm.",
     link: "/projects/thumbnails/hovercraft",
     skills: [
       "Arduino",
@@ -190,7 +188,7 @@ export const projects = [
     title: "FastKeys",
     imageSrc: fastkeys,
     description:
-      "is a 2D typing game built using the Unity Game Engine. Implemented basic concepts such as using Rigidbody physics, collision detection, user input, and so forth.",
+      "is a 2D typing game built using the Unity Game Engine. Implemented basic concepts such as Rigidbody physics, collision detection, user input, and so forth.",
     link: "https://labbgames.itch.io/fastkeys",
     skills: [
       "Unity Game Engine",
