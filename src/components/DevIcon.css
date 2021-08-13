@@ -20,8 +20,3 @@
   animation-duration: 2s;
   animation-iteration-count: infinite;
 }
-
-.dev-icon:hover {
-  transform: translateY(-10px);
-  transition: 400ms;
-}
