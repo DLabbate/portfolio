@@ -254,4 +254,5 @@ export const technologies = [
   "cplusplus",
   "python",
   "java",
+  "azure",
 ];
