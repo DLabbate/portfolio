@@ -1,17 +1,44 @@
 .moodai__slogan {
   font-style: italic;
+  margin-top: -100px;
+  font-size: 1.2rem;
 }
 
 .moodai__logo {
-  max-width: 200px;
+  max-width: 300px;
+  width: 40%;
   border-radius: 100%;
-  /* margin-top: -100px; */
+  margin-top: 100px;
 }
 
 .moodai__demo {
-  width: 15%;
+  width: 30%;
+  max-width: 300px;
   margin: 20px;
   border: solid 3px #11101d;
   border-radius: 15px;
-  margin-top: 100px;
+}
+
+.moodai__list {
+  line-height: 50px;
+}
+
+.moodai__info {
+  /* max-width: 60%; */
+  max-width: 800px;
+  margin: 15px;
+}
+
+.moodai__info b {
+  color: #89d0f1;
+}
+
+.moodai__info p {
+  line-height: 30px;
+}
+
+.moodai__gsr {
+  width: 30%;
+  max-width: 300px;
+  margin: 20px;
 }
