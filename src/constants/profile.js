@@ -8,7 +8,7 @@ import moodAI from "../assets/projects/thumbnails/moodai.jpg";
 import bikebuddy from "../assets/projects/thumbnails/bikebuddy2.PNG";
 import fastkeys from "../assets/projects/thumbnails/fastkeys.PNG";
 import bumpercars from "../assets/projects/thumbnails/bumpercars.png";
-import hovercraft from "../assets/projects/thumbnails/hovercraft.mp4";
+import hovercraft from "../assets/projects/thumbnails/hovercraft-trimmed.mp4";
 
 export const sidebarItems = [
   { label: "About Me", icon: "FiUser", to: "about-me" },
@@ -17,6 +17,26 @@ export const sidebarItems = [
   { label: "Projects", icon: "FiGithub", to: "projects" },
   { label: "Accomplishments", icon: "FiAward", to: "accomplishments" },
   { label: "Volunteer", icon: "FiHeart", to: "volunteer" },
+  {
+    label: "LinkedIn",
+    icon: "FiLinkedin",
+    link: "https://www.linkedin.com/in/domenic-labbate",
+  },
+  {
+    label: "YouTube",
+    icon: "FiYoutube",
+    link: "https://www.youtube.com/channel/UCPoHCHX-RCL8MzlOIJ7l9Nw",
+  },
+];
+
+// Links are relative to the root
+export const sidebarItemsRootLinks = [
+  { label: "About Me", icon: "FiUser", link: "/#about-me" },
+  { label: "Education", icon: "FiBook", link: "/#education" },
+  { label: "Experience", icon: "FiCode", link: "/#experience" },
+  { label: "Projects", icon: "FiGithub", link: "/#projects" },
+  { label: "Accomplishments", icon: "FiAward", link: "/#accomplishments" },
+  { label: "Volunteer", icon: "FiHeart", link: "/#volunteer" },
   {
     label: "LinkedIn",
     icon: "FiLinkedin",

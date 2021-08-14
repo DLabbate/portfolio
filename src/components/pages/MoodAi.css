@@ -1,0 +1,17 @@
+.moodai__slogan {
+  font-style: italic;
+}
+
+.moodai__logo {
+  max-width: 200px;
+  border-radius: 100%;
+  /* margin-top: -100px; */
+}
+
+.moodai__demo {
+  width: 15%;
+  margin: 20px;
+  border: solid 3px #11101d;
+  border-radius: 15px;
+  margin-top: 100px;
+}
