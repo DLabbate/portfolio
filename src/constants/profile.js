@@ -54,6 +54,7 @@ export const education = [
     logoSrc: concordia,
     title: "Bachelor of Engineering — Computer Engineering",
     company: "Concordia University (Montreal, Canada)",
+    url: "https://www.concordia.ca/",
     year: "September 2017 — Present",
     content: [
       "GPA: 4.27/4.30",
@@ -72,6 +73,7 @@ export const workExperience = [
     logoSrc: genetec,
     title: "Software Developer Intern",
     company: "Genetec",
+    url: "https://www.genetec.com/",
     year: "May 2021 — Present",
     content: [
       "Worked on the backend codebase of a Cloud based video surveillance system",
@@ -94,6 +96,7 @@ export const workExperience = [
     logoSrc: concordia,
     title: "Research Assistant",
     company: "Concordia University",
+    url: "https://www.concordia.ca/",
     year: "June 2020 — September 2020",
     content: [
       "Participated as a research assistant for a project between Concordia University and Ciena",
@@ -107,6 +110,7 @@ export const workExperience = [
     title: "Software Quality Assurance Intern",
     company: "CAE Healthcare",
     year: "September 2018 — December 2018",
+    url: "https://www.cae.com/",
     content: [
       "Executed test runs on medical simulation systems including patient simulation software and augmented reality applications",
       "Routinely followed up with QA progress by testing and closing resolved bugs in Jira. When necessary, informed developers to ensure the issues were corrected",
@@ -250,6 +254,7 @@ export const volunter = [
     logoSrc: youtube,
     title: "Dom the Engineer",
     company: "YouTube",
+    url: "https://www.youtube.com/channel/UCPoHCHX-RCL8MzlOIJ7l9Nw",
     year: "August 2021 — Present",
     content: [
       "Started a YouTube channel with the goal of sharing educational videos",
@@ -261,6 +266,7 @@ export const volunter = [
     logoSrc: pdc,
     title: "Tutoring",
     company: "Pierre de Coubertin Elementary School",
+    url: "https://pierredecoubertin.emsb.qc.ca/pdc",
     year: "2014",
     content: [
       "Volunteered to aid grade 1 students with homework for an hour and a half weekly",

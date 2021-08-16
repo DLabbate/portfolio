@@ -2,11 +2,21 @@ import React from "react";
 import "./Experience.css";
 import Skill from "./Skill";
 
-const Experience = ({ logoSrc, title, company, year, content, skills }) => {
+const Experience = ({
+  logoSrc,
+  title,
+  company,
+  year,
+  content,
+  skills,
+  url,
+}) => {
   return (
     <div className="experience">
       <div className="experience__logo-container">
-        <img className="experience__logo" src={logoSrc} alt="Experience" />
+        <a href={url}>
+          <img className="experience__logo" src={logoSrc} alt="Experience" />
+        </a>
       </div>
       <div className="experience__title-container">
         <h3>{title}</h3>
