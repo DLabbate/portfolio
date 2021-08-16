@@ -68,8 +68,8 @@ const MoodAi = () => {
             <p>
               In addition to symptom data captured by the patient’s mood logs,
               the application also has the option of recording physiological
-              skin conductance via a GSR sensor, as this metric is very closely
-              related to emotional arousal
+              skin conductance with a GSR sensor, which is very closely related
+              to emotional arousal
             </p>
           </div>
           <img src={gsr} className="moodai__gsr" alt="Mood.AI Demo" />
