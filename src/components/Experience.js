@@ -1,6 +1,7 @@
 import React from "react";
 import "./Experience.css";
 import Skill from "./Skill";
+import { useInView } from "react-intersection-observer";
 
 const Experience = ({
   logoSrc,
@@ -11,8 +12,16 @@ const Experience = ({
   skills,
   url,
 }) => {
+  const { ref, inView } = useInView({
+    /* Optional options */
+    threshold: 0.3,
+  });
+
   return (
-    <div className="experience">
+    <div
+      className={inView ? "experience experience--active" : "experience"}
+      ref={ref}
+    >
       <div className="experience__logo-container">
         <a href={url}>
           <img className="experience__logo" src={logoSrc} alt="Experience" />

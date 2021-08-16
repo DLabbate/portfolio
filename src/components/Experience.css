@@ -5,6 +5,16 @@
   width: 70%;
   max-width: 1000px;
   margin: 20px;
+
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: 1s;
+}
+
+.experience--active {
+  transform: translateX(50px);
+  opacity: 1;
+  transition: 1s;
 }
 
 .experience__logo-container {

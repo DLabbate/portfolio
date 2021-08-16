@@ -13,6 +13,16 @@
   border-width: 0px 0px 0px 5px;
   border-style: solid;
   border-color: #11101d;
+
+  opacity: 0;
+  transform: scale(150%);
+  transition: 1s;
+}
+
+.accomplishment--active {
+  opacity: 1;
+  transform: scale(100%);
+  transition: 1s;
 }
 
 .accomplishment:hover {
