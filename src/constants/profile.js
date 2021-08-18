@@ -244,7 +244,7 @@ export const accomplishments = [
     title: "Knowledge First Scholarship",
     organization: "Concordia University",
     description:
-      "Renewable scholarship of $2500 per semester (for a maximum of 8 semesters) in recognition of high academic entrance qualifications for the Fall 2017 semester",
+      "Renewable scholarship of $2500 per semester (total of 8 semesters) in recognition of high academic entrance qualifications",
     year: "2017",
   },
 ];
