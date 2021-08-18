@@ -12,7 +12,8 @@
 }
 
 .experience--active {
-  transform: translateX(50px);
+  /* Back to original position */
+  transform: translateX(0px);
   opacity: 1;
   transition: 1s;
 }
@@ -57,4 +58,34 @@
 
 ul {
   list-style: circle;
+}
+
+@media screen and (max-width: 700px) {
+  .experience {
+    width: 92.5%;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .experience li {
+    line-height: 30px;
+  }
+
+  .experience__content-container {
+    margin-top: 0px;
+  }
+
+  .experience__logo-container {
+    position: absolute;
+    left: 0;
+  }
+
+  .experience__title-container {
+    margin-left: 80px;
+  }
+
+  .experience__year-container {
+    margin-left: 80px;
+  }
 }

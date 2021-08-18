@@ -136,3 +136,40 @@
 .sidebar__tooltip--open {
   display: none;
 }
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    position: fixed;
+    background-color: transparent;
+    height: 60px;
+    transition: all 0.5s ease;
+  }
+
+  .sidebar__menu {
+    color: #11101d;
+  }
+
+  .sidebar--open {
+    background-color: #11101dcb;
+    height: 100vh;
+    transition: all 0.5s ease;
+    width: 300px;
+  }
+
+  .sidebar__list {
+    display: none;
+  }
+
+  .sidebar--open .sidebar__list {
+    display: block;
+  }
+
+  .sidebar--open .sidebar__menu {
+    color: white;
+    transition: 400ms;
+  }
+
+  .sidebar--open .sidebar__logo {
+    color: white;
+  }
+}

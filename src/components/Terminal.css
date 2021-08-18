@@ -16,7 +16,7 @@
 .terminal {
   background: #11101d;
   overflow: hidden;
-  width: 70%;
+  width: 92.5%;
   aspect-ratio: 1.5;
   max-width: 700px;
 }
@@ -57,4 +57,13 @@
 
 .terminal__button--green {
   background-color: rgb(37, 204, 62);
+}
+
+@media screen and (max-width: 700px) {
+  .terminal {
+    transition: 400ms;
+  }
+  .terminal * {
+    font-size: 11px;
+  }
 }

@@ -52,8 +52,8 @@ export const sidebarItemsRootLinks = [
 export const education = [
   {
     logoSrc: concordia,
-    title: "Bachelor of Engineering — Computer Engineering",
-    company: "Concordia University (Montreal, Canada)",
+    title: "Computer Engineering",
+    company: "Concordia University",
     url: "https://www.concordia.ca/",
     year: "September 2017 — Present",
     content: [
@@ -62,7 +62,7 @@ export const education = [
     ],
     skills: [
       "Object Oriented Programming",
-      "Data Structures and Algorithms",
+      "Data Structures & Algorithms",
       "Operating Systems",
     ],
   },
@@ -103,7 +103,7 @@ export const workExperience = [
       "Scope of project included research into 5G Adaptive Network Slicing under supervision of a Professor",
       "Participated in the research of algorithmic solutions to ensure 5G networks adhere to Service Level Agreements",
     ],
-    skills: ["Java", "Git", "Communication Networks and Protocols"],
+    skills: ["Java", "Git", "Communication Networks & Protocols"],
   },
   {
     logoSrc: cae,

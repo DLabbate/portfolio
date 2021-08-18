@@ -2,7 +2,7 @@
   position: relative;
   width: 45%;
   min-width: 550px;
-  max-width: 650px;
+  max-width: 700px;
   aspect-ratio: 4;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   transition: 400ms;
@@ -59,4 +59,23 @@
 .accomplishment__link:hover {
   color: white;
   background-color: #11101d;
+}
+
+.accomplishment__description {
+  margin-right: 30px;
+}
+
+@media screen and (max-width: 700px) {
+  .accomplishment {
+    min-width: 300px;
+    width: 90%;
+  }
+
+  .accomplishment__title {
+    font-size: 1rem;
+  }
+
+  .accomplishment__subtitle {
+    font-size: 0.85rem;
+  }
 }
