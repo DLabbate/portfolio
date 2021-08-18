@@ -41,3 +41,10 @@
   margin: 5px;
   align-self: flex-start;
 }
+
+@media screen and (max-width: 700px) {
+  .project {
+    min-width: 300px;
+    width: 90%;
+  }
+}

@@ -19,3 +19,11 @@
   max-width: 700px;
   margin: 20px;
 }
+
+@media screen and (max-width: 700px) {
+  .technologies-container {
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+  }
+}

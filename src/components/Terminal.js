@@ -18,22 +18,14 @@ const Terminal = () => {
               .changeDelay(50)
               .typeString(">> Hello World!\n")
               .typeString(">> My name is Domenic.\n\n")
-              .typeString(
-                ">> I am a Computer Engineering student at Concordia University.\n"
-              )
+              .typeString(">> I am a Computer Engineering student.\n")
               .typeString(">> I'm graduating soon! December 2021.\n\n")
+              .typeString(">> Here are some things you should know about me.\n")
+              .typeString("\t>> I have a passion for problem solving.\n")
               .typeString(
-                ">> Here are a couple things you should know about me.\n"
+                "\t>> I'm resourceful and can overcome difficulties.\n"
               )
-              .typeString(
-                "\t>> I have a passion for problem solving, and I am capable of overcoming difficulties.\n"
-              )
-              .typeString(
-                "\t>> I'm resourceful. I might not have all the answers, but I'll figure it out!\n"
-              )
-              .typeString(
-                "\t>> I place an emphasis on self-improvement. I'm always eager to get better.\n"
-              )
+              .typeString("\t>> I place an emphasis on self-improvement.\n")
               .pauseFor(10000)
               .deleteAll(1)
               .start();

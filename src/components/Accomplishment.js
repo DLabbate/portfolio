@@ -16,10 +16,11 @@ const Accomplishment = ({ title, organization, description, year, link }) => {
       }
       ref={ref}
     >
-      <h3>
-        {organization} — {title}
-      </h3>
-      <p>{description}</p>
+      <h2 className="accomplishment__title">{title}</h2>
+      <h3 className="accomplishment__subtitle">{organization}</h3>
+
+      <br />
+      <p className="accomplishment__description">{description}</p>
       <span className="accomplishment__year">{year}</span>
       {link ? (
         <a className="accomplishment__link" href={link}>

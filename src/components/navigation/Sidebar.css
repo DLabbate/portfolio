@@ -136,3 +136,52 @@
 .sidebar__tooltip--open {
   display: none;
 }
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    position: fixed;
+    height: 60px;
+    transition: all 0.5s ease;
+    width: 100%;
+    overflow: hidden;
+    background-color: #11101dcb;
+  }
+
+  .sidebar__logo {
+    opacity: 1;
+  }
+
+  .sidebar--open {
+    background-color: #11101dcb;
+    height: 100vh;
+    transition: all 0.5s ease;
+    width: 100%;
+  }
+
+  .sidebar__list {
+    /* display: none; */
+  }
+
+  .sidebar__icon {
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+
+  .sidebar--open .sidebar__icon {
+    opacity: 1;
+    transition: all 0.5s ease;
+  }
+
+  .sidebar--open .sidebar__list {
+    display: block;
+  }
+
+  .sidebar--open .sidebar__menu {
+    color: white;
+    transition: 400ms;
+  }
+
+  .sidebar--open .sidebar__logo {
+    color: white;
+  }
+}

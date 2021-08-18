@@ -12,7 +12,8 @@
 }
 
 .experience--active {
-  transform: translateX(50px);
+  /* Back to original position */
+  transform: translateX(0px);
   opacity: 1;
   transition: 1s;
 }
@@ -57,4 +58,39 @@
 
 ul {
   list-style: circle;
+}
+
+@media screen and (max-width: 700px) {
+  .experience {
+    width: 92.5%;
+    font-size: 16px;
+    grid-template-columns: auto 1fr;
+    gap: 0px;
+  }
+
+  .experience__title-container {
+    margin-left: 5px;
+  }
+
+  .experience__year-container {
+    grid-row: 2/3;
+    grid-column: 2/3;
+    margin-top: -10px;
+    margin-left: 5px;
+  }
+
+  .experience__content-container {
+    grid-row: 3/4;
+    grid-column: 1/3;
+    padding: 0px 20px;
+    margin-top: 20px;
+    line-height: 30px;
+  }
+
+  .experience__skills-container {
+    grid-row: 4/5;
+    grid-column: 1/4;
+    display: flex;
+    flex-wrap: wrap;
+  }
 }

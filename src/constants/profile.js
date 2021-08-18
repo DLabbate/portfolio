@@ -52,8 +52,8 @@ export const sidebarItemsRootLinks = [
 export const education = [
   {
     logoSrc: concordia,
-    title: "Bachelor of Engineering — Computer Engineering",
-    company: "Concordia University (Montreal, Canada)",
+    title: "Computer Engineering",
+    company: "Concordia University",
     url: "https://www.concordia.ca/",
     year: "September 2017 — Present",
     content: [
@@ -62,7 +62,7 @@ export const education = [
     ],
     skills: [
       "Object Oriented Programming",
-      "Data Structures and Algorithms",
+      "Data Structures & Algorithms",
       "Operating Systems",
     ],
   },
@@ -103,7 +103,7 @@ export const workExperience = [
       "Scope of project included research into 5G Adaptive Network Slicing under supervision of a Professor",
       "Participated in the research of algorithmic solutions to ensure 5G networks adhere to Service Level Agreements",
     ],
-    skills: ["Java", "Git", "Communication Networks and Protocols"],
+    skills: ["Java", "Git", "Communication Networks & Protocols"],
   },
   {
     logoSrc: cae,
@@ -244,7 +244,7 @@ export const accomplishments = [
     title: "Knowledge First Scholarship",
     organization: "Concordia University",
     description:
-      "Renewable scholarship of $2500 per semester (for a maximum of 8 semesters) in recognition of high academic entrance qualifications for the Fall 2017 semester",
+      "Renewable scholarship of $2500 per semester (total of 8 semesters) in recognition of high academic entrance qualifications",
     year: "2017",
   },
 ];
@@ -265,7 +265,7 @@ export const volunter = [
   {
     logoSrc: pdc,
     title: "Tutoring",
-    company: "Pierre de Coubertin Elementary School",
+    company: "Pierre de Coubertin",
     url: "https://pierredecoubertin.emsb.qc.ca/pdc",
     year: "2014",
     content: [
