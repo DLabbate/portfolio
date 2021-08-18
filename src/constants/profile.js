@@ -265,7 +265,7 @@ export const volunter = [
   {
     logoSrc: pdc,
     title: "Tutoring",
-    company: "Pierre de Coubertin Elementary School",
+    company: "Pierre de Coubertin",
     url: "https://pierredecoubertin.emsb.qc.ca/pdc",
     year: "2014",
     content: [

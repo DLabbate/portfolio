@@ -64,28 +64,33 @@ ul {
   .experience {
     width: 92.5%;
     font-size: 16px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .experience li {
-    line-height: 30px;
-  }
-
-  .experience__content-container {
-    margin-top: 0px;
-  }
-
-  .experience__logo-container {
-    position: absolute;
-    left: 0;
+    grid-template-columns: auto 1fr;
+    gap: 0px;
   }
 
   .experience__title-container {
-    margin-left: 80px;
+    margin-left: 5px;
   }
 
   .experience__year-container {
-    margin-left: 80px;
+    grid-row: 2/3;
+    grid-column: 2/3;
+    margin-top: -10px;
+    margin-left: 5px;
+  }
+
+  .experience__content-container {
+    grid-row: 3/4;
+    grid-column: 1/3;
+    padding: 0px 20px;
+    margin-top: 20px;
+    line-height: 30px;
+  }
+
+  .experience__skills-container {
+    grid-row: 4/5;
+    grid-column: 1/4;
+    display: flex;
+    flex-wrap: wrap;
   }
 }
