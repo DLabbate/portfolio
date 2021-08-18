@@ -140,24 +140,36 @@
 @media screen and (max-width: 700px) {
   .sidebar {
     position: fixed;
-    background-color: transparent;
     height: 60px;
     transition: all 0.5s ease;
+    width: 100%;
+    overflow: hidden;
+    background-color: #11101dcb;
   }
 
-  .sidebar__menu {
-    color: #11101d;
+  .sidebar__logo {
+    opacity: 1;
   }
 
   .sidebar--open {
     background-color: #11101dcb;
     height: 100vh;
     transition: all 0.5s ease;
-    width: 300px;
+    width: 100%;
   }
 
   .sidebar__list {
-    display: none;
+    /* display: none; */
+  }
+
+  .sidebar__icon {
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+
+  .sidebar--open .sidebar__icon {
+    opacity: 1;
+    transition: all 0.5s ease;
   }
 
   .sidebar--open .sidebar__list {
