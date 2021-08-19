@@ -134,7 +134,7 @@ export const projects = [
     title: "Acasa",
     imageSrc: acasa,
     description:
-      "is a simple to use real estate platform that offers the ability to search for homes, organize favorites into different categories, and even create your own listing!",
+      "is a simple real estate platform that offers the ability to search for homes, organize favorites into different categories, and even create your own listing!",
     link: "https://github.com/DLabbate/real-estate-website",
     skills: [
       "JavaScript",
@@ -153,7 +153,7 @@ export const projects = [
     title: "Mood.AI",
     imageSrc: moodAI,
     description:
-      "is a mental health application for a modern age.  In a team of 5 students, we developed a Cross-Platform mobile app that allows patients with mental health difficulties to enter mood logs, gain insights on how they feel, and share data with psychologists.",
+      "is a mental health application for a modern age.  In a team of 5 students, we developed a Cross-Platform mobile app that allows patients with mental health difficulties the ability to enter mood logs, gain insights on how they feel, and share data with psychologists.",
     link: "/projects/moodai",
     skills: [
       "JavaScript",
@@ -167,7 +167,7 @@ export const projects = [
     title: "BikeBuddy",
     imageSrc: bikebuddy,
     description:
-      "is your personal biking assistant. In a team of 4 students, we received 1st place for a mobile design project. Our platform is intended for cyclists seeking to track and improve performance.",
+      "is a personal biking assistant. In a team of 4 students, we received 1st place for a mobile design project. Our platform is intended for cyclists to track and improve performance.",
     link: "https://github.com/DLabbate/BikeBuddy",
     skills: [
       "Java",
@@ -181,7 +181,7 @@ export const projects = [
     title: "BumperCars",
     imageSrc: bumpercars,
     description:
-      "is a 3D computer game built using OpenGL API. Application includes a user-controlled car that can collide with other cars on the track.",
+      "is a 3D computer game built using OpenGL API. The application includes a user-controlled car that can collide with other cars on the track.",
     link: "https://github.com/DLabbate/OpenGL_CarProject",
     skills: [
       "OpenGL",
@@ -198,7 +198,7 @@ export const projects = [
     title: "Autonomous Hovercraft",
     videoSrc: hovercraft,
     description:
-      "received 1st place for a design project in a team of 3 students. Each team tasked with developing a fully autonomous hovercraft capable of navigating a specified track and surpassing obstacles of height 1mm to 3mm.",
+      "received 1st place for a design project in a team of 3 students. Each team was tasked with building a fully autonomous hovercraft capable of navigating a specified track and surpassing obstacles of height 1mm to 3mm.",
     link: "/projects/thumbnails/hovercraft",
     skills: [
       "Arduino",
@@ -269,8 +269,8 @@ export const volunter = [
     url: "https://pierredecoubertin.emsb.qc.ca/pdc",
     year: "2014",
     content: [
-      "Volunteered to aid grade 1 students with homework for an hour and a half weekly",
-      "Offered help in English, French and Mathematics",
+      "Volunteered to aid grade 1 students with homework for an hour and a half per week",
+      "Offered help in English, French, and Mathematics",
     ],
     skills: ["Education", "English", "French", "Mathematics"],
   },
