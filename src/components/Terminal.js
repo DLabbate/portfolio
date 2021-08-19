@@ -18,7 +18,7 @@ const Terminal = () => {
               .changeDelay(50)
               .typeString(">> Hello World!\n")
               .typeString(">> My name is Domenic.\n\n")
-              .typeString(">> I am a Computer Engineering student.\n")
+              .typeString(">> I'm a Computer Engineering student.\n")
               .typeString(">> I'm graduating soon! December 2021.\n\n")
               .typeString(">> Here are some things you should know about me.\n")
               .typeString("\t>> I have a passion for problem solving.\n")
