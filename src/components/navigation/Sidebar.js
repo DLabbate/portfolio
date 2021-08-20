@@ -77,7 +77,7 @@ const Sidebar = ({ sidebarItems }) => {
         >
           Domenic Labbate
         </span>
-
+        <div className="sidebar__initials">DL</div>
         <FeatherIcons.FiMenu
           className="sidebar__menu"
           size={20}

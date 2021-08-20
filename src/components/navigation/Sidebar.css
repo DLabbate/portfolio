@@ -42,6 +42,17 @@
   transition: 400ms;
 }
 
+.sidebar__initials {
+  position: absolute;
+  left: calc((80px - 20px) / 2);
+  opacity: 0;
+  background-color: transparent;
+  border: solid 1px white;
+  padding: 10px;
+  border-radius: 100%;
+  color: white;
+}
+
 .sidebar__logo--open {
   opacity: 1;
   transition: 400ms;
@@ -148,7 +159,12 @@
   }
 
   .sidebar__logo {
+    opacity: 0;
+  }
+
+  .sidebar__initials {
     opacity: 1;
+    transition: all 0.5s ease;
   }
 
   .sidebar--open {
@@ -183,5 +199,11 @@
 
   .sidebar--open .sidebar__logo {
     color: white;
+    opacity: 1;
+  }
+
+  .sidebar--open .sidebar__initials {
+    opacity: 0;
+    transition: all 0.5s ease;
   }
 }
