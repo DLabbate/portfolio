@@ -15,13 +15,19 @@
 
 .terminal {
   background: #11101d;
-  overflow: hidden;
   width: 92.5%;
   aspect-ratio: 1.5;
   max-width: 700px;
+  overflow: hidden;
+  position: relative;
+}
+
+.terminal__content {
+  width: 100%;
+  height: 100%;
+  position: absolute;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 .terminal--active {
@@ -49,6 +55,7 @@
   aspect-ratio: 1;
   border-radius: 100%;
   margin-left: 1%;
+  border: 0.1px solid grey;
 }
 
 .terminal__button--red {
@@ -69,5 +76,21 @@
   }
   .terminal * {
     font-size: 11px;
+  }
+}
+
+@supports not (aspect-ratio: 1.5) {
+  /* Padding hack to maintain aspect ratio */
+  .terminal::before {
+    content: "";
+    padding-top: calc(100% * (2 / 3));
+    float: left;
+  }
+
+  /* Padding hack to maintain aspect ratio */
+  .terminal__button::before {
+    content: "";
+    padding-top: 100%;
+    float: left;
   }
 }
