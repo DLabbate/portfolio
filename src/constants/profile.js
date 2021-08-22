@@ -107,7 +107,7 @@ export const workExperience = [
   },
   {
     logoSrc: cae,
-    title: "Software Quality Assurance Intern",
+    title: "Quality Assurance Intern",
     company: "CAE Healthcare",
     year: "September 2018 — December 2018",
     url: "https://www.cae.com/",
