@@ -1,20 +1,20 @@
 import React from "react";
 import "./Accomplishment.css";
 import { FiLink } from "react-icons/fi";
-import { useInView } from "react-intersection-observer";
 
-const Accomplishment = ({ title, organization, description, year, link }) => {
-  const { ref, inView } = useInView({
-    /* Optional options */
-    threshold: 0.3,
-  });
-
+const Accomplishment = ({
+  title,
+  organization,
+  description,
+  year,
+  link,
+  inView,
+}) => {
   return (
     <div
       className={
         inView ? "accomplishment accomplishment--active" : "accomplishment"
       }
-      ref={ref}
     >
       <h2 className="accomplishment__title">{title}</h2>
       <h3 className="accomplishment__subtitle">{organization}</h3>

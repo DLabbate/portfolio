@@ -1,0 +1,24 @@
+.contact-link {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  cursor: pointer;
+  border: 1px solid black;
+  transition: all 0.5s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact-link:hover {
+  transform: scale(125%);
+  transition: all 0.5s ease;
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1px;
+}

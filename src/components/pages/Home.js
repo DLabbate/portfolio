@@ -13,11 +13,18 @@ import {
   accomplishments,
   volunter,
   technologies,
+  contact,
 } from "../../constants/profile";
 import Accomplishment from "../Accomplishment";
 import DevIcon from "../DevIcon";
+import { FiGithub, FiLinkedin, FiYoutube } from "react-icons/fi";
+import { useInView } from "react-intersection-observer";
+import ContactLink from "../ContactLink";
 
 const Home = () => {
+  const [accomplishmentsRef, accomplishmentsInView] = useInView({
+    threshold: 0.3,
+  });
   return (
     <>
       <Sidebar sidebarItems={sidebarItems} />
@@ -48,9 +55,15 @@ const Home = () => {
           </div>
         </Section>
         <Section title={"Accomplishments"} id="accomplishments">
-          <div className="accomplishments-container">
+          <div className="accomplishments-container" ref={accomplishmentsRef}>
             {accomplishments.map((item, index) => {
-              return <Accomplishment {...item} key={index} />;
+              return (
+                <Accomplishment
+                  {...item}
+                  inView={accomplishmentsInView}
+                  key={index}
+                />
+              );
             })}
           </div>
         </Section>
@@ -58,6 +71,13 @@ const Home = () => {
           <div className="accomplishments-container">
             {volunter.map((item, index) => {
               return <Experience {...item} key={index} />;
+            })}
+          </div>
+        </Section>
+        <Section title={"Contact"} id="contact">
+          <div className="contact-container">
+            {contact.map((item, index) => {
+              return <ContactLink {...item} key={index} />;
             })}
           </div>
         </Section>

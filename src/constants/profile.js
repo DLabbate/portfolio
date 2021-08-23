@@ -17,16 +17,7 @@ export const sidebarItems = [
   { label: "Projects", icon: "FiGithub", to: "projects" },
   { label: "Accomplishments", icon: "FiAward", to: "accomplishments" },
   { label: "Volunteer", icon: "FiHeart", to: "volunteer" },
-  {
-    label: "LinkedIn",
-    icon: "FiLinkedin",
-    link: "https://www.linkedin.com/in/domenic-labbate",
-  },
-  {
-    label: "YouTube",
-    icon: "FiYoutube",
-    link: "https://www.youtube.com/channel/UCPoHCHX-RCL8MzlOIJ7l9Nw",
-  },
+  { label: "Contact", icon: "FiLink", to: "contact" },
 ];
 
 // Links are relative to the root
@@ -37,16 +28,7 @@ export const sidebarItemsRootLinks = [
   { label: "Projects", icon: "FiGithub", link: "/#projects" },
   { label: "Accomplishments", icon: "FiAward", link: "/#accomplishments" },
   { label: "Volunteer", icon: "FiHeart", link: "/#volunteer" },
-  {
-    label: "LinkedIn",
-    icon: "FiLinkedin",
-    link: "https://www.linkedin.com/in/domenic-labbate",
-  },
-  {
-    label: "YouTube",
-    icon: "FiYoutube",
-    link: "https://www.youtube.com/channel/UCPoHCHX-RCL8MzlOIJ7l9Nw",
-  },
+  { label: "Contact", icon: "FiLink", link: "/#contact" },
 ];
 
 export const education = [
@@ -290,4 +272,19 @@ export const technologies = [
   "python",
   "java",
   "azure",
+];
+
+export const contact = [
+  {
+    icon: "FiGithub",
+    url: "https://github.com/DLabbate",
+  },
+  {
+    icon: "FiLinkedin",
+    url: "https://www.linkedin.com/in/domenic-labbate",
+  },
+  {
+    icon: "FiYoutube",
+    url: "https://www.youtube.com/channel/UCPoHCHX-RCL8MzlOIJ7l9Nw",
+  },
 ];
