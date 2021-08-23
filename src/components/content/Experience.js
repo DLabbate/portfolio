@@ -1,6 +1,6 @@
 import React from "react";
 import "./Experience.css";
-import Skill from "./Skill";
+import Skill from "../shared/Skill";
 import { useInView } from "react-intersection-observer";
 
 const Experience = ({

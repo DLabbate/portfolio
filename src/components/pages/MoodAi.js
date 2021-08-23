@@ -6,7 +6,7 @@ import Sidebar from "../navigation/Sidebar";
 import Section from "../wrappers/Section";
 import logo from "../../assets/projects/thumbnails/moodai.jpg";
 import home from "../../assets/projects/general/moodai/moodai-home.jpg";
-import Slider from "../Slider";
+import Slider from "../wrappers/Slider";
 import gsr from "../../assets/projects/general/moodai/gsr.png";
 
 const MoodAi = () => {

@@ -1,10 +1,10 @@
 import React from "react";
 import "./Home.css";
-import Experience from "../Experience";
+import Experience from "../content/Experience";
 import Section from "../wrappers/Section";
 import Sidebar from "../navigation/Sidebar";
-import Terminal from "../Terminal";
-import Project from "../Project";
+import Terminal from "../general/Terminal";
+import Project from "../content/Project";
 import {
   sidebarItems,
   education,
@@ -15,11 +15,10 @@ import {
   technologies,
   contact,
 } from "../../constants/profile";
-import Accomplishment from "../Accomplishment";
-import DevIcon from "../DevIcon";
-import { FiGithub, FiLinkedin, FiYoutube } from "react-icons/fi";
+import Accomplishment from "../content/Accomplishment";
+import DevIcon from "../shared/DevIcon";
 import { useInView } from "react-intersection-observer";
-import ContactLink from "../ContactLink";
+import ContactLink from "../shared/ContactLink";
 
 const Home = () => {
   const [accomplishmentsRef, accomplishmentsInView] = useInView({

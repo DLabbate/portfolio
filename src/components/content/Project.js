@@ -1,6 +1,6 @@
 import React from "react";
 import "./Project.css";
-import Skill from "./Skill";
+import Skill from "../shared/Skill";
 
 const Project = ({ link, title, description, imageSrc, skills, videoSrc }) => {
   return (
