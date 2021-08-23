@@ -21,6 +21,9 @@ import { useInView } from "react-intersection-observer";
 import ContactLink from "../shared/ContactLink";
 
 const Home = () => {
+  const [terminalRef, terminalInView] = useInView({
+    threshold: 0,
+  });
   const [accomplishmentsRef, accomplishmentsInView] = useInView({
     threshold: 0.3,
   });
@@ -29,7 +32,10 @@ const Home = () => {
       <Sidebar sidebarItems={sidebarItems} />
       <div className="content">
         <Section title={"About Me"} id="about-me">
-          <Terminal />
+          <div className="terminal-container" ref={terminalRef}>
+            <Terminal inView={terminalInView} />
+          </div>
+
           <div className="technologies-container">
             {technologies.map((name) => {
               return <DevIcon name={name} key={name} />;

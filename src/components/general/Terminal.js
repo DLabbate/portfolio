@@ -2,9 +2,9 @@ import React from "react";
 import "./Terminal.css";
 import Typewriter from "typewriter-effect";
 
-const Terminal = () => {
+const Terminal = ({ inView }) => {
   return (
-    <div className="terminal terminal--active">
+    <div className={inView ? "terminal terminal--active" : "terminal"}>
       <div className="terminal__content">
         <div className="terminal__header">
           <div className="terminal__button terminal__button--red"></div>
