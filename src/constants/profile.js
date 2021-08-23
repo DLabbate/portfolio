@@ -56,12 +56,12 @@ export const workExperience = [
     title: "Software Developer Intern",
     company: "Genetec",
     url: "https://www.genetec.com/",
-    year: "May 2021 — Present",
+    year: "May 2021 — August 2021",
     content: [
       "Worked on the backend codebase of a Cloud based video surveillance system",
       "Increased robustness of a push notification service by implementing logic to handle unmanaged camera states",
       "Improved codebase by migrating to a newer supported version of ASP.NET",
-      "Implemented coding best practices and design patterns such as publisher—subscriber, dependency injection, mediator, MVC",
+      "Implemented coding best practices and design patterns such as publisher-subscriber, dependency injection, mediator, MVC",
     ],
     skills: [
       "C#",
@@ -124,7 +124,7 @@ export const projects = [
       "CSS",
       "React",
       "NodeJS",
-      "ExpressJS",
+      "Express",
       "MongoDB",
       "AWS",
       "Jest",
@@ -240,7 +240,7 @@ export const volunter = [
     year: "August 2021 — Present",
     content: [
       "Started a YouTube channel with the goal of sharing educational videos",
-      "Content includes beginner coding projects with an emphasis on Web and Mobile Technologies",
+      "Content includes beginner coding projects with an emphasis on Web and Mobile technologies",
     ],
     skills: ["Education", "Web", "Mobile"],
   },
