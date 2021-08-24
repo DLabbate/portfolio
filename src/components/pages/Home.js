@@ -19,6 +19,7 @@ import Accomplishment from "../content/Accomplishment";
 import DevIcon from "../shared/DevIcon";
 import { useInView } from "react-intersection-observer";
 import ContactLink from "../shared/ContactLink";
+import Content from "../wrappers/Content";
 
 const Home = () => {
   const [terminalRef, terminalInView] = useInView({
@@ -30,7 +31,7 @@ const Home = () => {
   return (
     <>
       <Sidebar sidebarItems={sidebarItems} />
-      <div className="content">
+      <Content>
         <Section title={"About Me"} id="about-me">
           <div className="terminal-container" ref={terminalRef}>
             <Terminal inView={terminalInView} />
@@ -86,7 +87,7 @@ const Home = () => {
             })}
           </div>
         </Section>
-      </div>
+      </Content>
     </>
   );
 };

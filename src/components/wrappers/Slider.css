@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 100px;
+  flex-wrap: wrap;
 }
 
 @media screen and (max-width: 700px) {

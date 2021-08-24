@@ -1,0 +1,47 @@
+.hovercraft__overview {
+  margin: -20px 10px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.hovercraft__video {
+  width: 90%;
+  min-width: 275px;
+  max-width: 900px;
+  margin-top: 100px;
+}
+
+.hovercraft__main p {
+  margin-top: 10px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.hovercraft__photo {
+  width: 40%;
+  min-width: 275px;
+  max-width: 600px;
+  margin: 20px;
+}
+
+.hovercraft__info {
+  max-width: 500px;
+  min-width: 200px;
+  margin: 15px;
+}
+
+.hovercraft__hardware {
+  line-height: 50px;
+  margin: 10px;
+}
+
+.hovercraft__info p {
+  line-height: 30px;
+}
+
+@media screen and (max-width: 700px) {
+  .hovercraft__info {
+    width: 90%;
+  }
+}

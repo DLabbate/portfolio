@@ -181,7 +181,7 @@ export const projects = [
     videoSrc: hovercraft,
     description:
       "received 1st place for a design project in a team of 3 students. Each team was tasked with building a fully autonomous hovercraft capable of navigating a specified track and surpassing obstacles of height 1mm to 3mm.",
-    link: "/",
+    link: "/projects/hovercraft",
     skills: [
       "Arduino",
       "Fans",

@@ -8,6 +8,7 @@ import logo from "../../assets/projects/thumbnails/moodai.jpg";
 import home from "../../assets/projects/general/moodai/moodai-home.jpg";
 import Slider from "../wrappers/Slider";
 import gsr from "../../assets/projects/general/moodai/gsr.png";
+import Content from "../wrappers/Content";
 
 const MoodAi = () => {
   const List = () => {
@@ -37,44 +38,47 @@ const MoodAi = () => {
   return (
     <>
       <Sidebar sidebarItems={sidebarItemsRootLinks} />
-      <div className="content">
-        <Section title="Mood.AI" />
-        <p className="moodai__slogan">"A mental health app for a modern age"</p>
-        <img src={logo} className="moodai__logo" alt="Mood.AI Demo" />
+      <Content>
+        <Section title="Mood.AI">
+          <p className="moodai__slogan">
+            "A mental health app for a modern age"
+          </p>
+          <img src={logo} className="moodai__logo" alt="Mood.AI Demo" />
 
-        <Slider>
-          <div className="moodai__info">
-            <h2>Innovative & Insightful</h2>
-            <List />
-          </div>
-          <Video />
-        </Slider>
+          <Slider>
+            <div className="moodai__info">
+              <h2>Innovative & Insightful</h2>
+              <List />
+            </div>
+            <Video />
+          </Slider>
 
-        <Slider>
-          <img src={home} className="moodai__demo" alt="Mood.AI Demo" />
-          <div className="moodai__info">
-            <h2>State of the Art</h2>
-            <p>
-              The developed <b>Cross-Platform</b> mobile app utilizes bleeding
-              edge technologies including <b>Machine Learning</b>, Bluetooth Low
-              Energy <b>(BLE)</b>, and <b>Cloud Deployments</b>
-            </p>
-          </div>
-        </Slider>
+          <Slider>
+            <img src={home} className="moodai__demo" alt="Mood.AI Demo" />
+            <div className="moodai__info">
+              <h2>State of the Art</h2>
+              <p>
+                The developed <b>Cross-Platform</b> mobile app utilizes bleeding
+                edge technologies including <b>Machine Learning</b>, Bluetooth
+                Low Energy <b>(BLE)</b>, and <b>Cloud Deployments</b>
+              </p>
+            </div>
+          </Slider>
 
-        <Slider>
-          <div className="moodai__info">
-            <h2>Cognitive & Physiological Data</h2>
-            <p>
-              In addition to symptom data captured by the patient’s mood logs,
-              the application also has the option of recording physiological
-              skin conductance with a GSR sensor, which is very closely related
-              to emotional arousal
-            </p>
-          </div>
-          <img src={gsr} className="moodai__gsr" alt="Mood.AI Demo" />
-        </Slider>
-      </div>
+          <Slider>
+            <div className="moodai__info">
+              <h2>Cognitive & Physiological Data</h2>
+              <p>
+                In addition to symptom data captured by the patient’s mood logs,
+                the application also has the option of recording physiological
+                skin conductance with a GSR sensor, which is very closely
+                related to emotional arousal
+              </p>
+            </div>
+            <img src={gsr} className="moodai__gsr" alt="Mood.AI Demo" />
+          </Slider>
+        </Section>
+      </Content>
     </>
   );
 };
