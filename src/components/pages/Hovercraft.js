@@ -52,7 +52,7 @@ const Hovercraft = () => {
                 In this competition, each team was tasked with building a fully
                 autonomous hovercraft capable of navigating a specified track
                 and surpassing obstacles of height 1mm to 3mm. Using data from
-                the infrared & ultrasonic sensors, we devised a{" "}
+                infrared & ultrasonic sensors, we devised a{" "}
                 <b>position tracking algorithm</b> that completed the course in
                 ⏱️ 20 seconds!
               </p>
