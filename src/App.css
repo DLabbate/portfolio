@@ -9,3 +9,23 @@
   background-color: rgb(241, 241, 241);
   display: flex;
 }
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(241, 241, 241);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #11101d;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: lightgray;
+}

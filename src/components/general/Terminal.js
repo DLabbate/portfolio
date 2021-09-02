@@ -16,7 +16,7 @@ const Terminal = ({ inView }) => {
             options={{ loop: true }}
             onInit={(typewriter) => {
               typewriter
-                .changeDelay(50)
+                .changeDelay(25)
                 .typeString(">> Hello World!\n")
                 .typeString(">> My name is Domenic.\n\n")
                 .typeString(">> I'm a Computer Engineering student.\n")
