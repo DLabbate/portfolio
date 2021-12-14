@@ -8,7 +8,7 @@ import moodAI from "../assets/projects/thumbnails/moodai.jpg";
 import bikebuddy from "../assets/projects/thumbnails/bikebuddy2.PNG";
 import fastkeys from "../assets/projects/thumbnails/fastkeys.PNG";
 import bumpercars from "../assets/projects/thumbnails/bumpercars.png";
-import hovercraft from "../assets/projects/thumbnails/hovercraft-trimmed.mp4";
+import hovercraft from "../assets/projects/thumbnails/hovercraft-trimmed-2.mp4";
 
 export const sidebarItems = [
   { label: "About Me", icon: "FiUser", to: "about-me" },
