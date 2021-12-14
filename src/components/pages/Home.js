@@ -74,7 +74,7 @@ const Home = () => {
           </div>
         </Section>
         <Section title={"Volunteer"} id="volunteer">
-          <div className="accomplishments-container">
+          <div className="volunteer-container">
             {volunter.map((item, index) => {
               return <Experience {...item} key={index} />;
             })}
