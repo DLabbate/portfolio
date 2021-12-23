@@ -3,12 +3,12 @@ import genetec from "../assets/logos/genetec.png";
 import concordia from "../assets/logos/concordia.jpg";
 import pdc from "../assets/logos/pdc.png";
 import youtube from "../assets/logos/youtube.png";
-import acasa from "../assets/projects/thumbnails/acasa.gif";
+import acasa from "../assets/projects/thumbnails/acasa.png";
 import moodAI from "../assets/projects/thumbnails/moodai.jpg";
 import bikebuddy from "../assets/projects/thumbnails/bikebuddy2.PNG";
 import fastkeys from "../assets/projects/thumbnails/fastkeys.PNG";
 import bumpercars from "../assets/projects/thumbnails/bumpercars.png";
-import hovercraft from "../assets/projects/thumbnails/hovercraft-trimmed-2.mp4";
+import hovercraft from "../assets/projects/thumbnails/hovercraft.jpg";
 
 export const sidebarItems = [
   { label: "About Me", icon: "FiUser", to: "about-me" },
@@ -178,7 +178,7 @@ export const projects = [
   },
   {
     title: "Autonomous Hovercraft",
-    videoSrc: hovercraft,
+    imageSrc: hovercraft,
     description:
       "received 1st place for a design project in a team of 3 students. Each team was tasked with building a fully autonomous hovercraft capable of navigating a specified track and surpassing obstacles of height 1mm to 3mm.",
     link: "/projects/hovercraft",
