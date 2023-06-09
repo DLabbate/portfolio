@@ -1,6 +1,6 @@
 import Header from "@/components/layout/header";
 import "./globals.css";
-import { Inter, Quicksand, Space_Mono } from "next/font/google";
+import { Quicksand, Space_Mono } from "next/font/google";
 import { GitHub, Linkedin, Youtube } from "react-feather";
 
 export const metadata = {
@@ -27,11 +27,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${quicksand.variable} ${spaceMono.variable} flex min-h-screen flex-col bg-primary font-sans text-dark`}
+      className={`${quicksand.variable} ${spaceMono.variable} bg-primary font-sans text-dark`}
     >
-      <body>
+      <body className="flex min-h-screen flex-col">
         <Header />
-        <main>{children}</main>
+        <main className="flex flex-1 flex-col items-center">{children}</main>
         <ul className="fixed bottom-4 left-4 flex flex-col gap-2">
           <li className="cursor-pointer">
             <a href="https://github.com/DLabbate">
