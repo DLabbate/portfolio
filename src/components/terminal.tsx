@@ -20,7 +20,9 @@ const Terminal = () => {
     let index = 0;
 
     const intervalId = setInterval(() => {
-      setCurrentText(text.slice(0, index));
+      // Slice without splitting unicode characters (emojis)
+      // https://stackoverflow.com/questions/52526719/javascript-substring-without-splitting-emoji
+      setCurrentText(Array.from(text).slice(0, index).join(""));
 
       const isLastChar = index === text.length - 1;
 
