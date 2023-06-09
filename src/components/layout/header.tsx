@@ -1,9 +1,7 @@
-"use client";
-
 import React from "react";
 import { Moon } from "react-feather";
-import { motion } from "framer-motion";
 import Link from "next/link";
+import { MotionDiv, MotionListItem } from "../animations/motion";
 
 type Props = {
   title: string;
@@ -12,10 +10,10 @@ type Props = {
 
 const HeaderLink = ({ title, href }: Props) => {
   return (
-    <motion.li whileHover="hover" className="relative cursor-pointer">
+    <MotionListItem whileHover="hover" className="relative cursor-pointer">
       <Link href={href}>{title}</Link>
       <div className="flex justify-center">
-        <motion.div
+        <MotionDiv
           className="absolute mt-1 h-1 bg-neutral-50"
           variants={{
             hover: {
@@ -24,7 +22,7 @@ const HeaderLink = ({ title, href }: Props) => {
           }}
         />
       </div>
-    </motion.li>
+    </MotionListItem>
   );
 };
 

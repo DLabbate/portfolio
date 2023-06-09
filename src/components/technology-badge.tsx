@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Image, { type StaticImageData } from "next/image";
 import react from "public/logos/react.png";

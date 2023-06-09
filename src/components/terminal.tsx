@@ -1,6 +1,7 @@
 "use client";
-import { motion } from "framer-motion";
+
 import React, { useEffect, useState } from "react";
+import { MotionSpan } from "./animations/motion";
 
 const text = `Hello World!
 
@@ -40,7 +41,7 @@ const Terminal = () => {
       </div>
       <span className="inline flex-1 overflow-hidden whitespace-break-spaces p-8">
         {currentText}
-        <motion.span
+        <MotionSpan
           className="inline-block h-6 w-3 bg-white align-top"
           animate={{ opacity: [0, 1.0, 0] }}
           transition={{ repeat: Infinity, duration: 1 }}

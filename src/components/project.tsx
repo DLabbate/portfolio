@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { MotionAnchor } from "./animations/motion";
 import React from "react";
 import Image from "next/image";
 import { type Project } from "@/constants/profile";
@@ -14,7 +12,7 @@ const Project = ({
   link,
 }: Project) => {
   return (
-    <motion.a
+    <MotionAnchor
       href={link}
       className="flex aspect-[0.75] w-1/3 min-w-[24rem] max-w-[28rem] cursor-pointer flex-col rounded-xl border border-primary-2 bg-primary-1 p-3"
       whileHover={{ scale: 1.05 }}
@@ -38,7 +36,7 @@ const Project = ({
           ))}
         </div>
       </div>
-    </motion.a>
+    </MotionAnchor>
   );
 };
 
