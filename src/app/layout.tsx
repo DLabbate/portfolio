@@ -2,6 +2,7 @@ import Header from "@/components/layout/header";
 import "./globals.css";
 import { Quicksand, Space_Mono } from "next/font/google";
 import { GitHub, Linkedin, Youtube } from "react-feather";
+import { SOCIAL } from "@/constants/profile";
 
 export const metadata = {
   title: "Create Next App",
@@ -34,17 +35,17 @@ export default function RootLayout({
         <main className="flex flex-1 flex-col items-center">{children}</main>
         <ul className="fixed bottom-4 left-4 flex flex-col gap-2">
           <li className="cursor-pointer">
-            <a href="https://github.com/DLabbate">
+            <a href={SOCIAL.github}>
               <GitHub strokeWidth={1} size={30} />
             </a>
           </li>
           <li>
-            <a href="https://linkedin.com/in/domenic-labbate">
+            <a href={SOCIAL.linkedin}>
               <Linkedin strokeWidth={1} size={30} />
             </a>
           </li>
           <li>
-            <a href="https://www.youtube.com/@domtheengineer">
+            <a href={SOCIAL.youtube}>
               <Youtube strokeWidth={1} size={30} />
             </a>
           </li>

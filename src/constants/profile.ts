@@ -47,6 +47,16 @@ export type TimelineEntry = Readonly<{
   technologies: Technology[];
 }>;
 
+export type SocialLinks = Readonly<
+  Record<"linkedin" | "youtube" | "github", string>
+>;
+
+export const SOCIAL: SocialLinks = {
+  linkedin: "https://linkedin.com/in/domenic-labbate",
+  youtube: "https://www.youtube.com/@domtheengineer",
+  github: "https://github.com/DLabbate",
+};
+
 export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
   {
     title: "Software Developer II",

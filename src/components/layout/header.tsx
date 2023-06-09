@@ -28,7 +28,7 @@ const HeaderLink = ({ title, href }: Props) => {
 
 const Header = () => {
   return (
-    <nav className="sticky top-0 z-50 flex items-center justify-center bg-primary p-8">
+    <header className="sticky top-0 z-50 flex items-center justify-center bg-primary p-8">
       <span className="flex-1 font-mono text-2xl">Domenic Labbate</span>
       <ul className="flex flex-1 items-center justify-center gap-16 text-xl">
         <HeaderLink title="Home" href="/" />
@@ -38,7 +38,7 @@ const Header = () => {
       <button className="flex flex-1 justify-end">
         <Moon strokeWidth={1} size={30} />
       </button>
-    </nav>
+    </header>
   );
 };
 
