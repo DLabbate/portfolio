@@ -1,23 +1,21 @@
-import {
-  MotionListItem,
-  MotionUnorderedList,
-} from "@/components/animations/motion";
+import * as motion from "@/components/animations/motion";
 import { Label, Technologies } from "@/components/technology-badge";
 import Terminal from "@/components/terminal";
+import { ABOUT } from "@/constants/profile";
 
 const Home = () => {
   return (
     <>
       <div className="flex flex-1 flex-col items-center justify-center bg-primary w-full">
-        <Terminal />
-        <MotionUnorderedList
+        <Terminal text={ABOUT} />
+        <motion.ul
           className="m-4 flex w-full max-w-[55rem] flex-wrap items-center justify-center gap-2"
           variants={{ show: { transition: { staggerChildren: 0.15 } } }}
           initial={"initial"}
           animate={"show"}
         >
           {Technologies.map((label) => (
-            <MotionListItem
+            <motion.li
               key={label}
               variants={{
                 initial: { opacity: 0, scale: 0.5 },
@@ -25,9 +23,9 @@ const Home = () => {
               }}
             >
               <Label type={label} />
-            </MotionListItem>
+            </motion.li>
           ))}
-        </MotionUnorderedList>
+        </motion.ul>
       </div>
     </>
   );

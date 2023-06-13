@@ -1,6 +1,6 @@
 import React from "react";
 import { type Accomplishment } from "@/constants/profile";
-import { MotionAnchor, MotionDiv } from "./animations/motion";
+import * as motion from "@/components/animations/motion";
 
 const Accomplishment = ({
   title,
@@ -10,7 +10,7 @@ const Accomplishment = ({
   link,
 }: Accomplishment) => {
   return (
-    <MotionAnchor
+    <motion.a
       href={link}
       className="relative flex w-1/3 min-w-[30rem] max-w-[40rem] cursor-pointer flex-col rounded-lg border border-primary-2 bg-primary-1 p-4"
       whileHover={{ scale: 1.05 }}
@@ -21,7 +21,7 @@ const Accomplishment = ({
       <span className="absolute right-4 top-4 text-dark-medium">
         {years.join(", ")}
       </span>
-    </MotionAnchor>
+    </motion.a>
   );
 };
 

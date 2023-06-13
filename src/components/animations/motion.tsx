@@ -4,10 +4,11 @@
  */
 
 "use client";
+
 import { motion } from "framer-motion";
 
-export const MotionDiv = motion.div;
-export const MotionAnchor = motion.a;
-export const MotionSpan = motion.span;
-export const MotionListItem = motion.li;
-export const MotionUnorderedList = motion.ul;
+export const div = motion.div;
+export const a = motion.a;
+export const span = motion.span;
+export const li = motion.li;
+export const ul = motion.ul;

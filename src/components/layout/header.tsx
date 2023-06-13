@@ -1,7 +1,7 @@
 import React from "react";
 import { Moon } from "react-feather";
 import Link from "next/link";
-import { MotionDiv, MotionListItem } from "../animations/motion";
+import * as motion from "@/components/animations/motion";
 
 type Props = {
   title: string;
@@ -10,10 +10,10 @@ type Props = {
 
 const HeaderLink = ({ title, href }: Props) => {
   return (
-    <MotionListItem whileHover="hover" className="relative cursor-pointer">
+    <motion.li whileHover="hover" className="relative cursor-pointer">
       <Link href={href}>{title}</Link>
       <div className="flex justify-center">
-        <MotionDiv
+        <motion.div
           className="absolute mt-1 h-1 bg-neutral-50"
           variants={{
             hover: {
@@ -22,7 +22,7 @@ const HeaderLink = ({ title, href }: Props) => {
           }}
         />
       </div>
-    </MotionListItem>
+    </motion.li>
   );
 };
 

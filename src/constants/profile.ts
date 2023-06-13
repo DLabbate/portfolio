@@ -51,6 +51,15 @@ export type SocialLinks = Readonly<
   Record<"linkedin" | "youtube" | "github", string>
 >;
 
+export const ABOUT: string = `Hello World!
+
+My name is Domenic.
+
+Here are some things you should know about me.
+  🤓 I'm a Software Engineer.
+  🧠 I have a passion for learning & self improvement.
+  📚 I'm resourceful and can overcome difficulties.`;
+
 export const SOCIAL: SocialLinks = {
   linkedin: "https://linkedin.com/in/domenic-labbate",
   youtube: "https://www.youtube.com/@domtheengineer",
