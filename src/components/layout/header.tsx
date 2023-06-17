@@ -52,7 +52,7 @@ const Header = () => {
         </span>
         <motion.nav
           layout
-          className="absolute top-24 flex w-full flex-1 flex-col items-center justify-center border-y border-primary-2 opacity-0 lg:static lg:flex-row lg:gap-16 lg:opacity-100"
+          className="absolute top-24 flex w-full flex-1 flex-col items-center justify-center border-y border-primary-2 opacity-0 lg:static lg:flex-row lg:gap-16 lg:border-y-0 lg:opacity-100"
           variants={{ open: { opacity: 1 } }}
         >
           <HeaderLink title="Home" href="/" />
