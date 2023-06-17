@@ -12,3 +12,4 @@ export const a = motion.a;
 export const span = motion.span;
 export const li = motion.li;
 export const ul = motion.ul;
+export const header = motion.header;
