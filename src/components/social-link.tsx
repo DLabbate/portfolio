@@ -1,4 +1,4 @@
-import { SOCIAL, SocialMedia, SocialPlatform } from "@/constants/profile";
+import { SocialMedia, SocialPlatform } from "@/constants/profile";
 import React from "react";
 import { GitHub, Linkedin, Youtube } from "react-feather";
 

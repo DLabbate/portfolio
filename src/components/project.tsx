@@ -1,5 +1,4 @@
 import * as motion from "@/components/animations/motion";
-import React from "react";
 import Image from "next/image";
 import { type Project } from "@/constants/profile";
 import { Label } from "./technology-badge";

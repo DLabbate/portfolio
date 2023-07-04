@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import { type TimelineEntry } from "@/constants/profile";
 import { Label } from "./technology-badge";

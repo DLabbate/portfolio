@@ -1,4 +1,3 @@
-import React from "react";
 import Image, { type StaticImageData } from "next/image";
 import react from "public/logos/react.png";
 import typescript from "public/logos/typescript.png";
