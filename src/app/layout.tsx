@@ -2,7 +2,8 @@ import Header from "@/components/layout/header";
 import "./globals.css";
 import { Quicksand, Space_Mono } from "next/font/google";
 import { GitHub, Linkedin, Youtube } from "react-feather";
-import { SOCIAL } from "@/constants/profile";
+import { SOCIAL_MEDIA } from "@/constants/profile";
+import SocialLink from "@/components/social-link";
 
 export const metadata = {
   title: "Domenic Labbate",
@@ -35,23 +36,11 @@ export default function RootLayout({
         <main className="mt-24 flex flex-1 flex-col items-center">
           {children}
         </main>
-        <ul className="fixed bottom-4 left-4 hidden flex-col gap-2 lg:flex">
-          <li className="cursor-pointer">
-            <a href={SOCIAL.github}>
-              <GitHub strokeWidth={1} size={30} />
-            </a>
-          </li>
-          <li>
-            <a href={SOCIAL.linkedin}>
-              <Linkedin strokeWidth={1} size={30} />
-            </a>
-          </li>
-          <li>
-            <a href={SOCIAL.youtube}>
-              <Youtube strokeWidth={1} size={30} />
-            </a>
-          </li>
-        </ul>
+        <div className="fixed bottom-4 left-4 hidden flex-col gap-2 lg:flex">
+          {SOCIAL_MEDIA.map((item) => (
+            <SocialLink key={item.platform} {...item} />
+          ))}
+        </div>
       </body>
     </html>
   );

@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Menu, Moon } from "react-feather";
+import { usePathname } from "next/navigation";
+import { Menu, Moon, X } from "react-feather";
 import Link from "next/link";
 import * as motion from "@/components/animations/motion";
-import { Dialog } from "@headlessui/react";
+import SocialLink from "../social-link";
+import { SOCIAL_MEDIA } from "@/constants/profile";
 
 type Props = {
   title: string;
@@ -30,6 +32,7 @@ const HeaderLink = ({ title, href }: Props) => {
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const body = document.querySelector("body");
@@ -40,34 +43,45 @@ const Header = () => {
 
   return (
     <motion.header
-      layout
       animate={mobileMenuOpen ? "open" : "closed"}
-      className="fixed top-0 z-50 h-24 w-full bg-primary opacity-95"
-      variants={{ open: { height: "100vh" }, closed: { height: "auto" } }}
+      className="fixed top-0 z-50 h-auto w-full overflow-hidden bg-primary opacity-95"
+      variants={{ open: { height: "100vh" } }}
       transition={{ ease: "linear" }}
     >
       <div className="flex h-full w-full items-start justify-center p-8">
         <span className="flex-1 whitespace-nowrap font-mono text-2xl">
           Domenic Labbate
         </span>
-        <motion.nav
-          layout
-          className="absolute top-24 flex w-full flex-1 flex-col items-center justify-center border-y border-primary-2 opacity-0 lg:static lg:flex-row lg:gap-16 lg:border-y-0 lg:opacity-100"
+        <motion.div
+          className="absolute top-24 w-full flex-1 opacity-0 lg:static lg:opacity-100"
           variants={{ open: { opacity: 1 } }}
         >
-          <HeaderLink title="Home" href="/" />
-          <HeaderLink title="Portfolio" href="/portfolio" />
-          <HeaderLink title="Blogs" href="/blogs" />
-        </motion.nav>
-        <button className="hidden flex-1 justify-end lg:flex">
-          <Moon strokeWidth={1} size={30} />
-        </button>
-        <button
-          className="lg:hidden"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          <Menu strokeWidth={1} size={30} />
-        </button>
+          <motion.nav className="flex flex-col items-center justify-center border-y border-primary-2 lg:flex-row lg:gap-16 lg:border-y-0">
+            <HeaderLink title="Home" href="/" />
+            <HeaderLink title="Portfolio" href="/portfolio" />
+            <HeaderLink title="Blogs" href="/blogs" />
+          </motion.nav>
+          <div className="m-8 flex items-center justify-center gap-8 lg:hidden">
+            {SOCIAL_MEDIA.map((item) => (
+              <SocialLink key={item.platform} {...item} />
+            ))}
+          </div>
+        </motion.div>
+        <div className="flex flex-1 justify-end gap-4 lg:flex">
+          <button>
+            <Moon strokeWidth={1} size={30} />
+          </button>
+          <button
+            className="lg:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? (
+              <X strokeWidth={1} size={30} />
+            ) : (
+              <Menu strokeWidth={1} size={30} />
+            )}
+          </button>
+        </div>
       </div>
     </motion.header>
   );

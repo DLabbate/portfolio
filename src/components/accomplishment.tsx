@@ -1,4 +1,3 @@
-import React from "react";
 import { type Accomplishment } from "@/constants/profile";
 import * as motion from "@/components/animations/motion";
 

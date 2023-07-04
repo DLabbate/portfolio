@@ -47,10 +47,6 @@ export type TimelineEntry = Readonly<{
   technologies: Technology[];
 }>;
 
-export type SocialLinks = Readonly<
-  Record<"linkedin" | "youtube" | "github", string>
->;
-
 export const ABOUT: string = `Hello World!
 
 My name is Domenic.
@@ -60,11 +56,29 @@ Here are some things you should know about me.
   🧠 I have a passion for learning & self improvement.
   📚 I'm resourceful and can overcome difficulties.`;
 
-export const SOCIAL: SocialLinks = {
-  linkedin: "https://linkedin.com/in/domenic-labbate",
-  youtube: "https://www.youtube.com/@domtheengineer",
-  github: "https://github.com/DLabbate",
+export const SOCIAL_PLATFORMS = ["github", "youtube", "linkedin"] as const;
+
+export type SocialPlatform = (typeof SOCIAL_PLATFORMS)[number];
+
+export type SocialMedia = {
+  platform: SocialPlatform;
+  link: string;
 };
+
+export const SOCIAL_MEDIA: ReadonlyArray<SocialMedia> = [
+  {
+    platform: "linkedin",
+    link: "https://linkedin.com/in/domenic-labbate",
+  },
+  {
+    platform: "youtube",
+    link: "https://www.youtube.com/@domtheengineer",
+  },
+  {
+    platform: "github",
+    link: "https://github.com/DLabbate",
+  },
+];
 
 export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
   {
