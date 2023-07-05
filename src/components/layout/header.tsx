@@ -45,7 +45,7 @@ const Header = () => {
     <motion.header
       animate={mobileMenuOpen ? "open" : "closed"}
       className="fixed top-0 z-50 h-auto w-full overflow-hidden bg-primary opacity-95"
-      variants={{ open: { height: "100vh" } }}
+      variants={{ open: { height: "100%" } }}
       transition={{ ease: "linear" }}
     >
       <div className="flex h-full w-full items-start justify-center p-8">
