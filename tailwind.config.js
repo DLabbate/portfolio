@@ -9,6 +9,8 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         timeline: "auto 1fr auto",
+        "timeline-small": "auto 1fr",
+        accomplishment: "1fr auto",
       },
       textColor: {
         light: {

@@ -1,5 +1,6 @@
 import { type Accomplishment } from "@/constants/profile";
 import * as motion from "@/components/animations/motion";
+import { Calendar, MapPin } from "react-feather";
 
 const Accomplishment = ({
   title,
@@ -11,15 +12,21 @@ const Accomplishment = ({
   return (
     <motion.a
       href={link}
-      className="relative flex w-1/3 min-w-[30rem] max-w-[40rem] cursor-pointer flex-col rounded-lg border border-primary-2 bg-primary-1 p-4"
+      className="relative flex w-full cursor-pointer flex-col rounded-lg border border-primary-2 bg-primary-1 p-4 md:gap-0 lg:w-[calc(100%/2-1rem/2)]"
       whileHover={{ scale: 1.05 }}
     >
       <span className="text-2xl">{title}</span>
-      <span className="text-md mb-4 text-dark-medium">{organization}</span>
-      <span className="text-sm text-dark-medium">{description}</span>
-      <span className="absolute right-4 top-4 text-dark-medium">
-        {years.join(", ")}
-      </span>
+      <div className="flex items-start gap-1">
+        {/* <MapPin strokeWidth={1} className="h-auto stroke-[#a5a5a9] md:hidden" /> */}
+        <span className="text-md text-dark-medium">{organization}</span>
+
+        {/* <span className="text-md text-dark-medium">{organization}</span> */}
+      </div>
+      <div className="right-4 top-4 flex gap-1 md:absolute">
+        <Calendar strokeWidth={1} className="stroke-[#a5a5a9] md:hidden" />
+        <span className="text-dark-medium">{years.join(", ")}</span>
+      </div>
+      <p className="col-span-2 mt-4 text-sm text-dark-medium ">{description}</p>
     </motion.a>
   );
 };

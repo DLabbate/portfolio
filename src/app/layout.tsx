@@ -4,6 +4,7 @@ import { Quicksand, Space_Mono } from "next/font/google";
 import { GitHub, Linkedin, Youtube } from "react-feather";
 import { SOCIAL_MEDIA } from "@/constants/profile";
 import SocialLink from "@/components/social-link";
+import Footer from "@/components/layout/footer";
 
 export const metadata = {
   title: "Domenic Labbate",
@@ -12,11 +13,13 @@ export const metadata = {
 
 const quicksand = Quicksand({
   subsets: ["latin"],
+  display: "swap",
   variable: "--font-quicksand",
 });
 
 const spaceMono = Space_Mono({
   subsets: ["latin"],
+  display: "swap",
   variable: "--font-spacemono",
   weight: "400",
 });
@@ -31,16 +34,17 @@ export default function RootLayout({
       lang="en"
       className={`${quicksand.variable} ${spaceMono.variable} bg-primary font-sans text-dark`}
     >
-      <body className="flex min-h-screen flex-col">
+      <body className="flex min-h-screen flex-col items-center">
         <Header />
-        <main className="mt-24 flex flex-1 flex-col items-center">
+        <main className="ml-[5vw] mr-[5vw] mt-24 flex max-w-7xl flex-1 flex-col items-center">
           {children}
         </main>
-        <div className="fixed bottom-4 left-4 hidden flex-col gap-2 lg:flex">
+        <div className="fixed bottom-4 left-4 hidden flex-col gap-2 xl:flex">
           {SOCIAL_MEDIA.map((item) => (
             <SocialLink key={item.platform} {...item} />
           ))}
         </div>
+        <Footer />
       </body>
     </html>
   );

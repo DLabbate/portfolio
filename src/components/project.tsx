@@ -13,7 +13,7 @@ const Project = ({
   return (
     <motion.a
       href={link}
-      className="flex aspect-[0.75] w-1/3 min-w-[24rem] max-w-[28rem] cursor-pointer flex-col rounded-xl border border-primary-2 bg-primary-1 p-3"
+      className="flex w-full cursor-pointer flex-col rounded-xl border border-primary-2 bg-primary-1 p-3 md:aspect-[0.75] md:w-[calc(100%/2-1rem/2)] xl:w-[calc(100%/3-2*1rem/3)]"
       whileHover={{ scale: 1.05 }}
     >
       <div className="w-auto flex-[1] overflow-hidden rounded-2xl bg-primary-2">
@@ -22,6 +22,7 @@ const Project = ({
           alt="project"
           placeholder="blur"
           style={{ height: "100%", width: "100%", objectFit: "cover" }}
+          className="aspect-square md:aspect-auto"
         />
       </div>
       <div className="flex flex-col">

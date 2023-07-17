@@ -240,7 +240,7 @@ export const PROJECTS: ReadonlyArray<Project> = [
     title: "Spacestagram",
     description:
       "is a platform where users can view images from NASA's Astronomy API, and “like” and “unlike” their favourite images.",
-    technologies: ["react", "javascript", "jest", "rtl", "tailwind"],
+    technologies: ["react", "javascript", "tailwind", "jest", "rtl"],
     link: "https://github.com/DLabbate/spacestagram",
   },
   {
@@ -251,13 +251,13 @@ export const PROJECTS: ReadonlyArray<Project> = [
     technologies: [
       "react",
       "javascript",
+      "jest",
       "html",
       "css",
       "nodejs",
       "express",
       "mongodb",
       "aws",
-      "jest",
     ],
     link: "https://github.com/DLabbate/real-estate-website",
   },

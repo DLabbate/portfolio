@@ -11,7 +11,7 @@ import {
 
 const Portfolio = () => {
   return (
-    <div className="ml-auto mr-auto flex flex-1 flex-col items-center justify-center gap-16 overflow-hidden pb-8 lg:max-w-screen-2xl">
+    <div className="flex flex-1 flex-col items-center justify-center gap-16">
       <Section title="Experience">
         <Timeline data={EXPERIENCE} />
       </Section>
