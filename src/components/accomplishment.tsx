@@ -16,12 +16,7 @@ const Accomplishment = ({
       whileHover={{ scale: 1.05 }}
     >
       <span className="text-2xl">{title}</span>
-      <div className="flex items-start gap-1">
-        {/* <MapPin strokeWidth={1} className="h-auto stroke-[#a5a5a9] md:hidden" /> */}
-        <span className="text-md text-dark-medium">{organization}</span>
-
-        {/* <span className="text-md text-dark-medium">{organization}</span> */}
-      </div>
+      <span className="text-md text-dark-medium">{organization}</span>
       <div className="right-4 top-4 flex gap-1 md:absolute">
         <Calendar strokeWidth={1} className="stroke-[#a5a5a9] md:hidden" />
         <span className="text-dark-medium">{years.join(", ")}</span>

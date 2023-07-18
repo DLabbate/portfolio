@@ -105,14 +105,8 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       "rtl",
       "csharp",
       "dotnet",
-      //"ASP.NET",
-      //"Design Patterns",
       "azure",
       "mongodb",
-      //"Microservice Architecture",
-      //"Git",
-      //"Agile",
-      //"Scrum",
     ],
   },
   {
@@ -132,17 +126,7 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       "Improved codebase by migrating to a newer supported version of ASP.NET",
       "Implemented coding best practices and design patterns such as publisher-subscriber, dependency injection, mediator, MVC",
     ],
-    technologies: [
-      "csharp",
-      "dotnet",
-      //"ASP.NET",
-      //"Design Patterns",
-      "azure",
-      //"Microservice Architecture",
-      //"Git",
-      //"Agile",
-      //"Scrum",
-    ],
+    technologies: ["csharp", "dotnet", "azure"],
   },
   {
     title: "Research Assistant",
@@ -169,7 +153,6 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       logo: cae,
       link: "https://www.cae.com",
     },
-    // year: "September 2018 — December 2018",
     timeframe: {
       from: new Date(2018, 8),
       to: new Date(2018, 11),
@@ -182,13 +165,7 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       "When writing test cases, performed requirements traceability by ensuring the implementation satisfies all requirements",
       "Participated in the continuous improvement of the quality assurance process",
     ],
-    technologies: [
-      // "Quality Assurance",
-      // "System Testing",
-      // "Test Cases",
-      // "Test Plans",
-      "jira",
-    ],
+    technologies: ["jira"],
   },
 ];
 
@@ -209,9 +186,6 @@ export const EDUCATION: ReadonlyArray<TimelineEntry> = [
       "Member of the Institute for Co-operative Education",
     ],
     technologies: [
-      // "Object Oriented Programming",
-      // "Data Structures & Algorithms",
-      // "Operating Systems",
       "cpp",
       "java",
       "python",
@@ -288,16 +262,7 @@ export const PROJECTS: ReadonlyArray<Project> = [
     title: "BumperCars",
     description:
       "is a 3D computer game built using OpenGL API. The application includes a user-controlled car that can collide with other cars on the track.",
-    technologies: [
-      "cpp",
-      "opengl",
-      //   "Computer Graphics",
-      //   "Modeling",
-      //   "Illumination",
-      //   "Shading",
-      //   "Texturing",
-      //   "Shadow Mapping",
-    ],
+    technologies: ["cpp", "opengl"],
     link: "https://github.com/DLabbate/OpenGL_CarProject",
   },
   {
@@ -305,13 +270,7 @@ export const PROJECTS: ReadonlyArray<Project> = [
     title: "Autonomous Hovercraft",
     description:
       "received 1st place for a design project in a team of 3 students. Each team was tasked with building a fully autonomous hovercraft capable of navigating a specified track and surpassing obstacles of height 1mm to 3mm.",
-    technologies: [
-      "arduino",
-      //   "Fans",
-      //   "Servos",
-      //   "Ultrasonic Sensors",
-      //   "Infrared Sensors",
-    ],
+    technologies: ["arduino"],
     link: "https://labbgames.itch.io/fastkeys",
   },
   {
@@ -319,13 +278,7 @@ export const PROJECTS: ReadonlyArray<Project> = [
     title: "FastKeys",
     description:
       "is a 2D typing game built using the Unity Game Engine. Implemented basic concepts such as Rigidbody physics, collision detection, user input, and so forth.",
-    technologies: [
-      "unity",
-      "csharp",
-      //   "Rigidbody physics",
-      //   "Collision Detection",
-      //   "User Input",
-    ],
+    technologies: ["unity", "csharp"],
     link: "https://labbgames.itch.io/fastkeys",
   },
 ];
