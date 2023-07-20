@@ -21,7 +21,7 @@ const LINKS: ReadonlyArray<Page> = [
 type Props = {
   title: string;
   href: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const HeaderLink = ({ title, href, onClick }: Props) => {
@@ -36,7 +36,7 @@ const HeaderLink = ({ title, href, onClick }: Props) => {
     >
       <div
         className="w-full lg:h-auto lg:w-auto"
-        onClick={isSmallDevice ? onClick : () => {}}
+        onClick={isSmallDevice && onClick ? onClick : () => {}}
       >
         <Link
           className="flex h-full w-full items-center justify-center"
@@ -59,7 +59,7 @@ const HeaderLink = ({ title, href, onClick }: Props) => {
   );
 };
 
-const Header = () => {
+const SmallHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
@@ -72,31 +72,16 @@ const Header = () => {
   }, [mobileMenuOpen]);
 
   return (
-    <motion.header
-      animate={mobileMenuOpen ? "open" : "closed"}
-      className="fixed top-0 z-50 h-auto w-full overflow-hidden bg-primary/75 backdrop-blur-md"
-      variants={{ open: { height: "100%" } }}
-      transition={{ ease: "linear" }}
-    >
-      <div className="flex h-full w-full items-start justify-center p-8">
+    <header className="fixed top-0 z-50 flex h-screen w-full flex-col lg:hidden">
+      <div className="flex w-full items-start justify-center bg-primary/75 p-8 backdrop-blur-md">
         <span className="flex-1 whitespace-nowrap font-mono text-2xl">
           Domenic Labbate
         </span>
-        <motion.div
-          className="absolute top-24 w-full flex-1 opacity-0 lg:static lg:opacity-100"
-          variants={{ open: { opacity: 1 } }}
-        >
-          <motion.nav className="flex flex-col items-center justify-center border-y border-primary-2 lg:flex-row lg:gap-16 lg:border-y-0">
-            {LINKS.map((link) => (
-              <HeaderLink key={link.title} {...link} onClick={toggleMenu} />
-            ))}
-          </motion.nav>
-        </motion.div>
-        <div className="flex flex-1 justify-end gap-4 lg:flex">
+        <div className="flex flex-1 justify-end gap-4">
           <button>
             <Moon strokeWidth={1} size={30} />
           </button>
-          <button className="lg:hidden" onClick={toggleMenu}>
+          <button onClick={toggleMenu}>
             {mobileMenuOpen ? (
               <X strokeWidth={1} size={30} />
             ) : (
@@ -105,8 +90,49 @@ const Header = () => {
           </button>
         </div>
       </div>
-    </motion.header>
+      <motion.div
+        className="top-24 w-full flex-1 bg-primary/75 backdrop-blur-md"
+        animate={mobileMenuOpen ? "open" : "closed"}
+        variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
+      >
+        <nav className="flex flex-col items-center justify-center border-y border-primary-2">
+          {LINKS.map((link) => (
+            <HeaderLink key={link.title} {...link} onClick={toggleMenu} />
+          ))}
+        </nav>
+      </motion.div>
+    </header>
   );
 };
 
+const LargeHeader = () => {
+  return (
+    <header className="fixed top-0 z-50 hidden h-auto w-full items-start justify-center bg-primary/75 p-8 backdrop-blur-md lg:flex">
+      <span className="flex-1 whitespace-nowrap font-mono text-2xl">
+        Domenic Labbate
+      </span>
+      <div className="top-24 w-full flex-1 opacity-100">
+        <nav className="flex items-center justify-center gap-16 border-primary-2">
+          {LINKS.map((link) => (
+            <HeaderLink key={link.title} {...link} />
+          ))}
+        </nav>
+      </div>
+      <div className="flex flex-1 justify-end">
+        <button>
+          <Moon strokeWidth={1} size={30} />
+        </button>
+      </div>
+    </header>
+  );
+};
+
+const Header = () => {
+  return (
+    <>
+      <SmallHeader />
+      <LargeHeader />
+    </>
+  );
+};
 export default Header;
