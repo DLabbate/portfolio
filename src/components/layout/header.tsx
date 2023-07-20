@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { Menu, Moon, X } from "react-feather";
 import Link from "next/link";
 import * as motion from "@/components/animations/motion";
-import useMediaQuery from "@/hooks/useMediaQuery";
 
 type Page = {
   title: string;
@@ -20,17 +19,10 @@ const LINKS: ReadonlyArray<Page> = [
 ];
 
 type Props = Page & {
-  isSmallDevice?: boolean;
   onClick?: () => void;
 };
 
-const HeaderLink = ({
-  title,
-  href,
-  exact,
-  onClick,
-  isSmallDevice = false,
-}: Props) => {
+const HeaderLink = ({ title, href, exact, onClick }: Props) => {
   const pathname = usePathname();
   const active: boolean = exact ? pathname === href : pathname.startsWith(href);
   return (
@@ -46,7 +38,7 @@ const HeaderLink = ({
       >
         {title}
       </Link>
-      {!isSmallDevice && (
+      <div className="hidden w-full lg:block">
         <motion.div
           className="absolute h-1 bg-neutral-50"
           variants={{
@@ -55,7 +47,7 @@ const HeaderLink = ({
             inactive: { width: 0 },
           }}
         />
-      )}
+      </div>
     </motion.div>
   );
 };
@@ -72,7 +64,7 @@ const SmallHeader = () => {
   }, [mobileMenuOpen]);
 
   return (
-    <header className="fixed top-0 z-50 flex h-screen w-full flex-col lg:hidden">
+    <div className="flex h-screen w-full flex-col lg:hidden">
       <div className="flex w-full items-start justify-center bg-primary/75 p-8 backdrop-blur-md">
         <span className="flex-1 whitespace-nowrap font-mono text-2xl">
           Domenic Labbate
@@ -97,22 +89,17 @@ const SmallHeader = () => {
       >
         <nav className="flex flex-col items-center justify-center border-y border-primary-2">
           {LINKS.map((link) => (
-            <HeaderLink
-              key={link.title}
-              {...link}
-              onClick={toggleMenu}
-              isSmallDevice={true}
-            />
+            <HeaderLink key={link.title} {...link} onClick={toggleMenu} />
           ))}
         </nav>
       </motion.div>
-    </header>
+    </div>
   );
 };
 
 const LargeHeader = () => {
   return (
-    <header className="fixed top-0 z-50 hidden h-auto w-full items-start justify-center bg-primary/75 p-8 backdrop-blur-md lg:flex">
+    <div className="hidden h-auto w-full items-start justify-center bg-primary/75 p-8 backdrop-blur-md lg:flex">
       <span className="flex-1 whitespace-nowrap font-mono text-2xl">
         Domenic Labbate
       </span>
@@ -128,13 +115,17 @@ const LargeHeader = () => {
           <Moon strokeWidth={1} size={30} />
         </button>
       </div>
-    </header>
+    </div>
   );
 };
 
 const Header = () => {
-  const isSmallDevice = useMediaQuery("only screen and (max-width : 1024px)");
-
-  return isSmallDevice ? <SmallHeader /> : <LargeHeader />;
+  return (
+    <header className="fixed top-0 z-50 w-full">
+      <SmallHeader />
+      <LargeHeader />
+    </header>
+  );
 };
+
 export default Header;
