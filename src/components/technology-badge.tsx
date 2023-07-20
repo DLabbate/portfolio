@@ -194,7 +194,7 @@ export const Label = ({ type }: Props) => {
   const { src, displayName } = LOGO_DATA[type];
   return (
     <div className="flex h-10 w-auto items-center rounded-full border border-primary-2 bg-primary-1 px-3 py-2 text-sm">
-      <Image src={src} alt="logo" height="24" />
+      <Image src={src} alt="logo" className="h-6 w-auto" />
       <span className="ml-2 align-middle font-mono">{displayName}</span>
     </div>
   );
