@@ -10,41 +10,42 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 type Page = {
   title: string;
   href: string;
+  exact: boolean;
 };
 
 const LINKS: ReadonlyArray<Page> = [
-  { title: "Home", href: "/" },
-  { title: "Portfolio", href: "/portfolio" },
-  { title: "Blogs", href: "/blogs" },
+  { title: "Home", href: "/", exact: true },
+  { title: "Portfolio", href: "/portfolio", exact: false },
+  { title: "Blogs", href: "/blogs", exact: false },
 ];
 
-type Props = {
-  title: string;
-  href: string;
+type Props = Page & {
+  isSmallDevice?: boolean;
   onClick?: () => void;
 };
 
-const HeaderLink = ({ title, href, onClick }: Props) => {
-  const isSmallDevice = useMediaQuery("only screen and (max-width : 1024px)");
+const HeaderLink = ({
+  title,
+  href,
+  exact,
+  onClick,
+  isSmallDevice = false,
+}: Props) => {
   const pathname = usePathname();
-  const active: boolean = pathname === href;
+  const active: boolean = exact ? pathname === href : pathname.startsWith(href);
   return (
     <motion.div
       whileHover="hover"
       animate={active ? "active" : "inactive"}
       className="relative flex w-full cursor-pointer items-center justify-center border-y border-primary-2 p-8 text-xl lg:block lg:w-auto lg:border-0 lg:p-0 "
     >
-      <div
-        className="w-full lg:h-auto lg:w-auto"
-        onClick={isSmallDevice && onClick ? onClick : () => {}}
+      <Link
+        className="flex h-full w-full items-center justify-center lg:h-auto lg:w-auto"
+        href={href}
+        onClick={onClick ? onClick : () => {}}
       >
-        <Link
-          className="flex h-full w-full items-center justify-center"
-          href={href}
-        >
-          {title}
-        </Link>
-      </div>
+        {title}
+      </Link>
       {!isSmallDevice && (
         <motion.div
           className="absolute h-1 bg-neutral-50"
@@ -61,7 +62,6 @@ const HeaderLink = ({ title, href, onClick }: Props) => {
 
 const SmallHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
   useEffect(() => {
@@ -97,7 +97,12 @@ const SmallHeader = () => {
       >
         <nav className="flex flex-col items-center justify-center border-y border-primary-2">
           {LINKS.map((link) => (
-            <HeaderLink key={link.title} {...link} onClick={toggleMenu} />
+            <HeaderLink
+              key={link.title}
+              {...link}
+              onClick={toggleMenu}
+              isSmallDevice={true}
+            />
           ))}
         </nav>
       </motion.div>
@@ -128,11 +133,8 @@ const LargeHeader = () => {
 };
 
 const Header = () => {
-  return (
-    <>
-      <SmallHeader />
-      <LargeHeader />
-    </>
-  );
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 1024px)");
+
+  return isSmallDevice ? <SmallHeader /> : <LargeHeader />;
 };
 export default Header;
