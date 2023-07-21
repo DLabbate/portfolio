@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Menu, Moon, X } from "react-feather";
 import Link from "next/link";
 import * as motion from "@/components/animations/motion";
+import { NAME } from "@/constants/profile";
 
 type Page = {
   title: string;
@@ -67,7 +68,7 @@ const SmallHeader = () => {
     <div className="flex h-screen w-full flex-col lg:hidden">
       <div className="flex w-full items-start justify-center bg-primary/75 p-8 backdrop-blur-md">
         <span className="flex-1 whitespace-nowrap font-mono text-2xl">
-          Domenic Labbate
+          {NAME}
         </span>
         <div className="flex flex-1 justify-end gap-4">
           <button>
@@ -101,7 +102,7 @@ const LargeHeader = () => {
   return (
     <div className="hidden h-auto w-full items-start justify-center bg-primary/75 p-8 backdrop-blur-md lg:flex">
       <span className="flex-1 whitespace-nowrap font-mono text-2xl">
-        Domenic Labbate
+        {NAME}
       </span>
       <div className="top-24 w-full flex-1 opacity-100">
         <nav className="flex items-center justify-center gap-16 border-primary-2">

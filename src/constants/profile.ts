@@ -47,6 +47,8 @@ export type TimelineEntry = Readonly<{
   technologies: Technology[];
 }>;
 
+export const NAME: string = "Domenic Labbate";
+
 export const ABOUT: string = `Hello World!
 
 My name is Domenic.
@@ -247,7 +249,7 @@ export const PROJECTS: ReadonlyArray<Project> = [
       "bluetooth",
       "raspberrypi",
     ],
-    link: "https://labbgames.itch.io/fastkeys",
+    link: "/portfolio/projects/moodai",
   },
   {
     image: bikebuddy,
@@ -271,7 +273,7 @@ export const PROJECTS: ReadonlyArray<Project> = [
     description:
       "received 1st place for a design project in a team of 3 students. Each team was tasked with building a fully autonomous hovercraft capable of navigating a specified track and surpassing obstacles of height 1mm to 3mm.",
     technologies: ["arduino"],
-    link: "https://labbgames.itch.io/fastkeys",
+    link: "/portfolio/projects/hovercraft",
   },
   {
     image: fastkeys,
