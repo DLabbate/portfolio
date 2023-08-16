@@ -1,4 +1,5 @@
 import * as motion from "@/components/animations/motion";
+import RoundedImage from "@/components/rounded-image";
 import { Label, Technologies } from "@/components/technology-badge";
 import Terminal from "@/components/terminal";
 import { ABOUT } from "@/constants/profile";
