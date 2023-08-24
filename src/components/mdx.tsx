@@ -1,14 +1,10 @@
-import Image, { ImageProps } from "next/image";
 import { useMDXComponent } from "next-contentlayer/hooks";
-import { Link } from "react-feather";
-import RoundedImage from "./rounded-image";
-
-// function RoundedImages(props: ImageProps) {
-//   return <Image alt={props.alt} className="rounded-lg" {...props} />;
-// }
+import AutoVideoPlayer from "./media/auto-video-player";
+import StyledImage from "./media/styled-image";
 
 const mdxComponents = {
-  RoundedImage,
+  Image: StyledImage,
+  AutoVideoPlayer,
 };
 
 interface MdxProps {
