@@ -1,7 +1,6 @@
 import Header from "@/components/layout/header";
 import "./globals.css";
-import { Quicksand, Space_Mono } from "next/font/google";
-import { GitHub, Linkedin, Youtube } from "react-feather";
+import { Space_Mono, Work_Sans } from "next/font/google";
 import { SOCIAL_MEDIA } from "@/constants/profile";
 import SocialLink from "@/components/social-link";
 import Footer from "@/components/layout/footer";
@@ -11,10 +10,11 @@ export const metadata = {
   description: "Computer Engineer Portfolio",
 };
 
-const quicksand = Quicksand({
+const quicksand = Work_Sans({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-quicksand",
+  weight: "400",
 });
 
 const spaceMono = Space_Mono({

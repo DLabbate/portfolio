@@ -1,5 +1,4 @@
 import * as motion from "@/components/animations/motion";
-import RoundedImage from "@/components/rounded-image";
 import { Label, Technologies } from "@/components/technology-badge";
 import Terminal from "@/components/terminal";
 import { ABOUT } from "@/constants/profile";
@@ -18,7 +17,7 @@ const Home = () => {
           <motion.li
             key={label}
             variants={{
-              initial: { opacity: 0, scale: 0.5 },
+              initial: { opacity: 0, scale: 0 },
               show: { opacity: 1, scale: 1 },
             }}
           >
