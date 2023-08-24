@@ -6,6 +6,7 @@ import { Menu, Moon, X } from "react-feather";
 import Link from "next/link";
 import * as motion from "@/components/animations/motion";
 import { NAME } from "@/constants/profile";
+import { AnimatePresence } from "framer-motion";
 
 type Page = {
   title: string;
@@ -65,8 +66,8 @@ const SmallHeader = () => {
   }, [mobileMenuOpen]);
 
   return (
-    <div className="flex h-screen w-full flex-col lg:hidden">
-      <div className="flex w-full items-start justify-center bg-primary/75 p-8 backdrop-blur-md">
+    <>
+      <div className="flex h-24 w-full items-start justify-center bg-primary/75 p-8 backdrop-blur-md lg:hidden">
         <span className="flex-1 whitespace-nowrap font-mono text-2xl">
           {NAME}
         </span>
@@ -83,18 +84,23 @@ const SmallHeader = () => {
           </button>
         </div>
       </div>
-      <motion.div
-        className="top-24 w-full flex-1 bg-primary/75 backdrop-blur-md"
-        animate={mobileMenuOpen ? "open" : "closed"}
-        variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
-      >
-        <nav className="flex flex-col items-center justify-center border-y border-primary-2">
-          {LINKS.map((link) => (
-            <HeaderLink key={link.title} {...link} onClick={toggleMenu} />
-          ))}
-        </nav>
-      </motion.div>
-    </div>
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            className="top-24 h-[calc(100vh-6rem)] w-full bg-primary/75 backdrop-blur-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <nav className="flex flex-col items-center justify-center border-y border-primary-2">
+              {LINKS.map((link) => (
+                <HeaderLink key={link.title} {...link} onClick={toggleMenu} />
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
