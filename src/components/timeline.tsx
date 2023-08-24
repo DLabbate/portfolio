@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { type TimelineEntry } from "@/constants/profile";
-import { Label } from "./technology-badge";
+import { TechnologyBadge } from "./technology-badge";
 import { Calendar } from "react-feather";
 
 /**
@@ -57,7 +57,7 @@ const TimelineEntry = ({
       </div>
       <div className="col-span-full flex flex-wrap gap-2 md:col-span-2 md:col-start-2">
         {technologies.map((item) => (
-          <Label key={item} type={item} />
+          <TechnologyBadge key={item} type={item} />
         ))}
       </div>
     </div>

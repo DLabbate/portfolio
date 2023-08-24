@@ -1,7 +1,7 @@
 import * as motion from "@/components/animations/motion";
 import Image from "next/image";
 import { type Project } from "@/constants/profile";
-import { Label } from "./technology-badge";
+import { TechnologyBadge } from "./technology-badge";
 import Link from "next/link";
 
 const Project = ({
@@ -33,7 +33,7 @@ const Project = ({
           </div>
           <div className="mt-4 flex flex-wrap justify-center gap-2">
             {technologies.map((technology) => (
-              <Label key={technology} type={technology} />
+              <TechnologyBadge key={technology} type={technology} />
             ))}
           </div>
         </div>

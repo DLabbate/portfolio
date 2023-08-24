@@ -190,7 +190,7 @@ type Props = {
   type: Technology;
 };
 
-export const Label = ({ type }: Props) => {
+export const TechnologyBadge = ({ type }: Props) => {
   const { src, displayName } = LOGO_DATA[type];
   return (
     <div className="flex h-10 w-auto items-center rounded-full border border-primary-2 bg-primary-1 px-3 py-2 text-sm">

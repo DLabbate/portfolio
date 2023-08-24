@@ -1,5 +1,5 @@
 import * as motion from "@/components/animations/motion";
-import { Label, Technologies } from "@/components/technology-badge";
+import { TechnologyBadge, Technologies } from "@/components/technology-badge";
 import Terminal from "@/components/terminal";
 import { ABOUT } from "@/constants/profile";
 
@@ -13,15 +13,15 @@ const Home = () => {
         initial={"initial"}
         animate={"show"}
       >
-        {Technologies.map((label) => (
+        {Technologies.map((technology) => (
           <motion.li
-            key={label}
+            key={technology}
             variants={{
               initial: { opacity: 0, scale: 0 },
               show: { opacity: 1, scale: 1 },
             }}
           >
-            <Label type={label} />
+            <TechnologyBadge type={technology} />
           </motion.li>
         ))}
       </motion.ul>
