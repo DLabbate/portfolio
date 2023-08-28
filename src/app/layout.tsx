@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${quicksand.variable} ${spaceMono.variable} bg-primary font-sans text-dark`}
+      className={`${quicksand.variable} ${spaceMono.variable} bg-primary-950 font-sans text-dark`}
     >
       <body className="flex min-h-screen flex-col items-center">
         <Header />

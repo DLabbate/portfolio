@@ -14,10 +14,10 @@ const Project = ({
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
-      className="cursor-pointer rounded-xl border border-primary-2 bg-primary-1 p-3 md:aspect-[0.75] md:w-[calc(100%/2-1rem/2)] xl:w-[calc(100%/3-2*1rem/3)]"
+      className="cursor-pointer rounded-xl border border-primary-800 bg-primary-900 p-3 md:aspect-[0.75] md:w-[calc(100%/2-1rem/2)] xl:w-[calc(100%/3-2*1rem/3)]"
     >
       <Link href={link} className="flex h-full w-full flex-col">
-        <div className="w-auto flex-[1] overflow-hidden rounded-2xl bg-primary-2">
+        <div className="w-auto flex-[1] overflow-hidden rounded-2xl bg-primary-900">
           <Image
             src={image}
             alt="project"

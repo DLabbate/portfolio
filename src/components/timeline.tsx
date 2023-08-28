@@ -44,7 +44,7 @@ const TimelineEntry = ({
             {timeframe.to === "Present" ? "Present" : formatDate(timeframe.to)}
           </time>
         </div>
-        <div className="-right-[1.375rem] top-[0.375rem] hidden h-3 w-3 rounded-full bg-primary-2 md:absolute md:block" />
+        <div className="-right-[1.375rem] top-[0.375rem] hidden h-3 w-3 rounded-full bg-primary-800 md:absolute md:block" />
       </div>
       <div className="col-span-full md:col-span-2 md:col-start-2">
         <ul className="ml-4 list-disc">
@@ -70,7 +70,7 @@ type TimelineProps = {
 
 const Timeline = ({ data }: TimelineProps) => {
   return (
-    <div className="flex flex-col gap-8 md:border-r md:border-primary-2">
+    <div className="flex flex-col gap-8 md:border-r md:border-primary-800">
       {data.map((item) => (
         <TimelineEntry key={item.title} {...item} />
       ))}

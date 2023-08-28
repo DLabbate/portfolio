@@ -31,7 +31,7 @@ const HeaderLink = ({ title, href, exact, onClick }: Props) => {
     <motion.div
       whileHover="hover"
       animate={active ? "active" : "inactive"}
-      className="relative flex w-full cursor-pointer items-center justify-center border-y border-primary-2 p-8 text-xl lg:block lg:w-auto lg:border-0 lg:p-0 "
+      className="relative flex w-full cursor-pointer items-center justify-center border-y border-primary-800 p-8 text-xl lg:block lg:w-auto lg:border-0 lg:p-0 "
     >
       <Link
         className="flex h-full w-full items-center justify-center lg:h-auto lg:w-auto"
@@ -67,7 +67,7 @@ const SmallHeader = () => {
 
   return (
     <>
-      <div className="flex h-24 w-full items-start justify-center bg-primary/75 p-8 backdrop-blur-md lg:hidden">
+      <div className="flex h-24 w-full items-start justify-center p-8 backdrop-blur-md lg:hidden">
         <span className="flex-1 whitespace-nowrap font-mono text-2xl">
           {NAME}
         </span>
@@ -87,12 +87,14 @@ const SmallHeader = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="top-24 h-[calc(100vh-6rem)] w-full bg-primary/75 backdrop-blur-md"
+            className="top-24 h-[calc(100vh-6rem)] w-full backdrop-blur-md"
+            key="mobile-header"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.15, ease: "linear" }}
           >
-            <nav className="flex flex-col items-center justify-center border-y border-primary-2">
+            <nav className="flex flex-col items-center justify-center border-y border-primary-800">
               {LINKS.map((link) => (
                 <HeaderLink key={link.title} {...link} onClick={toggleMenu} />
               ))}
@@ -106,12 +108,12 @@ const SmallHeader = () => {
 
 const LargeHeader = () => {
   return (
-    <div className="hidden h-auto w-full items-start justify-center bg-primary/75 p-8 backdrop-blur-md lg:flex">
+    <div className="hidden h-auto w-full items-start justify-center p-8 backdrop-blur-md lg:flex">
       <span className="flex-1 whitespace-nowrap font-mono text-2xl">
         {NAME}
       </span>
       <div className="top-24 w-full flex-1 opacity-100">
-        <nav className="flex items-center justify-center gap-16 border-primary-2">
+        <nav className="flex items-center justify-center gap-16 border-primary-800">
           {LINKS.map((link) => (
             <HeaderLink key={link.title} {...link} />
           ))}
@@ -128,7 +130,7 @@ const LargeHeader = () => {
 
 const Header = () => {
   return (
-    <header className="fixed top-0 z-50 w-full">
+    <header className="fixed top-0 z-50 w-full bg-primary-950/75">
       <SmallHeader />
       <LargeHeader />
     </header>

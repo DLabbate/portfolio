@@ -29,11 +29,14 @@ const Terminal = ({ text }: Props) => {
   }, [text]);
 
   return (
-    <div className="flex aspect-[4/3] w-full max-w-[40rem] flex-col items-start justify-start rounded-lg border border-primary-2 bg-primary-1 font-mono">
+    <div className="flex aspect-[4/3] w-full max-w-[40rem] flex-col items-start justify-start rounded-lg border border-primary-800 bg-primary-900 font-mono">
       <div className="flex h-4 gap-2 p-2">
-        <div className="h-4 w-4 rounded-full border border-primary-2" />
-        <div className="h-4 w-4 rounded-full border border-primary-2" />
-        <div className="h-4 w-4 rounded-full border border-primary-2" />
+        {Array.from({ length: 3 }, (_, index) => (
+          <div
+            key={index}
+            className="h-4 w-4 rounded-full border border-primary-800"
+          />
+        ))}
       </div>
       <span className="inline flex-1 overflow-hidden whitespace-break-spaces p-8">
         {currentText}

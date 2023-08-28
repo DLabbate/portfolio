@@ -12,7 +12,7 @@ const Accomplishment = ({
   return (
     <motion.a
       href={link}
-      className="relative flex w-full cursor-pointer flex-col rounded-lg border border-primary-2 bg-primary-1 p-4 md:gap-0 lg:w-[calc(100%/2-1rem/2)]"
+      className="relative flex w-full cursor-pointer flex-col rounded-lg border border-primary-800 bg-primary-900 p-4 md:gap-0 lg:w-[calc(100%/2-1rem/2)]"
       whileHover={{ scale: 1.05 }}
     >
       <span className="text-2xl">{title}</span>
