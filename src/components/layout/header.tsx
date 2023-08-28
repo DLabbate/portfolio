@@ -87,12 +87,11 @@ const SmallHeader = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="top-24 h-[calc(100vh-6rem)] w-full backdrop-blur-md"
+            className="absolute top-24 h-[calc(100vh-6rem)] w-full bg-primary-950/75 backdrop-blur-md"
             key="mobile-header"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.15, ease: "linear" }}
           >
             <nav className="flex flex-col items-center justify-center border-y border-primary-800">
               {LINKS.map((link) => (
