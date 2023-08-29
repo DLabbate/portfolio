@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, Moon, X } from "react-feather";
+import { Menu, X } from "react-feather";
 import Link from "next/link";
 import * as motion from "@/components/animations/motion";
 import { NAME } from "@/constants/profile";
 import { AnimatePresence } from "framer-motion";
+import ThemeSelector from "../theme/theme-selector";
 
 type Page = {
   title: string;
@@ -42,7 +43,7 @@ const HeaderLink = ({ title, href, exact, onClick }: Props) => {
       </Link>
       <div className="hidden w-full lg:block">
         <motion.div
-          className="absolute h-1 bg-neutral-50"
+          className="absolute h-1 bg-primary-900 dark:bg-white"
           variants={{
             hover: { width: "100%" },
             active: { width: "100%" },
@@ -58,6 +59,12 @@ const SmallHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
+  const iconProps = {
+    strokeWidth: 1,
+    size: 30,
+    className: "stroke-light dark:stroke-dark",
+  } as const;
+
   useEffect(() => {
     const body = document.querySelector("body");
     if (body) {
@@ -72,22 +79,16 @@ const SmallHeader = () => {
           {NAME}
         </span>
         <div className="flex flex-1 justify-end gap-4">
-          <button>
-            <Moon strokeWidth={1} size={30} />
-          </button>
+          <ThemeSelector />
           <button onClick={toggleMenu}>
-            {mobileMenuOpen ? (
-              <X strokeWidth={1} size={30} />
-            ) : (
-              <Menu strokeWidth={1} size={30} />
-            )}
+            {mobileMenuOpen ? <X {...iconProps} /> : <Menu {...iconProps} />}
           </button>
         </div>
       </div>
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="absolute top-24 h-[calc(100vh-6rem)] w-full bg-primary-950/75 backdrop-blur-md"
+            className="absolute top-24 h-[calc(100vh-6rem)] w-full bg-primary-50/75 backdrop-blur-md dark:bg-primary-950/75"
             key="mobile-header"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -119,9 +120,7 @@ const LargeHeader = () => {
         </nav>
       </div>
       <div className="flex flex-1 justify-end">
-        <button>
-          <Moon strokeWidth={1} size={30} />
-        </button>
+        <ThemeSelector />
       </div>
     </div>
   );
@@ -129,7 +128,7 @@ const LargeHeader = () => {
 
 const Header = () => {
   return (
-    <header className="fixed top-0 z-50 w-full bg-primary-950/75">
+    <header className="fixed top-0 z-50 w-full bg-primary-50/75 dark:bg-primary-950/75">
       <SmallHeader />
       <LargeHeader />
     </header>

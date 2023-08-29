@@ -1,14 +1,14 @@
-import { SocialMedia, SocialPlatform } from "@/constants/profile";
+import { SocialMedia } from "@/constants/profile";
 import React from "react";
 import { GitHub, Linkedin, Youtube } from "react-feather";
 
-type IconProps = {
-  strokeWidth: number;
-  size: number;
-};
-const Icon = ({ platform }: Omit<SocialMedia, "link">) => {
-  const iconProps: IconProps = { strokeWidth: 1, size: 30 };
+const iconProps = {
+  strokeWidth: 1,
+  size: 30,
+  className: "stroke-light-medium dark:stroke-dark-medium",
+} as const;
 
+const Icon = ({ platform }: Omit<SocialMedia, "link">) => {
   switch (platform) {
     case "github":
       return <GitHub {...iconProps} />;

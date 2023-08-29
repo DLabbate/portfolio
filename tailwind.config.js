@@ -5,6 +5,7 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       gridTemplateColumns: {
@@ -26,16 +27,16 @@ module.exports = {
       },
       colors: {
         primary: {
-          50: "#E5E6EB",
-          100: "#D9DAE3",
-          200: "#BFC1CF",
-          300: "#A5A7BB",
-          400: "#8A8EA8",
-          500: "#707494",
-          600: "#5C5F7A",
-          700: "#484B60",
-          800: "#343646",
-          900: "#21222C",
+          50: "#F3F4F6",
+          100: "#E5E6EB",
+          200: "#CBCCD8",
+          300: "#ADB0C2",
+          400: "#9396AE",
+          500: "#767A98",
+          600: "#606480",
+          700: "#4C4F66",
+          800: "#373949",
+          900: "#23242F",
           950: "#181920",
         },
       },
@@ -91,6 +92,16 @@ module.exports = {
           DEFAULT: theme("colors.white"),
           medium: theme("colors.primary[300]"),
           disabled: theme("colors.primary[400]"),
+        },
+      }),
+      stroke: ({ theme }) => ({
+        light: {
+          DEFAULT: theme("colors.primary[900]"),
+          medium: theme("colors.primary[700]"),
+        },
+        dark: {
+          DEFAULT: theme("colors.white"),
+          medium: theme("colors.primary[300]"),
         },
       }),
     },

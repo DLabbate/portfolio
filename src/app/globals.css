@@ -2,11 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --scrollbar: #adb0c2;
+}
+
+.dark {
+  --scrollbar: #373949;
+}
+
 *::-webkit-scrollbar {
   width: 8px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #2c2c35;
+  background-color: var(--scrollbar);
   border-radius: 4px;
 }

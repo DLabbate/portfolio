@@ -14,7 +14,7 @@ const Project = ({
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
-      className="cursor-pointer rounded-xl border border-primary-800 bg-primary-900 p-3 md:aspect-[0.75] md:w-[calc(100%/2-1rem/2)] xl:w-[calc(100%/3-2*1rem/3)]"
+      className="cursor-pointer rounded-xl border border-primary-200 bg-white p-3 shadow dark:border-primary-800 dark:bg-primary-900 md:aspect-[0.75] md:w-[calc(100%/2-1rem/2)] xl:w-[calc(100%/3-2*1rem/3)]"
     >
       <Link href={link} className="flex h-full w-full flex-col">
         <div className="w-auto flex-[1] overflow-hidden rounded-2xl bg-primary-900">
@@ -29,7 +29,9 @@ const Project = ({
         <div className="flex flex-col">
           <div className="mt-3 text-justify">
             <span className="font-bold">{title} </span>
-            <span className="text-sm text-dark-medium">{description}</span>
+            <span className="text-sm text-light-medium dark:text-dark-medium">
+              {description}
+            </span>
           </div>
           <div className="mt-4 flex flex-wrap justify-center gap-2">
             {technologies.map((technology) => (

@@ -193,7 +193,7 @@ type Props = {
 export const TechnologyBadge = ({ type }: Props) => {
   const { src, displayName } = LOGO_DATA[type];
   return (
-    <div className="flex h-10 w-auto items-center rounded-full border border-primary-800 bg-primary-900 px-3 py-2 text-sm">
+    <div className="flex h-10 w-auto items-center rounded-full border border-primary-200 bg-white px-3 py-2 text-sm shadow dark:border-primary-800 dark:bg-primary-900">
       <Image src={src} alt="logo" className="h-6 w-auto" />
       <span className="ml-2 align-middle font-mono">{displayName}</span>
     </div>

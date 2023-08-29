@@ -30,26 +30,28 @@ const TimelineEntry = ({
       </a>
       <div className="flex flex-col">
         <span className="text-2xl">{title}</span>
-        <span className="text-xl text-dark-medium">{organization.name}</span>
+        <span className="text-xl text-light-medium dark:text-dark-medium">
+          {organization.name}
+        </span>
       </div>
       <div className="relative col-span-full flex items-center gap-1 md:col-span-1 md:items-start">
         <Calendar
           strokeWidth={1}
-          className="h-auto stroke-[#a5a5a9] md:hidden"
+          className="h-auto stroke-light-medium dark:stroke-dark-medium md:hidden"
         />
-        <div className="block text-dark-medium">
+        <div className="block text-light-medium dark:text-dark-medium">
           <time>{formatDate(timeframe.from)}</time>
           <span className="ml-2 mr-2">—</span>
           <time>
             {timeframe.to === "Present" ? "Present" : formatDate(timeframe.to)}
           </time>
         </div>
-        <div className="-right-[1.375rem] top-[0.375rem] hidden h-3 w-3 rounded-full bg-primary-800 md:absolute md:block" />
+        <div className="-right-[1.375rem] top-[0.375rem] hidden h-3 w-3 rounded-full bg-primary-200 dark:bg-primary-800 md:absolute md:block" />
       </div>
       <div className="col-span-full md:col-span-2 md:col-start-2">
         <ul className="ml-4 list-disc">
           {content.map((item) => (
-            <li key={item} className="text-dark-medium">
+            <li key={item} className="text-light-medium dark:text-dark-medium">
               {item}
             </li>
           ))}
@@ -70,7 +72,7 @@ type TimelineProps = {
 
 const Timeline = ({ data }: TimelineProps) => {
   return (
-    <div className="flex flex-col gap-8 md:border-r md:border-primary-800">
+    <div className="flex flex-col gap-8 md:border-r md:border-primary-200 md:dark:border-primary-800">
       {data.map((item) => (
         <TimelineEntry key={item.title} {...item} />
       ))}
