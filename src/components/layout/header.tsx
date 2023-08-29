@@ -108,7 +108,7 @@ const SmallHeader = () => {
 
 const LargeHeader = () => {
   return (
-    <div className="hidden h-auto w-full items-start justify-center p-8 backdrop-blur-md lg:flex">
+    <div className="hidden h-auto w-full items-center justify-center p-8 backdrop-blur-md lg:flex">
       <span className="flex-1 whitespace-nowrap font-mono text-2xl">
         {NAME}
       </span>

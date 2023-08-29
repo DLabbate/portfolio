@@ -8,6 +8,7 @@
 import { motion } from "framer-motion";
 
 export const div = motion.div;
+export const button = motion.button;
 export const h1 = motion.h1;
 export const a = motion.a;
 export const span = motion.span;

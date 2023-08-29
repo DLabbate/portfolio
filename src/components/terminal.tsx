@@ -41,7 +41,7 @@ const Terminal = ({ text }: Props) => {
       <span className="inline flex-1 overflow-hidden whitespace-break-spaces p-8">
         {currentText}
         <motion.span
-          className="inline-block h-6 w-3 bg-primary-200 align-top dark:bg-white"
+          className="inline-block h-6 w-3 bg-primary-400 align-top dark:bg-white"
           animate={{ opacity: [0, 1.0, 0] }}
           transition={{ repeat: Infinity, duration: 1 }}
         />

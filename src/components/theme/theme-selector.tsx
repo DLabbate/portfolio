@@ -3,6 +3,7 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "react-feather";
+import * as motion from "@/components/animations/motion";
 
 const themes = {
   light: "light",
@@ -34,13 +35,29 @@ const ThemeSelector = () => {
   return (
     <>
       {isDark ? (
-        <button onClick={() => setTheme(themes.light)}>
-          <Moon {...iconProps} />
-        </button>
+        <motion.button
+          key="moon"
+          onClick={() => setTheme(themes.light)}
+          initial={{ y: -10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+        >
+          <Moon
+            {...iconProps}
+            className="transition duration-200 hover:stroke-primary-200"
+          />
+        </motion.button>
       ) : (
-        <button onClick={() => setTheme(themes.dark)}>
-          <Sun {...iconProps} />
-        </button>
+        <motion.button
+          key="sun"
+          onClick={() => setTheme(themes.dark)}
+          initial={{ y: 10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+        >
+          <Sun
+            {...iconProps}
+            className="transition duration-200 hover:stroke-primary-600"
+          />
+        </motion.button>
       )}
     </>
   );
