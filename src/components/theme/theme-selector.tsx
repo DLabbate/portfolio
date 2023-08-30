@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 import { Moon, Sun } from "react-feather";
 import * as motion from "@/components/animations/motion";
 
-const themes = {
+const THEMES = {
   light: "light",
   dark: "dark",
 } as const;
 
-const iconProps = {
+const ICON_PROPS = {
   strokeWidth: 1,
   size: 30,
   className: "stroke-light dark:stroke-dark",
@@ -30,31 +30,31 @@ const ThemeSelector = () => {
     return null;
   }
 
-  const isDark = theme === themes.dark;
+  const isDark = theme === THEMES.dark;
 
   return (
     <>
       {isDark ? (
         <motion.button
           key="moon"
-          onClick={() => setTheme(themes.light)}
+          onClick={() => setTheme(THEMES.light)}
           initial={{ y: -10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
         >
           <Moon
-            {...iconProps}
+            {...ICON_PROPS}
             className="transition duration-200 hover:stroke-primary-200"
           />
         </motion.button>
       ) : (
         <motion.button
           key="sun"
-          onClick={() => setTheme(themes.dark)}
+          onClick={() => setTheme(THEMES.dark)}
           initial={{ y: 10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
         >
           <Sun
-            {...iconProps}
+            {...ICON_PROPS}
             className="transition duration-200 hover:stroke-primary-600"
           />
         </motion.button>
