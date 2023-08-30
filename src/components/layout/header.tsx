@@ -43,6 +43,7 @@ const HeaderLink = ({ title, href, exact, onClick }: Props) => {
       </Link>
       <div className="hidden w-full lg:block">
         <motion.div
+          data-test={`header-link-underline-${title.toLowerCase()}`}
           className="absolute h-1 bg-primary-900 dark:bg-white"
           variants={{
             hover: { width: "100%" },
@@ -81,7 +82,11 @@ const SmallHeader = () => {
         <div className="flex flex-1 justify-end gap-4">
           <ThemeSelector />
           <button onClick={toggleMenu}>
-            {mobileMenuOpen ? <X {...iconProps} /> : <Menu {...iconProps} />}
+            {mobileMenuOpen ? (
+              <X {...iconProps} data-test="x-icon" />
+            ) : (
+              <Menu {...iconProps} data-test="menu-icon" />
+            )}
           </button>
         </div>
       </div>
@@ -89,7 +94,8 @@ const SmallHeader = () => {
         {mobileMenuOpen && (
           <motion.div
             className="absolute top-24 h-[calc(100vh-6rem)] w-full bg-primary-50/75 backdrop-blur-md dark:bg-primary-950/75"
-            key="mobile-header"
+            key="mobile-menu"
+            data-test="mobile-menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
