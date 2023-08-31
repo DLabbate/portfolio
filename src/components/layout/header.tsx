@@ -75,7 +75,10 @@ const SmallHeader = () => {
 
   return (
     <>
-      <div className="flex h-24 w-full items-start justify-center p-8 backdrop-blur-md lg:hidden">
+      <div
+        className="flex h-24 w-full items-start justify-center p-8 backdrop-blur-md lg:hidden"
+        data-test="small-header"
+      >
         <span className="flex-1 whitespace-nowrap font-mono text-2xl">
           {NAME}
         </span>
@@ -114,7 +117,10 @@ const SmallHeader = () => {
 
 const LargeHeader = () => {
   return (
-    <div className="hidden h-auto w-full items-center justify-center p-8 backdrop-blur-md lg:flex">
+    <div
+      className="hidden h-auto w-full items-center justify-center p-8 backdrop-blur-md lg:flex"
+      data-test="large-header"
+    >
       <span className="flex-1 whitespace-nowrap font-mono text-2xl">
         {NAME}
       </span>

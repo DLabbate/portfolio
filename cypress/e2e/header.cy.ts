@@ -3,6 +3,7 @@ describe("header", () => {
     beforeEach(() => {
       cy.viewport(1280, 720);
       cy.visit("/");
+      cy.getBySel("large-header").should("be.visible");
     });
 
     it("navigates to all pages", () => {
@@ -29,7 +30,9 @@ describe("header", () => {
 
   context("small screen", () => {
     beforeEach(() => {
+      cy.viewport("ipad-mini");
       cy.visit("/");
+      cy.getBySel("small-header").should("be.visible");
     });
 
     it("navigates to all pages", () => {
