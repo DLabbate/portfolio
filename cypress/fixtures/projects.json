@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Stock Dashboard",
+    "url": "https://github.com/DLabbate/stock-dashboard"
+  },
+  {
+    "title": "Spacestagram",
+    "url": "https://github.com/DLabbate/spacestagram"
+  },
+  {
+    "title": "Acasa",
+    "url": "https://github.com/DLabbate/real-estate-website"
+  },
+  {
+    "title": "Mood.AI",
+    "url": "http://localhost:3000/portfolio/projects/moodai"
+  },
+  {
+    "title": "BikeBuddy",
+    "url": "https://github.com/DLabbate/BikeBuddy"
+  },
+  {
+    "title": "BumperCars",
+    "url": "https://github.com/DLabbate/OpenGL_CarProject"
+  },
+  {
+    "title": "Autonomous Hovercraft",
+    "url": "http://localhost:3000/portfolio/projects/hovercraft"
+  },
+  {
+    "title": "FastKeys",
+    "url": "https://labbgames.itch.io/fastkeys"
+  }
+]
