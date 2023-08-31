@@ -41,13 +41,13 @@ describe("header", () => {
           cy.getBySel("menu-icon").click();
 
           cy.getBySel("x-icon").should("be.visible");
-          cy.getBySel("mobile-menu").should("be.visible");
+          cy.getBySel("expandable-menu").should("be.visible");
 
           cy.contains(text).should("be.visible").click();
 
           cy.location("pathname").should("eq", path);
           cy.getBySel("menu-icon").should("be.visible");
-          cy.getBySel("mobile-menu").should("not.exist");
+          cy.getBySel("expandable-menu").should("not.exist");
         });
       });
     });

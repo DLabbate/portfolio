@@ -57,8 +57,8 @@ const HeaderLink = ({ title, href, exact, onClick }: Props) => {
 };
 
 const SmallHeader = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   const iconProps = {
     strokeWidth: 1,
@@ -69,9 +69,9 @@ const SmallHeader = () => {
   useEffect(() => {
     const body = document.querySelector("body");
     if (body) {
-      body.style.overflow = mobileMenuOpen ? "hidden" : "auto";
+      body.style.overflow = menuOpen ? "hidden" : "auto";
     }
-  }, [mobileMenuOpen]);
+  }, [menuOpen]);
 
   return (
     <>
@@ -85,7 +85,7 @@ const SmallHeader = () => {
         <div className="flex flex-1 justify-end gap-4">
           <ThemeSelector />
           <button onClick={toggleMenu}>
-            {mobileMenuOpen ? (
+            {menuOpen ? (
               <X {...iconProps} data-test="x-icon" />
             ) : (
               <Menu {...iconProps} data-test="menu-icon" />
@@ -94,11 +94,11 @@ const SmallHeader = () => {
         </div>
       </div>
       <AnimatePresence>
-        {mobileMenuOpen && (
+        {menuOpen && (
           <motion.div
             className="absolute top-24 h-[calc(100vh-6rem)] w-full bg-primary-50/75 backdrop-blur-md dark:bg-primary-950/75"
-            key="mobile-menu"
-            data-test="mobile-menu"
+            key="expandable-menu"
+            data-test="expandable-menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
