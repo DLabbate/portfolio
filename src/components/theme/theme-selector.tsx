@@ -36,7 +36,8 @@ const ThemeSelector = () => {
     <>
       {isDark ? (
         <motion.button
-          key="moon"
+          key="moon-icon"
+          data-test="moon-icon"
           onClick={() => setTheme(THEMES.light)}
           initial={{ y: -10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -48,7 +49,8 @@ const ThemeSelector = () => {
         </motion.button>
       ) : (
         <motion.button
-          key="sun"
+          key="sun-icon"
+          data-test="sun-icon"
           onClick={() => setTheme(THEMES.dark)}
           initial={{ y: 10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}

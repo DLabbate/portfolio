@@ -43,6 +43,7 @@ const HeaderLink = ({ title, href, exact, onClick }: Props) => {
       </Link>
       <div className="hidden w-full lg:block">
         <motion.div
+          data-test={`header-link-underline-${title.toLowerCase()}`}
           className="absolute h-1 bg-primary-900 dark:bg-white"
           variants={{
             hover: { width: "100%" },
@@ -56,8 +57,8 @@ const HeaderLink = ({ title, href, exact, onClick }: Props) => {
 };
 
 const SmallHeader = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   const iconProps = {
     strokeWidth: 1,
@@ -68,28 +69,36 @@ const SmallHeader = () => {
   useEffect(() => {
     const body = document.querySelector("body");
     if (body) {
-      body.style.overflow = mobileMenuOpen ? "hidden" : "auto";
+      body.style.overflow = menuOpen ? "hidden" : "auto";
     }
-  }, [mobileMenuOpen]);
+  }, [menuOpen]);
 
   return (
     <>
-      <div className="flex h-24 w-full items-start justify-center p-8 backdrop-blur-md lg:hidden">
+      <div
+        className="flex h-24 w-full items-start justify-center p-8 backdrop-blur-md lg:hidden"
+        data-test="small-header"
+      >
         <span className="flex-1 whitespace-nowrap font-mono text-2xl">
           {NAME}
         </span>
         <div className="flex flex-1 justify-end gap-4">
           <ThemeSelector />
           <button onClick={toggleMenu}>
-            {mobileMenuOpen ? <X {...iconProps} /> : <Menu {...iconProps} />}
+            {menuOpen ? (
+              <X {...iconProps} data-test="x-icon" />
+            ) : (
+              <Menu {...iconProps} data-test="menu-icon" />
+            )}
           </button>
         </div>
       </div>
       <AnimatePresence>
-        {mobileMenuOpen && (
+        {menuOpen && (
           <motion.div
             className="absolute top-24 h-[calc(100vh-6rem)] w-full bg-primary-50/75 backdrop-blur-md dark:bg-primary-950/75"
-            key="mobile-header"
+            key="expandable-menu"
+            data-test="expandable-menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -108,7 +117,10 @@ const SmallHeader = () => {
 
 const LargeHeader = () => {
   return (
-    <div className="hidden h-auto w-full items-center justify-center p-8 backdrop-blur-md lg:flex">
+    <div
+      className="hidden h-auto w-full items-center justify-center p-8 backdrop-blur-md lg:flex"
+      data-test="large-header"
+    >
       <span className="flex-1 whitespace-nowrap font-mono text-2xl">
         {NAME}
       </span>

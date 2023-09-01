@@ -70,7 +70,7 @@ export type SocialMedia = {
 export const SOCIAL_MEDIA: ReadonlyArray<SocialMedia> = [
   {
     platform: "linkedin",
-    link: "https://linkedin.com/in/domenic-labbate",
+    link: "https://www.linkedin.com/in/domenic-labbate",
   },
   {
     platform: "youtube",
