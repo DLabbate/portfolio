@@ -11,6 +11,9 @@ Cypress.Commands.add("getBySelLike", (selector, ...args) => {
   return cy.get(`[data-test*=${selector}]`, ...args);
 });
 
+/**
+ * Gets all links and verifies that none of them are broken.
+ */
 Cypress.Commands.add("getAllLinks", () => {
   return cy
     .get("a")

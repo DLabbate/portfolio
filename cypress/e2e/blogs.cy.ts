@@ -1,6 +1,6 @@
 describe("blogs page", () => {
   beforeEach(() => {
-    cy.visit("/");
+    cy.visit("/blogs");
   });
 
   it("checks all links are valid", () => {
