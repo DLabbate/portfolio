@@ -29,7 +29,7 @@ const Terminal = ({ text }: Props) => {
   }, [text]);
 
   return (
-    <div className="flex aspect-[4/3] w-full max-w-[40rem] flex-col items-start justify-start rounded-lg border border-primary-200 bg-white font-mono shadow dark:border-primary-800 dark:bg-primary-900">
+    <div className="flex aspect-square w-full max-w-[40rem] flex-col items-start justify-start rounded-lg border border-primary-200 bg-white font-mono shadow dark:border-primary-800 dark:bg-primary-900 sm:aspect-[4/3]">
       <div className="flex h-4 gap-2 p-2">
         {Array.from({ length: 3 }, (_, index) => (
           <div

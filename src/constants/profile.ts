@@ -54,9 +54,10 @@ export const ABOUT: string = `Hello World!
 My name is Domenic.
 
 Here are some things you should know about me.
-  🤓 I'm a Software Engineer.
-  🧠 I have a passion for learning & self improvement.
-  📚 I'm resourceful and can overcome difficulties.`;
+
+🤓 I'm a Software Engineer.
+🧠 I have a passion for learning & self improvement.
+📚 I'm resourceful and can overcome difficulties.`;
 
 export const SOCIAL_PLATFORMS = ["github", "youtube", "linkedin"] as const;
 
