@@ -41,6 +41,7 @@ const ThemeSelector = () => {
           onClick={() => setTheme(THEMES.light)}
           initial={{ y: -10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
+          aria-label="dark mode"
         >
           <Moon
             {...ICON_PROPS}
@@ -54,6 +55,7 @@ const ThemeSelector = () => {
           onClick={() => setTheme(THEMES.dark)}
           initial={{ y: 10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
+          aria-label="light mode"
         >
           <Sun
             {...ICON_PROPS}

@@ -24,6 +24,7 @@ const Project = ({
             placeholder="blur"
             style={{ height: "100%", width: "100%", objectFit: "cover" }}
             className="aspect-square md:aspect-auto"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
           />
         </div>
         <div className="flex flex-col">

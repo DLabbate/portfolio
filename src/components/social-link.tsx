@@ -2,7 +2,7 @@ import { SocialMedia } from "@/constants/profile";
 import React from "react";
 import { GitHub, Linkedin, Youtube } from "react-feather";
 
-const iconProps = {
+const ICON_PROPS = {
   strokeWidth: 1,
   size: 30,
   className: "stroke-light-medium dark:stroke-dark-medium",
@@ -11,17 +11,17 @@ const iconProps = {
 const Icon = ({ platform }: Omit<SocialMedia, "link">) => {
   switch (platform) {
     case "github":
-      return <GitHub {...iconProps} />;
+      return <GitHub {...ICON_PROPS} />;
     case "linkedin":
-      return <Linkedin {...iconProps} />;
+      return <Linkedin {...ICON_PROPS} />;
     case "youtube":
-      return <Youtube {...iconProps} />;
+      return <Youtube {...ICON_PROPS} />;
   }
 };
 
 const SocialLink = ({ platform, link }: SocialMedia) => {
   return (
-    <a href={link}>
+    <a href={link} aria-label={platform}>
       <Icon platform={platform} />
     </a>
   );
