@@ -23,7 +23,9 @@ const Section = ({ title, children }: Props) => {
       <motion.h1 className="mb-8 text-3xl font-bold" variants={VARIANTS}>
         {title}
       </motion.h1>
-      <motion.div variants={VARIANTS}>{children}</motion.div>
+      <motion.div variants={VARIANTS} className="w-full">
+        {children}
+      </motion.div>
     </motion.section>
   );
 };
