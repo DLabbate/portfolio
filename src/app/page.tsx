@@ -5,7 +5,7 @@ import { ABOUT } from "@/constants/profile";
 
 const Home = () => {
   return (
-    <div className="flex w-full flex-1 flex-col items-center justify-center bg-primary">
+    <div className="bg-primary flex w-full flex-1 flex-col items-center justify-center">
       <Terminal text={ABOUT} />
       <motion.ul
         className="m-4 flex w-full max-w-[55rem] flex-wrap items-center justify-center gap-2"

@@ -1,6 +1,6 @@
 import { type Accomplishment } from "@/constants/profile";
 import * as motion from "@/components/animations/motion";
-import { Calendar, MapPin } from "react-feather";
+import { Calendar } from "react-feather";
 
 const Accomplishment = ({
   title,

@@ -1,5 +1,3 @@
-// TODO: Use CldVideoPlayer from next-cloudinary when the following issue is solved: https://github.com/colbyfayock/next-cloudinary/issues/248
-
 type Props = {
   alt: string;
   src: string;
