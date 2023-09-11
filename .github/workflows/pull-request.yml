@@ -2,15 +2,12 @@ on:
   pull_request:
     branches:
       - master
-
 jobs:
-  build-and-test:
+  cypress-run:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
