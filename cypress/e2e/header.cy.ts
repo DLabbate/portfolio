@@ -11,10 +11,10 @@ describe("header", () => {
         data.forEach(({ text, path }) => {
           cy.contains(text).should("be.visible").click();
 
-          cy.location("pathname").should("eq", path);
           cy.getBySel(`header-link-underline-${text.toLowerCase()}`).should(
             "be.visible"
           );
+          cy.location("pathname").should("eq", path);
         });
       });
     });
