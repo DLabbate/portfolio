@@ -11,10 +11,10 @@ describe("header", () => {
         data.forEach(({ text, path }) => {
           cy.contains(text).should("be.visible").click();
 
-          cy.location("pathname").should("eq", path);
           cy.getBySel(`header-link-underline-${text.toLowerCase()}`).should(
             "be.visible"
           );
+          cy.location("pathname").should("eq", path);
         });
       });
     });
@@ -38,7 +38,7 @@ describe("header", () => {
     it("navigates to all pages", () => {
       cy.fixture<[{ text: string; path: string }]>("pages").then((data) => {
         data.forEach(({ text, path }) => {
-          cy.getBySel("menu-icon").click();
+          cy.getBySel("menu-icon").should("be.visible").click();
 
           cy.getBySel("x-icon").should("be.visible");
           cy.getBySel("expandable-menu").should("be.visible");
