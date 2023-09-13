@@ -17,7 +17,24 @@ export const Project = defineDocumentType(() => ({
   },
 }));
 
+export const Blog = defineDocumentType(() => ({
+  name: "Blog",
+  filePathPattern: "blogs/**/*.mdx",
+  contentType: "mdx",
+  fields: {
+    title: { type: "string", required: true },
+    date: { type: "date", required: true },
+    imageSrc: { type: "string", required: true },
+  },
+  computedFields: {
+    slug: {
+      type: "string",
+      resolve: (project) => project._raw.sourceFileName.replace(".mdx", ""),
+    },
+  },
+}));
+
 export default makeSource({
   contentDirPath: "content",
-  documentTypes: [Project],
+  documentTypes: [Project, Blog],
 });

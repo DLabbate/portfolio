@@ -92,7 +92,7 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       link: "https://www.genetec.com",
     },
     timeframe: {
-      from: new Date(2023, 0),
+      from: new Date(Date.UTC(2023, 0)),
       to: "Present",
     },
     content: [
@@ -120,8 +120,8 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       link: "https://www.genetec.com",
     },
     timeframe: {
-      from: new Date(2022, 1),
-      to: new Date(2023, 0),
+      from: new Date(Date.UTC(2022, 1)),
+      to: new Date(Date.UTC(2023, 0)),
     },
     content: [
       "Refactored frontend codebase in React to utilize compound components, enhancing code modularity and reusability",
@@ -148,8 +148,8 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       link: "https://www.genetec.com",
     },
     timeframe: {
-      from: new Date(2021, 4),
-      to: new Date(2021, 7),
+      from: new Date(Date.UTC(2021, 4)),
+      to: new Date(Date.UTC(2021, 7)),
     },
     content: [
       "Worked on the backend codebase of a Cloud-based video surveillance system",
@@ -167,8 +167,8 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       link: "https://www.concordia.com",
     },
     timeframe: {
-      from: new Date(2020, 5),
-      to: new Date(2020, 8),
+      from: new Date(Date.UTC(2020, 5)),
+      to: new Date(Date.UTC(2020, 8)),
     },
     content: [
       "Participated in the research of algorithmic solutions to ensure 5G networks adhere to Service Level Agreements",
@@ -184,8 +184,8 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       link: "https://www.cae.com",
     },
     timeframe: {
-      from: new Date(2018, 8),
-      to: new Date(2018, 11),
+      from: new Date(Date.UTC(2018, 8)),
+      to: new Date(Date.UTC(2018, 11)),
     },
     content: [
       "Executed test runs on medical simulation systems, ensuring comprehensive test coverage",
@@ -206,8 +206,8 @@ export const EDUCATION: ReadonlyArray<TimelineEntry> = [
       link: "https://www.concordia.com",
     },
     timeframe: {
-      from: new Date(2017, 8),
-      to: new Date(2021, 11),
+      from: new Date(Date.UTC(2017, 8)),
+      to: new Date(Date.UTC(2021, 11)),
     },
     content: [
       "GPA: 4.27/4.30",

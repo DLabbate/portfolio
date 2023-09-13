@@ -1,7 +1,9 @@
 import { Mdx } from "@/components/mdx";
 import { allProjects } from "contentlayer/generated";
 import { notFound } from "next/navigation";
-import React from "react";
+
+const findProjectBySlug = (slug: string) =>
+  allProjects.find((project) => project.slug === slug);
 
 export const generateStaticParams = async () =>
   allProjects.map(({ slug }) => {
@@ -9,13 +11,13 @@ export const generateStaticParams = async () =>
   });
 
 export const generateMetadata = ({ params }: { params: { slug: string } }) => {
-  const project = allProjects.find((project) => project.slug === params.slug);
+  const project = findProjectBySlug(params.slug);
   if (!project) return;
   return { title: project.title };
 };
 
 const ProjectPage = ({ params }: { params: { slug: string } }) => {
-  const project = allProjects.find((project) => project.slug === params.slug);
+  const project = findProjectBySlug(params.slug);
   if (!project) return notFound();
 
   return (
