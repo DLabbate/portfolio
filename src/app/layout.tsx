@@ -39,7 +39,7 @@ export default function RootLayout({
       <body className="flex min-h-screen flex-col items-center bg-primary-50 text-light dark:bg-primary-950 dark:text-dark">
         <ThemeProvider attribute="class">
           <Header />
-          <main className="ml-[5vw] mr-[5vw] mt-24 flex max-w-7xl flex-1 flex-col items-center">
+          <main className="ml-auto mr-auto mt-24 flex w-[90%] max-w-7xl flex-1 flex-col items-center">
             {children}
           </main>
           <div className="fixed bottom-4 left-4 hidden flex-col gap-2 xl:flex">

@@ -13,18 +13,6 @@ module.exports = {
         "timeline-small": "auto 1fr",
         accomplishment: "1fr auto",
       },
-      textColor: {
-        light: {
-          DEFAULT: "#212121",
-          medium: "#666666",
-          disabled: "#9E9E9E",
-        },
-        dark: {
-          DEFAULT: "#e2e2e3",
-          medium: "#a5a5a9",
-          disabled: "#74747a",
-        },
-      },
       colors: {
         primary: {
           50: "#F3F4F6",
