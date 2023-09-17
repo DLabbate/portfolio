@@ -31,20 +31,8 @@ const BlogTag = ({ label, state }: Props) => {
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
 
-      const tags = params.get("tags");
-
       const before = params.getAll(name);
       if (before.includes(value)) {
-        // console.log(params.getAll(name));
-        // params.delete(name, value);
-        // params.set(
-        //   name,
-        //   params
-        //     .getAll(name)
-        //     .filter((param) => param !== value)
-        //     .join("&")
-        // );
-
         // Delete only the specific value
         // E.g. tags="Next.js"&tags="TailwindCSS" should become tags="Next.js" after removing "TailwindCSS"
         params.delete(name);

@@ -16,6 +16,10 @@ const formatTags = (tags: string[] | undefined): string[] => {
   return tags?.map(formatTag) || [];
 };
 
+const ALL_BLOGS = allBlogs.map((blog) => {
+  return { ...blog, tags: formatTags(blog.tags) };
+});
+
 /**
  * Retrieves a list (with no duplicates) of all the tags found from all the blog posts.
  */
@@ -29,11 +33,7 @@ const getAllTags = (): string[] => {
   return Array.from(tags);
 };
 
-const ALL_BLOGS = allBlogs.map((blog) => {
-  return { ...blog, tags: formatTags(blog.tags) };
-});
-
-const ALL_TAGS = getAllTags().map((tag) => formatTag(tag));
+const ALL_TAGS = getAllTags();
 
 /**
  * Formats tags as an array of strings.
@@ -42,11 +42,11 @@ const getTagsFromSearchParams = (searchParams: SearchParams): string[] => {
   const tags = searchParams.tags;
 
   if (typeof tags === "string") {
-    return [formatTag(tags)];
+    return [tags];
   }
 
   if (Array.isArray(tags)) {
-    return formatTags(tags);
+    return tags;
   }
 
   return [];
@@ -57,11 +57,9 @@ const getTagsFromSearchParams = (searchParams: SearchParams): string[] => {
  */
 const blogExistsWithTags = (selectedTags: Set<string>): boolean => {
   const selectedTagsList = Array.from(selectedTags);
-  console.log("selectedTagsList", selectedTagsList);
 
   return ALL_BLOGS.some((blog) => {
     const blogTags = new Set(blog.tags);
-    console.log("blogTags", blogTags);
     return selectedTagsList.every((tag) => blogTags.has(tag));
   });
 };
@@ -74,8 +72,7 @@ const blogHasAllTags = (blog: Blog, selectedTags: Set<string>): boolean => {
 /**
  * Determines the state of a given tag.
  */
-const getFilterState = (selectedTags: Set<string>, tag: string): TagState => {
-  // If the tag is already selected, it is "active"
+const getTagState = (selectedTags: Set<string>, tag: string): TagState => {
   if (selectedTags.has(tag)) {
     return "active";
   }
@@ -91,28 +88,38 @@ const getFilterState = (selectedTags: Set<string>, tag: string): TagState => {
   return "disabled";
 };
 
+/**
+ * Determines if a blog's title includes a given text (case insensitive).
+ */
+const includesTitle = (blog: Blog, text: string | undefined): boolean => {
+  if (!text) return true;
+
+  return blog.title.toLowerCase().includes(text.toLowerCase());
+};
+
+/**
+ * Determines if a blog includes all the selected tags.
+ */
+const includesTags = (blog: Blog, selectedTags: Set<string>): boolean => {
+  if (selectedTags.size === 0) return true;
+
+  const tags = new Set<string>(blog.tags);
+  return Array.from(selectedTags).every((tag) => tags.has(tag));
+};
+
 type SearchParams = {
   tags: string | string[] | undefined;
   search: string | undefined;
 };
 
-type Params = {
-  params: { slug: string };
-  searchParams: SearchParams;
-};
+type Params = { searchParams: SearchParams };
 
-const Blogs = ({ params, searchParams }: Params) => {
+const Blogs = ({ searchParams }: Params) => {
   const searchInput = searchParams.search;
   const selectedTags = new Set<string>(getTagsFromSearchParams(searchParams));
 
-  // console.log("tags", tags, typeof searchParams.tags);
-  // console.log("searchParams.tags", searchParams.tags, typeof searchParams.tags);
-  // console.log("selectedTags", selectedTags);
   return (
     <div className="bg-primary mt-4 flex w-full flex-1 flex-col items-center justify-start gap-4">
-      <div>{searchParams.search}</div>
-      <div>{searchParams.tags}</div>
-      <div>{selectedTags}</div>
       <BlogSearch />
       <div className="flex w-full flex-wrap items-center justify-start gap-2">
         <span className="text-light-medium dark:text-dark-medium">
@@ -123,29 +130,14 @@ const Blogs = ({ params, searchParams }: Params) => {
             <BlogTag
               key={tag}
               label={tag}
-              state={getFilterState(selectedTags, tag)}
+              state={getTagState(selectedTags, tag)}
             />
           );
         })}
       </div>
       <div className="mt-4 flex w-full flex-wrap items-stretch justify-center gap-4">
-        {ALL_BLOGS.filter(({ title }) => {
-          if (!searchInput) return true;
-          return title.toLowerCase().includes(searchInput.toLowerCase());
-        })
-          .filter(({ tags }) => {
-            if (selectedTags.size !== 0) {
-              return Array.from(selectedTags).every((tag) =>
-                tags?.includes(tag)
-              );
-            }
-            return true;
-
-            // if (selectedTags.length !== 0) {
-            //   // TODO : optimize?
-            //   return selectedTags.every((tag) => tags?.includes(tag));
-            // }
-          })
+        {ALL_BLOGS.filter((blog) => includesTitle(blog, searchInput))
+          .filter((blog) => includesTags(blog, selectedTags))
           .map(({ slug, title, imageSrc, date, tags }) => (
             <>
               <BlogPost
