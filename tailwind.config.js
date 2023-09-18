@@ -73,8 +73,8 @@ module.exports = {
       textColor: ({ theme }) => ({
         light: {
           DEFAULT: theme("colors.primary[900]"),
-          medium: theme("colors.primary[700]"),
-          disabled: theme("colors.primary[600]"),
+          medium: theme("colors.primary[600]"),
+          disabled: theme("colors.primary[500]"),
         },
         dark: {
           DEFAULT: theme("colors.white"),
