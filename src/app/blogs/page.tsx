@@ -16,6 +16,9 @@ const formatTags = (tags: string[] | undefined): string[] => {
   return tags?.map(formatTag) || [];
 };
 
+/**
+ * List of blogs, with tags formatted (no trailing whitespace or line terminator characters).
+ */
 const ALL_BLOGS = allBlogs.map((blog) => {
   return { ...blog, tags: formatTags(blog.tags) };
 });
@@ -33,6 +36,9 @@ const getAllTags = (): string[] => {
   return Array.from(tags);
 };
 
+/**
+ * List (with no duplicates) of all the tags found from all the blog posts.
+ */
 const ALL_TAGS = getAllTags();
 
 /**
@@ -55,56 +61,43 @@ const getTagsFromSearchParams = (searchParams: SearchParams): string[] => {
 /**
  * Determines if there is at least one blog that contains all the selected tags.
  */
-const blogExistsWithTags = (selectedTags: Set<string>): boolean => {
-  const selectedTagsList = Array.from(selectedTags);
-
-  return ALL_BLOGS.some((blog) => {
-    const blogTags = new Set(blog.tags);
-    return selectedTagsList.every((tag) => blogTags.has(tag));
-  });
-};
-
-const blogHasAllTags = (blog: Blog, selectedTags: Set<string>): boolean => {
-  const blogTags = new Set(blog.tags);
-  return Array.from(selectedTags).every((tag) => blogTags.has(tag));
+const anyBlogExistsWithAllTags = (selectedTags: string[]): boolean => {
+  return ALL_BLOGS.some((blog) => blogIncludesAllTags(blog, selectedTags));
 };
 
 /**
  * Determines the state of a given tag.
  */
-const getTagState = (selectedTags: Set<string>, tag: string): TagState => {
-  if (selectedTags.has(tag)) {
+const getTagState = (selectedTags: string[], tag: string): TagState => {
+  // If the tag is already selected, it is active.
+  if (selectedTags.includes(tag)) {
     return "active";
   }
 
-  // Check if there is a blog post that would have all the selected tags *in addition* to the new tag
-  const newSet = new Set(selectedTags);
-  newSet.add(tag);
-
-  if (blogExistsWithTags(newSet)) {
+  // Check if there is a blog post that would have all the selected tags *in addition* to the new tag.
+  // If so, it should be in a neutral state because it can be used to further filter the blogs.
+  if (anyBlogExistsWithAllTags([...selectedTags, tag])) {
     return "neutral";
   }
 
+  // Otherwise, disable the tag because it would not result in any blogs.
   return "disabled";
 };
 
 /**
  * Determines if a blog's title includes a given text (case insensitive).
  */
-const includesTitle = (blog: Blog, text: string | undefined): boolean => {
+const blogIncludesText = (blog: Blog, text: string | undefined): boolean => {
   if (!text) return true;
-
   return blog.title.toLowerCase().includes(text.toLowerCase());
 };
 
 /**
  * Determines if a blog includes all the selected tags.
  */
-const includesTags = (blog: Blog, selectedTags: Set<string>): boolean => {
-  if (selectedTags.size === 0) return true;
-
-  const tags = new Set<string>(blog.tags);
-  return Array.from(selectedTags).every((tag) => tags.has(tag));
+const blogIncludesAllTags = (blog: Blog, selectedTags: string[]): boolean => {
+  if (selectedTags.length === 0) return true;
+  return selectedTags.every((tag) => blog.tags?.includes(tag));
 };
 
 type SearchParams = {
@@ -116,7 +109,8 @@ type Params = { searchParams: SearchParams };
 
 const Blogs = ({ searchParams }: Params) => {
   const searchInput = searchParams.search;
-  const selectedTags = new Set<string>(getTagsFromSearchParams(searchParams));
+  const selectedTags = getTagsFromSearchParams(searchParams);
+  const selectedTagsSet = new Set<string>(selectedTags);
 
   return (
     <div className="bg-primary mt-4 flex w-full flex-1 flex-col items-center justify-start gap-4">
@@ -136,8 +130,8 @@ const Blogs = ({ searchParams }: Params) => {
         })}
       </div>
       <div className="mt-4 flex w-full flex-wrap items-stretch justify-center gap-4">
-        {ALL_BLOGS.filter((blog) => includesTitle(blog, searchInput))
-          .filter((blog) => includesTags(blog, selectedTags))
+        {ALL_BLOGS.filter((blog) => blogIncludesText(blog, searchInput))
+          .filter((blog) => blogIncludesAllTags(blog, selectedTags))
           .map(({ slug, title, imageSrc, date, tags }) => (
             <>
               <BlogPost
@@ -148,11 +142,11 @@ const Blogs = ({ searchParams }: Params) => {
                 date={parseISO(date)}
                 views={1245252}
               />
-              <div>
+              {/* <div>
                 {tags?.map((tag, index) => (
                   <li key={index}>{tag}</li>
                 ))}
-              </div>
+              </div> */}
             </>
           ))}
       </div>
