@@ -1,0 +1,17 @@
+pre[data-theme="light"] {
+  display: block;
+  background-color: theme("colors.white");
+}
+
+pre[data-theme="dark"] {
+  display: none;
+}
+
+.dark pre[data-theme="light"] {
+  display: none;
+}
+
+.dark pre[data-theme="dark"] {
+  display: block;
+  background-color: theme("colors.primary.900");
+}

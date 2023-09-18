@@ -1,6 +1,6 @@
 import Header from "@/components/layout/header";
 import "./globals.css";
-import { Quicksand, Space_Mono, Work_Sans } from "next/font/google";
+import { Space_Mono, Work_Sans } from "next/font/google";
 import { SOCIAL_MEDIA } from "@/constants/profile";
 import SocialLink from "@/components/social-link";
 import Footer from "@/components/layout/footer";

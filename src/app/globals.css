@@ -1,9 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "./syntax-highlighting.css";
 
 :root {
   --scrollbar: #adb0c2;
+  font-variant-ligatures: none;
 }
 
 .dark {

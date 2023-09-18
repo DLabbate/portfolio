@@ -1,4 +1,5 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import rehypePrettyCode, { Options } from "rehype-pretty-code";
 
 export const Project = defineDocumentType(() => ({
   name: "Project",
@@ -38,7 +39,18 @@ export const Blog = defineDocumentType(() => ({
   },
 }));
 
+const rehypePrettyCodeOptions: Partial<Options> = {
+  theme: {
+    dark: "material-theme-palenight",
+    light: "material-theme-lighter",
+  },
+  keepBackground: false,
+};
+
 export default makeSource({
   contentDirPath: "content",
   documentTypes: [Project, Blog],
+  mdx: {
+    rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions]],
+  },
 });
