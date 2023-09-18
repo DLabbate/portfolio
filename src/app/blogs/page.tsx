@@ -1,7 +1,7 @@
 import { Blog, allBlogs } from "contentlayer/generated";
 import { parseISO } from "date-fns";
-import BlogSearch from "@/components/forms/blog-search";
-import BlogTag, { TagState } from "@/components/forms/blog-tag";
+import BlogSearch from "@/components/blog-search";
+import BlogTag, { TagState } from "@/components/blog-tag";
 import BlogPost from "@/components/blog";
 
 /**
@@ -110,7 +110,6 @@ type Params = { searchParams: SearchParams };
 const Blogs = ({ searchParams }: Params) => {
   const searchInput = searchParams.search;
   const selectedTags = getTagsFromSearchParams(searchParams);
-  const selectedTagsSet = new Set<string>(selectedTags);
 
   return (
     <div className="bg-primary mt-4 flex w-full flex-1 flex-col items-center justify-start gap-4">
@@ -132,22 +131,15 @@ const Blogs = ({ searchParams }: Params) => {
       <div className="mt-4 flex w-full flex-wrap items-stretch justify-center gap-4">
         {ALL_BLOGS.filter((blog) => blogIncludesText(blog, searchInput))
           .filter((blog) => blogIncludesAllTags(blog, selectedTags))
-          .map(({ slug, title, imageSrc, date, tags }) => (
-            <>
-              <BlogPost
-                key={slug}
-                slug={slug}
-                title={title}
-                image={imageSrc}
-                date={parseISO(date)}
-                views={1245252}
-              />
-              {/* <div>
-                {tags?.map((tag, index) => (
-                  <li key={index}>{tag}</li>
-                ))}
-              </div> */}
-            </>
+          .map(({ slug, title, imageSrc, date }) => (
+            <BlogPost
+              key={slug}
+              slug={slug}
+              title={title}
+              image={imageSrc}
+              date={parseISO(date)}
+              views={1245252}
+            />
           ))}
       </div>
     </div>

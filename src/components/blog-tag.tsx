@@ -7,17 +7,16 @@ export type TagState = "active" | "disabled" | "neutral";
 
 type Props = {
   label: string;
-  active?: boolean;
   state: TagState;
 };
 
 const VARIANTS: Record<TagState, string> = {
   active:
-    "cursor-pointer bg-primary-100 dark:bg-primary-800 text-light dark:text-dark",
+    "cursor-pointer bg-primary-100 text-light dark:bg-primary-800 dark:text-dark",
   disabled:
-    "cursor-not-allowed text-light-disabled dark:text-dark-disabled border-primary-100 dark:border-primary-400 dark:border-primary-900",
+    "cursor-not-allowed border-primary-100 text-light-disabled dark:border-primary-900 dark:text-dark-disabled",
   neutral:
-    "cursor-pointer bg-white bg-primary-900 text-light-medium dark:text-dark-medium bg-white hover:bg-primary-100 dark:hover:bg-primary-800 dark:bg-primary-900",
+    "cursor-pointer bg-white text-light-medium hover:bg-primary-100 hover:text-light dark:bg-primary-900 dark:text-dark-medium dark:hover:bg-primary-800 dark:hover:text-dark",
 };
 
 const BlogTag = ({ label, state }: Props) => {
@@ -31,12 +30,12 @@ const BlogTag = ({ label, state }: Props) => {
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
 
-      const before = params.getAll(name);
-      if (before.includes(value)) {
+      const values = params.getAll(name);
+      if (values.includes(value)) {
         // Delete only the specific value
         // E.g. tags="Next.js"&tags="TailwindCSS" should become tags="Next.js" after removing "TailwindCSS"
         params.delete(name);
-        before.forEach((item) => {
+        values.forEach((item) => {
           if (item !== value) params.append(name, item);
         });
       } else {
