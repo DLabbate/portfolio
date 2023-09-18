@@ -1,6 +1,6 @@
 import Header from "@/components/layout/header";
 import "./globals.css";
-import { Space_Mono, Work_Sans } from "next/font/google";
+import { Quicksand, Space_Mono, Work_Sans } from "next/font/google";
 import { SOCIAL_MEDIA } from "@/constants/profile";
 import SocialLink from "@/components/social-link";
 import Footer from "@/components/layout/footer";
@@ -11,10 +11,10 @@ export const metadata = {
   description: "Computer Engineer Portfolio",
 };
 
-const quicksand = Work_Sans({
+const workSans = Work_Sans({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-quicksand",
+  variable: "--font-work-sans",
   weight: "400",
 });
 
@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${quicksand.variable} ${spaceMono.variable} font-sans`}
+      className={`${workSans.variable} ${spaceMono.variable} font-sans`}
       suppressHydrationWarning
     >
       <body className="flex min-h-screen flex-col items-center bg-primary-50 text-light dark:bg-primary-950 dark:text-dark">

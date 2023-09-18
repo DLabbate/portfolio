@@ -29,7 +29,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-quicksand)"],
+        sans: ["var(--font-work-sans)"],
         mono: ["var(--font-spacemono)"],
       },
       typography: ({ theme }) => ({
