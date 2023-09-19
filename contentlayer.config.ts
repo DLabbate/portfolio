@@ -1,5 +1,7 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import rehypePrettyCode, { Options } from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
+import GithubSlugger from "github-slugger";
 
 export const Project = defineDocumentType(() => ({
   name: "Project",
@@ -36,6 +38,25 @@ export const Blog = defineDocumentType(() => ({
       type: "string",
       resolve: (project) => project._raw.sourceFileName.replace(".mdx", ""),
     },
+    headings: {
+      type: "json",
+      resolve: async (doc) => {
+        const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
+        const slugger = new GithubSlugger();
+        const headings = Array.from(doc.body.raw.matchAll(regXHeader)).map(
+          ({ groups }) => {
+            const flag = groups?.flag;
+            const content = groups?.content;
+            return {
+              level: flag?.length,
+              text: content,
+              slug: content ? slugger.slug(content) : undefined,
+            };
+          }
+        );
+        return headings;
+      },
+    },
   },
 }));
 
@@ -51,6 +72,6 @@ export default makeSource({
   contentDirPath: "content",
   documentTypes: [Project, Blog],
   mdx: {
-    rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions]],
+    rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions], [rehypeSlug]],
   },
 });

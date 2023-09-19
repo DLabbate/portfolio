@@ -28,7 +28,7 @@ const Blog = ({ slug, title, image, date, views }: Blog) => {
           <span className="whitespace-nowrap text-lg dark:text-dark-medium">
             {format(date, "MMMM d, yyyy")}
           </span>
-          <div className="flex h-auto justify-end align-top text-sm">
+          <div className="flex h-auto justify-end align-top">
             <ViewCounter views={12345} />
           </div>
           <div className="col-span-2 text-3xl">{title}</div>

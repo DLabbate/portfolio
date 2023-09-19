@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${workSans.variable} ${spaceMono.variable} font-sans`}
+      className={`${workSans.variable} ${spaceMono.variable} scroll-smooth font-sans`}
       suppressHydrationWarning
     >
       <body className="flex min-h-screen flex-col items-center bg-primary-50 text-light dark:bg-primary-950 dark:text-dark">
