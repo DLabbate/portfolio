@@ -12,6 +12,7 @@ module.exports = {
         timeline: "auto 1fr auto",
         "timeline-small": "auto 1fr",
         accomplishment: "1fr auto",
+        "blog-page": "1fr auto",
       },
       colors: {
         primary: {

@@ -1,4 +1,5 @@
 import { Mdx } from "@/components/mdx";
+import ViewCounter from "@/components/views";
 import { allBlogs } from "contentlayer/generated";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -22,21 +23,11 @@ const BlogPost = ({ params }: { params: { slug: string } }) => {
   if (!blog) return notFound();
 
   return (
-    <div className="w-full max-w-5xl items-center gap-8">
-      <h1 className="text-4xl font-bold">{blog.title}</h1>
-      {/* <Image
-        priority
-        src={blog.imageSrc}
-        width={800}
-        height={400}
-        className="rounded-lg"
-        alt={blog.title}
-      /> */}
-
-      <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+    <div className="flex w-full max-w-5xl flex-col items-start gap-8 lg:grid lg:grid-cols-blog-page">
+      <h1 className="col-span-2 text-4xl font-bold">{blog.title}</h1>
+      <div className="relative col-span-2 aspect-[3/2] w-full overflow-hidden rounded-lg">
         <Image priority src={blog.imageSrc} fill alt={blog.title} />
       </div>
-
       <div className="flex flex-col gap-2 self-start">
         <span className="text-light-medium dark:text-dark-medium">
           Published: April 17, 1998
@@ -45,7 +36,32 @@ const BlogPost = ({ params }: { params: { slug: string } }) => {
           Last Edited: April 17, 1998
         </span>
       </div>
+      <div className="justify-start lg:flex lg:w-full lg:justify-end">
+        <ViewCounter views={1001} />
+      </div>
       <Mdx code={blog.body.code} />
+      <div className="hidden lg:sticky lg:top-32 lg:flex lg:w-full lg:flex-col lg:items-start lg:gap-1">
+        <span>Table of Contents</span>
+
+        {[1, 1, 1, 2, 2, 2, 3, 3, 1, 2, 2, 2, 3, 3, 4].map((item) => {
+          const margins: Record<number, string> = {
+            1: "ml-0",
+            2: "ml-4",
+            3: "ml-8",
+            4: "ml-12",
+            5: "ml-16",
+            6: "ml-20",
+          };
+          return (
+            <a
+              key={item}
+              className={`inline-block cursor-pointer text-light-medium transition duration-100 hover:text-light dark:text-dark-medium dark:hover:text-dark ${margins[item]}`}
+            >
+              Heading {item}
+            </a>
+          );
+        })}
+      </div>
     </div>
   );
 };
