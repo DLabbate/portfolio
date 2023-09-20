@@ -1,9 +1,29 @@
 "use client";
 
 import clsx from "clsx";
-import Link from "next/link";
 import { useEffect, useState } from "react";
-import { ArrowUpCircle, ArrowUpRight } from "react-feather";
+import { ArrowUpRight, ArrowUpCircle, Icon } from "react-feather";
+
+type AdditionalLinkProps = {
+  href: string;
+  text: string;
+  icon: Icon;
+};
+
+const AdditionalLink = ({ href, text, icon: Icon }: AdditionalLinkProps) => {
+  return (
+    <a
+      href={href}
+      className="group flex items-center gap-2 text-light-medium hover:text-light dark:text-dark-medium dark:hover:text-dark"
+    >
+      {text}
+      <Icon
+        className="stroke-light-medium group-hover:stroke-light dark:stroke-dark-medium dark:group-hover:stroke-dark"
+        size={16}
+      />
+    </a>
+  );
+};
 
 export type Heading = {
   level: number;
@@ -15,6 +35,7 @@ type Props = {
   headings: Heading[];
 };
 
+// Used to have different levels of indentation depending on the heading (e.g. h1 vs. h2 vs. h3)
 const MARGINS: Record<number, string> = {
   1: "ml-0",
   2: "ml-0",
@@ -80,27 +101,17 @@ const TableOfContents = ({ headings }: Props) => {
           </a>
         );
       })}
-      <hr className="mb-4 mt-4 w-full bg-primary-400 dark:border-primary-800" />
-      <a
-        href={"https://github.com/DLabbate/portfolio/tree/master/content"}
-        className="group flex items-center gap-2 text-light-medium dark:text-dark-medium dark:hover:text-dark"
-      >
-        Edit on GitHub
-        <ArrowUpRight
-          className="stroke-light-medium group-hover:stroke-light dark:stroke-dark-medium dark:group-hover:stroke-dark"
-          size={16}
-        />
-      </a>
-      <a
+      <hr className="mb-4 mt-4 w-full border-primary-200 dark:border-primary-800" />
+      <AdditionalLink
+        href="https://github.com/DLabbate/portfolio/tree/master/content"
+        text="Edit on GitHub"
+        icon={ArrowUpRight}
+      />
+      <AdditionalLink
         href={`#${headings[0].slug}`}
-        className="group flex items-center gap-2 text-light-medium dark:text-dark-medium dark:hover:text-dark"
-      >
-        Scroll to top
-        <ArrowUpCircle
-          className="stroke-light-medium group-hover:stroke-light dark:stroke-dark-medium dark:group-hover:stroke-dark"
-          size={16}
-        />
-      </a>
+        text="Scroll to top"
+        icon={ArrowUpCircle}
+      />
     </div>
   );
 };
