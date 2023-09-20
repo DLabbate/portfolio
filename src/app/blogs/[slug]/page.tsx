@@ -23,7 +23,6 @@ const BlogPost = ({ params }: { params: { slug: string } }) => {
   const blog = findBlogBySlug(params.slug);
   if (!blog) return notFound();
 
-  console.log(blog.headings);
   return (
     <div className="flex w-full max-w-5xl flex-col items-start gap-8 lg:grid lg:grid-cols-blog-page">
       <h1 className="col-span-2 text-4xl font-bold">{blog.title}</h1>
