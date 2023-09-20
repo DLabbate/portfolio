@@ -83,21 +83,21 @@ const TableOfContents = ({ headings }: Props) => {
       <hr className="mb-4 mt-4 w-full bg-primary-400 dark:border-primary-800" />
       <a
         href={"https://github.com/DLabbate/portfolio/tree/master/content"}
-        className="flex items-center gap-2 text-light-medium dark:text-dark-medium"
+        className="group flex items-center gap-2 text-light-medium dark:text-dark-medium dark:hover:text-dark"
       >
         Edit on GitHub
         <ArrowUpRight
-          className="stroke-light dark:stroke-dark-medium"
+          className="stroke-light-medium group-hover:stroke-light dark:stroke-dark-medium dark:group-hover:stroke-dark"
           size={16}
         />
       </a>
       <a
         href={`#${headings[0].slug}`}
-        className="flex items-center gap-2 text-light-medium dark:text-dark-medium"
+        className="group flex items-center gap-2 text-light-medium dark:text-dark-medium dark:hover:text-dark"
       >
         Scroll to top
         <ArrowUpCircle
-          className="stroke-light dark:stroke-dark-medium"
+          className="stroke-light-medium group-hover:stroke-light dark:stroke-dark-medium dark:group-hover:stroke-dark"
           size={16}
         />
       </a>
