@@ -26,3 +26,25 @@
   /* To account for the header */
   scroll-margin-top: 6rem;
 }
+
+/* Anchor Headings */
+.prose .anchor {
+  @apply invisible absolute no-underline;
+
+  margin-left: -1em;
+  width: 100%;
+  cursor: pointer;
+}
+
+.anchor:hover {
+  visibility: visible;
+}
+
+.prose .anchor:after {
+  @apply text-primary-200 dark:text-primary-700;
+  content: "#";
+}
+
+.prose *:hover > .anchor {
+  @apply visible;
+}

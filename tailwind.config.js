@@ -86,7 +86,7 @@ module.exports = {
       stroke: ({ theme }) => ({
         light: {
           DEFAULT: theme("colors.primary[900]"),
-          medium: theme("colors.primary[500]"),
+          medium: theme("colors.primary[600]"),
         },
         dark: {
           DEFAULT: theme("colors.white"),
