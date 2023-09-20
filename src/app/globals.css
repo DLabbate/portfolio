@@ -23,5 +23,6 @@
 }
 
 :is(h1, h2, h3, h4, h5, h6) {
+  /* To account for the header */
   scroll-margin-top: 6rem;
 }
