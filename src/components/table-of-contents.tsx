@@ -1,6 +1,9 @@
 "use client";
 
+import clsx from "clsx";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ArrowUpCircle, ArrowUpRight } from "react-feather";
 
 export type Heading = {
   level: number;
@@ -21,17 +24,6 @@ const MARGINS: Record<number, string> = {
   6: "ml-16",
 };
 
-const isElementInViewport = (el: HTMLElement) => {
-  const rect = el.getBoundingClientRect();
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-  );
-};
-
 // https://stackoverflow.com/questions/45514676/react-check-if-element-is-visible-in-dom
 const isInViewport = (el: HTMLElement, offset = 0): boolean => {
   if (!el) return false;
@@ -39,72 +31,32 @@ const isInViewport = (el: HTMLElement, offset = 0): boolean => {
   return top + offset >= 0 && top - offset <= window.innerHeight;
 };
 
-// const Heading = ({ slug, text, level }: Heading) => {
-//   const [active, setActive] = useState(false);
-
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       const element = document.getElementById(slug);
-
-//       if (element && isElementInViewport(element)) {
-//         setActive(true);
-//       } else {
-//         setActive(false);
-//       }
-//     };
-
-//     handleScroll();
-
-//     document.addEventListener("scroll", handleScroll);
-
-//     return () => {
-//       document.removeEventListener("scroll", handleScroll);
-//     };
-//   }, [slug]);
-
-//   return (
-//     <a
-//       key={slug}
-//       href={`#${slug}`}
-//       className={`inline-block cursor-pointer transition duration-150 hover:font-semibold hover:text-indigo-500 dark:hover:text-indigo-500 ${
-//         MARGINS[level]
-//       } ${
-//         active
-//           ? "font-semibold text-indigo-500 dark:text-indigo-500"
-//           : "text-light-medium dark:text-dark-medium"
-//       }`}
-//     >
-//       {text}
-//     </a>
-//   );
-// };
-
 const TableOfContents = ({ headings }: Props) => {
   const [activeSlug, setActiveSlug] = useState("");
 
   useEffect(() => {
-    const handleScroll2 = () => {
-      const headingElements = headings.map(({ slug }) =>
-        document.getElementById(slug)
+    const handleScroll = () => {
+      const headingElements: HTMLElement[] = headings.map(
+        ({ slug }) => document.getElementById(slug) as HTMLElement
       );
 
       const visibleHeadings = headingElements.filter(
+        // Offset of 96px to account for the header
         (el) => el && isInViewport(el, -96)
       );
 
-      console.log(visibleHeadings);
-
-      if (visibleHeadings && visibleHeadings.length >= 1) {
-        if (visibleHeadings[0]) setActiveSlug(visibleHeadings[0].id);
+      if (visibleHeadings.length >= 1) {
+        setActiveSlug(visibleHeadings[0].id);
       }
     };
 
-    handleScroll2();
+    // Execute on first render
+    handleScroll();
 
-    document.addEventListener("scroll", handleScroll2);
+    document.addEventListener("scroll", handleScroll);
 
     return () => {
-      document.removeEventListener("scroll", handleScroll2);
+      document.removeEventListener("scroll", handleScroll);
     };
   }, [headings]);
 
@@ -113,31 +65,42 @@ const TableOfContents = ({ headings }: Props) => {
       <span className="text-lg font-bold">Table of Contents</span>
       {headings.map(({ slug, level, text }) => {
         return (
-          //   <a
-          //     key={slug}
-          //     href={`#${slug}`}
-          //     className={`inline-block cursor-pointer text-light-medium transition duration-100 hover:text-light dark:text-dark-medium dark:hover:text-dark ${MARGINS[level]}`}
-          //   >
-          //     {text}
-          //   </a>
-
-          // <Heading key={slug} slug={slug} level={level} text={text} />
-
           <a
             key={slug}
             href={`#${slug}`}
-            className={`inline-block cursor-pointer transition duration-150 hover:font-semibold hover:text-indigo-500 dark:hover:text-indigo-500 ${
-              MARGINS[level]
-            } ${
-              activeSlug == slug
+            className={clsx(
+              "inline-block cursor-pointer hover:font-semibold hover:text-indigo-500 dark:hover:text-indigo-500",
+              MARGINS[level],
+              activeSlug === slug
                 ? "font-semibold text-indigo-500 dark:text-indigo-500"
                 : "text-light-medium dark:text-dark-medium"
-            }`}
+            )}
           >
             {text}
           </a>
         );
       })}
+      <hr className="mb-4 mt-4 w-full bg-primary-400 dark:border-primary-800" />
+      <a
+        href={"https://github.com/DLabbate/portfolio/tree/master/content"}
+        className="flex items-center gap-2 text-light-medium dark:text-dark-medium"
+      >
+        Edit on GitHub
+        <ArrowUpRight
+          className="stroke-light dark:stroke-dark-medium"
+          size={16}
+        />
+      </a>
+      <a
+        href={`#${headings[0].slug}`}
+        className="flex items-center gap-2 text-light-medium dark:text-dark-medium"
+      >
+        Scroll to top
+        <ArrowUpCircle
+          className="stroke-light dark:stroke-dark-medium"
+          size={16}
+        />
+      </a>
     </div>
   );
 };

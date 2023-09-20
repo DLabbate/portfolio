@@ -27,7 +27,13 @@ const BlogPost = ({ params }: { params: { slug: string } }) => {
     <div className="flex w-full max-w-5xl flex-col items-start gap-8 lg:grid lg:grid-cols-blog-page">
       <h1 className="col-span-2 text-4xl font-bold">{blog.title}</h1>
       <div className="relative col-span-2 aspect-[3/2] w-full overflow-hidden rounded-lg">
-        <Image priority src={blog.imageSrc} fill alt={blog.title} />
+        <Image
+          priority
+          src={blog.imageSrc}
+          fill
+          alt={blog.title}
+          sizes="(max-width: 1024px) 100vw, 1024px"
+        />
       </div>
       <div className="flex flex-col gap-2 self-start">
         <span className="text-light-medium dark:text-dark-medium">
