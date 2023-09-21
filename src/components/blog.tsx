@@ -8,9 +8,10 @@ type Blog = {
   title: string;
   image: string;
   date: Date;
+  views: number;
 };
 
-const Blog = ({ slug, title, image, date }: Blog) => {
+const Blog = ({ slug, title, image, date, views }: Blog) => {
   return (
     <div className="w-full cursor-pointer rounded-xl p-4 transition duration-200 hover:bg-white hover:shadow hover:ring-1 hover:ring-primary-200 dark:hover:bg-primary-900 dark:hover:ring-1 dark:hover:ring-primary-800 md:w-[calc(100%/2-1rem/2)] xl:w-[calc(100%/3-2*1rem/3)]">
       <Link href={`/blogs/${slug}`} className="block h-full w-full">
@@ -28,7 +29,7 @@ const Blog = ({ slug, title, image, date }: Blog) => {
             {format(date, "MMMM d, yyyy")}
           </span>
           <div className="flex h-auto justify-end align-top">
-            <ViewCounter views={12345} />
+            <ViewCounter views={views} />
           </div>
           <div className="col-span-2 text-3xl">{title}</div>
         </div>

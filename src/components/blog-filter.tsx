@@ -1,40 +1,43 @@
 "use client";
 
 import clsx from "clsx";
-import { useEffect, useRef, useState } from "react";
+import { Blog } from "contentlayer/generated";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Calendar, Eye, Filter, Icon } from "react-feather";
 
 type Filter = {
+  query: string;
   text: string;
   icon: Icon;
 };
 
 const FILTERS: Filter[] = [
   {
+    query: "date-desc",
     text: "Date (Newest to Oldest)",
     icon: Calendar,
   },
   {
+    query: "date-asc",
     text: "Date (Oldest to Newest)",
     icon: Calendar,
   },
   {
+    query: "views-asc",
     text: "Views (Low to High)",
     icon: Eye,
   },
   {
+    query: "views-desc",
     text: "Views (High to Low)",
     icon: Eye,
   },
 ];
 
-const FilterItem = ({
-  text,
-  icon: Icon,
-  className,
-}: Filter & { className?: string }) => {
+const FilterItem = ({ text, icon: Icon }: Filter) => {
   return (
-    <div className={clsx("flex items-center gap-2", className)}>
+    <div className="flex items-center gap-2">
       <Icon strokeWidth={1} />
       {text}
     </div>
@@ -44,6 +47,26 @@ const FilterItem = ({
 const BlogFilter = () => {
   const [selected, setSelected] = useState(FILTERS[0]);
   const [open, setOpen] = useState<boolean>(false);
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  // Get a new searchParams string by merging the current
+  // searchParams with a provided key/value pair
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (value) {
+        params.set(name, value);
+      } else {
+        params.delete(name, value);
+      }
+
+      return params.toString();
+    },
+    [searchParams]
+  );
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -72,64 +95,28 @@ const BlogFilter = () => {
   });
 
   useEffect(() => {
-    console.log(open);
-  }, [open]);
+    //console.log(open);
+    router.push(pathname + "?" + createQueryString("sortBy", selected.query));
+  }, [createQueryString, pathname, router, selected]);
 
   return (
-    // <div>
-    //   <div className="relative z-50 flex w-96 items-center gap-2">
-    //     <span className="whitespace-nowrap text-light-medium dark:text-dark-medium">
-    //       Sort By
-    //     </span>
-
-    //     <div
-    //       className={clsx(
-    //         "h-auto w-full cursor-pointer rounded-lg border border-primary-200 bg-white p-2 text-light-medium dark:border-primary-800 dark:bg-primary-900 dark:text-dark-medium",
-    //         open &&
-    //           "ring-2 ring-inset ring-primary-100 dark:ring-primary-800 dark:placeholder:text-dark-medium"
-    //       )}
-    //       onClick={() => setOpen(!open)}
-    //     >
-    //       {selected.text}
-    //     </div>
-    //     {open && (
-    //       <div className="absolute top-12 flex w-full flex-col divide-y overflow-hidden rounded-lg border border-primary-200 bg-white text-light-medium dark:divide-primary-800 dark:border-primary-800 dark:bg-primary-900 dark:text-dark-medium">
-    //         {FILTERS.map((item) => (
-    //           <span
-    //             className="inline-block flex-1 cursor-pointer p-2 dark:hover:bg-primary-800 dark:hover:text-dark"
-    //             key={item.text}
-    //             onClick={() => setSelected(item)}
-    //           >
-    //             {item.text}
-    //           </span>
-    //         ))}
-    //       </div>
-    //     )}
-    //   </div>
-    // </div>
-
     <div>
       <div className="z-40 flex w-96 items-center gap-2 text-light-medium dark:text-dark-medium">
-        <span className="whitespace-nowrap text-light-medium dark:text-dark-medium">
-          Sort By
-        </span>
+        <span className="whitespace-nowrap">Sort By</span>
         <div className="relative z-40 flex-1">
           <div
             className={clsx(
               "flex h-auto w-full cursor-pointer gap-2 rounded-lg border border-primary-200 bg-white p-2 dark:border-primary-800 dark:bg-primary-900",
               open && "ring-2 ring-inset ring-primary-100 dark:ring-primary-800"
             )}
-            onClick={(e) => {
-              setOpen(!open);
-            }}
+            onClick={() => setOpen(!open)}
           >
-            <FilterItem text={selected.text} icon={selected.icon} />
+            <FilterItem {...selected} />
           </div>
-
           <div
             ref={dropdownRef}
             className={clsx(
-              "absolute top-12 flex w-full flex-col divide-y overflow-hidden rounded-lg border border-primary-200 bg-white text-light-medium shadow dark:divide-primary-800 dark:border-primary-800 dark:bg-primary-900 dark:text-dark-medium",
+              "absolute top-12 flex w-full flex-col divide-y divide-primary-100 overflow-hidden rounded-lg border border-primary-200 bg-white shadow dark:divide-primary-800 dark:border-primary-800 dark:bg-primary-900",
               !open && "hidden"
             )}
           >
@@ -137,8 +124,9 @@ const BlogFilter = () => {
               return (
                 <div
                   className={clsx(
-                    "flex-1 cursor-pointer p-2 dark:hover:bg-primary-800 dark:hover:text-dark",
-                    selected === item && "bg-primary-800 text-dark"
+                    "flex-1 cursor-pointer p-2 hover:bg-primary-100 hover:text-light dark:hover:bg-primary-800 dark:hover:text-dark",
+                    selected === item &&
+                      "bg-primary-100 text-light dark:bg-primary-800 dark:text-dark"
                   )}
                   key={item.text}
                   onClick={() => {
