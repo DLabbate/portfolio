@@ -1,9 +1,8 @@
 "use client";
 
+import { useSearchParamsActions } from "@/hooks/use-query-params";
 import clsx from "clsx";
-import { Blog } from "contentlayer/generated";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Calendar, Eye, Filter, Icon } from "react-feather";
 
 type Filter = {
@@ -48,25 +47,7 @@ const BlogFilter = () => {
   const [selected, setSelected] = useState(FILTERS[0]);
   const [open, setOpen] = useState<boolean>(false);
 
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  // Get a new searchParams string by merging the current
-  // searchParams with a provided key/value pair
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      if (value) {
-        params.set(name, value);
-      } else {
-        params.delete(name, value);
-      }
-
-      return params.toString();
-    },
-    [searchParams]
-  );
+  const { setParam } = useSearchParamsActions("sortBy");
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -95,9 +76,8 @@ const BlogFilter = () => {
   });
 
   useEffect(() => {
-    //console.log(open);
-    router.push(pathname + "?" + createQueryString("sortBy", selected.query));
-  }, [createQueryString, pathname, router, selected]);
+    setParam(selected.query);
+  }, [selected, setParam]);
 
   return (
     <div>
