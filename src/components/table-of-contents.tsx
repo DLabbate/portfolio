@@ -35,7 +35,7 @@ type Props = {
   headings: Heading[];
 };
 
-// Used to have different levels of indentation depending on the heading (e.g. h1 vs. h2 vs. h3)
+// Different levels of indentation depending on the heading (e.g. h1 vs. h2 vs. h3)
 const MARGINS: Record<number, string> = {
   1: "ml-0",
   2: "ml-0",

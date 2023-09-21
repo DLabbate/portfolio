@@ -138,7 +138,6 @@ const Blogs = ({ searchParams }: Params) => {
               title={title}
               image={imageSrc}
               date={parseISO(date)}
-              views={1245252}
             />
           ))}
       </div>
