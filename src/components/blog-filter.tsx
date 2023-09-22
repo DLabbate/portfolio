@@ -45,9 +45,9 @@ const FilterItem = ({ text, icon: Icon }: Filter) => {
 };
 
 const BlogFilter = () => {
+  const { setParam } = useSearchParamsActions("sortBy");
   const [selected, setSelected] = useState(FILTERS[0]);
   const [open, setOpen] = useState(false);
-  const { setParam } = useSearchParamsActions("sortBy");
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close the dropdown if a user clicks the Escape button

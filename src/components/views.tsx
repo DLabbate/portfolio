@@ -6,7 +6,7 @@ type Props = {
 
 const ViewCounter = ({ views }: Props) => {
   return (
-    <span className="inline-block w-auto whitespace-nowrap rounded-sm bg-primary-200 p-1 font-mono text-sm dark:bg-primary-800">
+    <span className="inline-block h-fit w-auto whitespace-nowrap rounded-sm bg-primary-200 p-1 font-mono text-sm dark:bg-primary-800">
       {views.toLocaleString("en-US")} Views
     </span>
   );

@@ -24,9 +24,9 @@ const BlogPost = ({ params }: { params: { slug: string } }) => {
   if (!blog) return notFound();
 
   return (
-    <div className="flex w-full max-w-5xl flex-col items-start gap-8 lg:grid lg:grid-cols-blog-page">
-      <h1 className="col-span-2 text-4xl font-bold">{blog.title}</h1>
-      <div className="relative col-span-2 aspect-[3/2] w-full overflow-hidden rounded-lg">
+    <div className="grid w-full max-w-5xl grid-cols-1 gap-8 lg:grid-cols-blog-page">
+      <h1 className="text-4xl font-bold lg:col-span-full">{blog.title}</h1>
+      <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg lg:col-span-full">
         <Image
           priority
           src={blog.imageSrc}
@@ -43,11 +43,13 @@ const BlogPost = ({ params }: { params: { slug: string } }) => {
           Last Edited: April 17, 1998
         </span>
       </div>
-      <div className="justify-start lg:flex lg:w-full lg:justify-end">
+      <div className="flex justify-start lg:flex lg:w-full lg:justify-end">
         <ViewCounter views={1001} />
       </div>
       <Mdx code={blog.body.code} />
-      <TableOfContents headings={blog.headings} />
+      <div className="overflow-clip">
+        <TableOfContents headings={blog.headings} />
+      </div>
     </div>
   );
 };

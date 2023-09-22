@@ -21,8 +21,8 @@ const ProjectPage = ({ params }: { params: { slug: string } }) => {
   if (!project) return notFound();
 
   return (
-    <div>
-      <div className="mb-8 flex flex-col items-center justify-center gap-2">
+    <div className="">
+      <div className="mb-8 grid grid-cols-1 gap-2 overflow-hidden">
         <h1 className="text-4xl font-bold">{project.title}</h1>
         <span className="text-lg italic">{project.subtitle}</span>
       </div>
