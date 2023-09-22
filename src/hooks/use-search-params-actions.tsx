@@ -29,7 +29,7 @@ export const useSearchParamsActions = (name: string) => {
       if (value) {
         params.set(name, value);
       } else {
-        params.delete(name, value);
+        params.delete(name);
       }
 
       setQueryParams(params);

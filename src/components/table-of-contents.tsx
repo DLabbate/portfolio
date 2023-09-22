@@ -1,7 +1,7 @@
 "use client";
 
+import { Heading, useTableOfContents } from "@/hooks/use-table-of-contents";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
 import { ArrowUpRight, ArrowUpCircle, Icon } from "react-feather";
 
 type AdditionalLinkProps = {
@@ -25,16 +25,6 @@ const AdditionalLink = ({ href, text, icon: Icon }: AdditionalLinkProps) => {
   );
 };
 
-export type Heading = {
-  level: number;
-  text: string;
-  slug: string;
-};
-
-type Props = {
-  headings: Heading[];
-};
-
 // Different levels of indentation depending on the heading (e.g. h1 vs. h2 vs. h3)
 const MARGINS: Record<number, string> = {
   1: "ml-0",
@@ -45,41 +35,12 @@ const MARGINS: Record<number, string> = {
   6: "ml-16",
 };
 
-// https://stackoverflow.com/questions/45514676/react-check-if-element-is-visible-in-dom
-const isInViewport = (el: HTMLElement, offset = 0): boolean => {
-  if (!el) return false;
-  const top = el.getBoundingClientRect().top;
-  return top + offset >= 0 && top - offset <= window.innerHeight;
+type TableOfContentsProps = {
+  headings: Heading[];
 };
 
-const TableOfContents = ({ headings }: Props) => {
-  const [activeSlug, setActiveSlug] = useState("");
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const headingElements: HTMLElement[] = headings.map(
-        ({ slug }) => document.getElementById(slug) as HTMLElement
-      );
-
-      const visibleHeadings = headingElements.filter(
-        // Offset of 96px to account for the header
-        (el) => el && isInViewport(el, -96)
-      );
-
-      if (visibleHeadings.length >= 1) {
-        setActiveSlug(visibleHeadings[0].id);
-      }
-    };
-
-    // Execute on first render
-    handleScroll();
-
-    document.addEventListener("scroll", handleScroll);
-
-    return () => {
-      document.removeEventListener("scroll", handleScroll);
-    };
-  }, [headings]);
+const TableOfContents = ({ headings }: TableOfContentsProps) => {
+  const { activeSlug } = useTableOfContents(headings);
 
   return (
     <div className="hidden lg:sticky lg:top-32 lg:flex lg:w-full lg:flex-col lg:items-start lg:gap-1">

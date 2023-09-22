@@ -17,3 +17,12 @@ export const useKeyDown = (handleKeyDown: (event: KeyboardEvent) => void) => {
     };
   });
 };
+
+export const useScroll = (handleScrollEvent: (event: Event) => void) => {
+  useEffect(() => {
+    document.addEventListener("scroll", handleScrollEvent);
+    return () => {
+      document.removeEventListener("scroll", handleScrollEvent);
+    };
+  });
+};
