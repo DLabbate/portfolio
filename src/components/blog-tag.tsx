@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParamsActions } from "@/hooks/use-query-params";
+import { useSearchParamsActions } from "@/hooks/use-search-params-actions";
 import clsx from "clsx";
 
 export type TagState = "active" | "disabled" | "neutral";

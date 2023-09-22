@@ -1,6 +1,7 @@
 "use client";
 
-import { useSearchParamsActions } from "@/hooks/use-query-params";
+import { useKeyDown, useMouseClick } from "@/hooks/use-events";
+import { useSearchParamsActions } from "@/hooks/use-search-params-actions";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { Calendar, Eye, Filter, Icon } from "react-feather";
@@ -45,18 +46,18 @@ const FilterItem = ({ text, icon: Icon }: Filter) => {
 
 const BlogFilter = () => {
   const [selected, setSelected] = useState(FILTERS[0]);
-  const [open, setOpen] = useState<boolean>(false);
-
+  const [open, setOpen] = useState(false);
   const { setParam } = useSearchParamsActions("sortBy");
-
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Close the dropdown if a user clicks the Escape button
   const handleHideDropdown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
       setOpen(false);
     }
   };
 
+  // Close the dropdown if a user clicks outside
   const handleClickOutside = (event: Event) => {
     if (
       dropdownRef.current &&
@@ -66,14 +67,8 @@ const BlogFilter = () => {
     }
   };
 
-  useEffect(() => {
-    document.addEventListener("keydown", handleHideDropdown);
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("keydown", handleHideDropdown);
-      document.removeEventListener("click", handleClickOutside);
-    };
-  });
+  useMouseClick(handleClickOutside);
+  useKeyDown(handleHideDropdown);
 
   useEffect(() => {
     setParam(selected.query);
