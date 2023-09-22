@@ -75,45 +75,43 @@ const BlogFilter = () => {
   }, [selected, setParam]);
 
   return (
-    <div>
-      <div className="z-40 flex w-96 items-center gap-2 text-light-medium dark:text-dark-medium">
-        <span className="whitespace-nowrap">Sort By</span>
-        <div className="relative z-40 flex-1">
-          <div
-            className={clsx(
-              "flex h-auto w-full cursor-pointer gap-2 rounded-lg border border-primary-200 bg-white p-2 transition duration-200 dark:border-primary-800 dark:bg-primary-900",
-              open && "ring-2 ring-inset ring-primary-100 dark:ring-primary-800"
-            )}
-            onClick={() => setOpen(!open)}
-          >
-            <FilterItem {...selected} />
-          </div>
-          <div
-            ref={dropdownRef}
-            className={clsx(
-              "absolute top-12 flex w-full flex-col divide-y divide-primary-100 overflow-hidden rounded-lg border border-primary-200 bg-white shadow dark:divide-primary-800 dark:border-primary-800 dark:bg-primary-900",
-              !open && "hidden"
-            )}
-          >
-            {FILTERS.map((item) => {
-              return (
-                <div
-                  className={clsx(
-                    "flex-1 cursor-pointer p-2 hover:bg-primary-100 hover:text-light dark:hover:bg-primary-800 dark:hover:text-dark",
-                    selected === item &&
-                      "bg-primary-100 text-light dark:bg-primary-800 dark:text-dark"
-                  )}
-                  key={item.text}
-                  onClick={() => {
-                    setSelected(item);
-                    setOpen(false);
-                  }}
-                >
-                  <FilterItem {...item} />
-                </div>
-              );
-            })}
-          </div>
+    <div className="z-40 flex w-96 items-center gap-2 text-light-medium dark:text-dark-medium">
+      <span className="whitespace-nowrap">Sort By</span>
+      <div className="relative z-40 flex-1">
+        <div
+          className={clsx(
+            "flex h-auto w-full cursor-pointer gap-2 rounded-lg border border-primary-200 bg-white p-2 transition duration-200 dark:border-primary-800 dark:bg-primary-900",
+            open && "ring-2 ring-inset ring-primary-100 dark:ring-primary-800"
+          )}
+          onClick={() => setOpen(!open)}
+        >
+          <FilterItem {...selected} />
+        </div>
+        <div
+          ref={dropdownRef}
+          className={clsx(
+            "absolute top-12 flex w-full flex-col divide-y divide-primary-100 overflow-hidden rounded-lg border border-primary-200 bg-white shadow dark:divide-primary-800 dark:border-primary-800 dark:bg-primary-900",
+            !open && "hidden"
+          )}
+        >
+          {FILTERS.map((item) => {
+            return (
+              <div
+                className={clsx(
+                  "flex-1 cursor-pointer p-2 hover:bg-primary-100 hover:text-light dark:hover:bg-primary-800 dark:hover:text-dark",
+                  selected === item &&
+                    "bg-primary-100 text-light dark:bg-primary-800 dark:text-dark"
+                )}
+                key={item.text}
+                onClick={() => {
+                  setSelected(item);
+                  setOpen(false);
+                }}
+              >
+                <FilterItem {...item} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

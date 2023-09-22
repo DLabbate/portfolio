@@ -4,7 +4,6 @@ import BlogSearch from "@/components/blog-search";
 import BlogTag, { TagState } from "@/components/blog-tag";
 import BlogPost from "@/components/blog";
 import BlogFilter from "@/components/blog-filter";
-import { randomInt } from "crypto";
 
 /**
  * Removes the leading and trailing white space and line terminator characters from a tag.
@@ -146,28 +145,26 @@ const Blogs = ({ searchParams }: Params) => {
   const searchInput = searchParams.search;
   const selectedTags = getTagsFromSearchParams(searchParams);
   const sortBy = searchParams.sortBy;
-  console.log(sortBy);
+
   return (
-    <div className="bg-primary mt-4 flex w-full flex-1 flex-col items-center justify-start gap-4">
+    <div className="bg-primary mt-4 flex w-full flex-col gap-4 md:grid md:grid-cols-blogs-page">
       <BlogSearch />
-      <div className="grid grid-cols-blog-filter">
-        <div className="flex w-full flex-wrap items-center justify-start gap-2">
-          <span className="text-light-medium dark:text-dark-medium">
-            Filter by tag:
-          </span>
-          {ALL_TAGS.map((tag) => {
-            return (
-              <BlogTag
-                key={tag}
-                label={tag}
-                state={getTagState(selectedTags, tag)}
-              />
-            );
-          })}
-        </div>
-        <BlogFilter />
+      <BlogFilter />
+      <div className="col-span-full flex w-full flex-wrap items-center justify-start gap-2">
+        <span className="text-light-medium dark:text-dark-medium">
+          Filter By Tag
+        </span>
+        {ALL_TAGS.map((tag) => {
+          return (
+            <BlogTag
+              key={tag}
+              label={tag}
+              state={getTagState(selectedTags, tag)}
+            />
+          );
+        })}
       </div>
-      <div className="mt-4 flex w-full flex-wrap items-stretch justify-center gap-4">
+      <div className="col-span-2 mt-4 flex w-full flex-wrap items-stretch justify-center gap-4">
         {FORMATTED_BLOGS.filter((blog) => blogIncludesText(blog, searchInput))
           .filter((blog) => blogIncludesAllTags(blog, selectedTags))
           .sort((blog1, blog2) => compare(sortBy ?? "", blog1, blog2))
