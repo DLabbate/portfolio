@@ -6,7 +6,12 @@ import type { ThemeProviderProps } from "next-themes/dist/types";
 
 const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
   return (
-    <NextThemesProvider {...props} defaultTheme="dark" enableSystem={false}>
+    <NextThemesProvider
+      {...props}
+      disableTransitionOnChange
+      defaultTheme="dark"
+      enableSystem={false}
+    >
       {children}
     </NextThemesProvider>
   );

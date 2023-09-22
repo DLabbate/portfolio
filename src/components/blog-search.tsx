@@ -21,7 +21,7 @@ const BlogSearch = () => {
         id="search"
         onChange={(event) => setParam(event.target.value)}
         placeholder="Search..."
-        className="block w-full rounded-lg border-0 bg-white py-2 pl-14 ring-inset placeholder:text-light-medium focus:outline-0 focus:ring-2 focus:ring-inset focus:ring-primary-100 dark:bg-primary-900 dark:placeholder:text-dark-medium dark:focus:ring-primary-800"
+        className="block w-full rounded-lg border-0 bg-white py-2 pl-14 ring-inset transition duration-200 placeholder:text-light-medium focus:outline-0 focus:ring-2 focus:ring-inset focus:ring-primary-100 dark:bg-primary-900 dark:placeholder:text-dark-medium dark:focus:ring-primary-800"
       />
     </div>
   );

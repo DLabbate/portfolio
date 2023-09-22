@@ -28,7 +28,7 @@ const BlogTag = ({ label, state }: Props) => {
         }
       }}
       className={clsx(
-        "flex h-10 w-auto items-center rounded-full border border-primary-200 px-3 py-2 text-sm transition dark:border-primary-800",
+        "flex h-10 w-auto items-center rounded-full border border-primary-200 px-3 py-2 text-sm transition duration-200 dark:border-primary-800",
         state === "active" &&
           "cursor-pointer bg-primary-100 text-light dark:bg-primary-800 dark:text-dark",
         state === "disabled" &&

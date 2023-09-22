@@ -81,7 +81,7 @@ const BlogFilter = () => {
         <div className="relative z-40 flex-1">
           <div
             className={clsx(
-              "flex h-auto w-full cursor-pointer gap-2 rounded-lg border border-primary-200 bg-white p-2 dark:border-primary-800 dark:bg-primary-900",
+              "flex h-auto w-full cursor-pointer gap-2 rounded-lg border border-primary-200 bg-white p-2 transition duration-200 dark:border-primary-800 dark:bg-primary-900",
               open && "ring-2 ring-inset ring-primary-100 dark:ring-primary-800"
             )}
             onClick={() => setOpen(!open)}
