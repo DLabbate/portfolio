@@ -32,10 +32,10 @@ const HeaderLink = ({ title, href, exact, onClick }: Props) => {
     <motion.div
       whileHover="hover"
       animate={active ? "active" : "inactive"}
-      className="relative flex w-full cursor-pointer items-center justify-center border-y border-primary-800 p-8 text-xl lg:block lg:w-auto lg:border-0 lg:p-0 "
+      className="relative flex w-full cursor-pointer items-center justify-center border-y border-primary-800 text-xl lg:block lg:w-auto lg:border-0"
     >
       <Link
-        className="flex h-full w-full items-center justify-center lg:h-auto lg:w-auto"
+        className="flex h-full w-full items-center justify-center p-8 lg:h-auto lg:w-auto lg:p-0"
         href={href}
         onClick={onClick ? onClick : () => {}}
       >
