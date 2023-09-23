@@ -75,7 +75,7 @@ const BlogFilter = () => {
   }, [selected, setParam]);
 
   return (
-    <div className="z-40 flex w-96 items-center gap-2 text-light-medium dark:text-dark-medium">
+    <div className="z-40 flex w-80 items-center gap-2 text-light-medium dark:text-dark-medium">
       <span className="whitespace-nowrap">Sort By</span>
       <div className="relative z-40 flex-1">
         <div
