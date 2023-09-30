@@ -4,6 +4,7 @@ import BlogSearch from "@/components/blog-search";
 import BlogTag, { TagState } from "@/components/blog-tag";
 import BlogPost from "@/components/blog";
 import BlogFilter from "@/components/blog-filter";
+import { db, getAllBlogViews } from "@/lib/db";
 
 /**
  * Removes the leading and trailing white space and line terminator characters from a tag.
@@ -129,7 +130,7 @@ const compare = (
     case "views-desc":
       return blog2.views - blog1.views;
     default:
-      return 0;
+      return compareDesc(parseISO(blog1.date), parseISO(blog2.date));
   }
 };
 
@@ -141,10 +142,23 @@ type SearchParams = {
 
 type Params = { searchParams: SearchParams };
 
-const Blogs = ({ searchParams }: Params) => {
+export const revalidate = "force cache";
+
+const Blogs = async ({ searchParams }: Params) => {
   const searchInput = searchParams.search;
   const selectedTags = getTagsFromSearchParams(searchParams);
   const sortBy = searchParams.sortBy;
+
+  const allViews = await getAllBlogViews();
+  const formattedBlogs = ALL_BLOGS.map((blog, index) => {
+    allViews;
+    return {
+      ...blog,
+      views: allViews.find((x) => x.slug == blog.slug)?.views ?? 0,
+    };
+  });
+
+  console.log("all views", allViews);
 
   return (
     <div className="bg-primary mt-4 flex w-full flex-col gap-4 md:grid md:grid-cols-blogs-page">
@@ -165,7 +179,9 @@ const Blogs = ({ searchParams }: Params) => {
         })}
       </div>
       <div className="col-span-2 mt-4 flex w-full flex-wrap items-stretch justify-center gap-4">
-        {FORMATTED_BLOGS.filter((blog) => blogIncludesText(blog, searchInput))
+        {/* {test.map((item) => item.views)} */}
+        {formattedBlogs
+          .filter((blog) => blogIncludesText(blog, searchInput))
           .filter((blog) => blogIncludesAllTags(blog, selectedTags))
           .sort((blog1, blog2) => compare(sortBy ?? "", blog1, blog2))
           .map(({ slug, title, imageSrc, date, views }) => (

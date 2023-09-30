@@ -2,6 +2,7 @@ import * as motion from "@/components/animations/motion";
 import { TechnologyBadge, Technologies } from "@/components/technology-badge";
 import Terminal from "@/components/terminal";
 import { ABOUT } from "@/constants/profile";
+import { getAllBlogViews } from "@/lib/db";
 
 const Home = () => {
   return (
