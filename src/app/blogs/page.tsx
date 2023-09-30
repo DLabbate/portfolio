@@ -39,8 +39,8 @@ type Params = { searchParams: SearchParams };
 
 const Blogs = async ({ searchParams }: Params) => {
   const searchInput = searchParams.search;
-  const selectedTags = getTagsFromSearchParams(searchParams);
   const sortBy = searchParams.sortBy as SortKey;
+  const selectedTags = getTagsFromSearchParams(searchParams);
 
   const allTags = getAllTags();
   const blogs = await getSortedAndFilteredBlogs(

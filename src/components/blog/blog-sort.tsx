@@ -6,7 +6,7 @@ import { SortKey } from "@/lib/blogs";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { Calendar, Eye, Icon } from "react-feather";
-import * as motion from "./animations/motion";
+import * as motion from "@/components/animations/motion";
 
 type SortInfo = {
   query: SortKey;
