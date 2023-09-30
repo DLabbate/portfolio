@@ -5,32 +5,33 @@ import { useSearchParamsActions } from "@/hooks/use-search-params-actions";
 import { SortKey } from "@/lib/blogs";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
-import { Calendar, Eye, Filter, Icon } from "react-feather";
+import { Calendar, Eye, Icon } from "react-feather";
+import * as motion from "./animations/motion";
 
 type SortInfo = {
-  key: SortKey;
+  query: SortKey;
   text: string;
   icon: Icon;
 };
 
 const SORT_LIST: SortInfo[] = [
   {
-    key: "date-desc",
+    query: "date-desc",
     text: "Date (Newest to Oldest)",
     icon: Calendar,
   },
   {
-    key: "date-asc",
+    query: "date-asc",
     text: "Date (Oldest to Newest)",
     icon: Calendar,
   },
   {
-    key: "views-asc",
+    query: "views-asc",
     text: "Views (Low to High)",
     icon: Eye,
   },
   {
-    key: "views-desc",
+    query: "views-desc",
     text: "Views (High to Low)",
     icon: Eye,
   },
@@ -38,7 +39,7 @@ const SORT_LIST: SortInfo[] = [
 
 const SortItem = ({ text, icon: Icon }: SortInfo) => {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex select-none items-center gap-2 ">
       <Icon strokeWidth={1} />
       {text}
     </div>
@@ -72,7 +73,7 @@ const BlogSort = () => {
   useKeyDown(handleHideDropdown);
 
   useEffect(() => {
-    setParam(selected.key);
+    setParam(selected.query);
   }, [selected, setParam]);
 
   return (
@@ -88,11 +89,17 @@ const BlogSort = () => {
         >
           <SortItem {...selected} />
         </div>
-        <div
+        <motion.div
+          key="blog-sort"
           ref={dropdownRef}
+          variants={{
+            open: { opacity: 1 },
+            closed: { opacity: 0, y: -10 },
+          }}
+          animate={open ? "open" : "closed"}
           className={clsx(
             "absolute top-12 flex w-full flex-col divide-y divide-primary-100 overflow-hidden rounded-lg border border-primary-200 bg-white shadow dark:divide-primary-800 dark:border-primary-800 dark:bg-primary-900",
-            !open && "hidden"
+            !open && "invisible"
           )}
         >
           {SORT_LIST.map((item) => {
@@ -113,7 +120,7 @@ const BlogSort = () => {
               </div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

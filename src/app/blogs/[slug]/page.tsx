@@ -25,7 +25,6 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
   const blog = findBlogBySlug(slug);
   if (!blog) return notFound();
 
-  const allviews = await getAllBlogViews();
   const views = await getBlogViewsBySlug(slug);
 
   return (
