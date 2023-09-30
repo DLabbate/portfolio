@@ -1,7 +1,7 @@
 import { parseISO } from "date-fns";
 import BlogSearch from "@/components/blog-search";
 import BlogTag from "@/components/blog-tag";
-import BlogPost from "@/components/blog";
+import BlogThumbnail from "@/components/blog-thumbnail";
 import BlogFilter from "@/components/blog-sort";
 import {
   SortKey,
@@ -67,7 +67,7 @@ const Blogs = async ({ searchParams }: Params) => {
       </div>
       <div className="col-span-2 mt-4 flex w-full flex-wrap items-stretch justify-center gap-4">
         {blogs.map(({ slug, title, imageSrc, date, views }) => (
-          <BlogPost
+          <BlogThumbnail
             key={slug}
             slug={slug}
             title={title}
