@@ -17,7 +17,7 @@ export const generateStaticParams = async () =>
 export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   const blog = findBlogBySlug(params.slug);
   if (!blog) return;
-  return { title: blog.title };
+  return { title: blog.title, tags: blog.tags };
 };
 
 const BlogPost = async ({ params }: { params: { slug: string } }) => {

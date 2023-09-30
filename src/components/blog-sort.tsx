@@ -2,40 +2,41 @@
 
 import { useKeyDown, useMouseClick } from "@/hooks/use-events";
 import { useSearchParamsActions } from "@/hooks/use-search-params-actions";
+import { SortKey } from "@/lib/blogs";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { Calendar, Eye, Filter, Icon } from "react-feather";
 
-type Filter = {
-  query: string;
+type SortInfo = {
+  key: SortKey;
   text: string;
   icon: Icon;
 };
 
-const FILTERS: Filter[] = [
+const SORT_LIST: SortInfo[] = [
   {
-    query: "date-desc",
+    key: "date-desc",
     text: "Date (Newest to Oldest)",
     icon: Calendar,
   },
   {
-    query: "date-asc",
+    key: "date-asc",
     text: "Date (Oldest to Newest)",
     icon: Calendar,
   },
   {
-    query: "views-asc",
+    key: "views-asc",
     text: "Views (Low to High)",
     icon: Eye,
   },
   {
-    query: "views-desc",
+    key: "views-desc",
     text: "Views (High to Low)",
     icon: Eye,
   },
 ];
 
-const FilterItem = ({ text, icon: Icon }: Filter) => {
+const SortItem = ({ text, icon: Icon }: SortInfo) => {
   return (
     <div className="flex items-center gap-2">
       <Icon strokeWidth={1} />
@@ -44,9 +45,9 @@ const FilterItem = ({ text, icon: Icon }: Filter) => {
   );
 };
 
-const BlogFilter = () => {
+const BlogSort = () => {
   const { setParam } = useSearchParamsActions("sortBy");
-  const [selected, setSelected] = useState(FILTERS[0]);
+  const [selected, setSelected] = useState(SORT_LIST[0]);
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -71,7 +72,7 @@ const BlogFilter = () => {
   useKeyDown(handleHideDropdown);
 
   useEffect(() => {
-    setParam(selected.query);
+    setParam(selected.key);
   }, [selected, setParam]);
 
   return (
@@ -85,7 +86,7 @@ const BlogFilter = () => {
           )}
           onClick={() => setOpen(!open)}
         >
-          <FilterItem {...selected} />
+          <SortItem {...selected} />
         </div>
         <div
           ref={dropdownRef}
@@ -94,7 +95,7 @@ const BlogFilter = () => {
             !open && "hidden"
           )}
         >
-          {FILTERS.map((item) => {
+          {SORT_LIST.map((item) => {
             return (
               <div
                 className={clsx(
@@ -108,7 +109,7 @@ const BlogFilter = () => {
                   setOpen(false);
                 }}
               >
-                <FilterItem {...item} />
+                <SortItem {...item} />
               </div>
             );
           })}
@@ -118,4 +119,4 @@ const BlogFilter = () => {
   );
 };
 
-export default BlogFilter;
+export default BlogSort;

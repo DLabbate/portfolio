@@ -14,9 +14,9 @@ export const db = drizzle(connection, { schema });
 
 export const revalidate = 60;
 
-export const getAllBlogViews = () => {
+export const getAllBlogViews = cache(() => {
   return db.query.blogViews.findMany().execute();
-};
+});
 
 export const getBlogViewsBySlug = cache((slug: string) => {
   return db.query.blogViews
