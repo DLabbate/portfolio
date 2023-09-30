@@ -1,9 +1,8 @@
 "use client";
 
 import { useSearchParamsActions } from "@/hooks/use-search-params-actions";
+import { TagState } from "@/lib/blogs";
 import clsx from "clsx";
-
-export type TagState = "active" | "disabled" | "neutral";
 
 type Props = {
   label: string;

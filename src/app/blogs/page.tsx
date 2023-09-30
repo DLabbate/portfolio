@@ -1,14 +1,16 @@
 import { parseISO } from "date-fns";
-import BlogSearch from "@/components/blog-search";
-import BlogTag from "@/components/blog-tag";
-import BlogThumbnail from "@/components/blog-thumbnail";
-import BlogFilter from "@/components/blog-sort";
 import {
   SortKey,
   getAllTags,
   getSortedAndFilteredBlogs,
   getTagState,
 } from "@/lib/blogs";
+import {
+  BlogSearch,
+  BlogSort,
+  BlogTag,
+  BlogThumbnail,
+} from "@/components/blog";
 
 /**
  * Formats tags as an array of strings.
@@ -50,7 +52,7 @@ const Blogs = async ({ searchParams }: Params) => {
   return (
     <div className="bg-primary mt-4 flex w-full flex-col gap-4 md:grid md:grid-cols-blogs-page">
       <BlogSearch />
-      <BlogFilter />
+      <BlogSort />
       <div className="col-span-full flex w-full flex-wrap items-center justify-start gap-2">
         <span className="text-light-medium dark:text-dark-medium">
           Filter By Tag

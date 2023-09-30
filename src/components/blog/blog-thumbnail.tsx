@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
-import ViewCounter from "./views";
+import ViewCounter from "./blog-views";
 
 type Blog = {
   slug: string;

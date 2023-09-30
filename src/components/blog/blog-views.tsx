@@ -9,7 +9,7 @@ type Props = {
   trackView: boolean;
 };
 
-const ViewCounter = ({ slug, views, trackView = false }: Props) => {
+const BlogViews = ({ slug, views, trackView = false }: Props) => {
   useEffect(() => {
     if (trackView) {
       incrementBlogViewsBySlug(slug);
@@ -23,4 +23,4 @@ const ViewCounter = ({ slug, views, trackView = false }: Props) => {
   );
 };
 
-export default ViewCounter;
+export default BlogViews;

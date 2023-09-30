@@ -1,9 +1,10 @@
-import { TagState } from "@/components/blog-tag";
 import { allBlogs, Blog } from "contentlayer/generated";
 import { compareAsc, parseISO, compareDesc } from "date-fns";
 import { getAllBlogViews } from "../db";
 
 type FormattedBlog = Blog & { tags: string[] } & { views: number };
+
+type TagState = "active" | "disabled" | "neutral";
 
 type SortKey = "date-desc" | "date-asc" | "views-desc" | "views-asc";
 
@@ -151,4 +152,10 @@ async function getSortedAndFilteredBlogs(
     .sort((blog1, blog2) => compareBlogs(sortBy, blog1, blog2));
 }
 
-export { type SortKey, getSortedAndFilteredBlogs, getAllTags, getTagState };
+export {
+  type SortKey,
+  type TagState,
+  getSortedAndFilteredBlogs,
+  getAllTags,
+  getTagState,
+};
