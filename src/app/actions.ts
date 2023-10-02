@@ -1,8 +1,8 @@
 "use server";
 
 import { db } from "@/lib/db";
+import { blogViews } from "@/lib/db/schema";
 import { sql } from "drizzle-orm";
-import { blogViews } from "drizzle/schema";
 
 export async function incrementBlogViewsBySlug(slug: string) {
   db.insert(blogViews)
