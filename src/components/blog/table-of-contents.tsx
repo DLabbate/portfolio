@@ -1,8 +1,14 @@
 "use client";
 
-import { Heading, useTableOfContents } from "@/hooks/use-table-of-contents";
+import { useTableOfContents } from "@/hooks";
 import clsx from "clsx";
 import { ArrowUpRight, ArrowUpCircle, Icon } from "react-feather";
+
+type Heading = {
+  level: number;
+  text: string;
+  slug: string;
+};
 
 type AdditionalLinkProps = {
   href: string;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParamsActions } from "@/hooks/use-search-params-actions";
+import { useSearchParamsActions } from "@/hooks";
 import { Search } from "react-feather";
 
 const BlogSearch = () => {

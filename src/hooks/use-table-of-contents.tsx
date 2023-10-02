@@ -2,16 +2,11 @@ import { isInViewport } from "@/lib/html-utils";
 import { useState, useCallback, useEffect } from "react";
 import { useScroll } from "./use-events";
 
-export type Heading = {
-  level: number;
-  text: string;
-  slug: string;
-};
-
 /**
  * Custom hook that keeps track of the visible heading on a page.
+ * Each heading should have a unique slug.
  */
-export const useTableOfContents = (headings: Heading[]) => {
+export function useTableOfContents<T extends { slug: string }>(headings: T[]) {
   const [activeSlug, setActiveSlug] = useState("");
 
   const handleScroll = useCallback(() => {
@@ -37,4 +32,4 @@ export const useTableOfContents = (headings: Heading[]) => {
   useScroll(handleScroll);
 
   return { activeSlug };
-};
+}
