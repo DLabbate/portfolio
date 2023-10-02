@@ -12,7 +12,7 @@ type Action<T> =
     }
   | { type: "select"; selected: T };
 
-function reducer<T>(state: State<T>, action: Action<T>) {
+function reducer<T>(state: State<T>, action: Action<T>): State<T> {
   switch (action.type) {
     case "toggle": {
       return { ...state, open: !state.open };
@@ -24,7 +24,7 @@ function reducer<T>(state: State<T>, action: Action<T>) {
       return { ...state, open: false };
     }
     case "select": {
-      return { ...state, selected: action.selected };
+      return { selected: action.selected, open: false };
     }
   }
 }
@@ -65,7 +65,7 @@ export function useDropdown<T>(options: T[]) {
       dropdownRef.current &&
       !dropdownRef.current.contains(event.target as Node)
     ) {
-      dispatch({ type: "open" });
+      dispatch({ type: "close" });
     }
   }
 
