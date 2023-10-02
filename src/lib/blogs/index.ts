@@ -2,7 +2,7 @@ import { allBlogs, Blog } from "contentlayer/generated";
 import { compareAsc, parseISO, compareDesc } from "date-fns";
 import { getAllBlogViews } from "../db";
 
-type FormattedBlog = Blog & { tags: string[] } & { views: number };
+type FormattedBlog = Blog & { tags: string[]; views: number };
 
 type TagState = "active" | "disabled" | "neutral";
 
