@@ -10,7 +10,40 @@ import genetec from "public/organizations/genetec.png";
 import concordia from "public/organizations/concordia.png";
 import cae from "public/organizations/cae.png";
 import { type StaticImageData } from "next/image";
-import { Technology } from "@/components/technology-badge";
+
+export const TECHNOLOGIES: ReadonlyArray<string> = [
+  "react",
+  "reactnative",
+  "reactquery",
+  "jest",
+  "rtl",
+  "typescript",
+  "javascript",
+  "html",
+  "css",
+  "tailwind",
+  "nodejs",
+  "express",
+  "mongodb",
+  "firebase",
+  "csharp",
+  "dotnet",
+  "azure",
+  "aws",
+  "python",
+  "cpp",
+  "arduino",
+  "raspberrypi",
+  "bluetooth",
+  "java",
+  "androidstudio",
+  "googlemaps",
+  "opengl",
+  "unity",
+  "jira",
+];
+
+export type Technology = (typeof TECHNOLOGIES)[number];
 
 export type Project = Readonly<{
   title: string;
@@ -59,7 +92,11 @@ Here are some things you should know about me.
 🧠 I have a passion for learning & self improvement.
 📚 I'm resourceful and can overcome difficulties.`;
 
-export const SOCIAL_PLATFORMS = ["github", "youtube", "linkedin"] as const;
+export const SOCIAL_PLATFORMS: ReadonlyArray<string> = [
+  "github",
+  "youtube",
+  "linkedin",
+];
 
 export type SocialPlatform = (typeof SOCIAL_PLATFORMS)[number];
 

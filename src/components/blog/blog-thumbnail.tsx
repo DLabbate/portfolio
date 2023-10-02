@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ViewCounter from "./blog-views";
 
-type Blog = {
+type Props = {
   slug: string;
   title: string;
   image: string;
@@ -11,7 +11,7 @@ type Blog = {
   views: number;
 };
 
-const BlogThumbnail = async ({ slug, title, image, date, views }: Blog) => {
+const BlogThumbnail = async ({ slug, title, image, date, views }: Props) => {
   return (
     <div className="w-full cursor-pointer rounded-xl p-4 transition duration-200 hover:bg-white hover:shadow hover:ring-1 hover:ring-primary-200 dark:hover:bg-primary-900 dark:hover:ring-1 dark:hover:ring-primary-800 md:w-[calc(100%/2-1rem/2)] xl:w-[calc(100%/3-2*1rem/3)]">
       <Link href={`/blogs/${slug}`} className="block h-full w-full">

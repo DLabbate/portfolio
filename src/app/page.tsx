@@ -1,7 +1,6 @@
 import * as motion from "@/components/animations/motion";
-import { TechnologyBadge, Technologies } from "@/components/technology-badge";
-import Terminal from "@/components/terminal";
-import { ABOUT } from "@/constants/profile";
+import { ABOUT, TECHNOLOGIES } from "@/constants/profile";
+import { Terminal, TechnologyBadge } from "@/components/portfolio";
 
 const Home = () => {
   return (
@@ -13,7 +12,7 @@ const Home = () => {
         initial={"initial"}
         animate={"show"}
       >
-        {Technologies.map((technology) => (
+        {TECHNOLOGIES.map((technology) => (
           <motion.li
             key={technology}
             variants={{

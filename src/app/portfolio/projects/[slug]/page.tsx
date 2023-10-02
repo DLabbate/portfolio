@@ -1,4 +1,4 @@
-import { Mdx } from "@/components/mdx";
+import { Mdx } from "@/components/mdx/mdx";
 import { allProjects } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 

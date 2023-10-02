@@ -1,10 +1,9 @@
-import Header from "@/components/layout/header";
 import "./globals.css";
 import { Space_Mono, Work_Sans } from "next/font/google";
 import { SOCIAL_MEDIA } from "@/constants/profile";
-import SocialLink from "@/components/social-link";
-import Footer from "@/components/layout/footer";
-import ThemeProvider from "@/components/theme/theme-provider";
+import { SocialLink } from "@/components/social";
+import { ThemeProvider } from "@/components/theme";
+import { Footer, Header } from "@/components/layout";
 
 export const metadata = {
   title: "Domenic Labbate",

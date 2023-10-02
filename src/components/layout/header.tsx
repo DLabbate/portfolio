@@ -7,7 +7,7 @@ import Link from "next/link";
 import * as motion from "@/components/animations/motion";
 import { NAME } from "@/constants/profile";
 import { AnimatePresence } from "framer-motion";
-import ThemeSelector from "../theme/theme-selector";
+import { ThemeSelector } from "@/components/theme";
 
 type Page = {
   title: string;

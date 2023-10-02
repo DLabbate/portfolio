@@ -1,4 +1,4 @@
-import { type Accomplishment } from "@/constants/profile";
+import { type Accomplishment as AccomplishmentInfo } from "@/constants/profile";
 import * as motion from "@/components/animations/motion";
 import { Calendar } from "react-feather";
 
@@ -8,7 +8,7 @@ const Accomplishment = ({
   description,
   years,
   link,
-}: Accomplishment) => {
+}: AccomplishmentInfo) => {
   return (
     <motion.a
       href={link}

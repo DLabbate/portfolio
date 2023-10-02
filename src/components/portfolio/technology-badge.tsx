@@ -27,40 +27,7 @@ import tailwind from "public/logos/tailwind.png";
 import firebase from "public/logos/firebase.png";
 import reactquery from "public/logos/reactquery.png";
 import jira from "public/logos/jira.png";
-
-export const Technologies = [
-  "react",
-  "reactnative",
-  "reactquery",
-  "jest",
-  "rtl",
-  "typescript",
-  "javascript",
-  "html",
-  "css",
-  "tailwind",
-  "nodejs",
-  "express",
-  "mongodb",
-  "firebase",
-  "csharp",
-  "dotnet",
-  "azure",
-  "aws",
-  "python",
-  "cpp",
-  "arduino",
-  "raspberrypi",
-  "bluetooth",
-  "java",
-  "androidstudio",
-  "googlemaps",
-  "opengl",
-  "unity",
-  "jira",
-] as const;
-
-export type Technology = (typeof Technologies)[number];
+import { Technology } from "@/constants/profile";
 
 type LabelData = {
   displayName: string;

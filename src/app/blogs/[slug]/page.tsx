@@ -1,6 +1,5 @@
 import { Mdx } from "@/components/mdx";
-import { TableOfContents } from "@/components/blog";
-import ViewCounter from "@/components/blog/blog-views";
+import { BlogViews, TableOfContents } from "@/components/blog";
 import { getBlogViewsBySlug } from "@/lib/db";
 import { allBlogs } from "contentlayer/generated";
 import Image from "next/image";
@@ -50,7 +49,7 @@ const BlogPost = async ({ params }: Props) => {
         </span>
       </div>
       <div className="flex justify-start lg:flex lg:w-full lg:justify-end">
-        <ViewCounter slug={slug} views={views?.views ?? 0} trackView={true} />
+        <BlogViews slug={slug} views={views?.views ?? 0} trackView={true} />
       </div>
       <Mdx code={blog.body.code} />
       <div className="overflow-clip">
