@@ -1,37 +1,37 @@
 "use client";
 
-import { useKeyDown, useMouseClick } from "@/hooks/use-events";
 import { useSearchParamsActions } from "@/hooks/use-search-params-actions";
 import { SortKey } from "@/lib/blogs";
 import clsx from "clsx";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { Calendar, Eye, Icon } from "react-feather";
 import * as motion from "@/components/animations/motion";
+import { useDropdown } from "@/hooks/use-dropwdown";
 
 type SortInfo = {
-  query: SortKey;
+  sortKey: SortKey;
   text: string;
   icon: Icon;
 };
 
 const SORT_LIST: SortInfo[] = [
   {
-    query: "date-desc",
+    sortKey: "date-desc",
     text: "Date (Newest to Oldest)",
     icon: Calendar,
   },
   {
-    query: "date-asc",
+    sortKey: "date-asc",
     text: "Date (Oldest to Newest)",
     icon: Calendar,
   },
   {
-    query: "views-asc",
+    sortKey: "views-asc",
     text: "Views (Low to High)",
     icon: Eye,
   },
   {
-    query: "views-desc",
+    sortKey: "views-desc",
     text: "Views (High to Low)",
     icon: Eye,
   },
@@ -48,32 +48,11 @@ const SortItem = ({ text, icon: Icon }: SortInfo) => {
 
 const BlogSort = () => {
   const { setParam } = useSearchParamsActions("sortBy");
-  const [selected, setSelected] = useState(SORT_LIST[0]);
-  const [open, setOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Close the dropdown if a user clicks the Escape button
-  const handleHideDropdown = (event: KeyboardEvent) => {
-    if (event.key === "Escape") {
-      setOpen(false);
-    }
-  };
-
-  // Close the dropdown if a user clicks outside
-  const handleClickOutside = (event: Event) => {
-    if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(event.target as Node)
-    ) {
-      setOpen(false);
-    }
-  };
-
-  useMouseClick(handleClickOutside);
-  useKeyDown(handleHideDropdown);
+  const { open, selected, toggleOpen, dropdownRef, selectItem } =
+    useDropdown(SORT_LIST);
 
   useEffect(() => {
-    setParam(selected.query);
+    setParam(selected.sortKey);
   }, [selected, setParam]);
 
   return (
@@ -85,7 +64,7 @@ const BlogSort = () => {
             "flex h-auto w-full cursor-pointer gap-2 rounded-lg border border-primary-200 bg-white p-2 transition duration-200 dark:border-primary-800 dark:bg-primary-900",
             open && "ring-2 ring-inset ring-primary-100 dark:ring-primary-800"
           )}
-          onClick={() => setOpen(!open)}
+          onClick={toggleOpen}
         >
           <SortItem {...selected} />
         </div>
@@ -105,16 +84,13 @@ const BlogSort = () => {
           {SORT_LIST.map((item) => {
             return (
               <div
+                key={item.text}
                 className={clsx(
                   "flex-1 cursor-pointer p-2 hover:bg-primary-100 hover:text-light dark:hover:bg-primary-800 dark:hover:text-dark",
                   selected === item &&
                     "bg-primary-100 text-light dark:bg-primary-800 dark:text-dark"
                 )}
-                key={item.text}
-                onClick={() => {
-                  setSelected(item);
-                  setOpen(false);
-                }}
+                onClick={() => selectItem(item)}
               >
                 <SortItem {...item} />
               </div>
