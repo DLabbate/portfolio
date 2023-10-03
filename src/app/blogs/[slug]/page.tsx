@@ -30,7 +30,9 @@ const BlogPost = async ({ params }: Props) => {
 
   return (
     <div className="grid w-full max-w-5xl grid-cols-1 gap-8 lg:grid-cols-blog-page">
-      <h1 className="text-4xl font-bold lg:col-span-full">{blog.title}</h1>
+      <h1 className="flex items-center justify-center text-4xl font-bold lg:col-span-full">
+        {blog.title}
+      </h1>
       <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg lg:col-span-full">
         <Image
           priority

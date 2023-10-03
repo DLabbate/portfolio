@@ -53,7 +53,7 @@ One approach is to rely on **unique identifiers**. This way, even if a request i
 
 In our example, we can refactor the server to accept a `transactionId` field. If an operation is retried with the same `transactionId`, the server should only process it once.
 
-That is actually how industry leaders such as [Stripe](https://stripe.com/docs/api/idempotent_requests) and [Square API](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency)
+That is actually how industry leaders such as [Stripe](https://stripe.com/docs/api/idempotent_requests) and [Square](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency)
 implement idempotency!
 
 <ThemeImage
@@ -74,7 +74,7 @@ Let's review some key aspects that our system will benefit from.
 ## Idempotency is Ubiquitous
 
 Another important detail to mention is that idempotency does _not_ only apply to API endpoints.
-For example, idempotency is an important point to consider when designing functions, message consumers, database operations, etc.
+For example, idempotency is an important point to consider even when designing functions, message consumers, database operations, etc.
 
 **Idempotency is language-agnostic and ubiquitous.**
 
