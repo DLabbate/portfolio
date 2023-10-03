@@ -43,3 +43,8 @@
 .prose *:hover > .anchor {
   @apply visible;
 }
+
+/* Single backtick `code` */
+:not(pre) > code {
+  @apply whitespace-nowrap rounded-lg border border-primary-200 bg-white px-1 font-mono !font-normal text-light before:hidden after:hidden dark:border-primary-700 dark:bg-primary-800 dark:text-dark;
+}
