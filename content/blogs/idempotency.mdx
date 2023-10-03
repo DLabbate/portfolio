@@ -44,7 +44,11 @@ The server had no way of knowing that both requests should _not_ have been handl
 
 The solution to this problem is `idempotency`.
 
-Idempotency can be summarized as the ability to safely retry an operation without unintended side effects.
+<Banner
+  type="info"
+  title="Idempotency Definition"
+  text="Idempotency is the ability to safely retry an operation without unintended side effects."
+/>
 
 ## How to Implement Idempotency
 
@@ -76,7 +80,7 @@ Let's review some key aspects that our system will benefit from.
 Another important detail to mention is that idempotency does _not_ only apply to API endpoints.
 For example, idempotency is an important point to consider even when designing functions, message consumers, database operations, etc.
 
-**Idempotency is language-agnostic and ubiquitous.**
+<Banner type="info" text="Idempotency is language-agnostic and ubiquitous" />
 
 ## Conclusion
 
