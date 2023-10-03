@@ -2,7 +2,7 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import { StyledImage, AutoVideoPlayer, ThemeImage } from "@/components/media";
 import InlineCode from "./inline-code";
 import CustomLink from "./custom-link";
-import Banner from "./banner";
+import Alert from "./alert";
 
 const mdxComponents = {
   Image: StyledImage,
@@ -10,7 +10,7 @@ const mdxComponents = {
   code: InlineCode,
   a: CustomLink,
   AutoVideoPlayer,
-  Banner,
+  Alert,
 };
 
 interface MdxProps {
