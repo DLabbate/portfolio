@@ -1,8 +1,9 @@
 import { useMDXComponent } from "next-contentlayer/hooks";
-import { StyledImage, AutoVideoPlayer } from "@/components/media";
+import { StyledImage, AutoVideoPlayer, ThemeImage } from "@/components/media";
 
 const mdxComponents = {
   Image: StyledImage,
+  ThemeImage: ThemeImage,
   AutoVideoPlayer,
 };
 
