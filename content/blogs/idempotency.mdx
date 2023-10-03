@@ -1,0 +1,87 @@
+---
+title: Idempotency is Important
+date: 2023-10-02
+imageSrc: /blogs/test.jpg
+tags:
+  - Design Patterns
+---
+
+## Introduction
+
+In the context of software engineering, `idempotency` is an important concept which plays a crucial role in improving the fault tolerance and reliability of an application.
+
+To better understand this concept and its significance, let's start off by illustrating an example.
+
+## Example: Why Idempotency Matters
+
+In the following example, we will discuss the impact of _not_ considering idempotency.
+
+### Scenario
+
+Let's imagine that we have a client (user) and a server. The user would like to purchase a product from the website.
+
+1. The user clicks on the "buy" button in the UI.
+2. The server processes the payment request.
+3. Unfortunately there is a network failure, and the user does not know if the first request was successfully processed.
+4. The user becomes frustrated, and clicks the "buy" button a second time.
+
+**😡 However, later in the day the user notices that they were charged twice on their credit card bill!**
+
+<Image
+  src="/blogs/idempotency/example-without-idempotency-dark.png"
+  alt="User being charged twice because idempotency was not considered"
+  width={1213}
+  height={734}
+/>
+
+### What Went Wrong?
+
+Why did this occur? From the server's perspective, it received two separate requests and processed both of them successfully!
+The server had no way of knowing that both requests should _not_ have been handled separately..
+
+### The Idempotent Solution
+
+The solution to this problem is `idempotency`.
+
+Idempotency can be summarized as the ability to safely retry an operation without unintended side effects.
+
+## How to Implement Idempotency
+
+Now that we understand the definition of idempotency, let's discuss how we can actually implement it.
+One approach is to rely on **unique identifiers**. This way, even if a request is sent multiple times, the system can recognize duplicates and handle them accordingly.
+
+In our example, we can refactor the server to accept a `transactionId` field. If an operation is retried with the same `transactionId`, the server should only process it once.
+
+That is actually how industry leaders such as [Stripe](https://stripe.com/docs/api/idempotent_requests) and [Square API](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency)
+implement idempotency!
+
+<Image
+  src="/blogs/idempotency/example-with-idempotency-dark.png"
+  alt="User not being charged twice because idempotency was considered"
+  width={1559}
+  height={734}
+/>
+
+## Key Benefits
+
+Let's review some key aspects that our system will benefit from.
+
+- **Enhanced Reliability:** Idempotency ensures that your operations remain reliable even in the face of network failures or multiple requests.
+- **Improved User Experience:** Users can interact with applications confidently, knowing that glitches won’t result in accidental multiple charges or unintended actions.
+
+## Idempotency is Ubiquitous
+
+Another important detail to mention is that idempotency does _not_ only apply to API endpoints.
+For example, idempotency is an important point to consider when designing functions, message consumers, database operations, etc.
+
+**Idempotency is language-agnostic and ubiquitous.**
+
+## Conclusion
+
+- We can improve the fault tolerance and reliablity of an application by considering idempotency
+- Idempotency can be implemeneted by leveraging unique identifiers
+
+## References
+
+- [Stripe API](https://stripe.com/docs/api/idempotent_requests)
+- [Square API](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency)
