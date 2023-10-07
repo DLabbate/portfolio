@@ -40,6 +40,7 @@ const BlogPost = async ({ params }: Props) => {
           fill
           alt={blog.title}
           sizes="(max-width: 1024px) 100vw, 1024px"
+          className="object-cover"
         />
       </div>
       <div className="flex flex-col gap-2 self-start">

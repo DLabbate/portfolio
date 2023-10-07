@@ -5,11 +5,12 @@ type Props = Omit<ImageProps, "src" | "priority" | "loading"> & {
   srcLight: string;
   srcDark: string;
   alt: string;
+  caption: string;
 };
 
-const ThemeImage = ({ srcLight, srcDark, alt, ...rest }: Props) => {
+const ThemeImage = ({ srcLight, srcDark, alt, caption, ...rest }: Props) => {
   return (
-    <>
+    <figure className="flex flex-col items-center">
       <StyledImage
         {...rest}
         src={srcLight}
@@ -22,7 +23,10 @@ const ThemeImage = ({ srcLight, srcDark, alt, ...rest }: Props) => {
         alt={alt}
         className="hidden dark:block"
       />
-    </>
+      <figcaption className="text-sm text-light-medium dark:text-dark-medium">
+        {caption}
+      </figcaption>
+    </figure>
   );
 };
 
