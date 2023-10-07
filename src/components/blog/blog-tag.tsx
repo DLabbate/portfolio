@@ -29,11 +29,11 @@ const BlogTag = ({ label, state }: Props) => {
       className={clsx(
         "flex h-10 w-auto items-center rounded-full border border-primary-200 px-3 py-2 text-sm transition duration-200 dark:border-primary-800",
         state === "active" &&
-          "cursor-pointer bg-primary-100 text-light dark:bg-primary-800 dark:text-dark",
+          "cursor-pointer bg-primary-200 text-light dark:bg-primary-800 dark:text-dark",
         state === "disabled" &&
           "cursor-not-allowed border-primary-100 text-light-disabled dark:border-primary-900 dark:text-dark-disabled",
         state === "neutral" &&
-          "cursor-pointer bg-white text-light-medium hover:bg-primary-100 hover:text-light dark:bg-primary-900 dark:text-dark-medium dark:hover:bg-primary-800 dark:hover:text-dark"
+          "cursor-pointer bg-white text-light-medium hover:bg-primary-200 hover:text-light dark:bg-primary-900 dark:text-dark-medium dark:hover:bg-primary-800 dark:hover:text-dark"
       )}
     >
       {label}
