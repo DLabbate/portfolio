@@ -1,0 +1,163 @@
+---
+title: Scalability With Asynchronous Messaging
+date: 2023-10-02
+imageSrc: /blogs/idempotency/thumbnail.jpg
+tags:
+  - Design Patterns
+  - Microservices
+---
+
+## Introduction
+
+Many software systems are built using a **distributed architecture**.
+That is, a system composed of several independent services (also referred to as **microservices**) each performing a unique function.
+
+For example, an e-commerce system might consist of the following:
+
+- Order Service
+- Inventory Service
+- Notification Service
+- Shipping Service
+- ...
+
+While a distributed architecture holds many benefits, one common facing challenge is the **communication between microservices**.
+
+There are various protocols and methods of communication that can be used between microservices.
+One popular approach is **REST APIs**, which use `HTTP` methods for resource manipulation.
+
+REST APIs follow a **synchronous** request-reply pattern, making it a suitable in scenarios where an immediate response is expected.
+
+<Alert
+  type="info"
+  text="REST APIs follow a synchronous request-reply pattern"
+/>
+
+The following image depicts an example of creating a new order on an e-commerce system via a REST API.
+
+<ThemeImage
+  srcLight="/blogs/async-messaging/rest-api-example-light.png"
+  srcDark="/blogs/async-messaging/rest-api-example-dark.png"
+  alt="Creating a new order for an e-commerce system via a REST API"
+  width={950}
+  height={486}
+/>
+
+While REST APIs are a viable option for communication between microservices,
+this blog article will focus on an **asynchronous** approach.
+
+## Asynchronous Messaging
+
+The definition of asynchronous messaging can be explained quite succintly by one of [Microsoft's articles:](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/asynchronous-message-based-communication)
+
+> When using messaging, processes communicate by exchanging messages asynchronously.
+> A client makes a command or a request to a service by sending it a message.
+> If the service needs to reply, it sends a different message back to the client.
+
+## Publisher & Subscriber
+
+Let's look into this pattern a bit deeper. Asynchronous messaging typically uses a mechanism known as **publisher & subscriber**. Below is an image outlining this messaging model.
+
+- **Topic:** A subset or category of messages.
+- **Publisher:** Creates and sends message to a given topic.
+- **Subscriber:** Receives and consumes messages from a given topic.
+- **Message Broker:** Intermediary for transimitting messages. _To be discussed further in the following sections._
+
+<ThemeImage
+  srcLight="/blogs/async-messaging/publisher-subscriber-light.png"
+  srcDark="/blogs/async-messaging/publisher-subscriber-dark.png"
+  alt="Publisher & Subscriber architecture"
+  width={1496}
+  height={608}
+/>
+
+## E-Commerce Example: Creating an Order
+
+Let's apply this architecture to the e-commerce scenario we mentioned earlier.
+Suppose we want to create a new order, then update the inventory and send a confirmation email to the user.
+
+That might look like the following
+
+<ThemeImage
+  srcLight="/blogs/async-messaging/example-light.png"
+  srcDark="/blogs/async-messaging/example-dark.png"
+  alt="Creating a new order for an e-commerce system via asynchronous messaging"
+  width={1476}
+  height={427}
+/>
+
+The Order Service submits a message to the _fulfillment_ topic. Both the Inventory Service and Notification Service are subscribed to this topic.
+When they receive this message, the Inventory Service and Notification Service can execute their specific logic.
+
+## Message Brokers
+
+There are several enteprise grade message brokers that offer this capability.
+Examples are
+
+- Kafka
+- Azure
+- GCP
+
+## Benefits of Asynchronous Messaging
+
+Asynchronous messaging offeres many benefits. Some notable ones are outlined below.
+
+### Decoupling & Scalability
+
+As mentioned previously, an approach such as a **REST API** follows a synchronous request-reply pattern.
+This means that if the service receiving the request is down, the client service that sent the request will be blocked!
+
+On the other hand, in asynchronous communication services can operate independently from one another.
+For instance, the sender can continue with its work even if the recipients are unhealthy.
+
+### Fault Tolerance
+
+In the case that a service becomes unhealthy, message brokers can store the message until the service becomes available to process the message.
+This prevents data loss and improves reliability of the system.
+
+### Improved Troubleshooting
+
+Many message brokers offer what is called a **dead-letter queue (DLQ).** That is, a special type of queue that temporarily stores messages that were unable to be processed due to errors.
+
+<Alert
+  type="info"
+  title="Dead-Letter Queue"
+  text="A special type of queue that temporarily stores messages that were unable to be processed due to errors."
+/>
+
+> This lets your developers focus on identifying the causes of the errors. They can investigate why the receiver couldn't process the messages, apply the fixes, and perform new attempts to deliver the messages.
+
+## Challenges of Asynchronous Messaging
+
+### Eventual consistency
+
+It is common that subsribers update their database entities upon receiving a message.
+However, there is transient period of time (between the message dispatch and processing) where the service will not reflect the most recent data.
+Although the latency can be minimal, it is still important to be aware of.
+
+### Overhead and Complexity
+
+Introducing asynchronous messaging via a message broker requires additional infrastructure, configuration, and maintenance.
+
+### Message Ordering
+
+Message brokers typically do not guarantee that messages will be processed in a specific order (by default).
+If that is important for your given business domain, your design must take this into account.
+For example, an `OrderCanceled` message should only be processed after an `OrderCreated` message.
+
+_Note that message brokers such as [Google Cloud](https://cloud.google.com/pubsub/docs/ordering) do offer message ordering capabilities, but it needs to be configured._
+
+## Conclusion
+
+- If you are working on a distributed system where scalability and fault-tolerance are paramount, you should consider using asynchronous messaging.
+- It is important to be aware of other challenges this may introduce, such as eventual consistency.
+
+## References
+
+- [Google cloud message ordering](https://www.youtube.com/watch?v=f8nQk62IkHM)
+- [Google cloud message ordering](https://cloud.google.com/pubsub/docs/ordering)
+- [AWS DLQ](https://aws.amazon.com/what-is/dead-letter-queue/)
+- [Microsoft](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/communication-in-microservice-architecture)
+- [Microsoft - Asynchronous message-based communication](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/asynchronous-message-based-communication)
+- [LinkedIn - What are the benefits and challenges of using message queues for asynchronous communication?](https://www.linkedin.com/advice/0/what-benefits-challenges-using-message-queues)
+- [IBM - What are message brokers?](https://www.ibm.com/topics/message-brokers)
+- [VMware - What is a Message Broker?](https://www.vmware.com/ca/topics/glossary/content/message-brokers.html)
