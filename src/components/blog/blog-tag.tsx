@@ -14,6 +14,8 @@ const BlogTag = ({ label, state }: Props) => {
 
   return (
     <button
+      aria-pressed={state === "active"}
+      aria-disabled={state === "disabled"}
       onClick={() => {
         switch (state) {
           case "active":

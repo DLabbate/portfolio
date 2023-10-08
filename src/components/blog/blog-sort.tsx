@@ -3,7 +3,6 @@
 import { useSearchParamsActions, useDropdown } from "@/hooks";
 import { SortKey } from "@/lib/blogs";
 import clsx from "clsx";
-import { useEffect } from "react";
 import { Calendar, Eye, Icon } from "react-feather";
 import * as motion from "@/components/animations/motion";
 
@@ -50,15 +49,13 @@ const BlogSort = () => {
   const { open, selected, toggleOpen, dropdownRef, selectItem } =
     useDropdown(SORT_LIST);
 
-  useEffect(() => {
-    setParam(selected.sortKey);
-  }, [selected, setParam]);
-
   return (
     <div className="z-40 flex w-80 items-center gap-2 text-light-medium dark:text-dark-medium">
       <span className="whitespace-nowrap">Sort By</span>
       <div className="relative z-40 flex-1">
         <div
+          ref={dropdownRef}
+          data-test="blog-sortby"
           className={clsx(
             "flex h-auto w-full cursor-pointer gap-2 rounded-lg border border-primary-200 bg-white p-2 transition duration-200 dark:border-primary-800 dark:bg-primary-900",
             open && "ring-2 ring-inset ring-primary-100 dark:ring-primary-800"
@@ -69,7 +66,6 @@ const BlogSort = () => {
         </div>
         <motion.div
           key="blog-sort"
-          ref={dropdownRef}
           variants={{
             open: { opacity: 1 },
             closed: { opacity: 0, y: -10 },
@@ -77,7 +73,7 @@ const BlogSort = () => {
           animate={open ? "open" : "closed"}
           className={clsx(
             "absolute top-12 flex w-full flex-col divide-y divide-primary-100 overflow-hidden rounded-lg border border-primary-200 bg-white shadow dark:divide-primary-800 dark:border-primary-800 dark:bg-primary-900",
-            !open && "invisible"
+            !open && "hidden"
           )}
         >
           {SORT_LIST.map((item) => {
@@ -89,7 +85,10 @@ const BlogSort = () => {
                   selected === item &&
                     "bg-primary-100 text-light dark:bg-primary-800 dark:text-dark"
                 )}
-                onClick={() => selectItem(item)}
+                onClick={() => {
+                  selectItem(item);
+                  setParam(item.sortKey);
+                }}
               >
                 <SortItem {...item} />
               </div>

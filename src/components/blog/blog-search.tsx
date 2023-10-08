@@ -16,6 +16,7 @@ const BlogSearch = () => {
         />
       </div>
       <input
+        data-test="blog-search-input"
         type="text"
         name="search"
         id="search"
