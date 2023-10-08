@@ -121,10 +121,10 @@ function compareBlogs(
 ): number {
   switch (sortBy) {
     case "date-asc":
-      return compareAsc(parseISO(blog1.date), parseISO(blog2.date));
+      return compareAsc(parseISO(blog1.published), parseISO(blog2.published));
     case "date-desc":
     default:
-      return compareDesc(parseISO(blog1.date), parseISO(blog2.date));
+      return compareDesc(parseISO(blog1.published), parseISO(blog2.published));
     case "views-asc":
       return blog1.views - blog2.views;
     case "views-desc":

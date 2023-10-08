@@ -2,12 +2,13 @@ import Image from "next/image";
 import { type TimelineEntry } from "@/constants/profile";
 import { TechnologyBadge } from "./technology-badge";
 import { Calendar } from "react-feather";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 /**
  * Formats a date in the format "Month Year", e.g. "May 2021"
  */
-const formatDate = (date: Date): string => format(date, "MMMM, yyyy");
+const formatDate = (date: string): string =>
+  format(parseISO(date), "MMMM yyyy");
 
 const TimelineEntry = ({
   title,

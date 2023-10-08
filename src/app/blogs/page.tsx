@@ -68,16 +68,18 @@ const Blogs = async ({ searchParams }: Params) => {
         })}
       </div>
       <div className="col-span-2 mt-4 flex w-full flex-wrap items-stretch justify-center gap-4">
-        {blogs.map(({ slug, title, imageSrc, date, views }) => (
-          <BlogThumbnail
-            key={slug}
-            slug={slug}
-            title={title}
-            image={imageSrc}
-            date={parseISO(date)}
-            views={views}
-          />
-        ))}
+        {blogs.map(({ slug, title, imageSrc, published, views }) => {
+          return (
+            <BlogThumbnail
+              key={slug}
+              slug={slug}
+              title={title}
+              image={imageSrc}
+              date={parseISO(published)}
+              views={views}
+            />
+          );
+        })}
       </div>
     </div>
   );

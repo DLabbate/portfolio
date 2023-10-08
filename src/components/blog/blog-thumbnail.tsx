@@ -26,7 +26,7 @@ const BlogThumbnail = async ({ slug, title, image, date, views }: Props) => {
             />
           </div>
           <span className="whitespace-nowrap text-lg dark:text-dark-medium">
-            {format(date, "MMMM d, yyyy")}
+            {format(date, "MMMM do, yyyy")}
           </span>
           <div className="flex h-auto justify-end align-top">
             <ViewCounter views={views} slug={slug} trackView={false} />
