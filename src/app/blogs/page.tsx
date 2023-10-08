@@ -59,7 +59,7 @@ const Blogs = async ({ searchParams }: Params) => {
     <motion.div
       initial="hidden"
       animate="visible"
-      transition={{ staggerChildren: 0.25 }}
+      transition={{ staggerChildren: 0.125 }}
       className="bg-primary mt-4 flex w-full flex-col gap-4 md:grid md:grid-cols-blogs-page"
     >
       <motion.div variants={VARIANTS}>
