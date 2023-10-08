@@ -11,6 +11,12 @@ import {
   BlogTag,
   BlogThumbnail,
 } from "@/components/blog";
+import * as motion from "@/components/animations/motion";
+
+const VARIANTS = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+} as const;
 
 /**
  * Formats tags as an array of strings.
@@ -50,10 +56,22 @@ const Blogs = async ({ searchParams }: Params) => {
   );
 
   return (
-    <div className="bg-primary mt-4 flex w-full flex-col gap-4 md:grid md:grid-cols-blogs-page">
-      <BlogSearch />
-      <BlogSort />
-      <div className="col-span-full flex w-full flex-wrap items-center justify-start gap-2">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      transition={{ staggerChildren: 0.25 }}
+      className="bg-primary mt-4 flex w-full flex-col gap-4 md:grid md:grid-cols-blogs-page"
+    >
+      <motion.div variants={VARIANTS}>
+        <BlogSearch />
+      </motion.div>
+      <motion.div variants={VARIANTS}>
+        <BlogSort />
+      </motion.div>
+      <motion.div
+        variants={VARIANTS}
+        className="col-span-full flex w-full flex-wrap items-center justify-start gap-2"
+      >
         <span className="text-light-medium dark:text-dark-medium">
           Filter By Tag
         </span>
@@ -66,8 +84,11 @@ const Blogs = async ({ searchParams }: Params) => {
             />
           );
         })}
-      </div>
-      <div className="col-span-2 mt-4 flex w-full flex-wrap items-stretch justify-center gap-4">
+      </motion.div>
+      <motion.div
+        variants={VARIANTS}
+        className="col-span-2 mt-4 flex w-full flex-wrap items-stretch justify-center gap-4"
+      >
         {blogs.map(({ slug, title, imageSrc, published, views }) => {
           return (
             <BlogThumbnail
@@ -80,8 +101,8 @@ const Blogs = async ({ searchParams }: Params) => {
             />
           );
         })}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
