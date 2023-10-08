@@ -76,3 +76,26 @@ describe("blogs list", () => {
     });
   });
 });
+
+describe("blogs page", () => {
+  beforeEach(() => {
+    cy.viewport(1280, 720);
+  });
+
+  it("checks all links are valid", () => {
+    cy.fixture<[string]>("blogs").then((data) => {
+      data.forEach((slug) => {
+        cy.visit(`blogs/${slug}`).getAllLinks();
+      });
+    });
+  });
+
+  it("scrolls to id element", () => {
+    cy.visit("/blogs/async-messaging");
+    cy.get("#conclusion").scrollIntoView().wait(1000); // Wait for smooth scroll to finish
+
+    cy.getBySel("table-of-contents").within(() => {
+      cy.contains("Conclusion").should("have.attr", "aria-current", "true");
+    });
+  });
+});
