@@ -7,6 +7,7 @@ const StyledImage = ({ alt, src, className, ...rest }: ImageProps) => {
       className={clsx("rounded-md", className)}
       alt={alt}
       src={src}
+      quality={100}
       {...rest}
     />
   );
