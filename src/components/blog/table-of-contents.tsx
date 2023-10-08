@@ -49,17 +49,23 @@ const TableOfContents = ({ headings }: TableOfContentsProps) => {
   const { activeSlug } = useTableOfContents(headings);
 
   return (
-    <div className="hidden lg:sticky lg:top-32 lg:flex lg:w-full lg:flex-col lg:items-start lg:gap-1">
+    <div
+      data-test="table-of-contents"
+      className="hidden lg:sticky lg:top-32 lg:flex lg:w-full lg:flex-col lg:items-start lg:gap-1"
+    >
       <span className="text-lg font-bold">Table of Contents</span>
       {headings.map(({ slug, level, text }) => {
+        const active = activeSlug === slug;
         return (
           <a
+            data-test={`table-of-contents-${slug}`}
             key={slug}
+            aria-current={active}
             href={`#${slug}`}
             className={clsx(
               "inline-block cursor-pointer hover:font-semibold hover:text-indigo-500 dark:hover:text-indigo-500",
               MARGINS[level],
-              activeSlug === slug
+              active
                 ? "font-semibold text-indigo-500 dark:text-indigo-500"
                 : "text-light-medium dark:text-dark-medium"
             )}
