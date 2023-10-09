@@ -89,7 +89,7 @@ describe("blogs list", () => {
     });
 
     // Inspired from https://www.cypress.io/blog/2020/07/27/sorting-the-table
-    it.only("checks that all sorting options work as expected", () => {
+    it("checks that all sorting options work as expected", () => {
       this.sortData.forEach((item: { sortKey: string; text: string }) => {
         // Select the sorting method
         cy.getBySel("blog-sortby").should("be.visible").click();
