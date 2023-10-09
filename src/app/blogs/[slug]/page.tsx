@@ -22,13 +22,9 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   return { title: blog.title, tags: blog.tags };
 };
 
-type Props = { params: { slug: string } };
-
 const BlogPost = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
   const blog = findBlogBySlug(slug);
-
-  console.error(slug, blog?.slug);
   if (!blog) return notFound();
 
   const { title, imageSrc, lastEdited, published } = blog;
