@@ -156,7 +156,19 @@ describe("blogs page", () => {
 
   it("scrolls to id element", () => {
     cy.visit("/blogs/async-messaging");
-    cy.get("#conclusion").scrollIntoView().wait(1000); // Wait for smooth scroll to finish
+
+    cy.getBySel("table-of-contents").within(() => {
+      cy.contains("Conclusion").should("have.attr", "aria-current", "false");
+    });
+
+    cy.contains("h2", "Conclusion").scrollIntoView({
+      offset: {
+        top: -100, // Some offset to account for the header component
+        left: 0,
+      },
+      easing: "linear",
+      duration: 1000,
+    });
 
     cy.getBySel("table-of-contents").within(() => {
       cy.contains("Conclusion").should("have.attr", "aria-current", "true");
