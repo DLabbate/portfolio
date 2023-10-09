@@ -16,9 +16,16 @@ Cypress.Commands.add("getBySelLike", (selector, ...args) => {
  */
 Cypress.Commands.add("getAllLinks", () => {
   return cy.get("a").each((a) => {
+    const url = a.prop("href");
     cy.request({
-      url: a.prop("href"),
+      url,
       failOnStatusCode: false,
+    }).then((response) => {
+      // Log the values
+      const status = response.status;
+      response.isOkStatusCode
+        ? console.log(url, status)
+        : console.error(url, status);
     });
   });
 });

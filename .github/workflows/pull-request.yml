@@ -16,4 +16,3 @@ jobs:
           browser: chrome
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          DEBUG: "cypress:*"
