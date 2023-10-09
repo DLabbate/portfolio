@@ -17,7 +17,10 @@ const BlogViews = ({ slug, views, trackView = false }: Props) => {
   }, [slug, trackView]);
 
   return (
-    <span className="inline-block h-fit w-auto whitespace-nowrap rounded-sm bg-primary-200 p-1 font-mono text-sm dark:bg-primary-800">
+    <span
+      data-test="view-counter"
+      className="inline-block h-fit w-auto whitespace-nowrap rounded-sm bg-primary-200 p-1 font-mono text-sm dark:bg-primary-800"
+    >
       {views.toLocaleString("en-US")} Views
     </span>
   );

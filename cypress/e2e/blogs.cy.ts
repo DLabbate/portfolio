@@ -75,6 +75,71 @@ describe("blogs list", () => {
       expect(loc.search).to.eq("?tags=Microservices");
     });
   });
+
+  describe("sorting", () => {
+    beforeEach(() => {
+      cy.fixture<[string]>("blogs").then((data) => {
+        this.blogs = data;
+      });
+      cy.fixture<[{ sortKey: string; text: string }]>("blogs-sort").then(
+        (data) => {
+          this.sortData = data;
+        }
+      );
+    });
+
+    // Inspired from https://www.cypress.io/blog/2020/07/27/sorting-the-table
+    it.only("checks that all sorting options work as expected", () => {
+      this.sortData.forEach((item: { sortKey: string; text: string }) => {
+        // Select the sorting method
+        cy.getBySel("blog-sortby").should("be.visible").click();
+        cy.getBySel(item.sortKey).should("be.visible").click();
+
+        // Wait for query params to be updated
+        cy.location().should((loc) => {
+          expect(loc.search).to.include(item.sortKey);
+        });
+
+        // Next, gather the data and compare with expected values
+
+        type SortType = "views" | "date";
+
+        const data: Record<
+          SortType,
+          {
+            identifier: string; // Identifier (data-test)
+            iteratee: (el: HTMLElement) => any; // Converting from the text to appropriate value for comparison
+          }
+        > = {
+          views: {
+            identifier: "view-counter",
+            iteratee: (el) => Number(el.innerText.split(" ")[0]),
+          },
+          date: {
+            identifier: "blog-date",
+            iteratee: (el) =>
+              new Date(el.innerText.replace(/(st|nd|rd|th)/, "")),
+          },
+        };
+
+        const sortType = item.sortKey.includes("views") ? "views" : "date";
+        const { identifier, iteratee } = data[sortType];
+
+        cy.getBySel(identifier)
+          .should("have.length", this.blogs.length)
+          .then(($items) => Cypress._.map($items, iteratee))
+          .then(($items) => {
+            let expected = Cypress._.sortBy($items);
+            if (item.sortKey.includes("desc")) {
+              expected = expected.reverse();
+            }
+
+            // Assert expected order
+            expect(expected).to.deep.equal($items);
+          });
+      });
+    });
+  });
 });
 
 describe("blogs page", () => {

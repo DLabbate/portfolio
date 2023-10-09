@@ -79,7 +79,8 @@ const BlogSort = () => {
           {SORT_LIST.map((item) => {
             return (
               <div
-                key={item.text}
+                key={item.sortKey}
+                data-test={item.sortKey}
                 className={clsx(
                   "flex-1 cursor-pointer p-2 hover:bg-primary-100 hover:text-light dark:hover:bg-primary-800 dark:hover:text-dark",
                   selected === item &&
