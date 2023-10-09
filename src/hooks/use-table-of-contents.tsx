@@ -16,7 +16,7 @@ export function useTableOfContents<T extends { slug: string }>(headings: T[]) {
 
     const visibleHeadings = headingElements.filter(
       // Offset of 96px to account for the header
-      (el) => el && isInViewport(el, -96)
+      (el) => el && isInViewport(el, 96)
     );
 
     if (visibleHeadings.length >= 1) {

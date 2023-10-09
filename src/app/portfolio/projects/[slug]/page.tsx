@@ -1,4 +1,4 @@
-import { Mdx } from "@/components/mdx/mdx";
+import { Mdx } from "@/components/mdx";
 import { allProjects } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 
@@ -21,13 +21,13 @@ const ProjectPage = ({ params }: { params: { slug: string } }) => {
   if (!project) return notFound();
 
   return (
-    <div className="">
+    <>
       <div className="mb-8 grid grid-cols-1 gap-2 overflow-hidden">
         <h1 className="text-4xl font-bold">{project.title}</h1>
         <span className="text-lg italic">{project.subtitle}</span>
       </div>
       <Mdx code={project.body.code} />
-    </div>
+    </>
   );
 };
 

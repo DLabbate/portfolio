@@ -60,8 +60,8 @@ function blogIncludesAllTags(
 ): boolean {
   if (selectedTags.length === 0) return true;
 
-  const tags = new Set<string>(blog.tags);
-  return selectedTags.every((tag) => tags.has(tag));
+  const blogTags = new Set<string>(blog.tags);
+  return selectedTags.every((selectedTag) => blogTags.has(selectedTag));
 }
 
 /**
@@ -75,12 +75,16 @@ function anyBlogExistsWithAllTags(
 }
 
 /**
- * Determines the state of a given tag.
+ *  Determines the state of a given tag.
+ * @param tag The tag for which the state needs to be computed.
+ * @param blogs The list of all blogs.
+ * @param selectedTags The selected tags.
+ * @returns The state of the tag (`active`, `disabled`, `neutral`)
  */
 function getTagState(
+  tag: string,
   blogs: FormattedBlog[],
-  selectedTags: string[],
-  tag: string
+  selectedTags: string[]
 ): TagState {
   // If the tag is already selected, it is active.
   if (selectedTags.includes(tag)) {
@@ -107,7 +111,6 @@ function blogIncludesText(blog: Blog, text: string | undefined) {
 
 /**
  * Compares two blogs based on the specified sorting criteria.
- *
  * @param sortBy - The key to determine the sorting order.
  * @param blog1 - The first blog to compare.
  * @param blog2 - The second blog to compare.

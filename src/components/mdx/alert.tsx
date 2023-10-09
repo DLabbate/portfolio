@@ -6,17 +6,17 @@ type Type = "info" | "warning";
 
 type Variant = {
   className: string;
-  Icon: Icon;
+  icon: Icon;
 };
 
 const VARIANTS: Record<Type, Variant> = {
   info: {
-    className: " text-blue-500 border-blue-500 bg-blue-500/10",
-    Icon: Info,
+    className: "text-blue-500 border-blue-500 bg-blue-500/10",
+    icon: Info,
   },
   warning: {
-    className: " text-yellow-500 border-yellow-500 bg-yellow-500/10",
-    Icon: AlertTriangle,
+    className: "text-yellow-500 border-yellow-500 bg-yellow-500/10",
+    icon: AlertTriangle,
   },
 };
 
@@ -27,7 +27,7 @@ type Props = {
 };
 
 const Alert = ({ type, title, text }: Props) => {
-  const { className, Icon } = VARIANTS[type];
+  const { className, icon: Icon } = VARIANTS[type];
 
   return (
     <div
