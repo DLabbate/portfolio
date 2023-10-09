@@ -1,18 +1,25 @@
-describe("blogs list", function () {
-  beforeEach(function () {
+describe("blogs list", () => {
+  let blogs: string[];
+  let sortData: [{ sortKey: string; text: string }];
+
+  beforeEach(() => {
     cy.visit("/blogs");
 
-    cy.fixture<[string]>("blogs").as("blogs");
-    cy.fixture<[{ sortKey: string; text: string }]>("blogs-sort").as(
-      "sortData"
+    cy.fixture<[string]>("blogs").then((data) => {
+      blogs = data;
+    });
+    cy.fixture<[{ sortKey: string; text: string }]>("blogs-sort").then(
+      (data) => {
+        sortData = data;
+      }
     );
   });
 
-  it("checks all links are valid", function () {
+  it("checks all links are valid", () => {
     cy.getAllLinks();
   });
 
-  it("checks input fields work", function () {
+  it("checks input fields work", () => {
     cy.get('[placeholder="Search..."]').should("be.visible");
     cy.contains("Filter By Tag").should("be.visible");
     cy.contains("Sort By").should("be.visible");
@@ -56,7 +63,7 @@ describe("blogs list", function () {
     });
   });
 
-  it("checks tags can be toggled", function () {
+  it("checks tags can be toggled", () => {
     const tag1 = "Microservices";
     const tag2 = "Design Patterns";
 
@@ -81,8 +88,8 @@ describe("blogs list", function () {
     });
   });
 
-  it("checks that all sorting options work as expected", function () {
-    this.sortData.forEach((item: { sortKey: string; text: string }) => {
+  it("checks that all sorting options work as expected", () => {
+    sortData.forEach((item: { sortKey: string; text: string }) => {
       // Select the sorting method
       cy.getBySel("blog-sortby").should("be.visible").click();
       cy.getBySel(item.sortKey).should("be.visible").click();
@@ -117,7 +124,7 @@ describe("blogs list", function () {
       const { identifier, iteratee } = data[sortType];
 
       cy.getBySel(identifier)
-        .should("have.length", this.blogs.length)
+        .should("have.length", blogs.length)
         .then(($items) => Cypress._.map($items, iteratee))
         .then(($items) => {
           let expected = Cypress._.sortBy($items);
@@ -132,20 +139,24 @@ describe("blogs list", function () {
   });
 });
 
-describe("blogs page", function () {
-  beforeEach(function () {
+describe("blogs page", () => {
+  let blogs: string[];
+
+  beforeEach(() => {
     cy.viewport(1280, 720);
 
-    cy.fixture<[string]>("blogs").as("blogs");
+    cy.fixture<[string]>("blogs").then((data) => {
+      blogs = data;
+    });
   });
 
-  it("checks all links are valid", function () {
-    this.blogs.forEach((slug: string) => {
+  it("checks all links are valid", () => {
+    blogs.forEach((slug: string) => {
       cy.visit(`blogs/${slug}`).getAllLinks();
     });
   });
 
-  it("scrolls to id element", function () {
+  it("scrolls to id element", () => {
     cy.visit("/blogs/async-messaging");
 
     cy.getBySel("table-of-contents").within(() => {

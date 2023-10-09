@@ -1,9 +1,9 @@
-describe("home page", function () {
-  beforeEach(function () {
+describe("home page", () => {
+  beforeEach(() => {
     cy.visit("/");
   });
 
-  it("checks all links are valid", function () {
+  it("checks all links are valid", () => {
     cy.getAllLinks();
   });
 });
