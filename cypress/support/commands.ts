@@ -21,11 +21,7 @@ Cypress.Commands.add("getAllLinks", () => {
       url,
       failOnStatusCode: false,
     }).then((response) => {
-      // Log the values
-      const status = response.status;
-      response.isOkStatusCode
-        ? console.log(url, status)
-        : console.error(url, status);
+      if (!response.isOkStatusCode) cy.log(url, response.status);
     });
   });
 });
