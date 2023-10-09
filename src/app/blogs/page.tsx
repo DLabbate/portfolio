@@ -80,7 +80,7 @@ const Blogs = async ({ searchParams }: Params) => {
             <BlogTag
               key={tag}
               label={tag}
-              state={getTagState(blogs, selectedTags, tag)}
+              state={getTagState(tag, blogs, selectedTags)}
             />
           );
         })}
