@@ -24,7 +24,7 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
 
 type Props = { params: { slug: string } };
 
-const BlogPost = async ({ params }: Props) => {
+const BlogPost = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
   const blog = findBlogBySlug(slug);
 

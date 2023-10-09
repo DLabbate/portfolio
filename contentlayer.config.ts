@@ -38,7 +38,7 @@ export const Blog = defineDocumentType(() => ({
   computedFields: {
     slug: {
       type: "string",
-      resolve: (project) => project._raw.sourceFileName.replace(".mdx", ""),
+      resolve: (blog) => blog._raw.sourceFileName.replace(".mdx", ""),
     },
     headings: {
       type: "json",
