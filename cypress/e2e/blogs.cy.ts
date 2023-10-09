@@ -140,7 +140,7 @@ describe("blogs page", function () {
   });
 
   it("checks all links are valid", function () {
-    this.blogs.forEach((slug) => {
+    this.blogs.forEach((slug: string) => {
       cy.visit(`blogs/${slug}`).getAllLinks();
     });
   });
