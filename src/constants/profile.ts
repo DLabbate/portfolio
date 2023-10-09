@@ -10,7 +10,6 @@ import genetec from "public/organizations/genetec.png";
 import concordia from "public/organizations/concordia.png";
 import cae from "public/organizations/cae.png";
 import { type StaticImageData } from "next/image";
-import { format, parseISO } from "date-fns";
 
 export const TECHNOLOGIES: ReadonlyArray<string> = [
   "react",
@@ -202,7 +201,7 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
     organization: {
       name: "Concordia University",
       logo: concordia,
-      link: "https://www.concordia.com",
+      link: "https://www.concordia.ca",
     },
     timeframe: {
       from: "2020-06",
@@ -241,7 +240,7 @@ export const EDUCATION: ReadonlyArray<TimelineEntry> = [
     organization: {
       name: "Concordia University",
       logo: concordia,
-      link: "https://www.concordia.com",
+      link: "https://www.concordia.ca",
     },
     timeframe: {
       from: "2017-09",

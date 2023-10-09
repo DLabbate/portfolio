@@ -1,4 +1,4 @@
-import { isInViewport } from "@/lib/html-utils";
+import { isInViewport } from "@/lib/viewport";
 import { useState, useCallback, useEffect } from "react";
 import { useScroll } from "./use-events";
 
