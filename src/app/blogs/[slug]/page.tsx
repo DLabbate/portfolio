@@ -27,6 +27,8 @@ type Props = { params: { slug: string } };
 const BlogPost = async ({ params }: Props) => {
   const { slug } = params;
   const blog = findBlogBySlug(slug);
+
+  console.error(slug, blog?.slug);
   if (!blog) return notFound();
 
   const { title, imageSrc, lastEdited, published } = blog;
