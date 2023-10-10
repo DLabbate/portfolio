@@ -40,6 +40,7 @@ export const Blog = defineDocumentType(() => ({
       type: "string",
       resolve: (blog) => blog._raw.sourceFileName.replace(".mdx", ""),
     },
+    // Inspired from https://yusuf.fyi/posts/contentlayer-table-of-contents
     headings: {
       type: "json",
       resolve: async (doc) => {
