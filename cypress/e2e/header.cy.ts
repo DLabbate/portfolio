@@ -3,7 +3,7 @@ describe("header", () => {
 
   context("large screen", () => {
     beforeEach(() => {
-      cy.fixture<[{ text: string; path: string }]>("pages").then((data) => {
+      cy.fixture<[{ text: string; path: string }]>("header").then((data) => {
         pages = data;
       });
       cy.viewport(1280, 720);

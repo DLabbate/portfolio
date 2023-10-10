@@ -15,6 +15,10 @@ describe("blogs list", () => {
     );
   });
 
+  it("checks expected number of blogs", () => {
+    cy.getBySel("blog-thumbnail").should("have.length", blogs.length);
+  });
+
   it("checks input fields work", () => {
     cy.get('[placeholder="Search..."]').should("be.visible");
     cy.contains("Filter By Tag").should("be.visible");
