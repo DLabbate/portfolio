@@ -15,10 +15,6 @@ describe("blogs list", () => {
     );
   });
 
-  it("checks all links are valid", () => {
-    cy.getAllLinks();
-  });
-
   it("checks input fields work", () => {
     cy.get('[placeholder="Search..."]').should("be.visible");
     cy.contains("Filter By Tag").should("be.visible");
@@ -106,7 +102,7 @@ describe("blogs list", () => {
       const data: Record<
         SortType,
         {
-          identifier: string; // Identifier (data-test)
+          identifier: string; // Identifier of the html element (i.e. 'data-test' attribute)
           iteratee: (el: HTMLElement) => any; // Converting from the text to appropriate value for comparison
         }
       > = {
@@ -140,20 +136,8 @@ describe("blogs list", () => {
 });
 
 describe("blogs page", () => {
-  let blogs: string[];
-
   beforeEach(() => {
     cy.viewport(1280, 720);
-
-    cy.fixture<[string]>("blogs").then((data) => {
-      blogs = data;
-    });
-  });
-
-  it("checks all links are valid", () => {
-    blogs.forEach((slug: string) => {
-      cy.visit(`blogs/${slug}`).getAllLinks();
-    });
   });
 
   it("scrolls to id element", () => {

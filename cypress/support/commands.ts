@@ -22,7 +22,7 @@ Cypress.Commands.add("getAllLinks", () => {
       failOnStatusCode: false,
     }).then((response) => {
       if (!response.isOkStatusCode)
-        cy.task("log", `(${response.status}) ${url}`);
+        cy.task("log", `Status ${response.status} for url: ${url}`);
     });
   });
 });

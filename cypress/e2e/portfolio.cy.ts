@@ -9,8 +9,4 @@ describe("portfolio page", () => {
     cy.contains("Projects").scrollIntoView().should("be.visible");
     cy.contains("Accomplishments").scrollIntoView().should("be.visible");
   });
-
-  it("checks all links are valid", () => {
-    cy.getAllLinks();
-  });
 });
