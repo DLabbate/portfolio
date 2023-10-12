@@ -12,6 +12,8 @@ const connection = connect({
 
 export const db = drizzle(connection, { schema });
 
+export const revalidate = 0;
+
 export const getAllBlogViews = cache(() => {
   return db.query.blogViews.findMany().execute();
 });
