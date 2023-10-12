@@ -1,18 +1,14 @@
 describe("blogs list", () => {
   let blogs: string[];
-  let sortData: [{ sortKey: string; text: string }];
 
-  beforeEach(() => {
-    cy.visit("/blogs");
-
+  before(() => {
     cy.fixture<[string]>("blogs").then((data) => {
       blogs = data;
     });
-    cy.fixture<[{ sortKey: string; text: string }]>("blogs-sort").then(
-      (data) => {
-        sortData = data;
-      }
-    );
+  });
+
+  beforeEach(() => {
+    cy.visit("/blogs");
   });
 
   it("checks expected number of blogs", () => {
@@ -20,40 +16,26 @@ describe("blogs list", () => {
   });
 
   it("checks input fields work", () => {
+    // Search
     cy.get('[placeholder="Search..."]').should("be.visible");
-    cy.contains("Filter By Tag").should("be.visible");
-    cy.contains("Sort By").should("be.visible");
-
-    // Search Input
-    const searchQuery = "Scalab";
-    cy.getBySel("blog-search-input").type(searchQuery);
-    cy.location().should((loc) => {
-      expect(loc.search).to.include(`search=${searchQuery}`);
-    });
+    cy.searchBlogs("Scalab");
 
     // Tags
-    const tag = "Microservices";
-    cy.contains(tag)
-      .should("have.attr", "aria-pressed", "false")
-      .click()
-      .should("have.attr", "aria-pressed", "true");
-    cy.location().should((loc) => {
-      expect(loc.search).to.include(`tags=${tag}`);
-    });
+    cy.contains("Filter By Tag").should("be.visible");
+    cy.addBlogTag("Microservices");
 
-    // Sort By
-    cy.getBySel("blog-sortby").should("be.visible").click();
-    cy.contains("Date (Oldest to Newest)").should("be.visible").click();
-    cy.location().should((loc) => {
-      expect(loc.search).to.include("sortBy=date-asc");
-    });
+    // Sort by
+    cy.contains("Sort By").should("be.visible");
+    cy.sortBlogs("date-asc");
 
-    // Expected Blog
+    // Assert the query params
     cy.location().should((loc) => {
       expect(loc.search).to.eq(
         "?search=Scalab&tags=Microservices&sortBy=date-asc"
       );
     });
+
+    // Assert the expected blog
     cy.contains("Scalability With Asynchronous Messaging")
       .scrollIntoView()
       .should("be.visible")
@@ -67,74 +49,73 @@ describe("blogs list", () => {
     const tag1 = "Microservices";
     const tag2 = "Design Patterns";
 
-    cy.contains(tag1)
-      .should("have.attr", "aria-pressed", "false")
-      .click()
-      .should("have.attr", "aria-pressed", "true");
-
-    cy.contains(tag2)
-      .should("have.attr", "aria-pressed", "false")
-      .click()
-      .should("have.attr", "aria-pressed", "true");
+    cy.addBlogTag(tag1);
+    cy.addBlogTag(tag2);
 
     cy.location().should((loc) => {
       expect(loc.search).to.eq("?tags=Microservices&tags=Design+Patterns");
     });
 
-    cy.contains(tag2).click().should("have.attr", "aria-pressed", "false");
+    cy.removeBlogTag(tag2);
 
     cy.location().should((loc) => {
       expect(loc.search).to.eq("?tags=Microservices");
     });
   });
 
-  it("checks that all sorting options work as expected", () => {
-    sortData.forEach((item: { sortKey: string; text: string }) => {
-      // Select the sorting method
-      cy.getBySel("blog-sortby").should("be.visible").click();
-      cy.getBySel(item.sortKey).should("be.visible").click();
+  context("sorting", () => {
+    const viewsIdentifier = "view-counter";
+    const viewsExtractor = (el: HTMLElement): number =>
+      Number(el.innerText.replace(",", "").split(" ")[0]); // Extract the number from something like "1,043 Views"
 
-      // Wait for query params to be updated
-      cy.location().should((loc) => {
-        expect(loc.search).to.include(item.sortKey);
+    const dateIdentifier = "blog-date";
+    const dateExtractor = (el: HTMLElement): Date =>
+      new Date(el.innerText.replace(/(st|nd|rd|th)/, "")); // Extract the date from something like "October 2nd, 2023"
+
+    type SortData = {
+      sortKey: "views-asc" | "views-desc" | "date-asc" | "date-desc";
+      text: string;
+      ascending: boolean;
+      extractor: (el: HTMLElement) => any;
+      identifier: string;
+    };
+
+    const SORT_DATA: SortData[] = [
+      {
+        sortKey: "date-desc",
+        text: "Date (Newest to Oldest)",
+        ascending: false,
+        extractor: dateExtractor,
+        identifier: dateIdentifier,
+      },
+      {
+        sortKey: "date-asc",
+        text: "Date (Oldest to Newest)",
+        ascending: true,
+        extractor: dateExtractor,
+        identifier: dateIdentifier,
+      },
+      {
+        sortKey: "views-desc",
+        text: "Views (High to Low)",
+        ascending: false,
+        extractor: viewsExtractor,
+        identifier: viewsIdentifier,
+      },
+      {
+        sortKey: "views-asc",
+        text: "Views (Low to High)",
+        ascending: true,
+        extractor: viewsExtractor,
+        identifier: viewsIdentifier,
+      },
+    ];
+
+    SORT_DATA.forEach(({ text, identifier, sortKey, extractor, ascending }) => {
+      it("sorts by date: " + text, () => {
+        cy.sortBlogs(sortKey);
+        cy.checkSorted(identifier, blogs.length, extractor, { ascending });
       });
-
-      // Next, gather the data and compare with expected values
-
-      type SortType = "views" | "date";
-
-      const data: Record<
-        SortType,
-        {
-          identifier: string; // Identifier of the html element (i.e. 'data-test' attribute)
-          iteratee: (el: HTMLElement) => any; // Converting from the text to appropriate value for comparison
-        }
-      > = {
-        views: {
-          identifier: "view-counter",
-          iteratee: (el) => Number(el.innerText.split(" ")[0]),
-        },
-        date: {
-          identifier: "blog-date",
-          iteratee: (el) => new Date(el.innerText.replace(/(st|nd|rd|th)/, "")),
-        },
-      };
-
-      const sortType = item.sortKey.includes("views") ? "views" : "date";
-      const { identifier, iteratee } = data[sortType];
-
-      cy.getBySel(identifier)
-        .should("have.length", blogs.length)
-        .then(($items) => Cypress._.map($items, iteratee))
-        .then(($items) => {
-          let expected = Cypress._.sortBy($items);
-          if (item.sortKey.includes("desc")) {
-            expected = expected.reverse();
-          }
-
-          // Assert expected order
-          expect(expected).to.deep.equal($items);
-        });
     });
   });
 });

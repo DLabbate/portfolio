@@ -1,11 +1,14 @@
 describe("header", () => {
   let pages: [{ text: string; path: string }];
 
+  before(() => {
+    cy.fixture<[{ text: string; path: string }]>("header").then((data) => {
+      pages = data;
+    });
+  });
+
   context("large screen", () => {
     beforeEach(() => {
-      cy.fixture<[{ text: string; path: string }]>("header").then((data) => {
-        pages = data;
-      });
       cy.viewport(1280, 720);
       cy.visit("/");
       cy.getBySel("large-header").should("be.visible");
@@ -23,11 +26,8 @@ describe("header", () => {
     });
 
     it("toggles light/dark mode", () => {
-      cy.getBySel("moon-icon").filter(":visible").click();
-      cy.get("html").should("have.class", "light");
-
-      cy.getBySel("sun-icon").filter(":visible").click();
-      cy.get("html").should("have.class", "dark");
+      cy.setLightMode();
+      cy.setDarkMode();
     });
   });
 
@@ -54,11 +54,8 @@ describe("header", () => {
     });
 
     it("toggles light/dark mode", () => {
-      cy.getBySel("moon-icon").filter(":visible").click();
-      cy.get("html").should("have.class", "light");
-
-      cy.getBySel("sun-icon").filter(":visible").click();
-      cy.get("html").should("have.class", "dark");
+      cy.setLightMode();
+      cy.setDarkMode();
     });
   });
 });

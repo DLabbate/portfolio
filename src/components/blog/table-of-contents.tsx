@@ -58,7 +58,6 @@ const TableOfContents = ({ headings }: TableOfContentsProps) => {
         const active = activeSlug === slug;
         return (
           <a
-            data-test={`table-of-contents-${slug}`}
             key={slug}
             aria-current={active}
             href={`#${slug}`}
