@@ -22,6 +22,8 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   return { title: blog.title, tags: blog.tags };
 };
 
+export const revalidate = 0;
+
 const BlogPost = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
   const blog = findBlogBySlug(slug);
