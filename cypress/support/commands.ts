@@ -10,7 +10,7 @@
  * @param {string} param - The query parameter to be encoded.
  * @returns {string} The encoded query parameter.
  */
-const encodeQueryParam = (param): string =>
+const encodeQueryParam = (param: string): string =>
   encodeURIComponent(param).replace(/%20/g, "+");
 
 Cypress.Commands.add("getBySel", (selector, ...args) => {
