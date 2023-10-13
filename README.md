@@ -13,7 +13,7 @@ Welcome to my portfolio! This website showcases my experience, projects, and blo
 - [MDX](https://mdxjs.com/) markdown content
 - [Contentlayer](https://contentlayer.dev/) for typesafe content handling
 - [Planetscale](https://planetscale.com/) SQL database
-- [DrizzleORM](https://orm.drizzle.team/) typescript based ORM
+- [DrizzleORM](https://orm.drizzle.team/) typescript SQL ORM
 - [Cypress](https://www.cypress.io/) end-to-end testing
 
 ## References & Inspiration
