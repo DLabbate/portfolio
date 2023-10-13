@@ -1,6 +1,6 @@
 import * as motion from "@/components/animations/motion";
 import Image from "next/image";
-import { type Project } from "@/constants/profile";
+import { type Project as ProjectInfo } from "@/constants/profile";
 import { TechnologyBadge } from "./technology-badge";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ const Project = ({
   technologies,
   image,
   link,
-}: Project) => {
+}: ProjectInfo) => {
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}

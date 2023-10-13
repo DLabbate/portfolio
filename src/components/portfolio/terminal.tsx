@@ -34,7 +34,7 @@ const Terminal = ({ text }: Props) => {
         {Array.from({ length: 3 }, (_, index) => (
           <div
             key={index}
-            className="h-4 w-4 rounded-full border border-primary-800"
+            className="h-4 w-4 rounded-full border border-primary-200 dark:border-primary-800"
           />
         ))}
       </div>

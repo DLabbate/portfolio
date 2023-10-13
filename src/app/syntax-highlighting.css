@@ -1,0 +1,21 @@
+pre[data-theme="light"] {
+  display: block;
+  background-color: theme("colors.white");
+  border-width: 1px;
+  border-color: theme("colors.primary.200");
+}
+
+pre[data-theme="dark"] {
+  display: none;
+}
+
+.dark pre[data-theme="light"] {
+  display: none;
+}
+
+.dark pre[data-theme="dark"] {
+  display: block;
+  background-color: theme("colors.primary.900");
+  border-width: 1px;
+  border-color: theme("colors.primary.800");
+}

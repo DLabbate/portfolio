@@ -1,7 +1,5 @@
-import Accomplishment from "@/components/accomplishment";
 import Section from "@/components/layout/section";
-import Project from "@/components/project";
-import Timeline from "@/components/timeline";
+import { Project, Timeline, Accomplishment } from "@/components/portfolio";
 import {
   EXPERIENCE,
   EDUCATION,

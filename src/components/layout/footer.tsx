@@ -1,5 +1,5 @@
 import { SOCIAL_MEDIA } from "@/constants/profile";
-import SocialLink from "../social-link";
+import { SocialLink } from "@/components/social";
 
 const Footer = () => {
   return (

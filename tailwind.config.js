@@ -1,5 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  // https://github.com/tailwindlabs/tailwindcss/pull/8394
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,18 +16,8 @@ module.exports = {
         timeline: "auto 1fr auto",
         "timeline-small": "auto 1fr",
         accomplishment: "1fr auto",
-      },
-      textColor: {
-        light: {
-          DEFAULT: "#212121",
-          medium: "#666666",
-          disabled: "#9E9E9E",
-        },
-        dark: {
-          DEFAULT: "#e2e2e3",
-          medium: "#a5a5a9",
-          disabled: "#74747a",
-        },
+        "blog-page": "max-content 1fr",
+        "blogs-page": "1fr auto",
       },
       colors: {
         primary: {
@@ -41,7 +35,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-quicksand)"],
+        sans: ["var(--font-work-sans)"],
         mono: ["var(--font-spacemono)"],
       },
       typography: ({ theme }) => ({
@@ -85,8 +79,8 @@ module.exports = {
       textColor: ({ theme }) => ({
         light: {
           DEFAULT: theme("colors.primary[900]"),
-          medium: theme("colors.primary[700]"),
-          disabled: theme("colors.primary[600]"),
+          medium: theme("colors.primary[600]"),
+          disabled: theme("colors.primary[500]"),
         },
         dark: {
           DEFAULT: theme("colors.white"),
@@ -97,7 +91,7 @@ module.exports = {
       stroke: ({ theme }) => ({
         light: {
           DEFAULT: theme("colors.primary[900]"),
-          medium: theme("colors.primary[700]"),
+          medium: theme("colors.primary[600]"),
         },
         dark: {
           DEFAULT: theme("colors.white"),

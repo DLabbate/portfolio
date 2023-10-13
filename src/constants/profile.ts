@@ -10,7 +10,40 @@ import genetec from "public/organizations/genetec.png";
 import concordia from "public/organizations/concordia.png";
 import cae from "public/organizations/cae.png";
 import { type StaticImageData } from "next/image";
-import { Technology } from "@/components/technology-badge";
+
+export const TECHNOLOGIES: ReadonlyArray<string> = [
+  "react",
+  "reactnative",
+  "reactquery",
+  "jest",
+  "rtl",
+  "typescript",
+  "javascript",
+  "html",
+  "css",
+  "tailwind",
+  "nodejs",
+  "express",
+  "mongodb",
+  "firebase",
+  "csharp",
+  "dotnet",
+  "azure",
+  "aws",
+  "python",
+  "cpp",
+  "arduino",
+  "raspberrypi",
+  "bluetooth",
+  "java",
+  "androidstudio",
+  "googlemaps",
+  "opengl",
+  "unity",
+  "jira",
+];
+
+export type Technology = (typeof TECHNOLOGIES)[number];
 
 export type Project = Readonly<{
   title: string;
@@ -35,8 +68,8 @@ export type Organization = Readonly<{
 }>;
 
 export type TimeFrame = Readonly<{
-  from: Date;
-  to: Date | "Present";
+  from: string;
+  to: string | "Present";
 }>;
 
 export type TimelineEntry = Readonly<{
@@ -59,7 +92,11 @@ Here are some things you should know about me.
 🧠 I have a passion for learning & self improvement.
 📚 I'm resourceful and can overcome difficulties.`;
 
-export const SOCIAL_PLATFORMS = ["github", "youtube", "linkedin"] as const;
+export const SOCIAL_PLATFORMS: ReadonlyArray<string> = [
+  "github",
+  "youtube",
+  "linkedin",
+];
 
 export type SocialPlatform = (typeof SOCIAL_PLATFORMS)[number];
 
@@ -92,7 +129,7 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       link: "https://www.genetec.com",
     },
     timeframe: {
-      from: new Date(2023, 0),
+      from: "2023-01",
       to: "Present",
     },
     content: [
@@ -120,8 +157,8 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       link: "https://www.genetec.com",
     },
     timeframe: {
-      from: new Date(2022, 1),
-      to: new Date(2023, 0),
+      from: "2022-02",
+      to: "2023-01",
     },
     content: [
       "Refactored frontend codebase in React to utilize compound components, enhancing code modularity and reusability",
@@ -148,8 +185,8 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       link: "https://www.genetec.com",
     },
     timeframe: {
-      from: new Date(2021, 4),
-      to: new Date(2021, 7),
+      from: "2021-05",
+      to: "2021-08",
     },
     content: [
       "Worked on the backend codebase of a Cloud-based video surveillance system",
@@ -164,11 +201,11 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
     organization: {
       name: "Concordia University",
       logo: concordia,
-      link: "https://www.concordia.com",
+      link: "https://www.concordia.ca",
     },
     timeframe: {
-      from: new Date(2020, 5),
-      to: new Date(2020, 8),
+      from: "2020-06",
+      to: "2020-09",
     },
     content: [
       "Participated in the research of algorithmic solutions to ensure 5G networks adhere to Service Level Agreements",
@@ -184,8 +221,8 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       link: "https://www.cae.com",
     },
     timeframe: {
-      from: new Date(2018, 8),
-      to: new Date(2018, 11),
+      from: "2018-09",
+      to: "2018-12",
     },
     content: [
       "Executed test runs on medical simulation systems, ensuring comprehensive test coverage",
@@ -203,11 +240,11 @@ export const EDUCATION: ReadonlyArray<TimelineEntry> = [
     organization: {
       name: "Concordia University",
       logo: concordia,
-      link: "https://www.concordia.com",
+      link: "https://www.concordia.ca",
     },
     timeframe: {
-      from: new Date(2017, 8),
-      to: new Date(2021, 11),
+      from: "2017-09",
+      to: "2021-12",
     },
     content: [
       "GPA: 4.27/4.30",

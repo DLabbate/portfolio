@@ -1,20 +1,50 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "./syntax-highlighting.css";
 
 :root {
-  --scrollbar: #adb0c2;
-}
-
-.dark {
-  --scrollbar: #373949;
+  font-variant-ligatures: none;
 }
 
 *::-webkit-scrollbar {
-  width: 8px;
+  @apply h-2 w-2;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbar);
-  border-radius: 4px;
+  @apply rounded-full bg-primary-200 dark:bg-primary-800;
+}
+
+:is(h1, h2, h3, h4, h5, h6) {
+  /* To account for the header */
+  scroll-margin-top: 6rem;
+}
+
+/*  Anchor Headings */
+.prose :is(h1, h2, h3, h4, h5, h6) {
+  position: relative;
+}
+
+.prose .anchor {
+  @apply invisible absolute cursor-pointer no-underline;
+  margin-left: -1em;
+  width: calc(100% + 1em);
+}
+
+.anchor:hover {
+  @apply visible;
+}
+
+.prose .anchor:after {
+  @apply text-primary-200 dark:text-primary-700;
+  content: "#";
+}
+
+.prose *:hover > .anchor {
+  @apply visible;
+}
+
+/* Single backtick `code` */
+:not(pre) > code {
+  @apply whitespace-nowrap rounded-lg border border-primary-200 bg-primary-100 px-1 font-mono !font-normal text-light before:hidden after:hidden dark:border-primary-700 dark:bg-primary-800 dark:text-dark;
 }
