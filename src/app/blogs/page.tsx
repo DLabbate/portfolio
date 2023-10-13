@@ -43,8 +43,6 @@ type SearchParams = {
 
 type Params = { searchParams: SearchParams };
 
-export const revalidate = 10
-
 const Blogs = async ({ searchParams }: Params) => {
   const searchInput = searchParams.search;
   const sortBy = searchParams.sortBy as SortKey;
