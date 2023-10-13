@@ -46,5 +46,5 @@
 
 /* Single backtick `code` */
 :not(pre) > code {
-  @apply whitespace-nowrap rounded-lg border border-primary-300 bg-primary-200 px-1 font-mono !font-normal text-light before:hidden after:hidden dark:border-primary-700 dark:bg-primary-800 dark:text-dark;
+  @apply whitespace-nowrap rounded-lg border border-primary-200 bg-primary-100 px-1 font-mono !font-normal text-light before:hidden after:hidden dark:border-primary-700 dark:bg-primary-800 dark:text-dark;
 }
