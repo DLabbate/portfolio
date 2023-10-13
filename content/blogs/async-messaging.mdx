@@ -21,7 +21,7 @@ For example, an e-commerce system might consist of the following:
 - Shipping Service
 - ...
 
-While a distributed architecture holds many benefits, one common facing challenge is the **communication between microservices**.
+While a distributed architecture holds many benefits, one common challenge is the **communication between microservices**.
 
 There are various protocols and methods of communication that can be used between microservices.
 One popular approach is **REST APIs**, which use `HTTP` methods for resource manipulation.
@@ -65,7 +65,7 @@ Let's look into this pattern a bit deeper. Asynchronous messaging typically uses
 ## E-Commerce Example: Creating an Order
 
 Let's apply this architecture to the e-commerce scenario we mentioned earlier.
-Suppose we want to create a new order, then update the inventory and send a confirmation email to the user.
+Suppose we want to create a new order. After that, we need to update the inventory and send a confirmation email to the user.
 
 That might look like the following:
 
@@ -78,7 +78,7 @@ That might look like the following:
   height={427}
 />
 
-The Order Service submits a message to the _Fulfillment_ topic. Both the Inventory Service and Notification Service are subscribed to this topic.
+The Order Service submits a message to the Fulfillment topic. Both the Inventory Service and Notification Service are subscribed to this topic.
 When they receive this message, the services can execute their respective logic.
 
 ## Message Brokers
@@ -161,6 +161,6 @@ _Note that message brokers such as [Google Cloud](https://cloud.google.com/pubsu
 - [Microsoft Service Bus](https://azure.microsoft.com/en-ca/products/service-bus)
 - [Microsoft - Communication in a Microservice Architecture](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/communication-in-microservice-architecture)
 - [Microsoft - Asynchronous Message-Based Communication](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/asynchronous-message-based-communication)
-- [LinkedIn - Benefits & Challenges of Message Brokers](https://www.linkedin.com/advice/0/what-benefits-challenges-using-message-queues)
+- [LinkedIn - Benefits & Challenges of Message Queues](https://www.linkedin.com/advice/0/what-benefits-challenges-using-message-queues)
 - [IBM - What Are Message Brokers?](https://www.ibm.com/topics/message-brokers)
 - [VMware - What Is a Message Broker?](https://www.vmware.com/ca/topics/glossary/content/message-brokers.html)
