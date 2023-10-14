@@ -1,6 +1,5 @@
 "use client";
 
-import { incrementBlogViewsBySlug } from "@/app/actions";
 import React, { useEffect } from "react";
 
 type Props = {
@@ -12,7 +11,9 @@ type Props = {
 const BlogViews = ({ slug, views, trackView = false }: Props) => {
   useEffect(() => {
     if (trackView) {
-      incrementBlogViewsBySlug(slug);
+      fetch(`/blogs/${slug}/views`, {
+        method: "POST",
+      });
     }
   }, [slug, trackView]);
 
