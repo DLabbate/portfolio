@@ -1,8 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-
-// https://vercel.com/guides/rate-limiting-edge-middleware-vercel-kv
-
-import { db } from "@/lib/db";
+import { NextRequest } from "next/server";
+import { db, incrementBlogViewsBySlug } from "@/lib/db";
 import { blogViews } from "@/lib/db/schema";
 import { sql } from "drizzle-orm";
 import { kv } from "@vercel/kv";
@@ -10,13 +7,13 @@ import { createHash } from "crypto";
 import { Ratelimit } from "@upstash/ratelimit";
 
 /**
- * Rate limiter that allows 10 requests per 10 seconds
+ * Rate limiter that allows 5 requests per 10 seconds
  * @link https://github.com/upstash/ratelimit
  * @link https://github.com/vercel/examples/tree/main/edge-functions/api-rate-limit
  */
 const ratelimit = new Ratelimit({
   redis: kv,
-  limiter: Ratelimit.slidingWindow(10, "10s"),
+  limiter: Ratelimit.slidingWindow(5, "10s"),
 });
 
 export async function POST(
@@ -34,11 +31,7 @@ export async function POST(
   const { success } = await ratelimit.limit(identifier);
 
   if (success) {
-    // Increment views
-    db.insert(blogViews)
-      .values({ slug, views: 1 })
-      .onDuplicateKeyUpdate({ set: { views: sql`${blogViews.views} + 1` } })
-      .execute();
+    incrementBlogViewsBySlug(slug);
   }
 
   return new Response(null, { status: 204 });
