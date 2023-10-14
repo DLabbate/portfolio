@@ -14,6 +14,8 @@ Welcome to my portfolio! This website showcases my experience, projects, and blo
 - [Contentlayer](https://contentlayer.dev/) for typesafe content handling
 - [Planetscale](https://planetscale.com/) SQL database
 - [DrizzleORM](https://orm.drizzle.team/) typescript SQL ORM
+- [Upstash](https://github.com/upstash/ratelimit) rate limiting
+- [Vercel KV](https://vercel.com/docs/storage/vercel-kv) durable redis
 - [Cypress](https://www.cypress.io/) end-to-end testing
 
 ## References & Inspiration
@@ -22,6 +24,7 @@ Below are some software blogs I follow that have inspired me to work on this pro
 
 - [Kent C. Dodds](https://kentcdodds.com/)
 - [leerob](https://leerob.io/)
+- [Delba](https://delba.dev/)
 - [Theodorus Clarence](https://theodorusclarence.com/)
 - [Josh W Comeau](https://www.joshwcomeau.com/)
 

@@ -1,5 +1,4 @@
 import { type Accomplishment as AccomplishmentInfo } from "@/constants/profile";
-import * as motion from "@/components/animations/motion";
 import { Calendar } from "react-feather";
 
 const Accomplishment = ({
@@ -10,10 +9,9 @@ const Accomplishment = ({
   link,
 }: AccomplishmentInfo) => {
   return (
-    <motion.a
+    <a
       href={link}
-      className="relative flex w-full cursor-pointer flex-col rounded-lg border border-primary-200 bg-white p-4 shadow dark:border-primary-800 dark:bg-primary-900 md:gap-0 lg:w-[calc(100%/2-1rem/2)]"
-      whileHover={{ scale: 1.05 }}
+      className="relative flex w-full cursor-pointer flex-col rounded-lg border border-primary-200 bg-white p-4 shadow transition duration-150 ease-in-out hover:scale-105 dark:border-primary-800 dark:bg-primary-900 md:gap-0 lg:w-[calc(100%/2-1rem/2)]"
     >
       <span className="text-2xl">{title}</span>
       <span className="text-md text-light-medium dark:text-dark-medium">
@@ -31,7 +29,7 @@ const Accomplishment = ({
       <p className="col-span-2 mt-4 text-sm text-light-medium dark:text-dark-medium">
         {description}
       </p>
-    </motion.a>
+    </a>
   );
 };
 

@@ -76,13 +76,13 @@ const SmallHeader = () => {
   return (
     <>
       <div
-        className="flex h-24 w-full items-start justify-center p-8 backdrop-blur-md lg:hidden"
+        className="flex h-24 w-full items-center justify-center px-4 py-8 backdrop-blur-md xs:px-8 lg:hidden"
         data-test="small-header"
       >
-        <span className="flex-1 whitespace-nowrap font-mono text-2xl">
+        <span className="flex-1 whitespace-nowrap font-mono text-xl xs:text-2xl">
           {NAME}
         </span>
-        <div className="flex flex-1 justify-end gap-4">
+        <div className="flex flex-1 justify-end gap-2 xs:gap-4">
           <ThemeSelector />
           <button onClick={toggleMenu}>
             {menuOpen ? (

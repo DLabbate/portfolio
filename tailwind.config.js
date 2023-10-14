@@ -12,6 +12,9 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      screens: {
+        xs: "475px",
+      },
       gridTemplateColumns: {
         timeline: "auto 1fr auto",
         "timeline-small": "auto 1fr",
