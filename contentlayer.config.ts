@@ -3,6 +3,7 @@ import rehypePrettyCode, { Options } from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import GithubSlugger from "github-slugger";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import remarkGfm from "remark-gfm";
 
 export const Project = defineDocumentType(() => ({
   name: "Project",
@@ -75,6 +76,7 @@ export default makeSource({
   contentDirPath: "content",
   documentTypes: [Project, Blog],
   mdx: {
+    remarkPlugins: [remarkGfm],
     rehypePlugins: [
       [rehypePrettyCode, rehypePrettyCodeOptions],
       [rehypeSlug],
