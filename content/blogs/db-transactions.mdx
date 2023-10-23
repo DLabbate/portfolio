@@ -1,7 +1,7 @@
 ---
 title: Maintain Database Consistency With Transactions
-published: 2023-10-15
-lastEdited: 2023-10-15
+published: 2023-10-22
+lastEdited: 2023-10-22
 imageSrc: /blogs/db-transactions/thumbnail.jpg
 tags:
   - Databases
@@ -48,7 +48,7 @@ This is what the account details would look like:
 
 <Alert
   type="info"
-  text="A database transasction is an all-or-nothing operation. Either all the steps complete successfully, or none of them."
+  text="A database transaction is an all-or-nothing operation. Either all the steps complete successfully, or none of them."
 />
 
 Let's revise the example with a transaction.
@@ -70,7 +70,7 @@ Although the transaction failed, we have at least maintained the consistency of 
 
 ## Properties of Database Transactions
 
-Database transasctions are characterized by ACID properties (atomicity, consistency, isolation, durability).
+Database transactions are characterized by ACID properties (atomicity, consistency, isolation, durability).
 
 ### Atomicity
 
@@ -84,11 +84,11 @@ In our previous example of transferring funds, the sum of both accounts will be 
 
 ### Isolation
 
-The **isolation** property enforces that intermediate states of a transaction are not visible to other transactions. This allows transactions to run concurrenctly.
+The **isolation** property enforces that intermediate states of a transaction are not visible to other transactions. This allows transactions to run concurrently.
 
 ### Durability
 
-The **durability** propert guarantees that when a transaction completes successfully, the data changes are persisted and will not be reversed (even in the event of a system failure).
+The **durability** property guarantees that when a transaction completes successfully, the data changes are persisted and will not be reversed (even in the event of a system failure).
 
 ## Database Providers
 
@@ -100,7 +100,7 @@ Many databases provide this feature. Some examples are listed below:
 
 ## Conclusion
 
-If you need to perform miltple database operations atomically, you should consider transactions in order to maintain data consistency.
+If you need to perform multiple database operations atomically, you should consider transactions in order to maintain data consistency.
 
 ## References
 
