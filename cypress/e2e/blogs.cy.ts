@@ -23,6 +23,7 @@ describe("blogs list", () => {
     // Tags
     cy.contains("Filter By Tag").should("be.visible");
     cy.addBlogTag("Microservices");
+    cy.verifyTagDisabled("Databases");
 
     // Sort by
     cy.contains("Sort By").should("be.visible");
