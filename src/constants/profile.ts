@@ -15,8 +15,10 @@ export const TECHNOLOGIES: ReadonlyArray<string> = [
   "react",
   "reactnative",
   "reactquery",
+  "nextjs",
   "jest",
   "rtl",
+  "cypress",
   "typescript",
   "javascript",
   "html",
@@ -88,9 +90,9 @@ My name is Domenic.
 
 Here are some things you should know about me.
 
-🤓 I'm a Software Engineer.
-🧠 I have a passion for learning & self improvement.
-📚 I'm resourceful and can overcome difficulties.`;
+🤓 I am a Computer Engineer.
+📚 I have a passion for learning & self improvement.
+🧠 I excel at problem solving and finding innovative solutions.`;
 
 export const SOCIAL_PLATFORMS: ReadonlyArray<string> = [
   "github",

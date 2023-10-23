@@ -7,7 +7,7 @@ const Home = () => {
     <div className="bg-primary flex w-full flex-1 flex-col items-center justify-center">
       <Terminal text={ABOUT} />
       <motion.ul
-        className="m-4 flex w-full max-w-[55rem] flex-wrap items-center justify-center gap-2"
+        className="m-4 flex w-full max-w-[50rem] flex-wrap items-center justify-center gap-2"
         variants={{ show: { transition: { staggerChildren: 0.15 } } }}
         initial={"initial"}
         animate={"show"}
