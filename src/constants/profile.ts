@@ -92,7 +92,7 @@ Here are some things you should know about me.
 
 🤓 I am a Computer Engineer.
 📚 I have a passion for learning & self improvement.
-🧠 I excel at problem solving and finding innovative solutions.`;
+📝 I enjoy writing documentation to clarify complex technical concepts.`;
 
 export const SOCIAL_PLATFORMS: ReadonlyArray<string> = [
   "github",
