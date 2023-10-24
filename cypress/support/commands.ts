@@ -80,6 +80,10 @@ Cypress.Commands.add("removeBlogTag", (tag) => {
   });
 });
 
+Cypress.Commands.add("verifyTagDisabled", (tag) => {
+  cy.contains(tag).should("have.attr", "aria-disabled", "true");
+});
+
 Cypress.Commands.add(
   "sortBlogs",
   (sortKey: "date-asc" | "date-desc" | "views-asc" | "views-desc") => {

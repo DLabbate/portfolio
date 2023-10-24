@@ -27,6 +27,8 @@ import tailwind from "public/logos/tailwind.png";
 import firebase from "public/logos/firebase.png";
 import reactquery from "public/logos/reactquery.png";
 import jira from "public/logos/jira.png";
+import nextjs from "public/logos/nextjs.png";
+import cypress from "public/logos/cypress.png";
 import { Technology } from "@/constants/profile";
 
 type LabelData = {
@@ -150,6 +152,14 @@ const LOGO_DATA: Record<Technology, LabelData> = {
   jira: {
     displayName: "Jira",
     src: jira,
+  },
+  nextjs: {
+    displayName: "Next.js",
+    src: nextjs,
+  },
+  cypress: {
+    displayName: "Cypress",
+    src: cypress,
   },
 } as const;
 

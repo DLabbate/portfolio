@@ -1,0 +1,113 @@
+---
+title: Maintain Database Consistency With Transactions
+published: 2023-10-22
+lastEdited: 2023-10-22
+imageSrc: /blogs/db-transactions/thumbnail.jpg
+tags:
+  - Databases
+---
+
+## Introduction
+
+For many types of applications, maintaining data consistency is critical. In the following article we will discuss how a database transaction can help us meet this need.
+
+Let's begin with an example, _without_ using database transactions.
+
+## Example
+
+Imagine a bank transfer between recipients Bruno and Emily. Bruno would like to transfer an amount of $100 to Emily.
+
+Below is a table outlining the account details _before_ the transfer takes place.
+
+| Name  | Account Total |
+| ----- | ------------- |
+| Bruno | $1000         |
+| Emily | $1000         |
+
+The application logic might be similar to the following:
+
+1. Add $100 to Emily's bank account.
+2. Deduct $100 from Bruno's bank account.
+
+Now imagine that the database is experiencing some downtime, and the following occurs:
+
+✔️ Step 1 passes
+
+❌ Step 2 fails
+
+This is what the account details would look like:
+
+| Name  | Account Total |
+| ----- | ------------- |
+| Bruno | $1000         |
+| Emily | $1100         |
+
+**We are now in an inconsistent state! Emily has just received a free $100.**
+
+## Database Transactions
+
+<Alert
+  type="info"
+  text="A database transaction is an all-or-nothing operation. Either all the steps complete successfully, or none of them."
+/>
+
+Let's revise the example with a transaction.
+
+✔️ Step 1 succeeds
+
+❌ Step 2 fails
+
+If a transaction does not complete normally, the system rolls back the changes. In other words, the original state (prior to executing the transaction) is restored.
+
+Hence, both Bruno and Emily's account will be the same as before the transaction started.
+
+| Name  | Account Total |
+| ----- | ------------- |
+| Bruno | $1000         |
+| Emily | $1000         |
+
+Although the transaction failed, we have at least maintained the consistency of our data.
+
+## Properties of Database Transactions
+
+Database transactions are characterized by ACID properties (atomicity, consistency, isolation, durability).
+
+### Atomicity
+
+A transaction can involve several database operations. The **atomic** property of transactions guarantees that all of the operations complete successfully, or none at all.
+In other words, a transaction will never be _partially_ executed.
+
+### Consistency
+
+A transaction guarantees that our database will always move from one **consistent** state to another.
+In our previous example of transferring funds, the sum of both accounts will be the same before and after the transaction.
+
+### Isolation
+
+The **isolation** property enforces that intermediate states of a transaction are not visible to other transactions. This allows transactions to run concurrently.
+
+### Durability
+
+The **durability** property guarantees that when a transaction completes successfully, the data changes are persisted and will not be reversed (even in the event of a system failure).
+
+## Database Providers
+
+Many databases provide this feature. Some examples are listed below:
+
+- [PostgreSQL](https://www.postgresql.org/docs/current/tutorial-transactions.html)
+- [MySQL](https://dev.mysql.com/doc/refman/8.0/en/commit.html)
+- [MongoDB](https://www.mongodb.com/transactions)
+- ...
+
+## Conclusion
+
+If you need to perform multiple database operations atomically, you should consider transactions in order to maintain data consistency.
+
+## References
+
+- [Acid Properties of Transactions](https://www.ibm.com/docs/en/cics-ts/5.4?topic=processing-acid-properties-transactions)
+- [Commit and Rollback](https://www.ibm.com/docs/en/cics-ts/5.4?topic=processing-commit-rollback)
+- [What Are Database Transactions?](https://www.educative.io/answers/what-are-database-transactions)
+- [PostgreSQL](https://www.postgresql.org/docs/current/tutorial-transactions.html)
+- [MySQL](https://dev.mysql.com/doc/refman/8.0/en/commit.html)
+- [MongoDB](https://www.mongodb.com/transactions)

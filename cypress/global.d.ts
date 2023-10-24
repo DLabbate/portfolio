@@ -51,6 +51,11 @@ declare namespace Cypress {
     removeBlogTag(tag: string): Chainable<JQuery<HTMLElement>>;
 
     /**
+     * Verifies that a given tag is disabled.
+     */
+    verifyTagDisabled(tag: string): Chainable<JQuery<HTMLElement>>;
+
+    /**
      * Sorts blogs by a given key.
      */
     sortBlogs(

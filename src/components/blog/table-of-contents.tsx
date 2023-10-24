@@ -42,10 +42,11 @@ const MARGINS: Record<number, string> = {
 };
 
 type TableOfContentsProps = {
+  slug: string;
   headings: Heading[];
 };
 
-const TableOfContents = ({ headings }: TableOfContentsProps) => {
+const TableOfContents = ({ headings, slug }: TableOfContentsProps) => {
   const { activeSlug } = useTableOfContents(headings);
 
   return (
@@ -75,7 +76,7 @@ const TableOfContents = ({ headings }: TableOfContentsProps) => {
       })}
       <hr className="mb-4 mt-4 w-full border-primary-200 dark:border-primary-800" />
       <AdditionalLink
-        href="https://github.com/DLabbate/portfolio/tree/master/content"
+        href={`https://github.com/DLabbate/portfolio/tree/master/content/blogs/${slug}.mdx`}
         text="Edit on GitHub"
         icon={ArrowUpRight}
       />

@@ -61,7 +61,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
       </div>
       <Mdx code={blog.body.code} />
       <div className="overflow-clip">
-        <TableOfContents headings={blog.headings} />
+        <TableOfContents slug={slug} headings={blog.headings} />
       </div>
     </div>
   );
