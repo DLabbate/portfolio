@@ -6,6 +6,13 @@ import {
   PROJECTS,
   ACCOMPLISHMENTS,
 } from "@/constants/profile";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Portfolio",
+  description:
+    "Computer Engineer portfolio showcasing my skills, projects, and accomplishments.",
+};
 
 const Portfolio = () => {
   return (

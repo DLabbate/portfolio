@@ -12,6 +12,13 @@ import {
   BlogThumbnail,
 } from "@/components/blog";
 import * as motion from "@/components/animations/motion";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blogs",
+  description:
+    "A collection of blogs aiming to clarify complex technical concepts.",
+};
 
 const VARIANTS = {
   hidden: { opacity: 0, y: 20 },

@@ -5,6 +5,7 @@ import { allBlogs } from "contentlayer/generated";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { format, parseISO } from "date-fns";
+import { Metadata } from "next";
 
 const formatDate = (date: string) => format(parseISO(date), "MMMM do, yyyy");
 
@@ -19,7 +20,34 @@ export const generateStaticParams = async () =>
 export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   const blog = findBlogBySlug(params.slug);
   if (!blog) return;
-  return { title: blog.title, tags: blog.tags };
+
+  const {
+    title,
+    description,
+    tags: keywords,
+    published: publishedTime,
+    imageSrc,
+  } = blog;
+
+  return {
+    title,
+    keywords,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      publishedTime,
+      url: `https://domeniclabbate.com/blogs/${params.slug}`,
+      images: [
+        {
+          url: imageSrc,
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+  };
 };
 
 export const revalidate = 0;
