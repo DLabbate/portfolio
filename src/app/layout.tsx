@@ -4,6 +4,7 @@ import { SOCIAL_MEDIA } from "@/constants/profile";
 import { SocialLink } from "@/components/social";
 import { ThemeProvider } from "@/components/theme";
 import { Footer, Header } from "@/components/layout";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   title: "Domenic Labbate",
@@ -48,6 +49,7 @@ export default function RootLayout({
           </div>
           <Footer />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
