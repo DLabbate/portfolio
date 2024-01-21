@@ -137,7 +137,7 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
     content: [
       "Architected distributed systems, improving maintainability through smaller, focused microservices",
       "Leveraged event-driven communication between microservices for scalability and reliability",
-      "Designed REST APIs with adherance to standards such as versioning, ensuring backwards compatibility",
+      "Designed REST APIs with adherence to standards such as versioning, ensuring backwards compatibility",
       "Implemented a state machine, enhancing code quality and legibility",
     ],
     technologies: [
