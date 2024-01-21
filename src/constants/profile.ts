@@ -137,7 +137,7 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
     content: [
       "Architected distributed systems, improving maintainability through smaller, focused microservices",
       "Leveraged event-driven communication between microservices for scalability and reliability",
-      "Designed REST APIs with adherance to standards such as versioning, ensuring backwards compatibility",
+      "Designed REST APIs with adherence to standards such as versioning, ensuring backwards compatibility",
       "Implemented a state machine, enhancing code quality and legibility",
     ],
     technologies: [
@@ -306,7 +306,7 @@ export const PROJECTS: ReadonlyArray<Project> = [
     image: moodai,
     title: "Mood.AI",
     description:
-      "is a mental health application for a modern age.  In a team of 5 students, we developed a Cross-Platform mobile app that allows patients with mental health difficulties the ability to enter mood logs, gain insights on how they feel, and share data with psychologists.",
+      "is a mental health application for a modern age. In a team of 5 students, we developed a Cross-Platform mobile app that allows patients with mental health difficulties the ability to enter mood logs, gain insights on how they feel, and share data with psychologists.",
     technologies: [
       "reactnative",
       "javascript",
