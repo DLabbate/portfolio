@@ -306,7 +306,7 @@ export const PROJECTS: ReadonlyArray<Project> = [
     image: moodai,
     title: "Mood.AI",
     description:
-      "is a mental health application for a modern age.  In a team of 5 students, we developed a Cross-Platform mobile app that allows patients with mental health difficulties the ability to enter mood logs, gain insights on how they feel, and share data with psychologists.",
+      "is a mental health application for a modern age. In a team of 5 students, we developed a Cross-Platform mobile app that allows patients with mental health difficulties the ability to enter mood logs, gain insights on how they feel, and share data with psychologists.",
     technologies: [
       "reactnative",
       "javascript",
