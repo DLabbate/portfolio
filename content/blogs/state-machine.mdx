@@ -1,0 +1,288 @@
+---
+title: State Machine Design Pattern
+description: Learn how to improve code quality and readability with the state machine pattern.
+published: 2024-02-18
+lastEdited: 2024-02-18
+imageSrc: /blogs/state-machine/t2.jpg
+tags:
+  - Design Patterns
+  - State Machines
+---
+
+## Code
+
+Although you may have never seen the state machine pattern before, it is likely you have seen something similar to the following:
+
+Suppose we want to write some logic for implementing a traffic light. We might write some code like the following:
+
+```cs
+    private enum MarioState
+    {
+        Dead,
+        Small,
+        Super,
+        Invincible,
+    }
+```
+
+```cs
+public class Mario
+{
+    private MarioState currentState;
+
+    // ...
+
+    public void ObtainMushroom()
+    {
+        switch (currentState)
+        {
+            case MarioState.Small:
+                Console.WriteLine("Mario obtained a mushroom! Powering up to Super Mario.");
+                currentState = MarioState.Super;
+                break;
+            case MarioState.Super:
+                Console.WriteLine("Mario obtained a mushroom! Nothing happens as Super Mario.");
+                break;
+            case MarioState.Invincible:
+                Console.WriteLine("Mario obtained a mushroom! Nothing happens as Invincible Mario.");
+                break;
+            default:
+                break;
+        }
+    }
+
+    // ...
+}
+```
+
+```cs
+using System;
+
+public class Mario
+{
+    private enum MarioState
+    {
+        Small,
+        Super,
+        Invincible
+    }
+
+    private MarioState currentState = MarioState.Small;
+
+    public void ObtainMushroom()
+    {
+        switch (currentState)
+        {
+            case MarioState.Small:
+                Console.WriteLine("Mario obtained a mushroom! Powering up to Super Mario.");
+                currentState = MarioState.Super;
+                break;
+            case MarioState.Super:
+                Console.WriteLine("Mario obtained a mushroom! Nothing happens as Super Mario.");
+                // Additional logic if needed
+                break;
+            case MarioState.Invincible:
+                Console.WriteLine("Mario obtained a mushroom! Nothing happens as Invincible Mario.");
+                // Additional logic if needed
+                break;
+        }
+    }
+
+    public void ObtainStar()
+    {
+        switch (currentState)
+        {
+            case MarioState.Small:
+                Console.WriteLine("Mario obtained a star! Powering up to Invincible Mario.");
+                currentState = MarioState.Invincible;
+                break;
+            case MarioState.Super:
+                Console.WriteLine("Mario obtained a star! Powering up to Invincible Mario.");
+                currentState = MarioState.Invincible;
+                break;
+            case MarioState.Invincible:
+                Console.WriteLine("Mario obtained a star! Nothing happens as Invincible Mario.");
+                // Additional logic if needed
+                break;
+        }
+    }
+
+    public void CollideEnemy()
+    {
+        switch (currentState)
+        {
+            case MarioState.Small:
+                Console.WriteLine("Mario collided with an enemy! Mario shrinks to Small Mario.");
+                // Additional logic for handling lives, game over, etc.
+                currentState = MarioState.Small;
+                break;
+            case MarioState.Super:
+                Console.WriteLine("Mario collided with an enemy! Powering down to Small Mario.");
+                // Additional logic for handling lives, game over, etc.
+                currentState = MarioState.Small;
+                break;
+            case MarioState.Invincible:
+                Console.WriteLine("Invincible Mario collided with an enemy! Enemy defeated.");
+                // Additional logic if needed
+                break;
+        }
+    }
+
+    public void DisplayState()
+    {
+        Console.WriteLine($"Current state: {currentState}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Mario mario = new Mario();
+        mario.DisplayState();
+
+        mario.ObtainMushroom();
+        mario.DisplayState();
+
+        mario.ObtainStar();
+        mario.DisplayState();
+
+        mario.CollideEnemy();
+        mario.DisplayState();
+    }
+}
+
+```
+
+Something seemingly simple can become quite complex with many nested conditionals!
+
+Let's see how we can refactor this using the **state machine design pattern** to make our code cleaner and more maintainable.
+
+The main principle of this pattern is to create base `State` class, and have concrete classes inherit from it.
+
+```cs
+using System;
+
+public class Mario
+{
+    private MarioState state;
+
+    public Mario()
+    {
+        state = new SmallMario(this);
+    }
+
+    public void SetState(MarioState newState)
+    {
+        state = newState;
+    }
+
+    public void ObtainMushroom()
+    {
+        state.ObtainMushroom();
+    }
+
+    public void ObtainStar()
+    {
+        state.ObtainStar();
+    }
+
+    public void CollideEnemy()
+    {
+        state.CollideEnemy();
+    }
+
+    public void DisplayState()
+    {
+        Console.WriteLine($"Current state: {state.GetType().Name}");
+    }
+}
+
+public abstract class MarioState
+{
+    protected Mario mario;
+
+    public MarioState(Mario mario)
+    {
+        this.mario = mario;
+    }
+
+    public virtual void ObtainMushroom() { }
+    public virtual void ObtainStar() { }
+    public virtual void CollideEnemy() { }
+}
+
+public class SmallMario : MarioState
+{
+    public SmallMario(Mario mario) : base(mario) { }
+
+    public override void ObtainMushroom()
+    {
+        Console.WriteLine("Mario obtained a mushroom! Powering up to Super Mario.");
+        mario.SetState(new SuperMario(mario));
+    }
+
+    public override void CollideEnemy()
+    {
+        Console.WriteLine("Mario collided with an enemy! Mario shrinks to Small Mario.");
+        // Additional logic for handling lives, game over, etc.
+        mario.SetState(new SmallMario(mario));
+    }
+}
+
+public class SuperMario : MarioState
+{
+    public SuperMario(Mario mario) : base(mario) { }
+
+    public override void ObtainMushroom()
+    {
+        Console.WriteLine("Mario obtained a mushroom! Nothing happens as Super Mario.");
+        // Additional logic if needed
+    }
+
+    public override void ObtainStar()
+    {
+        Console.WriteLine("Mario obtained a star! Powering up to Invincible Mario.");
+        mario.SetState(new InvincibleMario(mario));
+    }
+
+    public override void CollideEnemy()
+    {
+        Console.WriteLine("Mario collided with an enemy! Powering down to Small Mario.");
+        // Additional logic for handling lives, game over, etc.
+        mario.SetState(new SmallMario(mario));
+    }
+}
+
+public class InvincibleMario : MarioState
+{
+    public InvincibleMario(Mario mario) : base(mario) { }
+
+    public override void CollideEnemy()
+    {
+        Console.WriteLine("Invincible Mario collided with an enemy! Enemy defeated.");
+        // Additional logic if needed
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Mario mario = new Mario();
+        mario.DisplayState();
+
+        mario.ObtainMushroom();
+        mario.DisplayState();
+
+        mario.ObtainStar();
+        mario.DisplayState();
+
+        mario.CollideEnemy();
+        mario.DisplayState();
+    }
+}
+
+```
+
+...
