@@ -37,8 +37,8 @@ Mario can also encounter various items and enemies, which will affect the state 
   srcDark="/blogs/state-machine/state-machine-example-dark.png"
   alt="State machine diagram for Super Mario video game."
   caption="Super Mario Video Game"
-  width={622}
-  height={697}
+  width={1243 / 2}
+  height={1393 / 2}
 />
 
 We might write some code like the following:
@@ -75,7 +75,7 @@ public class Mario
 
 We can achieve this with conditional logic via switch statements.
 
-However, if project requirements change (i.e. a new state is added), all the switch statements will need to be modified!
+However, if project requirements change (e.g. a new state is added), all the switch statements will need to be modified!
 
 <Alert
   type="warning"
@@ -91,23 +91,34 @@ Let's see how we can refactor this using the **state machine** design pattern to
   srcDark="/blogs/state-machine/class-diagram-dark.png"
   alt="Class diagram for state machine design pattern."
   caption="State Machine Class Diagram"
-  width={1024}
-  height={424}
+  width={1144}
+  height={544}
 />
-The key takeaway from this diagram is that we encapsulate each state into its own
-class, all inheriting from the base `State` class.
+The key takeaway from this class diagram is that we encapsulate each state into its
+own class, all inheriting from the base `State` class.
 
 <Alert
   type="info"
   text="States are extracted into their own class, implementing the same interface."
 />
 
-Note that the `Context` class stores a reference to one of the concrete `State` objects in order to delegate all state-specific work.
-The `Context` also exposes a setter for passing it a new state object (i.e. when we need to perform a state transition).
+_Some additional notes are listed below._
+
+- The `Context` class stores a reference to one of the concrete `State` objects in order to delegate all state-specific work.
+- The `Context` also exposes a setter for passing it a new state object (i.e. when we need to perform a state transition) via the `TransitionTo` method.
 
 ## Refactored Example
 
 Let's refactor our example to see what this would look like.
+
+<ThemeImage
+  srcLight="/blogs/state-machine/refactored-example-light.png"
+  srcDark="/blogs/state-machine/refactored-example-dark.png"
+  alt="Refactored example using the state machine design pattern."
+  caption="Refactored Example Using State Machine Pattern"
+  width={1462}
+  height={622}
+/>
 
 ```cs
 using System;
@@ -119,7 +130,7 @@ public class Mario
 
     public Mario()
     {
-        state = new SmallMario(this);
+        state = new SmallMarioState(this);
     }
 
     // The Context exposes a method to update the State at runtime.
@@ -172,34 +183,34 @@ is a backreference to the `Mario` class, i.e. the `Context` class.
 This backreference is necessary to transition the `Context` to another `State`.
 
 ```cs
-public class SmallMario : MarioState
+public class SmallMarioState : MarioState
 {
-    public SmallMario(Mario mario) : base(mario) { }
+    public SmallMarioState(Mario mario) : base(mario) { }
 
     public override void ObtainMushroom()
     {
         Console.WriteLine("Small Mario obtained a 🍄 mushroom! Powering up to Super Mario.");
-        mario.TransitionTo(new SuperMario(mario));
+        mario.TransitionTo(new SuperMarioState(mario));
     }
 
     public override void ObtainStar()
     {
         Console.WriteLine("Small Mario obtained a ⭐ star! Powering up to Invincible Mario.");
-        mario.TransitionTo(new InvincibleMario(mario));
+        mario.TransitionTo(new InvincibleMarioState(mario));
     }
 
     public override void CollideEnemy()
     {
         Console.WriteLine("Small Mario collided with an enemy! Mario is dead ☠️.");
-        mario.TransitionTo(new DeadMario(mario));
+        mario.TransitionTo(new DeadMarioState(mario));
     }
 }
 ```
 
 ```cs
-public class SuperMario : MarioState
+public class SuperMarioState : MarioState
 {
-    public SuperMario(Mario mario) : base(mario) { }
+    public SuperMarioState(Mario mario) : base(mario) { }
 
     public override void ObtainMushroom()
     {
@@ -209,21 +220,21 @@ public class SuperMario : MarioState
     public override void ObtainStar()
     {
         Console.WriteLine("Super Mario obtained a ⭐ star! Powering up to Invincible Mario.");
-        mario.TransitionTo(new InvincibleMario(mario));
+        mario.TransitionTo(new InvincibleMarioState(mario));
     }
 
     public override void CollideEnemy()
     {
         Console.WriteLine("Mario collided with an enemy! Powering down to Small Mario.");
-        mario.TransitionTo(new SmallMario(mario));
+        mario.TransitionTo(new SmallMarioState(mario));
     }
 }
 ```
 
 ```cs
-public class InvincibleMario : MarioState
+public class InvincibleMarioState : MarioState
 {
-    public InvincibleMario(Mario mario) : base(mario) { }
+    public InvincibleMarioState(Mario mario) : base(mario) { }
 
     public override void ObtainMushroom()
     {
@@ -245,7 +256,7 @@ public class InvincibleMario : MarioState
 ```cs
 // There can be additional logic for determining game over, etc.
 // This was omitted for simplicity.
-public class DeadMario : MarioState
+public class DeadMarioState : MarioState
 {
     public override void ObtainMushroom()
     {
@@ -263,6 +274,8 @@ public class DeadMario : MarioState
     }
 }
 ```
+
+And finally, the client can instantiate the `Mario` class and call the methods as required:
 
 ```cs
 class Program
