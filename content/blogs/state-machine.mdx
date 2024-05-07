@@ -123,7 +123,7 @@ Let's refactor our example to see what this would look like.
 ```cs
 using System;
 
-// This class represents the "Context" class, which stores a reference to one of the concrete State objects.
+// This class represents the Context class, which stores a reference to one of the concrete State objects.
 public class Mario
 {
     private MarioState state;
@@ -161,9 +161,8 @@ public class Mario
 // The base State class declares methods that all concrete State should implement.
 public abstract class MarioState
 {
-    // The State class also provides a backreference to the "context" object,
-    // associated with the State. This backreference can be used by States to
-    // transition the Context to another State.
+    // The State class also provides a reference to the Context object.
+    // This reference can be used by States to transition the Context to another State.
     protected Mario mario;
 
     public MarioState(Mario mario)
@@ -177,10 +176,8 @@ public abstract class MarioState
 }
 ```
 
-A little detail you might notice in the base state class is that there
-is a backreference to the `Mario` class, i.e. the `Context` class.
-
-This backreference is necessary to transition the `Context` to another `State`.
+A little detail you might notice in the base state class is that there is a also a reference to the `Mario` class, i.e. the `Context` class.
+This reference is necessary to transition the `Context` to another `State`.
 
 ```cs
 public class SmallMarioState : MarioState
@@ -225,7 +222,7 @@ public class SuperMarioState : MarioState
 
     public override void CollideEnemy()
     {
-        Console.WriteLine("Mario collided with an enemy! Powering down to Small Mario.");
+        Console.WriteLine("Super Mario collided with an enemy! Powering down to Small Mario.");
         mario.TransitionTo(new SmallMarioState(mario));
     }
 }
