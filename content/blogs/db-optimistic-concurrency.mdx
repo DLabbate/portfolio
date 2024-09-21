@@ -1,0 +1,132 @@
+---
+title: Optimistic Concurrency in Databases
+description: Learn the importance of optimistic concurrency control in databases to handle race conditions.
+published: 2024-09-21
+lastEdited: 2024-09-21
+imageSrc: /blogs/db-optimistic-concurrency/thumbnail.jpg
+tags:
+  - Databases
+  - Concurrency
+---
+
+## Introduction
+
+In modern applications, concurrency is common, as multiple users often interact with the same data.
+One significant challenge that arises is race conditions, where two or more clients attempt to update the same resource simultaneously. This can lead to data inconsistency.
+
+To handle this, we can use **Optimistic Concurrency Control (OCC)**, which ensures that conflicting updates are detected before changes are committed.
+
+In this article, we'll explore how OCC works and how it prevents issues such as booking the same airplane ticket for two different passengers.
+
+## Problem
+
+Let's consider a real-world example of an airline ticket reservation system. Here's a simplified model of an **Airplane Ticket**:
+
+```sql
+-- Simplified representation of an airline ticket reservation system in SQL
+CREATE TABLE tickets (
+    id VARCHAR(255) PRIMARY KEY,  -- Unique identifier for the ticket
+    reserved BOOLEAN NOT NULL,    -- Indicates whether the ticket is reserved or not
+);
+```
+
+Imagine two users, Angelo and Bruno, who are both trying to book the same ticket. Here's how the race condition unfolds:
+
+```sql
+-- Example SQL query
+SELECT * FROM tickets WHERE reserved = false;
+```
+
+1. Angelo views that a ticket (`id = abc123`) is available (`reserved = false`).
+2. Bruno views the same ticket (`id = abc123`) as available.
+3. Both attempt to reserve the ticket simultaneously.
+
+```sql
+UPDATE tickets
+SET reserved = true
+WHERE Id = @ticketId
+```
+
+4. Both receive a successful reservation notification.
+
+<Alert
+  type="error"
+  title="Race Condition"
+  text="However, only one of them should have been able to reserve the ticket, as there is only one available. 
+  This is a classic race condition—both users are led to believe they successfully booked the same seat, but in reality, only one should have succeeded."
+/>
+
+## Solution
+
+To handle this issue, we can use **Optimistic Concurrency Control (OCC)**. The key idea is that when a record is retrieved, the system also tracks its `version` (or `timestamp`).
+Before updating the record, the version is checked to ensure it hasn't changed since the data was retrieved.
+
+<Alert
+  type="correct"
+  title="Solution"
+  text="Before updating the record, the version is checked to ensure it hasn't changed since the data was retrieved."
+/>
+
+Here’s how we can modify the process: add a `version` field to the airplane ticket record.
+
+```sql
+CREATE TABLE tickets (
+    id VARCHAR(255) PRIMARY KEY,
+    reserved BOOLEAN NOT NULL,
+    version INT NOT NULL -- Version column for optimistic concurrency control
+);
+```
+
+When Angelo and Bruno view the available ticket, they retrieve the ticket along with its current version (e.g., `version = 1`).
+
+```sql
+-- Example SQL query with version tracking
+SELECT * FROM tickets WHERE reserved = false AND version = 1;
+```
+
+Here is what the update will now look like:
+
+```sql
+UPDATE tickets
+SET reserved = true, version = version + 1
+WHERE Id = @ticketId AND version = 1;
+```
+
+Notice that when an attempt is made to to reserve the ticket, the version is included in the query. Moreover, after a successful update, the version is incremented.
+
+<Alert
+  type="info"
+  text="The version is included in the query. Moreover, after a successful update, the version is incremented."
+/>
+
+Thus, even if both Angelo and Bruno attempt to reserve the ticket at the same time, only one of them will be successful!
+
+Suppose that Angelo successfully reserved the ticket first.
+Now, when Bruno tries to update the same ticket, the system checks the version number. Since it has already changed due to Angelo’s update, Bruno’s update fails.
+
+```sql
+-- Bruno's update attempt will fail because the version has changed
+UPDATE tickets
+SET reserved = true, version = version + 1
+WHERE id = @ticketId AND version = 1; -- This will now throw an error
+```
+
+The second update attempt will trigger a concurrency conflict error, and Bruno will be notified that the ticket is no longer available.
+
+## Alternatives
+
+One alternative to **Optimistic Concurrency Control** is **Pessimistic Concurrency Control**, where records are 🔒 locked when a transaction begins, preventing others from accessing or modifying the data until the lock is released.
+While this method is effective, it can lead to performance bottlenecks, especially in high-traffic systems.
+
+In my experience, I have rarely encountered the need for pessimistic locking, which is why I chose to focus on optimistic concurrency in this article.
+
+## Conclusion
+
+- **Optimistic Concurrency Control** is an effective way to handle race conditions in database systems where multiple users are interacting with the same data.
+- By ensuring that updates only occur if the data hasn't changed since it was read, we can avoid conflicts and maintain data integrity.
+
+## References
+
+- [Prisma Docs - Optimistic Concurrency Control](https://www.prisma.io/docs/orm/prisma-client/queries/transactions#optimistic-concurrency-control)
+- [EF Core - Handling Concurrency Conflicts](https://learn.microsoft.com/en-us/ef/core/saving/concurrency?tabs=data-annotations)
+- [Optimistic vs Pessimistic Concurrency: What Every Developer Should Know](https://cult.honeypot.io/reads/optimistic-vs-pessimistic-concurrency/)
