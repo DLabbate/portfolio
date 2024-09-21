@@ -1,8 +1,8 @@
 ---
 title: State Machine Design Pattern
 description: Learn how to improve code quality, readability, and maintainability with the state machine pattern.
-published: 2024-05-04
-lastEdited: 2024-05-04
+published: 2024-09-21
+lastEdited: 2024-09-21
 imageSrc: /blogs/state-machine/thumbnail.jpg
 tags:
   - Design Patterns
@@ -11,7 +11,7 @@ tags:
 
 ## Introduction
 
-The **state machine** design pattern is a useful approach when dealing with a system that can be in one of several states, with logic for transitioning between them.
+The **state machine** design pattern is an effective approach for managing systems with multiple states, providing a clear structure for state transitions and their associated logic.
 
 In order to illustrate the benefits of this approach, let's first begin with an example, _without_ using the pattern.
 
@@ -170,9 +170,9 @@ public abstract class MarioState
         this.mario = mario;
     }
 
-    public void ObtainMushroom() { }
-    public void ObtainStar() { }
-    public void CollideEnemy() { }
+    public abstract void ObtainMushroom();
+    public abstract void ObtainStar();
+    public abstract void CollideEnemy();
 }
 ```
 
