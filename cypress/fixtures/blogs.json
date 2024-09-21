@@ -1,1 +1,1 @@
-["idempotency", "async-messaging", "db-transactions"]
+["idempotency", "async-messaging", "db-transactions", "state-machine"]
