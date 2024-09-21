@@ -30,7 +30,7 @@ CREATE TABLE tickets (
 );
 ```
 
-Imagine two users, Angelo and Bruno, who are both trying to book the same ticket. Here's how the race condition unfolds:
+Imagine two users, Angelo and Bruno, both trying to book the same ticket.
 
 ```sql
 -- Example SQL query
@@ -92,7 +92,7 @@ SET reserved = true, version = version + 1
 WHERE Id = @ticketId AND version = 1;
 ```
 
-Notice that when an attempt is made to to reserve the ticket, the version is included in the query. Moreover, after a successful update, the version is incremented.
+Notice that when an attempt is made to reserve the ticket, the version is included in the query. Moreover, after a successful update, the version is incremented.
 
 <Alert
   type="info"
