@@ -1,0 +1,149 @@
+---
+title: REST API Concurrency with ETag
+description: Learn the importance of the ETag header in REST APIs to to prevent simultaneous updates of a resource from overwriting each other.
+published: 2024-09-21
+lastEdited: 2024-09-21
+imageSrc: /blogs/db-optimistic-concurrency/thumbnail.jpg
+tags:
+  - REST API
+  - Concurrency
+---
+
+## Introduction
+
+Prior to reading this article, I would recommend first reading my blog: [Optimistic Concurrency in Databases](/db-optimistic-concurrency).
+
+The `ETag` (or **entity tag**) HTTP response header is an identifier for a specific version of a resource.
+In this article, we will discuss how this header is useful to prevent simultaneous updates of a resource from overwriting each other.
+
+## Problem
+
+Let's first illustrate the problem by considering a REST API that _does not_ leverage `ETag` headers.
+
+Consider a blog website, where multiple users can make edits to the same blog post. Here is a simplified representation of the the REST API:
+
+```
+GET /blogs/{blogId}
+PUT /blogs/{blogId}
+```
+
+Now imagine that two users (User A and User B) both make edits at the same time:
+
+<ThemeImage
+  srcLight="/blogs/rest-api-etag/without-etag-light.png"
+  srcDark="/blogs/rest-api-etag/without-etag-dark.png"
+  alt="REST API Without ETag Headers"
+  caption="REST API Without ETag Headers"
+  width={1240}
+  height={632}
+/>
+
+As illustrated in the diagram above, without `ETag` it is possible to overwrite changes made by another user!
+
+<Alert
+  type="warning"
+  text="A REST API without ETag headers are susceptible to overwriting changes made by another user!"
+/>
+
+## Solution
+
+This problem can be resolved by leveraging `ETag` and `If-Match` headers.
+
+### What is ETag?
+
+The `ETag` (or **entity tag**) HTTP response header is an identifier for a specific version of a resource.
+
+<Alert
+  type="info"
+  title="(Definition) ETag Header"
+  text="The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource."
+/>
+
+This is returned as a header in the `GET` endpoint of a resource.
+
+### What is If-Match Header?
+
+The `If-Match` header is used in HTTP requests to ensure that a resource is updated only if it matches a specific version.
+In more detail, it contains the `ETag` which can be retrieved by the `GET` endpoint of a resource.
+
+<Alert
+  type="info"
+  title="(Definition) If-Match header"
+  text="The If-Match header is used in HTTP requests to ensure that a resource is updated only if it matches a specific version or state."
+/>
+
+### ETag formats (Weak, Strong)
+
+#### Weak
+
+Weak `ETag` values of two representations of the same resources might be semantically equivalent, but not byte-for-byte identical.
+
+```
+ETag: W/"0815"
+```
+
+#### Strong
+
+Strong `ETag` values **uniquely represent the requested resource**. It is a string of ASCII characters placed between double quotes, like `"675af34563dc-tr34"`.
+The ETag can be generated as a hash of the content, a hash of the last modification timestamp, or just a version number.
+
+```
+ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4"
+```
+
+### ETag in Concurrency Control
+
+The image below illustrates a modified example where `ETag` and `If-Match` headers are used to prevent simultaneous updates from overwriting each other.
+
+<ThemeImage
+  srcLight="/blogs/rest-api-etag/with-etag-light.png"
+  srcDark="/blogs/rest-api-etag/with-etag-dark.png"
+  alt="UML sequence diagram of a REST API that leverages ETag and If-Match headers"
+  caption="REST API With ETag Headers"
+  width={1282}
+  height={692}
+/>
+
+When performing the update via the `PUT /blogs/{blogId}`, an `If-Match` header is passed (with the `ETag` value).
+If the version of the resource does not match, a `412 (Precondition Failed)` response will be returned.
+
+As a result, User B will not override the changes made by User A!
+
+<Alert
+  type="correct"
+  text="As a result, User B will not override the changes made by User A!"
+/>
+
+<Alert
+  type="info"
+  title="412 (Precondition Failed)"
+  text="412 (Precondition Failed) response is returned by the server if the provided ETag value does not match that of the resource."
+/>
+
+### What Happens Without If-Match Header
+
+<ThemeImage
+  srcLight="/blogs/rest-api-etag/missing-if-match-header-light.png"
+  srcDark="/blogs/rest-api-etag/missing-if-match-header-dark.png"
+  alt="UML sequence diagram of a REST API that leverages ETag and If-Match headers"
+  caption="REST API With ETag Headers"
+  width={902}
+  height={682}
+/>
+
+In the case that no `If-Match` header is provided to the `PUT /blogs/{blogId}`, the server can respond with `428 (Precondition Required)` response.
+
+<Alert
+  type="info"
+  title="428 (Precondition Required)"
+  text="428 (Precondition Required) response is returned by the server if no If-Match header is provided in the PUT operation."
+/>
+
+## Conclusion
+
+## References
+
+- [ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag)
+- [If-Match](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Match)
+- [412 Precondition Failed](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/412)
+- [428 Precondition Required](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/428)
