@@ -44,7 +44,7 @@ SELECT * FROM tickets WHERE reserved = false;
 ```sql
 UPDATE tickets
 SET reserved = true
-WHERE id = @ticketId
+WHERE id = 'abc123'
 ```
 
 4. Both receive a successful reservation notification.
@@ -59,7 +59,7 @@ WHERE id = @ticketId
 ## Solution
 
 To handle this issue, we can use **Optimistic Concurrency Control (OCC)**. The key idea is that when a record is retrieved, the system also tracks its `version` (or `timestamp`).
-Before updating the record, the version is checked to ensure it hasn't changed since the data was retrieved.
+Before updating the record, the `version` is checked to ensure it hasn't changed since the data was retrieved.
 
 <Alert
   type="correct"
@@ -77,19 +77,12 @@ CREATE TABLE tickets (
 );
 ```
 
-When Angelo and Bruno view the available ticket, they retrieve the ticket along with its current version (e.g., `version = 1`).
-
-```sql
--- Example SQL query with version tracking
-SELECT * FROM tickets WHERE reserved = false AND version = 1;
-```
-
-Here is what the update will now look like:
+When Angelo and Bruno view the available ticket, they retrieve the ticket along with its current `version` (e.g., `version = 1`). Here is what the update will now look like:
 
 ```sql
 UPDATE tickets
 SET reserved = true, version = version + 1
-WHERE id = @ticketId AND version = 1;
+WHERE id = 'abc123' AND version = 1;
 ```
 
 Notice that when an attempt is made to reserve the ticket, the version is included in the query. Moreover, after a successful update, the version is incremented.
@@ -102,13 +95,13 @@ Notice that when an attempt is made to reserve the ticket, the version is includ
 Thus, even if both Angelo and Bruno attempt to reserve the ticket at the same time, only one of them will be successful!
 
 Suppose that Angelo successfully reserved the ticket first.
-Now, when Bruno tries to update the same ticket, the system checks the version number. Since it has already changed due to Angelo’s update, Bruno’s update fails.
+Now, when Bruno tries to update the same ticket, the system checks the `version` number. Since it has already changed due to Angelo’s update, Bruno’s update fails.
 
 ```sql
 -- Bruno's update attempt will fail because the version has changed
 UPDATE tickets
 SET reserved = true, version = version + 1
-WHERE id = @ticketId AND version = 1; -- This will now throw an error
+WHERE id = 'abc123' AND version = 1; -- This will now throw an error
 ```
 
 The second update attempt will trigger a concurrency conflict error, and Bruno will be notified that the ticket is no longer available.
