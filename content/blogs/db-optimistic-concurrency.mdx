@@ -44,7 +44,7 @@ SELECT * FROM tickets WHERE reserved = false;
 ```sql
 UPDATE tickets
 SET reserved = true
-WHERE Id = @ticketId
+WHERE id = @ticketId
 ```
 
 4. Both receive a successful reservation notification.
@@ -89,7 +89,7 @@ Here is what the update will now look like:
 ```sql
 UPDATE tickets
 SET reserved = true, version = version + 1
-WHERE Id = @ticketId AND version = 1;
+WHERE id = @ticketId AND version = 1;
 ```
 
 Notice that when an attempt is made to reserve the ticket, the version is included in the query. Moreover, after a successful update, the version is incremented.
