@@ -252,7 +252,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="0v97EJeXPlTq_77H_Nlm" name="Without ETag">
-    <mxGraphModel dx="676" dy="1051" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="388" dy="601" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -315,7 +315,7 @@
             <mxPoint x="-16" y="-14" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="YmLsUw1xQpQ4hphStjL2-18" value="&lt;font color=&quot;#ff8000&quot;&gt;User B will override the changes made from user A!&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Space Mono;fontColor=#EA6B66;labelBackgroundColor=none;" parent="1" vertex="1">
+        <mxCell id="YmLsUw1xQpQ4hphStjL2-18" value="&lt;font color=&quot;#ff8000&quot;&gt;User B will overwrite the changes made from user A!&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Space Mono;fontColor=#EA6B66;labelBackgroundColor=none;" parent="1" vertex="1">
           <mxGeometry x="460" y="640" width="120" height="75" as="geometry" />
         </mxCell>
         <mxCell id="YmLsUw1xQpQ4hphStjL2-19" value="User A" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Space Mono;" parent="1" vertex="1">

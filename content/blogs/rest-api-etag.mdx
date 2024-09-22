@@ -1,8 +1,8 @@
 ---
 title: Managing REST API Concurrency with ETag Header
-description: Learn the importance of the ETag header in REST APIs to to prevent simultaneous updates of a resource from overwriting each other.
-published: 2024-09-21
-lastEdited: 2024-09-21
+description: Learn the importance of the ETag header in REST APIs to prevent simultaneous updates of a resource from overwriting each other.
+published: 2024-09-22
+lastEdited: 2024-09-22
 imageSrc: /blogs/rest-api-etag/thumbnail.jpg
 tags:
   - REST API
@@ -20,7 +20,7 @@ In this article, we will discuss how this header is useful to prevent simultaneo
 
 Let's first illustrate the problem by considering a REST API that _does not_ leverage `ETag` headers.
 
-Consider a blog website, where multiple users can make edits to the same blog post. Here is a simplified representation of the the REST API:
+Consider a blog website, where multiple users can make edits to the same blog post. Here is a simplified representation of the REST API:
 
 ```
 GET /blogs/{blogId}
@@ -42,16 +42,16 @@ As illustrated in the diagram above, without `ETag` it is possible to overwrite 
 
 <Alert
   type="warning"
-  text="A REST API without ETag headers are susceptible to overwriting changes made by another user!"
+  text="REST APIs without ETag headers are at risk of overwriting changes made by other users."
 />
 
 ## Solution
 
 This problem can be resolved by leveraging `ETag` and `If-Match` headers.
 
-### What is ETag?
+### What is the ETag Header?
 
-The `ETag` (or **entity tag**) HTTP response header is an identifier for a specific version of a resource.
+An `ETag` is a version identifier for a resource, ensuring **updates are made only when the current version is matched**.
 
 <Alert
   type="info"
@@ -61,7 +61,7 @@ The `ETag` (or **entity tag**) HTTP response header is an identifier for a speci
 
 This is returned as a header in the `GET` endpoint of a resource.
 
-### What is If-Match Header?
+### What is the If-Match Header?
 
 The `If-Match` header is used in HTTP requests to ensure that a resource is updated only if it matches a specific version.
 In more detail, it contains the `ETag` which can be retrieved by the `GET` endpoint of a resource.
@@ -69,7 +69,7 @@ In more detail, it contains the `ETag` which can be retrieved by the `GET` endpo
 <Alert
   type="info"
   title="(Definition) If-Match header"
-  text="The If-Match header is used in HTTP requests to ensure that a resource is updated only if it matches a specific version or state."
+  text="The If-Match header is used in HTTP requests to ensure that a resource is updated only if it matches a specific version."
 />
 
 ### ETag formats (Weak, Strong)
@@ -99,7 +99,7 @@ The image below illustrates a modified example where `ETag` and `If-Match` heade
   srcLight="/blogs/rest-api-etag/with-etag-light.png"
   srcDark="/blogs/rest-api-etag/with-etag-dark.png"
   alt="UML sequence diagram of a REST API that leverages ETag and If-Match headers"
-  caption="REST API With ETag Headers"
+  caption="REST API with ETag and If-Match Headers"
   width={1282}
   height={692}
 />
@@ -107,11 +107,11 @@ The image below illustrates a modified example where `ETag` and `If-Match` heade
 When performing the update via the `PUT /blogs/{blogId}`, an `If-Match` header is passed (with the `ETag` value).
 If the version of the resource does not match, a `412 (Precondition Failed)` response will be returned.
 
-As a result, User B will not override the changes made by User A!
+As a result, User B will not overwrite the changes made by User A!
 
 <Alert
   type="correct"
-  text="As a result, User B will not override the changes made by User A!"
+  text="As a result, User B will not overwrite the changes made by User A!"
 />
 
 <Alert
@@ -140,6 +140,9 @@ In the case that no `If-Match` header is provided to the `PUT /blogs/{blogId}`, 
 />
 
 ## Conclusion
+
+- The `ETag` (or **entity tag**) HTTP response header is an identifier for a specific version of a resource.
+- It is useful to prevent simultaneous updates of a resource from overwriting each other by returning a `412 (Precondition Failed)` response when the `If-Match` header does not match the expected value.
 
 ## References
 
