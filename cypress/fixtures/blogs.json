@@ -1,1 +1,8 @@
-["idempotency", "async-messaging", "db-transactions", "state-machine"]
+[
+  "idempotency",
+  "async-messaging",
+  "db-transactions",
+  "state-machine",
+  "db-optimistic-concurrency",
+  "rest-api-etag"
+]
