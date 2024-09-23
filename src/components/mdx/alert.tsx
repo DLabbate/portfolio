@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import React from "react";
-import { Icon, Info, AlertTriangle } from "react-feather";
+import { Icon, Info, AlertTriangle, XCircle, CheckCircle } from "react-feather";
 
-type Type = "info" | "warning";
+type Type = "info" | "warning" | "error" | "correct";
 
 type Variant = {
   className: string;
@@ -17,6 +17,14 @@ const VARIANTS: Record<Type, Variant> = {
   warning: {
     className: "text-yellow-500 border-yellow-500 bg-yellow-500/10",
     icon: AlertTriangle,
+  },
+  error: {
+    className: "text-red-500 border-red-500 bg-red-500/10",
+    icon: XCircle,
+  },
+  correct: {
+    className: "text-green-500 border-green-500 bg-green-500/10",
+    icon: CheckCircle,
   },
 };
 
