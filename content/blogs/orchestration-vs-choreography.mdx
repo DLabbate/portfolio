@@ -1,8 +1,8 @@
 ---
 title: Microservice Orchestration vs. Choreography
-description: This article discussed two approaches, along with their individual tradeoffs for designing workflows in a distributed environment, namely Orchestration and Choreography.
-published: 2024-09-22
-lastEdited: 2024-09-22
+description: This article discusses two approaches for designing workflows in a distributed environment—Orchestration and Choreography—and explores their respective tradeoffs.
+published: 2024-09-24
+lastEdited: 2024-09-24
 imageSrc: /blogs/orchestration-vs-choreography/thumbnail.jpg
 tags:
   - Microservices
@@ -11,8 +11,8 @@ tags:
 
 ## Introduction
 
-In distributed systems, it’s common for business workflows to span multiple microservices.
-For example, a travel booking service might need to coordinate work across an airline service, hotel service, and car rental service.
+In distributed systems, it’s common for workflows to span multiple microservices.
+For example, a travel application might need to coordinate work across an airline service, hotel service, and car rental service.
 
 Two common methods for architecting such workflows are **Orchestration** and **Choreography**.
 In this article, we will discuss both approaches and their respective tradeoffs.
@@ -23,6 +23,12 @@ In this article, we will discuss both approaches and their respective tradeoffs.
 
 As the name suggests, **Orchestration** involves a central orchestrator responsible for coordinating work across all microservices.
 The orchestrator defines and controls the sequence of service calls, making it easier to manage and modify the business logic.
+
+<Alert
+  type="info"
+  title="Orchestration"
+  text="Orchestration involves a central orchestrator responsible for coordinating work across all microservices. The orchestrator defines and controls the sequence of service calls."
+/>
 
 <ThemeImage
   srcLight="/blogs/orchestration-vs-choreography/orchestration-light.png"
@@ -49,7 +55,12 @@ The orchestrator defines and controls the sequence of service calls, making it e
 
 In a **Choreography**-based approach, there’s no central controller.
 Instead, microservices communicate with each other by emitting and responding to events, creating a decentralized flow of operations.
-Services react to events, driving the workflow based on independent triggers.
+
+<Alert
+  type="info"
+  title="Choreography"
+  text="In a Choreography-based approach, there’s no central controller. Instead, microservices communicate with each other by emitting and responding to events."
+/>
 
 <ThemeImage
   srcLight="/blogs/orchestration-vs-choreography/choreography-light.png"
@@ -84,7 +95,8 @@ When choosing between these approaches, consider the tradeoffs based on your sys
 
 - Use **Orchestration** when clear, centralized control and ease of troubleshooting are priorities.
 - Opt for **Choreography** if you're aiming for high scalability, loose coupling, and resilience to failure.
-  Each approach brings unique strengths and weaknesses, so it's essential to align the design with your business and technical goals.
+
+Each approach brings unique strengths and weaknesses, so it's essential to align the design with your business and technical goals.
 
 ## References
 
