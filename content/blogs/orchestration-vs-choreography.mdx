@@ -3,53 +3,91 @@ title: Microservice Orchestration vs. Choreography
 description: This article discussed two approaches, along with their individual tradeoffs for designing workflows in a distributed environment, namely Orchestration and Choreography.
 published: 2024-09-22
 lastEdited: 2024-09-22
-imageSrc: /blogs/rest-api-etag/thumbnail.jpg
+imageSrc: /blogs/orchestration-vs-choreography/thumbnail.jpg
 tags:
-  - REST API
-  - Concurrency
+  - Microservices
+  - Design Patterns
 ---
 
 ## Introduction
 
-In the context of a distributed system, it is very common for a business workflow to span multiple microservices.
-For instance, a travel booking service might need to coordinate work across a airline service, hotel service, and car rental service.
+In distributed systems, it’s common for business workflows to span multiple microservices.
+For example, a travel booking service might need to coordinate work across an airline service, hotel service, and car rental service.
 
-There are two common methods to architect such a workflow: **Orchestration** and **Choreography**. In this article we will discuss both approaches, and the tradeoffs associated with each one.
+Two common methods for architecting such workflows are **Orchestration** and **Choreography**.
+In this article, we will discuss both approaches and their respective tradeoffs.
 
 ## Orchestration
 
 ### Overview
 
-As the name implies, **Orchestration** involves the a central orchestrator that is responsible for coordination work across all the microservices.
+As the name suggests, **Orchestration** involves a central orchestrator responsible for coordinating work across all microservices.
+The orchestrator defines and controls the sequence of service calls, making it easier to manage and modify the business logic.
+
+<ThemeImage
+  srcLight="/blogs/orchestration-vs-choreography/orchestration-light.png"
+  srcDark="/blogs/orchestration-vs-choreography/orchestration-dark.png"
+  alt="Orchestration architecture in a distributed system"
+  caption="Orchestration Architecture"
+  width={1094 / 2}
+  height={957 / 2}
+/>
 
 ### Pros
 
-- ✔️ Business logic is centralized
-- ✔️ Easy to troubleshoot/debug
+- ✔️ Business logic is centralized, making it easier to maintain and modify.
+- ✔️ Clear control flow, which simplifies troubleshooting and debugging.
 
 ### Cons
 
-- ❌ The **Orchestrator** is a single point of failure.
+- ❌ The orchestrator can become a single point of failure, introducing a risk to system availability.
+- ❌ Scalability can be challenging, as the orchestrator might become a bottleneck if not designed properly.
 
-### Choreography
+## Choreography
 
 ### Overview
 
-In a **Choreography** based approach, rather than having a central point of command, microservices communicate with one another, typically via events.
+In a **Choreography**-based approach, there’s no central controller.
+Instead, microservices communicate with each other by emitting and responding to events, creating a decentralized flow of operations.
+Services react to events, driving the workflow based on independent triggers.
 
-See my article on [asynchronous messaging](/blogs/async-messaging) for more details.
+<ThemeImage
+  srcLight="/blogs/orchestration-vs-choreography/choreography-light.png"
+  srcDark="/blogs/orchestration-vs-choreography/choreography-dark.png"
+  alt="Choreography architecture in a distributed system"
+  caption="Choreography Architecture"
+  width={1096 / 2}
+  height={1016 / 2}
+/>
+
+This approach is often implemented using event-driven architectures with message brokers like Kafka or RabbitMQ.
+
+For more details on messaging, check out my article on [asynchronous messaging](/blogs/async-messaging).
 
 ### Pros
 
-- ✔️ No single point of failure
-- ✔️ Loose coupling
+- ✔️ No single point of failure, as services operate independently based on events.
+- ✔️ Loose coupling, meaning services are more autonomous, improving system flexibility and scalability.
 
 ### Cons
 
-- ❌ Business logic is scattered across various services.
-- ❌ Debugging/troubleshooting is more difficult because it must be performed across multiple services.
+- ❌ Business logic becomes scattered across multiple services, making it harder to understand and manage.
+- ❌ Debugging and troubleshooting are more difficult, as issues must be traced across several services.
 
 ## Conclusion
 
-- Orchestration involves a central orchestrator. It is good for clear control flow but has a single point of failure.
-- Choreography is decentralized, but can be challenging to debug.
+Both **Orchestration** and **Choreography** have their place in designing microservice workflows.
+**Orchestration** offers centralized control and is easier to debug, but it comes with a risk of a single point of failure.
+**Choreography**, while offering better fault tolerance and scalability, scatters business logic, making debugging more complex.
+
+When choosing between these approaches, consider the tradeoffs based on your system's specific requirements:
+
+- Use **Orchestration** when clear, centralized control and ease of troubleshooting are priorities.
+- Opt for **Choreography** if you're aiming for high scalability, loose coupling, and resilience to failure.
+  Each approach brings unique strengths and weaknesses, so it's essential to align the design with your business and technical goals.
+
+## References
+
+- [To Choreograph or Orchestrate your Saga, that is the question.](https://temporal.io/blog/to-choreograph-or-orchestrate-your-saga-that-is-the-question)
+- [Orchestration vs Choreography: How to Pick the Right Integration Pattern in Azure](https://techcommunity.microsoft.com/t5/azure-integration-services/orchestration-vs-choreography-how-to-pick-the-right-integration/m-p/3792149)
+- [Orchestration vs Choreography](https://www.milanjovanovic.tech/blog/orchestration-vs-choreography)
