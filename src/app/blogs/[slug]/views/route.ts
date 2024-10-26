@@ -1,10 +1,10 @@
 import { NextRequest } from "next/server";
-import { db, incrementBlogViewsBySlug } from "@/lib/db";
-import { blogViews } from "@/lib/db/schema";
-import { sql } from "drizzle-orm";
+import { incrementBlogViewsBySlug } from "@/lib/db";
 import { kv } from "@vercel/kv";
 import { createHash } from "crypto";
 import { Ratelimit } from "@upstash/ratelimit";
+import { differenceInSeconds } from "date-fns";
+import { getDeltaSeconds } from "@/lib/dates";
 
 /**
  * Rate limiter that allows 5 requests per 10 seconds
@@ -13,9 +13,13 @@ import { Ratelimit } from "@upstash/ratelimit";
  */
 const ratelimit = new Ratelimit({
   redis: kv,
-  limiter: Ratelimit.slidingWindow(5, "10s"),
+  limiter: Ratelimit.slidingWindow(1, "10s"),
 });
 
+/**
+ * @link https://nextjs.org/docs/app/building-your-application/routing/route-handlers
+ * @link https://www.ietf.org/archive/id/draft-polli-ratelimit-headers-02.html
+ */
 export async function POST(
   request: NextRequest,
   { params }: { params: { slug: string } }
@@ -28,11 +32,21 @@ export async function POST(
 
   // Limit the number of requests by blog page, per user
   const identifier = [slug, hashedIp].join(":");
-  const { success } = await ratelimit.limit(identifier);
+  const { success, limit, remaining, reset } = await ratelimit.limit(
+    identifier
+  );
 
-  if (success) {
-    incrementBlogViewsBySlug(slug);
+  // RateLimit header fields
+  const headers: Record<string, string> = {
+    "RateLimit-Limit": limit.toString(),
+    "RateLimit-Remaining": remaining.toString(),
+    "RateLimit-Reset": getDeltaSeconds(reset).toString(),
+  };
+
+  if (!success) {
+    return new Response("Too many requests", { status: 429, headers });
   }
 
-  return new Response(null, { status: 204 });
+  await incrementBlogViewsBySlug(slug);
+  return new Response(null, { status: 204, headers });
 }
