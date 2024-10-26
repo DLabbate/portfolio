@@ -1,107 +1,188 @@
-import { describe, it, expect, vi } from "vitest";
-import { Blog } from "contentlayer/generated";
-import { getSortedAndFilteredBlogs } from "..";
+import {
+  FormattedBlog,
+  getAllTags,
+  getSortedAndFilteredBlogs,
+  getTagState,
+  TagState,
+} from "..";
+import { expect } from "@jest/globals";
 
-const blogs = [
-  {
-    title: "Blog 1",
-    slug: "blog-1",
-    tags: ["tag1", "tag2"],
-    views: 150,
-    published: "2023-01-01",
-  },
-  {
-    title: "Blog 2",
-    slug: "blog-2",
-    tags: ["tag1"],
-    views: 300,
-    published: "2022-06-15",
-  },
-  {
-    title: "Blog 3",
-    slug: "blog-3",
-    tags: ["tag3"],
-    views: 50,
-    published: "2021-10-20",
-  },
-];
-
-vi.mock("../../../../.contentlayer/generated", () => ({
+jest.mock("contentlayer/generated", () => ({
   allBlogs: [
     {
       title: "Blog 1",
       slug: "blog-1",
-      tags: ["tag1", "tag2"],
-      views: 150,
+      tags: ["potato", "tomato"],
       published: "2023-01-01",
+      imageSrc: "https://localhost/images/1",
     },
     {
       title: "Blog 2",
       slug: "blog-2",
-      tags: ["tag1"],
-      views: 300,
+      tags: ["potato"],
       published: "2022-06-15",
+      imageSrc: "https://localhost/images/2",
     },
     {
       title: "Blog 3",
       slug: "blog-3",
-      tags: ["tag3"],
-      views: 50,
+      tags: ["cucumber"],
       published: "2021-10-20",
+      imageSrc: "https://localhost/images/3",
+    },
+    {
+      title: "Another Blog",
+      slug: "blog-4",
+      tags: ["potato", "cucumber"],
+      published: "2020-05-05",
+      imageSrc: "https://localhost/images/4",
     },
   ],
 }));
 
-vi.mock("../../db", () => ({
-  getAllBlogViews: vi.fn().mockResolvedValue([
+jest.mock("@/lib/db", () => ({
+  getAllBlogViews: jest.fn().mockResolvedValue([
     { slug: "blog-1", views: 150 },
     { slug: "blog-2", views: 300 },
     { slug: "blog-3", views: 50 },
+    { slug: "blog-4", views: 200 },
   ]),
 }));
+
+const blogsWithViews: FormattedBlog[] = [
+  {
+    title: "Blog 1",
+    slug: "blog-1",
+    tags: ["potato", "tomato"],
+    published: "2023-01-01",
+    imageSrc: "https://localhost/images/1",
+    views: 150,
+  },
+  {
+    title: "Blog 2",
+    slug: "blog-2",
+    tags: ["potato"],
+    published: "2022-06-15",
+    imageSrc: "https://localhost/images/2",
+    views: 300,
+  },
+  {
+    title: "Blog 3",
+    slug: "blog-3",
+    tags: ["cucumber"],
+    published: "2021-10-20",
+    imageSrc: "https://localhost/images/3",
+    views: 50,
+  },
+  {
+    title: "Another Blog",
+    slug: "blog-4",
+    tags: ["potato", "cucumber"],
+    published: "2020-05-05",
+    imageSrc: "https://localhost/images/4",
+    views: 200,
+  },
+];
+
+describe("getAllTags", () => {
+  it("should retrieve a unique and formatted list of tags", () => {
+    const tags = getAllTags();
+    expect(tags).toEqual(["potato", "tomato", "cucumber"]);
+  });
+});
+
+describe("getTagState", () => {
+  type GetTagStateTestCase = {
+    tag: string;
+    selectedTags: string[];
+    expectedState: TagState;
+  };
+
+  test.each<GetTagStateTestCase>([
+    { tag: "potato", selectedTags: ["tomato"], expectedState: "neutral" },
+    {
+      tag: "cucumber",
+      selectedTags: ["tomato", "potato"],
+      expectedState: "disabled",
+    },
+    { tag: "potato", selectedTags: ["potato"], expectedState: "active" },
+    { tag: "cucumber", selectedTags: [], expectedState: "neutral" },
+  ])(
+    "returns $expectedState for tag $tag when selectedTags are $selectedTags",
+    ({ tag, selectedTags, expectedState }) => {
+      const state = getTagState(tag, blogsWithViews, selectedTags);
+      expect(state).toBe(expectedState);
+    }
+  );
+});
 
 describe("getSortedAndFilteredBlogs", () => {
   type GetSortedAndFilteredBlogsTestCase = {
     searchText: string | undefined;
     tags: string[];
-    sort: "date-asc" | "views-desc" | undefined;
-    expectedBlogs: Partial<Blog>[]; // Reference the type of the blog array
+    sort: "date-asc" | "date-desc" | "views-asc" | "views-desc" | undefined;
+    expectedBlogs: FormattedBlog[];
   };
 
-  type FormattedBlog = {
-    title: string;
-    slug: string;
-    tags: string[];
-    views: number;
-    published: string;
-  };
-
-  it.each<GetSortedAndFilteredBlogsTestCase>([
-    // Test cases: { searchText, tags, sort, expectedBlogs }
+  test.each<GetSortedAndFilteredBlogsTestCase>([
     {
-      searchText: "Blog 1",
+      searchText: undefined,
       tags: [],
       sort: undefined,
-      expectedBlogs: [blogs[0]],
-    }, // Matching search text
+      expectedBlogs: [
+        blogsWithViews[0],
+        blogsWithViews[1],
+        blogsWithViews[2],
+        blogsWithViews[3],
+      ],
+    },
     {
-      searchText: undefined,
-      tags: ["tag1"],
+      searchText: "Blog",
+      tags: [],
+      sort: "date-desc",
+      expectedBlogs: [
+        blogsWithViews[0],
+        blogsWithViews[1],
+        blogsWithViews[2],
+        blogsWithViews[3],
+      ],
+    },
+    {
+      searchText: "Another",
+      tags: [],
       sort: undefined,
-      expectedBlogs: [{ ...blogs[0] }, { ...blogs[1] }],
-    }, // Matching tags
+      expectedBlogs: [blogsWithViews[3]],
+    },
     {
       searchText: undefined,
-      tags: [],
-      sort: "date-asc",
-      expectedBlogs: [{ ...blogs[2] }, { ...blogs[1] }, { ...blogs[0] }],
-    }, // Sort by date asc
-    {
-      searchText: undefined,
-      tags: [],
+      tags: ["potato"],
       sort: "views-desc",
-      expectedBlogs: [{ ...blogs[1] }, { ...blogs[0] }, { ...blogs[2] }],
-    }, // Sort by views desc
+      expectedBlogs: [blogsWithViews[1], blogsWithViews[3], blogsWithViews[0]],
+    },
+    {
+      searchText: undefined,
+      tags: ["cucumber"],
+      sort: "views-asc",
+      expectedBlogs: [blogsWithViews[2], blogsWithViews[3]],
+    },
+    {
+      searchText: undefined,
+      tags: ["potato", "cucumber"],
+      sort: "date-asc",
+      expectedBlogs: [blogsWithViews[3]],
+    },
+    {
+      searchText: "Blog",
+      tags: ["potato"],
+      sort: "views-asc",
+      expectedBlogs: [blogsWithViews[0], blogsWithViews[3], blogsWithViews[1]],
+    },
+    {
+      searchText: "Blog",
+      tags: ["potato", "cucumber"],
+      sort: "date-desc",
+      expectedBlogs: [blogsWithViews[3]],
+    },
   ])(
     "returns correct blogs for searchText: $searchText, tags: $tags, sort: $sort",
     async ({ searchText, tags, sort, expectedBlogs }) => {

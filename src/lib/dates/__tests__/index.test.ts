@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
 import { formatISOString, getDeltaSeconds, getFormattedDuration } from "..";
+import { expect } from "@jest/globals";
 
 describe("formatISOString", () => {
   it("formats ISO date string to 'Month Year'", () => {
