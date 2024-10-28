@@ -3,8 +3,8 @@ import { incrementBlogViewsBySlug } from "@/lib/db";
 import { kv } from "@vercel/kv";
 import { createHash } from "crypto";
 import { Ratelimit } from "@upstash/ratelimit";
-import { differenceInSeconds } from "date-fns";
 import { getDeltaSeconds } from "@/lib/dates";
+import { allBlogs } from "contentlayer/generated";
 
 /**
  * Rate limiter that allows 5 requests per 10 seconds
@@ -13,7 +13,7 @@ import { getDeltaSeconds } from "@/lib/dates";
  */
 const ratelimit = new Ratelimit({
   redis: kv,
-  limiter: Ratelimit.slidingWindow(1, "10s"),
+  limiter: Ratelimit.slidingWindow(5, "10s"),
 });
 
 /**
@@ -25,6 +25,13 @@ export async function POST(
   { params }: { params: { slug: string } }
 ) {
   const { slug } = params;
+
+  // Validate slug
+  const validSlugs: Set<string> = new Set(allBlogs.map((blog) => blog.slug));
+  if (!validSlugs.has(slug)) {
+    return new Response(`${slug} is not a valid slug`, { status: 400 });
+  }
+
   const ip = request.ip ?? "127.0.0.1";
 
   // Hash the IP address for security

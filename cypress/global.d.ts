@@ -75,5 +75,11 @@ declare namespace Cypress {
       extractor: (el: HTMLElement) => any,
       options?: { ascending: boolean }
     ): Chainable<JQuery<HTMLElement>>;
+
+    /**
+     * Custom command to increment the views of a blog.
+     * @param slug - The slug of the blog post
+     */
+    incrementBlogViews(slug: string): Cypress.Chainable<Cypress.Response<any>>;
   }
 }
