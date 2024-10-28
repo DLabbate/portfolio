@@ -85,7 +85,7 @@ const blogsWithViews: FormattedBlog[] = [
 ];
 
 describe("getAllTags", () => {
-  it("should retrieve a unique and formatted list of tags", () => {
+  test("should retrieve a unique and formatted list of tags", () => {
     const tags = getAllTags();
     expect(tags).toEqual(["potato", "tomato", "cucumber"]);
   });
