@@ -1,33 +1,54 @@
 "server only";
 
-import { drizzle } from "drizzle-orm/planetscale-serverless";
-import { connect } from "@planetscale/database";
-import * as schema from "./schema";
-import { cache } from "react";
-import { blogViews } from "./schema";
-import { sql } from "drizzle-orm";
+import mongoClient from "./mongodb";
 
-// Create database connection
-const connection = connect({
-  url: process.env.DATABASE_URL,
-});
+const databaseName = "portfolio-dev";
+const collectionName = "blog-views";
 
-export const db = drizzle(connection, { schema });
+interface BlogView {
+  _id: string; // The slug is used as the _id, for uniqueness
+  views: number;
+}
 
-export const getAllBlogViews = cache(() => {
-  return db.query.blogViews.findMany().execute();
-});
+const client = mongoClient;
+const db = client.db(databaseName);
 
-export const getBlogViewsBySlug = cache((slug: string) => {
-  return db.query.blogViews
-    .findFirst({ where: (blog, { eq }) => eq(blog.slug, slug) })
-    .execute();
-});
+/**
+ * Retrieves all blog view records from the collection.
+ * @returns {Promise<BlogView[]>} A promise that resolves to an array of blog view records.
+ */
+export async function getAllBlogViews(): Promise<BlogView[]> {
+  const results = await db
+    .collection<BlogView>(collectionName)
+    .find({})
+    .toArray();
 
+  return results;
+}
+
+/**
+ * Retrieves the number of views for a specific blog post identified by its slug.
+ * @param {string} slug - The slug of the blog post.
+ * @returns {Promise<number>} A promise that resolves to the number of views for the specified blog post. Returns 0 if not found.
+ */
+export async function getBlogViewsBySlug(slug: string): Promise<number> {
+  const result = await db
+    .collection<BlogView>(collectionName)
+    .findOne({ _id: slug });
+
+  return result?.views ?? 0;
+}
+
+/**
+ * Increments the view count for a specific blog post identified by its slug.
+ * If the blog post does not exist, it will be created with an initial view count of 1.
+ * @param {string} slug - The slug of the blog post.
+ * @returns {Promise<UpdateResult<BlogView>>} A promise that resolves to the result of the update operation.
+ */
 export async function incrementBlogViewsBySlug(slug: string) {
-  return db
-    .insert(blogViews)
-    .values({ slug, views: 1 })
-    .onDuplicateKeyUpdate({ set: { views: sql`${blogViews.views} + 1` } })
-    .execute();
+  return db.collection<BlogView>(collectionName).updateOne(
+    { _id: slug }, // Find the document by _id (which is the slug)
+    { $inc: { views: 1 } }, // Increment the views field by 1
+    { upsert: true } // Insert if not found
+  );
 }
