@@ -1,4 +1,4 @@
-import { allBlogs, Blog } from "../../../.contentlayer/generated";
+import { allBlogs } from "contentlayer/generated";
 import { compareAsc, parseISO, compareDesc } from "date-fns";
 import { getAllBlogViews } from "../db";
 

@@ -1,4 +1,3 @@
-// isInViewport.test.ts
 import { isInViewport } from "..";
 
 describe("isInViewport", () => {
