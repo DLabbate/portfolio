@@ -1,8 +1,15 @@
-import { allBlogs, Blog } from "contentlayer/generated";
+import { allBlogs } from "contentlayer/generated";
 import { compareAsc, parseISO, compareDesc } from "date-fns";
 import { getAllBlogViews } from "../db";
 
-type FormattedBlog = Blog & { tags: string[]; views: number };
+type FormattedBlog = {
+  slug: string;
+  title: string;
+  imageSrc: string;
+  published: string;
+  tags: string[];
+  views: number;
+};
 
 type TagState = "active" | "disabled" | "neutral";
 
@@ -104,7 +111,7 @@ function getTagState(
 /**
  * Determines if a blog's title includes a given text (case insensitive).
  */
-function blogIncludesText(blog: Blog, text: string | undefined) {
+function blogIncludesText(blog: FormattedBlog, text: string | undefined) {
   if (!text) return true;
   return blog.title.toLowerCase().includes(text.toLowerCase());
 }
@@ -158,6 +165,7 @@ async function getSortedAndFilteredBlogs(
 export {
   type SortKey,
   type TagState,
+  type FormattedBlog,
   getSortedAndFilteredBlogs,
   getAllTags,
   getTagState,

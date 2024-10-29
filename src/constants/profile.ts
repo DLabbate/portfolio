@@ -70,8 +70,8 @@ export type Organization = Readonly<{
 }>;
 
 export type TimeFrame = Readonly<{
-  from: string;
-  to: string | "Present";
+  from: string; // ISO date string for the start date
+  to: string | "Present"; // ISO date string or "Present" for ongoing events
 }>;
 
 export type TimelineEntry = Readonly<{
