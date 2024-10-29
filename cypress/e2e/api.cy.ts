@@ -22,7 +22,7 @@ describe("blog views api", () => {
     });
   });
 
-  it("should return 404 for invalid slugs", () => {
+  it("should return 400 status for invalid slugs", () => {
     const invalidSlug = "some-invalid-slug";
 
     cy.incrementBlogViews(invalidSlug).then((response) => {
