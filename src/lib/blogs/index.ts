@@ -50,7 +50,7 @@ async function getAllBlogsWithViews(): Promise<FormattedBlog[]> {
 
   // Note that the slug is stored in the _id field for uniqueness
   const blogViewsBySlug = new Map(
-    blogViews.map((item) => [item._id, item.views])
+    blogViews.map((item) => [item.slug, item.views])
   );
 
   return allBlogs.map((blog) => {
