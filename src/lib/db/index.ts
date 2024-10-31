@@ -2,8 +2,8 @@
 
 import mongoClient from "./mongodb";
 
-const databaseName = "portfolio-dev";
-const collectionName = "blog-views";
+export const DATABASE_NAME: string = "portfolio";
+export const COLLECTION_NAME: string = "blogViews";
 
 /**
  * Represents the MongoDB document structure for blog view data.
@@ -40,17 +40,15 @@ function toBusinessModel(entity: BlogViewDocument): BlogView {
 }
 
 const client = mongoClient;
-const db = client.db(databaseName);
+const db = client.db(DATABASE_NAME);
+const collection = db.collection<BlogViewDocument>(COLLECTION_NAME);
 
 /**
  * Retrieves all blog view records from the collection.
  * @returns {Promise<BlogView[]>} A promise that resolves to an array of blog view records.
  */
 export async function getAllBlogViews(): Promise<BlogView[]> {
-  const results = await db
-    .collection<BlogViewDocument>(collectionName)
-    .find({})
-    .toArray();
+  const results = await collection.find({}).toArray();
 
   return results.map(toBusinessModel);
 }
@@ -61,9 +59,7 @@ export async function getAllBlogViews(): Promise<BlogView[]> {
  * @returns {Promise<number>} A promise that resolves to the number of views for the specified blog post. Returns 0 if not found.
  */
 export async function getBlogViewsBySlug(slug: string): Promise<number> {
-  const result = await db
-    .collection<BlogViewDocument>(collectionName)
-    .findOne({ _id: slug });
+  const result = await collection.findOne({ _id: slug });
 
   return result?.views ?? 0;
 }
@@ -77,13 +73,11 @@ export async function getBlogViewsBySlug(slug: string): Promise<number> {
 export async function incrementBlogViewsBySlug(
   slug: string
 ): Promise<BlogView> {
-  const result = await db
-    .collection<BlogViewDocument>(collectionName)
-    .findOneAndUpdate(
-      { _id: slug }, // Find the document by _id (which is the slug)
-      { $inc: { views: 1 } }, // Increment the views field by 1
-      { upsert: true, returnDocument: "after" } // Insert if not found, and return the updated document
-    );
+  const result = await collection.findOneAndUpdate(
+    { _id: slug }, // Find the document by _id (which is the slug)
+    { $inc: { views: 1 } }, // Increment the views field by 1
+    { upsert: true, returnDocument: "after" } // Insert if not found, and return the updated document
+  );
 
   if (!result) {
     return { slug, views: 1 };

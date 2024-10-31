@@ -5,14 +5,13 @@
 import { Collection } from "mongodb";
 import {
   BlogViewDocument,
+  COLLECTION_NAME,
+  DATABASE_NAME,
   getAllBlogViews,
   getBlogViewsBySlug,
   incrementBlogViewsBySlug,
 } from "..";
 import client from "../mongodb";
-
-const databaseName = "portfolio-dev";
-const collectionName = "blog-views";
 
 describe("mongodb integration tests", () => {
   let db;
@@ -25,8 +24,8 @@ describe("mongodb integration tests", () => {
   beforeAll(async () => {
     await client.connect(); // Connect using mongodb-memory-server instance
 
-    db = client.db(databaseName);
-    collection = db.collection<BlogViewDocument>(collectionName);
+    db = client.db(DATABASE_NAME);
+    collection = db.collection<BlogViewDocument>(COLLECTION_NAME);
   });
 
   afterAll(async () => {
