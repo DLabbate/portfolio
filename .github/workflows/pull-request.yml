@@ -14,6 +14,8 @@ jobs:
         run: npm run build # Make sure this generates the .contentlayer folder
       - name: Run Jest tests
         run: npm test
+        env:
+          MONGODB_URI: mongodb://127.0.0.1:27017
   cypress-run:
     runs-on: ubuntu-latest
     needs: jest-run # Ensure Cypress runs only after Jest tests are complete
