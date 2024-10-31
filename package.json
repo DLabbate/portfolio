@@ -8,8 +8,6 @@
     "start": "next start",
     "lint": "next lint",
     "cypress": "cypress open",
-    "introspect": "drizzle-kit introspect:mysql",
-    "push": "drizzle-kit push:mysql ",
     "test": "jest",
     "test:watch": "jest --watch"
   },
