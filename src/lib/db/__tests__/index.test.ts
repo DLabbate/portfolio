@@ -2,16 +2,108 @@
  * @jest-environment node
  */
 
-import { getAllBlogViews, incrementBlogViewsBySlug } from "..";
+import { Collection } from "mongodb";
+import {
+  BlogViewDocument,
+  getAllBlogViews,
+  getBlogViewsBySlug,
+  incrementBlogViewsBySlug,
+} from "..";
 import client from "../mongodb";
 
-afterAll(async () => {
-  await client.close(); // Ensure the MongoClient instance is closed
-});
+const databaseName = "portfolio-dev";
+const collectionName = "blog-views";
 
 describe("mongodb integration tests", () => {
-  it("should successfully set & get information from the database", async () => {
-    await incrementBlogViewsBySlug("test-1-slug");
-    const test = await getAllBlogViews();
+  let db;
+  let collection: Collection<BlogViewDocument>;
+
+  async function seedDatabase(documents: BlogViewDocument[]): Promise<void> {
+    await collection.insertMany(documents);
+  }
+
+  beforeAll(async () => {
+    await client.connect(); // Connect using mongodb-memory-server instance
+
+    db = client.db(databaseName);
+    collection = db.collection<BlogViewDocument>(collectionName);
+  });
+
+  afterAll(async () => {
+    await client.close(); // Close the MongoClient connection
+  });
+
+  afterEach(async () => {
+    await collection.deleteMany({}); // Clear collection after each test
+  });
+
+  describe("getAllBlogViews", () => {
+    it("should retrieve all blog view records", async () => {
+      const testData = [
+        { _id: "test-slug-1", views: 5 },
+        { _id: "test-slug-2", views: 10 },
+        { _id: "test-slug-3", views: 115 },
+      ];
+      await seedDatabase(testData);
+
+      const result = await getAllBlogViews();
+
+      expect(result).toEqual([
+        { slug: "test-slug-1", views: 5 },
+        { slug: "test-slug-2", views: 10 },
+        { slug: "test-slug-3", views: 115 },
+      ]);
+    });
+
+    it("should return an empty array if no blog views are found", async () => {
+      const result = await getAllBlogViews();
+      expect(result).toEqual([]);
+    });
+  });
+
+  describe("getBlogViewsBySlug", () => {
+    it("should return the views count for a specific slug", async () => {
+      const testData = [
+        { _id: "test-slug-1", views: 5 },
+        { _id: "test-slug-2", views: 10 },
+        { _id: "test-slug-3", views: 115 },
+      ];
+      await seedDatabase(testData);
+
+      const result = await getBlogViewsBySlug("test-slug-3");
+
+      expect(result).toEqual(115);
+    });
+
+    it("should return 0 if the slug does not exist", async () => {
+      const result = await getBlogViewsBySlug("non-existing-slug");
+      expect(result).toBe(0);
+    });
+  });
+
+  describe("incrementBlogViewsBySlug", () => {
+    it("should increment views count for an existing slug", async () => {
+      const testData = [
+        { _id: "test-slug-1", views: 5 },
+        { _id: "test-slug-2", views: 10 },
+        { _id: "test-slug-3", views: 115 },
+      ];
+      await seedDatabase(testData);
+
+      const result = await incrementBlogViewsBySlug("test-slug-3");
+      expect(result).toEqual({
+        slug: "test-slug-3",
+        views: 116,
+      });
+    });
+
+    it("should create a new document with views count 1 if slug does not exist", async () => {
+      const result = await incrementBlogViewsBySlug("new-slug");
+
+      expect(result).toEqual({
+        slug: "new-slug",
+        views: 1,
+      });
+    });
   });
 });

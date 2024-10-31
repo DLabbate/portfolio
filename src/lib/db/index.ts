@@ -11,7 +11,7 @@ const collectionName = "blog-views";
  * @property {string} _id - The unique identifier for the blog post, using the slug as the `_id`.
  * @property {number} views - The number of views the blog post has received.
  */
-type BlogViewDocument = {
+export type BlogViewDocument = {
   _id: string; // The slug is used as the _id, for uniqueness
   views: number;
 };
@@ -72,12 +72,22 @@ export async function getBlogViewsBySlug(slug: string): Promise<number> {
  * Increments the view count for a specific blog post identified by its slug.
  * If the blog post does not exist, it will be created with an initial view count of 1.
  * @param {string} slug - The slug of the blog post.
- * @returns {Promise<UpdateResult<BlogView>>} A promise that resolves to the result of the update operation.
+ * @returns {Promise<BlogView>} A promise that resolves to the updated BlogView.
  */
-export async function incrementBlogViewsBySlug(slug: string) {
-  return db.collection<BlogViewDocument>(collectionName).updateOne(
-    { _id: slug }, // Find the document by _id (which is the slug)
-    { $inc: { views: 1 } }, // Increment the views field by 1
-    { upsert: true } // Insert if not found
-  );
+export async function incrementBlogViewsBySlug(
+  slug: string
+): Promise<BlogView> {
+  const result = await db
+    .collection<BlogViewDocument>(collectionName)
+    .findOneAndUpdate(
+      { _id: slug }, // Find the document by _id (which is the slug)
+      { $inc: { views: 1 } }, // Increment the views field by 1
+      { upsert: true, returnDocument: "after" } // Insert if not found, and return the updated document
+    );
+
+  if (!result) {
+    return { slug, views: 1 };
+  }
+
+  return toBusinessModel(result);
 }
