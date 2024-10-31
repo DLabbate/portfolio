@@ -5,13 +5,15 @@ on:
 jobs:
   jest-run:
     runs-on: ubuntu-latest
+    env:
+      MONGODB_URI: mongodb://127.0.0.1:27017
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Install dependencies
         run: npm install
-      - name: Create Contentlayer generated directory
-        run: mkdir -p .contentlayer/generated
+      - name: Generate Contentlayer
+        run: npm run build # Make sure this generates the .contentlayer folder
       - name: Run Jest tests
         run: npm test
   cypress-run:
