@@ -117,8 +117,7 @@ Cypress.Commands.add(
 Cypress.Commands.add("incrementBlogViews", (slug: string) => {
   const endpoint = `/blogs/${slug}/views`;
 
-  // Return the response for assertions within tests
-  cy.request({
+  return cy.request({
     method: "POST",
     url: endpoint,
     failOnStatusCode: false,

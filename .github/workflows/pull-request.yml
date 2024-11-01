@@ -5,6 +5,8 @@ on:
 jobs:
   jest-run:
     runs-on: ubuntu-latest
+    env:
+      MONGODB_URI: mongodb://127.0.0.1:27017
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -28,6 +30,7 @@ jobs:
           browser: chrome
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
           KV_REST_API_READ_ONLY_TOKEN: ${{ secrets.KV_REST_API_READ_ONLY_TOKEN }}
           KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
           KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}

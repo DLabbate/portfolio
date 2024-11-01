@@ -21,10 +21,9 @@ Welcome to my portfolio! This website showcases my experience, projects, and blo
 - [MDX](https://mdxjs.com/) markdown content
 - [Contentlayer](https://contentlayer.dev/) for typesafe content handling
 
-### 🗄️ Database
+### 🗄️ MongoDB
 
-- [Planetscale](https://planetscale.com/) SQL database
-- [DrizzleORM](https://orm.drizzle.team/) typescript SQL ORM
+- [MongoDB](https://www.mongodb.com/) NoSQL database
 
 ### ⏱ Rate Limiting
 

@@ -85,7 +85,7 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
         </span>
       </div>
       <div className="flex justify-start lg:flex lg:w-full lg:justify-end">
-        <BlogViews slug={slug} views={views?.views ?? 0} trackView={true} />
+        <BlogViews slug={slug} views={views} trackView={true} />
       </div>
       <Mdx code={blog.body.code} />
       <div className="overflow-clip">

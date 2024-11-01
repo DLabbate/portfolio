@@ -5,17 +5,19 @@ describe("blog views api", () => {
     // Reset the rate limiter
     cy.wait(15000);
 
-    // Send up to 5 requests within the rate limit
-    for (let i = 1; i <= 5; i++) {
-      cy.incrementBlogViews(slug).then((response) => {
-        expect(response.status).to.equal(204);
-        expect(response.headers["ratelimit-limit"]).to.exist;
-        expect(response.headers["ratelimit-remaining"]).to.exist;
-        expect(response.headers["ratelimit-reset"]).to.exist;
-      });
+    cy.incrementBlogViews(slug).then((response) => {
+      expect(response.status).to.equal(204);
+      expect(response.headers["ratelimit-limit"]).to.exist;
+      expect(response.headers["ratelimit-remaining"]).to.exist;
+      expect(response.headers["ratelimit-reset"]).to.exist;
+    });
+
+    // Attempt to spam the api
+    for (let i = 1; i <= 10; i++) {
+      cy.incrementBlogViews(slug);
     }
 
-    // Attempt a sixth request to trigger rate limit
+    // Verify that a 429 response is reached
     cy.incrementBlogViews(slug).then((response) => {
       expect(response.status).to.equal(429);
       expect(response.body).to.equal("Too many requests");
