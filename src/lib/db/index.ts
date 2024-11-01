@@ -28,8 +28,8 @@ export type BlogView = {
 };
 
 /**
- * Converts a `BlogViewCollectionEntity` to a `BlogView` business model.
- * @param {BlogViewCollectionEntity} entity - The MongoDB document entity to be converted.
+ * Converts a `BlogViewDocument` to a `BlogView` business model.
+ * @param {BlogViewDocument} entity - The MongoDB document entity to be converted.
  * @returns {BlogView} The business model representation of the blog view data.
  */
 function toBusinessModel(entity: BlogViewDocument): BlogView {
