@@ -1,0 +1,54 @@
+## Prerequisites
+
+To understand this topic fully, familiarity with distributed systems and microservices architecture is recommended.
+
+Here are some of my previous blog posts that will be useful:
+
+- [Maintain Database Consistency With Transactions](/blogs/db-transactions)
+- [Microservice Orchestration vs. Choreography](/blogs/orchestration-vs-choreography)
+
+## Introduction
+
+In distributed systems, workflows often span multiple microservices.
+Let’s consider the example of a travel application that I have used in my previous blog posts.
+This application is responsible for coordinating between an airline service, a hotel service, and a car rental service.
+This allows users to book all essential services for their vacation in one place.
+
+## Example Workflow
+
+1. Reserve airline tickets
+2. Reserve a hotel
+3. Reserve a rental car
+
+In a **monolithic** application, with all data in a single database, achieving a transaction is straightforward because everything is handled within the same database context.
+However, in a distributed system, each service (airline, hotel, car rental) operates independently, with its own database.
+_Ensuring that all services either succeed or fail as a unit becomes much more challenging._
+
+## Problem
+
+To illustrate this concern, imagine the following scenario:
+
+✔️ Step 1: Airline reservation is successful.
+✔️ Step 2: Hotel reservation is successful.
+❌ Step 3: Rental car reservation fails.
+
+Now, the user is left with partial reservations, an inconsistent state where only some services are booked, leading to a poor user experience.
+
+## Solution: The Saga Pattern
+
+The Saga Pattern helps by treating the entire workflow as a series of steps, each with an associated **compensation action** (a rollback step to undo previous work if something goes wrong).
+
+For example:
+
+✔️ Step 1: Airline reservation is successful.
+✔️ Step 2: Hotel reservation is successful.
+❌ Step 3: Rental car reservation fails.
+
+Using the Saga Pattern, we can roll back previous steps:
+
+**Cancel hotel reservation**
+**Cancel airline reservation**
+
+This way, the operation behaves atomically: either all services are booked, or none are, ensuring users won’t be left with partial bookings.
+
+## Conclusion
