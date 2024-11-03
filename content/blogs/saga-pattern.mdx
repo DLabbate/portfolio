@@ -1,3 +1,14 @@
+---
+title: Distributed Transactions with Saga Pattern
+description: Discover how the Saga pattern enables reliable and consistent transactions across microservices, helping you manage complex workflows in distributed systems effectively.
+published: 2024-11-03
+lastEdited: 2024-11-03
+imageSrc: /blogs/saga-pattern/thumbnail.jpg
+tags:
+  - Microservices
+  - Design Patterns
+---
+
 ## Prerequisites
 
 To understand this topic fully, familiarity with distributed systems and microservices architecture is recommended.
@@ -24,31 +35,75 @@ In a **monolithic** application, with all data in a single database, achieving a
 However, in a distributed system, each service (airline, hotel, car rental) operates independently, with its own database.
 _Ensuring that all services either succeed or fail as a unit becomes much more challenging._
 
+<Alert
+  type="info"
+  title="Distributed Transactions"
+  text="In a monolithic application with a single database, achieving a transaction is straightforward. 
+  However, in a distributed system, each service has ownership of their own database.
+  Ensuring that all services either succeed or fail as a unit becomes much more challenging."
+/>
+
 ## Problem
 
 To illustrate this concern, imagine the following scenario:
 
-✔️ Step 1: Airline reservation is successful.
-✔️ Step 2: Hotel reservation is successful.
-❌ Step 3: Rental car reservation fails.
+1. ✔️ Airline reservation is successful.
+
+2. ✔️ Hotel reservation is successful.
+
+3. ❌ Rental car reservation fails.
 
 Now, the user is left with partial reservations, an inconsistent state where only some services are booked, leading to a poor user experience.
 
+<Alert
+  type="error"
+  title="Partial Success"
+  text="The user paid for airline tickets, hotel reservation, and a rental car, but
+  is left in a state of partial success!"
+/>
+
 ## Solution: The Saga Pattern
 
-The Saga Pattern helps by treating the entire workflow as a series of steps, each with an associated **compensation action** (a rollback step to undo previous work if something goes wrong).
+The Saga Pattern helps by treating the entire workflow as a series of steps, each with an associated **compensating action** (a rollback step to undo previous work if something goes wrong).
+
+<Alert
+  type="info"
+  title="Compensating Transaction"
+  text="In a Saga workflow, each step is associated with a compensating action (a rollback step to undo previous work if something goes wrong)."
+/>
 
 For example:
 
-✔️ Step 1: Airline reservation is successful.
-✔️ Step 2: Hotel reservation is successful.
-❌ Step 3: Rental car reservation fails.
+1. ✔️ Airline reservation is successful.
+
+2. ✔️ Hotel reservation is successful.
+
+3. ❌ Rental car reservation fails.
 
 Using the Saga Pattern, we can roll back previous steps:
 
-**Cancel hotel reservation**
-**Cancel airline reservation**
+↩️ **Cancel hotel reservation**
 
-This way, the operation behaves atomically: either all services are booked, or none are, ensuring users won’t be left with partial bookings.
+↩️ **Cancel airline reservation**
+
+<ThemeImage
+  srcLight="/blogs/saga-pattern/example-dark.png"
+  srcDark="/blogs/saga-pattern/example-dark.png"
+  alt="Saga pattern example"
+  caption="Saga Pattern"
+  width={1920}
+  height={1080}
+/>
+
+As illustred in the image above, the operation behaves atomically: either all services are booked, or none are, ensuring users won’t be left with partial bookings.
 
 ## Conclusion
+
+- The **saga pattern** is an approach to achieve transactions in a **distributed system**.
+- This is achieved by each step in a workflow having an associated **compensating actions**,
+  i.e. rollback to undo previous work if a failure is encountered.
+- This improves the **reliability** and **data consistency** of a system.
+
+## References
+
+- [Saga distributed transactions pattern](https://learn.microsoft.com/en-us/azure/architecture/reference-architectures/saga/saga)
