@@ -11,7 +11,7 @@ tags:
 
 ## Prerequisites
 
-To understand this topic fully, familiarity with distributed systems and microservices architecture is recommended.
+To understand this topic fully, familiarity with **transactions** and **microservices** architecture is recommended.
 
 Here are some of my previous blog posts that will be useful:
 
@@ -20,9 +20,10 @@ Here are some of my previous blog posts that will be useful:
 
 ## Introduction
 
-In distributed systems, workflows often span multiple microservices.
+In **distributed systems**, workflows often span multiple **microservices**.
+
 Let’s consider the example of a travel application that I have used in my previous blog posts.
-This application is responsible for coordinating between an airline service, a hotel service, and a car rental service.
+This application is responsible for coordinating between an **airline service**, a **hotel service**, and a **car rental service**.
 This allows users to book all essential services for their vacation in one place.
 
 ## Example Workflow
@@ -32,15 +33,16 @@ This allows users to book all essential services for their vacation in one place
 3. Reserve a rental car
 
 In a **monolithic** application, with all data in a single database, achieving a transaction is straightforward because everything is handled within the same database context.
-However, in a distributed system, each service (airline, hotel, car rental) operates independently, with its own database.
-_Ensuring that all services either succeed or fail as a unit becomes much more challenging._
+
+However, in a **distributed system**, each service (airline, hotel, car rental) operates independently, with its own database.
+_Ensuring that all services either succeed or fail as a unit becomes much more challenging!_
 
 <Alert
-  type="info"
+  type="warning"
   title="Distributed Transactions"
   text="In a monolithic application with a single database, achieving a transaction is straightforward. 
   However, in a distributed system, each service has ownership of their own database.
-  Ensuring that all services either succeed or fail as a unit becomes much more challenging."
+  Ensuring that all services either succeed or fail as a unit becomes much more challenging!"
 />
 
 ## Problem
@@ -59,12 +61,12 @@ Now, the user is left with partial reservations, an inconsistent state where onl
   type="error"
   title="Partial Success"
   text="The user paid for airline tickets, hotel reservation, and a rental car, but
-  is left in a state of partial success!"
+  is left in a state of partial success where only some services are booked!"
 />
 
 ## Solution: The Saga Pattern
 
-The Saga Pattern helps by treating the entire workflow as a series of steps, each with an associated **compensating action** (a rollback step to undo previous work if something goes wrong).
+The **Saga pattern** helps by treating the entire workflow as a series of steps, each with an associated **compensating action** (a rollback step to undo previous work if something goes wrong).
 
 <Alert
   type="info"
@@ -72,7 +74,7 @@ The Saga Pattern helps by treating the entire workflow as a series of steps, eac
   text="In a Saga workflow, each step is associated with a compensating action (a rollback step to undo previous work if something goes wrong)."
 />
 
-For example:
+Recall the example:
 
 1. ✔️ Airline reservation is successful.
 
@@ -95,15 +97,17 @@ Using the Saga Pattern, we can roll back previous steps:
   height={1080}
 />
 
-As illustred in the image above, the operation behaves atomically: either all services are booked, or none are, ensuring users won’t be left with partial bookings.
+As illustred in the image above, the operation behaves atomically:
+either all services are booked, or none are, ensuring users will not be left with partial bookings.
 
 ## Conclusion
 
-- The **saga pattern** is an approach to achieve transactions in a **distributed system**.
-- This is achieved by each step in a workflow having an associated **compensating actions**,
+- The **Saga pattern** is an approach to achieve **transactions** in a **distributed system**.
+- This is achieved by each step in a workflow having an associated **compensating action**,
   i.e. rollback to undo previous work if a failure is encountered.
 - This improves the **reliability** and **data consistency** of a system.
 
 ## References
 
 - [Saga distributed transactions pattern](https://learn.microsoft.com/en-us/azure/architecture/reference-architectures/saga/saga)
+- [Pattern: Saga](https://microservices.io/patterns/data/saga.html)
