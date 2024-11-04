@@ -1,0 +1,160 @@
+---
+title: Reliable Messaging with Outbox Pattern
+description: Discover how the Saga pattern enables reliable and consistent transactions across microservices, helping you manage complex workflows in distributed systems effectively.
+published: 2024-11-03
+lastEdited: 2024-11-03
+imageSrc: /blogs/saga-pattern/thumbnail.jpg
+tags:
+  - Microservices
+  - Design Patterns
+  - Event-Driven Architecture
+---
+
+## Prerequisites
+
+To understand this topic fully, familiarity with **transactions**, **microservices**, **event driven architecture**,
+and **idempotency** is recommended.
+
+Here are some of my previous blog posts that will be useful:
+
+- [Maintain Database Consistency With Transactions](/blogs/db-transactions)
+- [Microservice Orchestration vs. Choreography](/blogs/orchestration-vs-choreography)
+- [Scalability With Asynchronous Messaging](/blogs/async-messaging)
+- [Idempotency is Important](/blogs/idempotency)
+
+## Introduction
+
+With a **microservice** architecture, it is very common to do something like the following:
+
+1. Create/update/delete an entity.
+2. Publish an event to a message broker.
+
+For instance, consider an e-commerce system. Every time we create an `Order` via the `OrderService`,
+we also publish an `OrderCreatedEvent` so that related services can react accordingly.
+
+Some examples of services that must perform an action when an `OrderCreatedEvent` is received:
+
+- `InventoryService` needs to update its inventory data.
+- `EmailService` sends a confirmation email to the customer.
+
+It's likely we have some code like the following:
+
+```cs
+/**
+ * Some pseudocode to illustrate creating a new order via the OrderService.
+ */
+
+// Step 1
+Database.CreateOrder(orderInfo);
+
+// Step 2
+MessageBroker.Publish(new OrderCreatedEvent(orderInfo));
+```
+
+## Problem
+
+However, like we have discussed in my previous blog posts, _things can fail!_ Suppose the following occurs:
+
+1. ✔️ Order is created successfully.
+
+2. ❌ Failure to send the `OrderCreatedEvent`.
+
+```cs
+// ✔️ Step 1
+Database.CreateOrder(orderInfo);
+
+// ❌ Step 2
+MessageBroker.Publish(new OrderCreatedEvent(orderInfo));
+```
+
+<ThemeImage
+  srcLight="/blogs/outbox-pattern/without-outbox-light.png"
+  srcDark="/blogs/outbox-pattern/without-outbox-dark.png"
+  alt="Example without outbox pattern"
+  caption="Example Without Outbox Pattern"
+  width={1044}
+  height={486}
+/>
+
+Although it might appear as though the order was created, the `OrderCreatedEvent` has actually been lost.
+As a result, the `InventoryService` would not update its inventory data,
+and the `EmailService` would not send the confirmation email to the user.
+
+_For mission-critical workflows, this can have serious implications!_
+
+<Alert
+  type="warning"
+  text="Without the outbox pattern, it is possible to lose events when performing a create/update/delete of an entity.
+  For mission-critical workflows, this can have serious implications!"
+/>
+
+## Solution: Outbox Pattern
+
+The **Outbox pattern** addresses this problem, via two main components:
+
+1. Persisting events with **transactions**
+2. **Background worker** to publish events
+
+<Alert
+  type="info"
+  title="Outbox Pattern"
+  text="The Outbox pattern eliminates the possibility of losing events by persisting events with transactions, 
+  and having a background worker publish these events."
+/>
+
+The overall process is outlined by the sequence diagram below:
+
+<ThemeImage
+  srcLight="/blogs/outbox-pattern/with-outbox-light.png"
+  srcDark="/blogs/outbox-pattern/with-outbox-dark.png"
+  alt="Example with outbox pattern"
+  caption="Example With Outbox Pattern"
+  width={1384}
+  height={726}
+/>
+
+Let's explore these concepts a bit further.
+
+### Persisting Events With Transactions
+
+First and foremost, events are persisted in the database, leveraging a **transaction**.
+
+```cs
+/**
+ * Modified pseudocode leveraging the Outbox pattern.
+ */
+
+Database.StartTransaction();
+  Database.CreateOrder(orderInfo);
+  Database.PersistEvent(new OrderCreatedEvent(orderInfo));
+Database.EndTransaction()
+```
+
+As illustrated by the pseudocode above, the two operations now execute atomically to ensure data consistency.
+
+### Background Worker to Publish Events
+
+The **background worker** queries the persisted events, publishes the events to the message broker, and finally marks them as processed.
+
+This can be accomplished via **polling**.
+
+## Considerations
+
+- **Order of publishing:** Publishing in the correct order order of the events is preserved.
+  For example, `OrderUpdated` should not be published before an `OrderCreated` event.
+- **Idempotent consumers:** It is good practice to ensure that consumers are idempotent.
+  In the case that duplicate messages are published, there would be no impact.
+
+## Conclusion
+
+- The **Outbox pattern** can improve the reliability of a system by performing the create/update/delete of an entity,
+  along with persisting events in a **transaction**.
+- A **background worker** is responsible for **polling** the events persisted in the database,
+  publishing to a message broker, and finally marking the events as processed.
+- This pattern improves the **reliability** of a system given that events will not be lost.
+
+## References
+
+- [Transactional Outbox pattern with Azure Cosmos DB](https://learn.microsoft.com/en-us/azure/architecture/databases/guide/transactional-outbox-cosmos)
+- [Pattern: Transactional outbox](https://microservices.io/patterns/data/transactional-outbox.html)
+- [Transactional outbox pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html)
