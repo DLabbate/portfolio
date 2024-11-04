@@ -1,9 +1,9 @@
 ---
 title: Reliable Messaging with Outbox Pattern
-description: Discover how the Saga pattern enables reliable and consistent transactions across microservices, helping you manage complex workflows in distributed systems effectively.
+description: Learn how to achieve reliable message delivery and prevent data loss in event-driven microservices by using the Outbox pattern.
 published: 2024-11-03
 lastEdited: 2024-11-03
-imageSrc: /blogs/saga-pattern/thumbnail.jpg
+imageSrc: /blogs/outbox-pattern/thumbnail.jpg
 tags:
   - Microservices
   - Design Patterns
@@ -12,7 +12,7 @@ tags:
 
 ## Prerequisites
 
-To understand this topic fully, familiarity with **transactions**, **microservices**, **event driven architecture**,
+To understand this topic fully, familiarity with **transactions**, **microservices**, **event-driven architecture**,
 and **idempotency** is recommended.
 
 Here are some of my previous blog posts that will be useful:
@@ -55,7 +55,7 @@ MessageBroker.Publish(new OrderCreatedEvent(orderInfo));
 
 However, like we have discussed in my previous blog posts, _things can fail!_ Suppose the following occurs:
 
-1. ✔️ Order is created successfully.
+1. ✔️ `Order` is created successfully.
 
 2. ❌ Failure to send the `OrderCreatedEvent`.
 
@@ -76,7 +76,7 @@ MessageBroker.Publish(new OrderCreatedEvent(orderInfo));
   height={486}
 />
 
-Although it might appear as though the order was created, the `OrderCreatedEvent` has actually been lost.
+Although it might appear as though the `Order` was created, the `OrderCreatedEvent` has actually been lost.
 As a result, the `InventoryService` would not update its inventory data,
 and the `EmailService` would not send the confirmation email to the user.
 
@@ -84,16 +84,16 @@ _For mission-critical workflows, this can have serious implications!_
 
 <Alert
   type="warning"
-  text="Without the outbox pattern, it is possible to lose events when performing a create/update/delete of an entity.
+  text="Without the Outbox pattern, it is possible to lose events when performing a create/update/delete of an entity.
   For mission-critical workflows, this can have serious implications!"
 />
 
-## Solution: Outbox Pattern
+## Solution: The Outbox Pattern
 
 The **Outbox pattern** addresses this problem, via two main components:
 
-1. Persisting events with **transactions**
-2. **Background worker** to publish events
+1. Persisting events with **transactions**.
+2. **Background worker** to publish events.
 
 <Alert
   type="info"
@@ -140,18 +140,19 @@ This can be accomplished via **polling**.
 
 ## Considerations
 
-- **Order of publishing:** Publishing in the correct order order of the events is preserved.
+Below are a few considerations that are important to keep in mind when implementing the **Outbox pattern**.
+
+- **Order of publishing:** Events must be sent in the same order in which the service updates the database.
   For example, `OrderUpdated` should not be published before an `OrderCreated` event.
 - **Idempotent consumers:** It is good practice to ensure that consumers are idempotent.
   In the case that duplicate messages are published, there would be no impact.
 
 ## Conclusion
 
-- The **Outbox pattern** can improve the reliability of a system by performing the create/update/delete of an entity,
-  along with persisting events in a **transaction**.
+- Events are persisted in the database alongside the create/update/delete of an entity, leveraging a **transaction**.
 - A **background worker** is responsible for **polling** the events persisted in the database,
   publishing to a message broker, and finally marking the events as processed.
-- This pattern improves the **reliability** of a system given that events will not be lost.
+- The **Outbox pattern** improves the **reliability** of a system given that events will not be lost.
 
 ## References
 
