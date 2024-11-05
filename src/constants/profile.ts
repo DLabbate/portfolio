@@ -140,6 +140,7 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       "Increased resilience of complex workflows with retry mechanisms and idempotency strategies",
       "Designed REST APIs with adherence to standards such as versioning, ensuring backwards compatibility",
       "Enhanced code quality and readability by implementing a state machine for predictable state management",
+      "Mentored junior engineers, providing guidance on design patterns and architectural principles",
     ],
     technologies: [
       "csharp",
