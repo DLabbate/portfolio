@@ -15,7 +15,7 @@ const VARIANTS: Record<Type, Variant> = {
     icon: Info,
   },
   warning: {
-    className: "text-yellow-500 border-yellow-500 bg-yellow-500/10",
+    className: "text-yellow-600 border-yellow-600 bg-yellow-500/10",
     icon: AlertTriangle,
   },
   error: {

@@ -5,5 +5,7 @@
   "state-machine",
   "db-optimistic-concurrency",
   "rest-api-etag",
-  "orchestration-vs-choreography"
+  "orchestration-vs-choreography",
+  "outbox-pattern",
+  "saga-pattern"
 ]
