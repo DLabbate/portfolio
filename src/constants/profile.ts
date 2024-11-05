@@ -32,6 +32,9 @@ export const TECHNOLOGIES: ReadonlyArray<string> = [
   "dotnet",
   "azure",
   "aws",
+  "docker",
+  "kubernetes",
+  "camunda",
   "python",
   "cpp",
   "arduino",
@@ -43,6 +46,8 @@ export const TECHNOLOGIES: ReadonlyArray<string> = [
   "opengl",
   "unity",
   "jira",
+  "confluence",
+  "opsgenie",
 ];
 
 export type Technology = (typeof TECHNOLOGIES)[number];
@@ -146,11 +151,16 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       "csharp",
       "dotnet",
       "azure",
+      "docker",
+      "kubernetes",
       "mongodb",
+      "typescript",
       "react",
       "reactquery",
       "jest",
       "rtl",
+      "confluence",
+      "opsgenie",
     ],
   },
   {
@@ -174,11 +184,16 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
       "csharp",
       "dotnet",
       "azure",
+      "docker",
+      "kubernetes",
       "mongodb",
+      "typescript",
       "react",
       "reactquery",
       "jest",
       "rtl",
+      "confluence",
+      "opsgenie",
     ],
   },
   {
@@ -214,8 +229,9 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
     content: [
       "Participated in the research of algorithmic solutions to ensure 5G networks adhere to Service Level Agreements",
       "Engaged in reading various academic papers and research materials, discussing key insights with Professor and colleagues",
+      "Orchestrated complex business workflows in Java using Camunda BPM, integrating multiple systems to streamline and automate processes",
     ],
-    technologies: ["java"],
+    technologies: ["java", "camunda"],
   },
   {
     title: "Quality Assurance Intern",
