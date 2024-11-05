@@ -29,6 +29,11 @@ import reactquery from "public/logos/reactquery.png";
 import jira from "public/logos/jira.png";
 import nextjs from "public/logos/nextjs.png";
 import cypress from "public/logos/cypress.png";
+import docker from "public/logos/docker.png";
+import kubernetes from "public/logos/kubernetes.png";
+import opsgenie from "public/logos/opsgenie.png";
+import confluence from "public/logos/confluence.png";
+import camunda from "public/logos/camunda.png";
 import { Technology } from "@/constants/profile";
 
 type LabelData = {
@@ -88,6 +93,14 @@ const LOGO_DATA: Record<Technology, LabelData> = {
   azure: {
     displayName: "Azure",
     src: azure,
+  },
+  docker: {
+    displayName: "Docker",
+    src: docker,
+  },
+  kubernetes: {
+    displayName: "Kubernetes",
+    src: kubernetes,
   },
   cpp: {
     displayName: "C++",
@@ -153,6 +166,14 @@ const LOGO_DATA: Record<Technology, LabelData> = {
     displayName: "Jira",
     src: jira,
   },
+  confluence: {
+    displayName: "Confluence",
+    src: confluence,
+  },
+  opsgenie: {
+    displayName: "Opsgenie",
+    src: opsgenie,
+  },
   nextjs: {
     displayName: "Next.js",
     src: nextjs,
@@ -160,6 +181,10 @@ const LOGO_DATA: Record<Technology, LabelData> = {
   cypress: {
     displayName: "Cypress",
     src: cypress,
+  },
+  camunda: {
+    displayName: "Camunda",
+    src: camunda,
   },
 } as const;
 
