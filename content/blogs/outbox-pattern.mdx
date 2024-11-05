@@ -134,9 +134,8 @@ As illustrated by the pseudocode above, the two operations now execute atomicall
 
 ### Background Worker to Publish Events
 
-The **background worker** queries the persisted events, publishes the events to the message broker, and finally marks them as processed.
-
-This can be accomplished via **polling**.
+The **background worker** periodically queries the persisted events (referred to as the "outbox" entries), publishes them to the **message broker**, and then marks them as processed.
+This process can be accomplished via **polling**.
 
 ## Considerations
 

@@ -32,7 +32,7 @@ This allows users to book all essential services for their vacation in one place
 2. Reserve a hotel
 3. Reserve a rental car
 
-In a **monolithic** application, with all data in a single database, achieving a transaction is straightforward because everything is handled within the same database context.
+In a **monolithic** application, with all data in a single database, achieving a **transaction** is straightforward because everything is handled within the same database context.
 
 However, in a **distributed system**, each service (airline, hotel, car rental) operates independently, with its own database.
 _Ensuring that all services either succeed or fail as a unit becomes much more challenging!_
