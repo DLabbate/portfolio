@@ -141,6 +141,7 @@ export const EXPERIENCE: ReadonlyArray<TimelineEntry> = [
     },
     content: [
       "Architected distributed systems, improving maintainability through smaller, focused microservices",
+      "Reduced latency of a critical microservice by 70% using Redis distributed caching",
       "Leveraged event-driven communication between microservices for scalability and reliability",
       "Increased resilience of complex workflows with retry mechanisms and idempotency strategies",
       "Designed REST APIs with adherence to standards such as versioning, ensuring backwards compatibility",
